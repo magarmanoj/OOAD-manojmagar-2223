@@ -1,0 +1,8 @@
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD\SlnHerhalingAanvulling\ConsoleTafels\bin\Debug\ConsoleTafels.exe.config
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD\SlnHerhalingAanvulling\ConsoleTafels\bin\Debug\ConsoleTafels.exe
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD\SlnHerhalingAanvulling\ConsoleTafels\bin\Debug\ConsoleTafels.pdb
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD\SlnHerhalingAanvulling\ConsoleTafels\obj\Debug\ConsoleTafels.csproj.AssemblyReference.cache
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD\SlnHerhalingAanvulling\ConsoleTafels\obj\Debug\ConsoleTafels.csproj.SuggestedBindingRedirects.cache
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD\SlnHerhalingAanvulling\ConsoleTafels\obj\Debug\ConsoleTafels.csproj.CoreCompileInputs.cache
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD\SlnHerhalingAanvulling\ConsoleTafels\obj\Debug\ConsoleTafels.exe
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD\SlnHerhalingAanvulling\ConsoleTafels\obj\Debug\ConsoleTafels.pdb
