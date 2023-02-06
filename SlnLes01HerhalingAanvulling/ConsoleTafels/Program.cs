@@ -19,11 +19,11 @@ namespace ConsoleTafels
             DrukTafel(2, 5);
 
 
-            Console.Write("\nGeef een getal:");
+            Console.Write("\nGeef een getal: ");
             int getal = VraagPositiefGetal();
-            Console.Write("Geef de lengte van de tafel:");
+            Console.Write("Geef de lengte: ");
             int lengte = VraagPositiefGetal();
-            Console.WriteLine("Tafel van " + getal + ":");
+            Console.WriteLine($"{getal}x{lengte} tafel: ");
             DrukTafel(getal, lengte);
             Console.ReadKey(true);
 
@@ -45,7 +45,7 @@ namespace ConsoleTafels
             int result;
             while (!int.TryParse(Console.ReadLine(), out result) || result <= 0)
             {
-                Console.WriteLine("Ongeldige invoer, geef een positief getal:");
+                Console.Write("Het geal moet positief zijn! Geef een getal: ");
             }
             return result;
             
