@@ -15,6 +15,7 @@ namespace ConsoleTafels
  
             Console.WriteLine("4x8 tafel: ");
             DrukTafel(4, 8);
+
             Console.WriteLine("\n2x5 tafel: ");
             DrukTafel(2, 5);
 
@@ -29,7 +30,7 @@ namespace ConsoleTafels
 
         }
 
-        static void DrukTafel(int getal, int lengte )
+        private static void DrukTafel(int getal, int lengte)
         {
             int result;
             for(int i = 1; i <= lengte; i++)
@@ -40,7 +41,7 @@ namespace ConsoleTafels
            
         }
 
-        static int VraagPositiefGetal()
+        private static int VraagPositiefGetal()
         {
             int result;
             while (!int.TryParse(Console.ReadLine(), out result) || result <= 0)

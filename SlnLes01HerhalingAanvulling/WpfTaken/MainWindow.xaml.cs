@@ -24,5 +24,46 @@ namespace WpfTaken
         {
             InitializeComponent();
         }
+
+        private void CheckForm()
+        {
+            if(Txtbox_Taak.Text == "" )
+            {
+                Fout_taak.Text = "schijf iets";
+            }
+            else
+            {
+                Fout_taak.Text = "";
+            }
+            if (ComboBox_Prio.SelectedIndex == -1 )
+            {
+                Fout_Prioriteit.Text = "Selecteer iets";
+            }
+            else
+            {
+                Fout_Prioriteit.Text = "";
+            }
+            if (DatePicker_Deadline.SelectedDate == null)
+            {
+                Fout_deadline.Text = "Selecteer datum";
+            }
+            else
+            {
+                Fout_deadline.Text = "";
+            }
+            if (RadioB_Adam.IsChecked == false || RadioB_Bilal.IsChecked == false || RadioB_Chelsey.IsChecked == false)
+            {
+                Fout_door.Text = "Selecteer iets";
+            }
+            else
+            {
+                Fout_door.Text = "";
+            }
+        }
+
+        private void Button_Toevoegen_Click(object sender, RoutedEventArgs e)
+        {
+            CheckForm();
+        }
     }
 }
