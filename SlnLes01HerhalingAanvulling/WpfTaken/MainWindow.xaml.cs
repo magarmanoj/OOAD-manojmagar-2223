@@ -101,6 +101,11 @@ namespace WpfTaken
                     lijsten.Background = Brushes.Yellow;
                 }
 
+                if(lijsten.Content != null)
+                {
+                    Button_Verwijderen.IsEnabled = true;
+                }
+
             }
             Txtbox_Taak.Text = "";
             ComboBox_Prio.SelectedIndex = -1;
@@ -139,10 +144,8 @@ namespace WpfTaken
             {
                 ListBoxItem item = lijstItems.Pop();
                 lijst_box.Items.Add(item);
-                
-            }Button_terugzetten.IsEnabled = true;
-            
-
+                           
+            }           
         }
 
         private void Button_Verwijderen_Click(object sender, RoutedEventArgs e)
@@ -155,8 +158,13 @@ namespace WpfTaken
                 lijstItems.Push(selectedItem);
                 lijst_box.Items.Remove(selectedItem);
             }
+        }
+
+        private void lijst_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Button_Verwijderen.IsEnabled = lijst_box.SelectedItem != null;
+            Button_terugzetten.IsEnabled = Button_Verwijderen.IsEnabled != true;
 
         }
-        //try
     }
 }

@@ -23,9 +23,9 @@
         <RadioButton x:Name="RadioB_Bilal" Content="Bilal" HorizontalAlignment="Left" Height="22" Margin="253,197,0,0" VerticalAlignment="Top" Width="67" Checked="RadioB_Adam_Checked"/>
         <RadioButton x:Name="RadioB_Chelsey" Content="Chelsey" HorizontalAlignment="Left" Height="22" Margin="333,197,0,0" VerticalAlignment="Top" Width="67" Checked="RadioB_Adam_Checked"/>
         <Button x:Name="Button_Toevoegen" Content="TOEVOEGEN" HorizontalAlignment="Left" Height="32" Margin="305,248,0,0" VerticalAlignment="Top" Width="95" Click="Button_Toevoegen_Click"/>
-        <ListBox x:Name="lijst_box" HorizontalAlignment="Left" Height="209" Margin="442,71,0,0" VerticalAlignment="Top" Width="326"/>
+        <ListBox x:Name="lijst_box" HorizontalAlignment="Left" Height="209" Margin="442,71,0,0" VerticalAlignment="Top" Width="326" SelectionChanged="lijst_box_SelectionChanged"/>
         <Button x:Name="Button_terugzetten" IsEnabled="False" Content="TERUGZETTEN" HorizontalAlignment="Left" Height="31" Margin="487,298,0,0" VerticalAlignment="Top" Width="92" Click="Button_terugzetten_Click"/>
-        <Button x:Name="Button_Verwijderen" IsEnabled="true" Content="VERWIJDEREN" HorizontalAlignment="Left" Height="31" Margin="614,298,0,0" VerticalAlignment="Top" Width="96" Click="Button_Verwijderen_Click"/>
+        <Button x:Name="Button_Verwijderen" IsEnabled="False" Content="VERWIJDEREN" HorizontalAlignment="Left" Height="31" Margin="614,298,0,0" VerticalAlignment="Top" Width="96" Click="Button_Verwijderen_Click"/>
         <TextBlock x:Name="Fout_taak" HorizontalAlignment="Left" Height="27" Margin="49,365,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="191"/>
         <TextBlock x:Name="Fout_Prioriteit" HorizontalAlignment="Left" Height="27" Margin="49,392,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="191"/>
         <TextBlock x:Name="Fout_deadline" HorizontalAlignment="Left" Height="27" Margin="49,419,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="191"/>
