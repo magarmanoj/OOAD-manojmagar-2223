@@ -155,5 +155,6 @@ namespace WpfTaken
                 lijst_box.Items.Remove(selectedItem);
             }
         }
+        //try
     }
 }
