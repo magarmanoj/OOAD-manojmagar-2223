@@ -139,8 +139,9 @@ namespace WpfTaken
             {
                 ListBoxItem item = lijstItems.Pop();
                 lijst_box.Items.Add(item);
-            }
-            Button_terugzetten.IsEnabled = false;
+                
+            }Button_terugzetten.IsEnabled = true;
+            
 
         }
 
@@ -154,6 +155,7 @@ namespace WpfTaken
                 lijstItems.Push(selectedItem);
                 lijst_box.Items.Remove(selectedItem);
             }
+
         }
         //try
     }
