@@ -13,7 +13,9 @@
         <ComboBox x:Name="ComboBox_Prio" HorizontalAlignment="Left" Height="35" Margin="173,111,0,0" VerticalAlignment="Top" Width="227">
             <ComboBoxItem Content="hoog" />
             <ComboBoxItem Content="normaal)"/>
-            <ComboBoxItem Content="laag"/>        </ComboBox>
+            <ComboBoxItem Content="laag"/>
+        </ComboBox>
+
         <TextBlock x:Name="DeadlineTxt" HorizontalAlignment="Left" Height="35" Margin="49,151,0,0" TextWrapping="Wrap" Text="Deadline:" VerticalAlignment="Top" Width="100"/>
         <DatePicker x:Name="DatePicker_Deadline" HorizontalAlignment="Left" Height="35" Margin="173,151,0,0" VerticalAlignment="Top" Width="227"/>
         <TextBlock x:Name="DoorTxt" HorizontalAlignment="Left" Height="35" Margin="49,191,0,0" TextWrapping="Wrap" Text="Door:" VerticalAlignment="Top" Width="100"/>
