@@ -21,7 +21,7 @@ namespace WpfTaken
     /// </summary>
     public partial class MainWindow : Window
     {
-        Stack<ListBoxItem> lijstItems = new Stack<ListBoxItem>();
+        Stack<ListBoxItem> LijstItems = new Stack<ListBoxItem>();
         public MainWindow()
         {
             InitializeComponent();
@@ -88,7 +88,7 @@ namespace WpfTaken
                     rb = RadioB_Chelsey;
                 }
                 lijsten.Content = $"{Txtbox_Taak.Text} (deadline: {DatePicker_Deadline.SelectedDate.Value.ToShortDateString()}; door: {rb.Content})";
-                lijst_box.Items.Add(lijsten);
+                Lijst_box.Items.Add(lijsten);
                 if(ComboBox_Prio.SelectedIndex == 0)
                 {
                     lijsten.Background = Brushes.Red;
@@ -140,10 +140,10 @@ namespace WpfTaken
         private void Button_terugzetten_Click(object sender, RoutedEventArgs e)
         {
             //als stack lijst meer dan 0 waarde heeft dan ga je die waarde terug poping in een oorspronkelijke lijst.
-            if (lijstItems.Count > 0)
+            if (LijstItems.Count > 0)
             {
-                ListBoxItem item = lijstItems.Pop();
-                lijst_box.Items.Add(item);
+                ListBoxItem item = LijstItems.Pop();
+                Lijst_box.Items.Add(item);
                            
             }           
         }
@@ -152,17 +152,17 @@ namespace WpfTaken
         {
             //Nieuwe lijst maken die de content van oude lijst 'kopieert' en daarna push je die waarde in stack lijst
             //en verwijderen van oorspronkelijke lijst.
-            ListBoxItem selectedItem = lijst_box.SelectedItem as ListBoxItem;
+            ListBoxItem selectedItem = Lijst_box.SelectedItem as ListBoxItem;
             if (selectedItem != null)
             {
-                lijstItems.Push(selectedItem);
-                lijst_box.Items.Remove(selectedItem);
+                LijstItems.Push(selectedItem);
+                Lijst_box.Items.Remove(selectedItem);
             }
         }
 
-        private void lijst_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Lijst_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Button_Verwijderen.IsEnabled = lijst_box.SelectedItem != null;
+            Button_Verwijderen.IsEnabled = Lijst_box.SelectedItem != null;
             Button_terugzetten.IsEnabled = Button_Verwijderen.IsEnabled != true;
 
         }

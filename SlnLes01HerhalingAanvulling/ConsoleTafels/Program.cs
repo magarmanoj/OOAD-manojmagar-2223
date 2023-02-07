@@ -8,7 +8,6 @@ namespace ConsoleTafels
 {
     internal class Program
     {
-        int[] result;
         static void Main(string[] args)
         {
 
@@ -38,9 +37,7 @@ namespace ConsoleTafels
                 Console.WriteLine($"{ getal} x {i} = {result}");
             }
             
-           
         }
-
         private static int VraagPositiefGetal()
         {
             int result;
