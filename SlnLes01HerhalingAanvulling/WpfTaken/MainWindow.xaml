@@ -10,7 +10,7 @@
         <TextBlock x:Name="TaakTxt" HorizontalAlignment="Left" Height="35" Margin="49,71,0,0" TextWrapping="Wrap" Text="Taak:" VerticalAlignment="Top" Width="100"/>
         <TextBox x:Name="Txtbox_Taak" HorizontalAlignment="Left" Height="35" Margin="173,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" TextChanged="Txtbox_Taak_TextChanged"/>
         <TextBlock x:Name="PrioriteitTxt" HorizontalAlignment="Left" Height="35" Margin="49,111,0,0" TextWrapping="Wrap" Text="Prioriteit:" VerticalAlignment="Top" Width="100"/>
-        <ComboBox x:Name="ComboBox_Prio" HorizontalAlignment="Left" Height="35" Margin="173,116,0,0" VerticalAlignment="Top" Width="227" SelectionChanged="ComboBox_Prio_SelectionChanged">
+        <ComboBox x:Name="ComboBox_Prio" HorizontalAlignment="Left" Height="35" Margin="173,111,0,0" VerticalAlignment="Top" Width="227" SelectionChanged="ComboBox_Prio_SelectionChanged">
             <ComboBoxItem Content="hoog" />
             <ComboBoxItem Content="normaal)"/>
             <ComboBoxItem Content="laag"/>
@@ -26,10 +26,8 @@
         <ListBox x:Name="Lijst_box" HorizontalAlignment="Left" Height="209" Margin="442,71,0,0" VerticalAlignment="Top" Width="326" SelectionChanged="lijst_box_SelectionChanged"/>
         <Button x:Name="Button_terugzetten" IsEnabled="False" Content="TERUGZETTEN" HorizontalAlignment="Left" Height="31" Margin="487,298,0,0" VerticalAlignment="Top" Width="92" Click="Button_terugzetten_Click"/>
         <Button x:Name="Button_Verwijderen" IsEnabled="False" Content="VERWIJDEREN" HorizontalAlignment="Left" Height="31" Margin="614,298,0,0" VerticalAlignment="Top" Width="96" Click="Button_Verwijderen_Click"/>
-        <TextBlock x:Name="Fout_taak" HorizontalAlignment="Left" Height="27" Margin="49,365,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="191"/>
-        <TextBlock x:Name="Fout_Prioriteit" HorizontalAlignment="Left" Height="27" Margin="49,392,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="191"/>
-        <TextBlock x:Name="Fout_deadline" HorizontalAlignment="Left" Height="27" Margin="49,419,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="191"/>
-        <TextBlock x:Name="Fout_door" HorizontalAlignment="Left" Height="27" Margin="49,446,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="191"/>
+        <TextBlock x:Name="Fout_Melding" HorizontalAlignment="Left" Height="134" Margin="49,365,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="191"/>
+        
 
     </Grid>
 </Window>
