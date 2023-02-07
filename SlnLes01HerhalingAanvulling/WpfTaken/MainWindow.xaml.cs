@@ -82,6 +82,7 @@ namespace WpfTaken
                     rb = RadioB_Chelsey;
                 }
                 lijsten.Content = $"{Txtbox_Taak.Text} (deadline: {DatePicker_Deadline.SelectedDate.Value.ToShortDateString()}; door: {rb.Content})";
+                Lijst_box.Items.Add(lijsten);
                 
                 if (ComboBox_Prio.SelectedIndex == 0)
                 {
@@ -100,7 +101,7 @@ namespace WpfTaken
                 {
                     Button_Verwijderen.IsEnabled = true;
                 }
-                Lijst_box.Items.Add(lijsten);
+                
                 Txtbox_Taak.Text = "";
                 ComboBox_Prio.SelectedIndex = -1;
                 DatePicker_Deadline.SelectedDate = null;
