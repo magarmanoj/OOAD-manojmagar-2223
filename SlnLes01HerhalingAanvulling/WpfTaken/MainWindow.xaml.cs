@@ -111,6 +111,7 @@ namespace WpfTaken
             CheckForm();
         }
 
+        // Deze event handler zorgt voor live form checking.
         private void Txtbox_Taak_TextChanged(object sender, TextChangedEventArgs e)
         {
             CheckForm();
@@ -129,6 +130,30 @@ namespace WpfTaken
         private void DatePicker_deadline_Picker(object sender, SelectionChangedEventArgs e)
         {
             CheckForm();
+        }
+
+        private void Button_terugzetten_Click(object sender, RoutedEventArgs e)
+        {
+            //als stack lijst meer dan 0 waarde heeft dan ga je die waarde terug poping in een oorspronkelijke lijst.
+            if (lijstItems.Count > 0)
+            {
+                ListBoxItem item = lijstItems.Pop();
+                lijst_box.Items.Add(item);
+            }
+            Button_terugzetten.IsEnabled = false;
+
+        }
+
+        private void Button_Verwijderen_Click(object sender, RoutedEventArgs e)
+        {
+            //Nieuwe lijst maken die de content van oude lijst 'kopieert' en daarna push je die waarde in stack lijst
+            //en verwijderen van oorspronkelijke lijst.
+            ListBoxItem selectedItem = lijst_box.SelectedItem as ListBoxItem;
+            if (selectedItem != null)
+            {
+                lijstItems.Push(selectedItem);
+                lijst_box.Items.Remove(selectedItem);
+            }
         }
     }
 }
