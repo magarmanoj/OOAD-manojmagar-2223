@@ -11,7 +11,7 @@ namespace ConsoleTafels
         static void Main(string[] args)
         {
 
- 
+
             Console.WriteLine("4x8 tafel: ");
             DrukTafel(4, 8);
             Console.WriteLine("\n2x5 tafel: ");
@@ -31,12 +31,12 @@ namespace ConsoleTafels
         private static void DrukTafel(int getal, int lengte)
         {
             int result;
-            for(int i = 1; i <= lengte; i++)
+            for (int i = 1; i <= lengte; i++)
             {
-                result= getal * i;
-                Console.WriteLine($"{ getal} x {i} = {result}");
+                result = getal * i;
+                Console.WriteLine($"{getal} x {i} = {result}");
             }
-            
+
         }
         private static int VraagPositiefGetal()
         {
@@ -46,9 +46,9 @@ namespace ConsoleTafels
                 Console.Write("Het geal moet positief zijn! Geef een getal: ");
             }
             return result;
-            
+
         }
-        
-        
+
+
     }
 }

@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Xml.Schema;
 
 namespace WpfTaken
 {
@@ -33,7 +32,7 @@ namespace WpfTaken
 
         private bool CheckForm()
         {
-            
+
             Fout_Melding.Foreground = Brushes.Red;
             Fout_Melding.Text = "";
             bool FormCheckLeeg = true;
@@ -101,21 +100,21 @@ namespace WpfTaken
                 {
                     Button_Verwijderen.IsEnabled = true;
                 }
-            Txtbox_Taak.Text = "";
-            ComboBox_Prio.SelectedIndex = -1;
-            DatePicker_Deadline.SelectedDate = null;
-            RadioB_Adam.IsChecked = false;
-            RadioB_Bilal.IsChecked = false;
-            RadioB_Chelsey.IsChecked = false;
-            CheckForm();
-            Fout_Melding.Text = "";
+                Txtbox_Taak.Text = "";
+                ComboBox_Prio.SelectedIndex = -1;
+                DatePicker_Deadline.SelectedDate = null;
+                RadioB_Adam.IsChecked = false;
+                RadioB_Bilal.IsChecked = false;
+                RadioB_Chelsey.IsChecked = false;
+                CheckForm();
+                Fout_Melding.Text = "";
             }
         }
 
         // Deze event handler zorgt voor live form checking.
         private void Txtbox_Taak_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(toevoegenIsclicked > 1)
+            if (toevoegenIsclicked >= 1)
             {
                 CheckForm();
             }
@@ -123,7 +122,7 @@ namespace WpfTaken
 
         private void ComboBox_Prio_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (toevoegenIsclicked > 1)
+            if (toevoegenIsclicked >= 1)
             {
                 CheckForm();
             }
@@ -131,7 +130,7 @@ namespace WpfTaken
 
         private void RadioB_Adam_Checked(object sender, RoutedEventArgs e)
         {
-            if (toevoegenIsclicked > 1)
+            if (toevoegenIsclicked >= 1)
             {
                 CheckForm();
             }
@@ -139,7 +138,7 @@ namespace WpfTaken
 
         private void DatePicker_deadline_Picker(object sender, SelectionChangedEventArgs e)
         {
-            if (toevoegenIsclicked > 1)
+            if (toevoegenIsclicked >= 1)
             {
                 CheckForm();
             }

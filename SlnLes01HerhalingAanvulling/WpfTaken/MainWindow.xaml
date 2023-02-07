@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTaken"
         mc:Ignorable="d"
-        Title="MainWindow" Height="525" Width="862">
+        Title="MainWindow" Height="450" Width="800">
     <Grid>
         <TextBlock x:Name="TaakTxt" HorizontalAlignment="Left" Height="35" Margin="49,71,0,0" TextWrapping="Wrap" Text="Taak:" VerticalAlignment="Top" Width="100"/>
         <TextBox x:Name="Txtbox_Taak" HorizontalAlignment="Left" Height="35" Margin="173,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" TextChanged="Txtbox_Taak_TextChanged"/>
@@ -27,7 +27,6 @@
         <Button x:Name="Button_terugzetten" IsEnabled="False" Content="TERUGZETTEN" HorizontalAlignment="Left" Height="31" Margin="487,298,0,0" VerticalAlignment="Top" Width="92" Click="Button_terugzetten_Click"/>
         <Button x:Name="Button_Verwijderen" IsEnabled="False" Content="VERWIJDEREN" HorizontalAlignment="Left" Height="31" Margin="614,298,0,0" VerticalAlignment="Top" Width="96" Click="Button_Verwijderen_Click"/>
         <TextBlock x:Name="Fout_Melding" HorizontalAlignment="Left" Height="201" Margin="49,298,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="237"/>
-
 
     </Grid>
 </Window>
