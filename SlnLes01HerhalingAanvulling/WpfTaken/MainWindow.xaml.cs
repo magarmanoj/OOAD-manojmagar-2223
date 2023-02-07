@@ -21,57 +21,93 @@ namespace WpfTaken
     /// </summary>
     public partial class MainWindow : Window
     {
+        Stack<ListBoxItem> lijstItems = new Stack<ListBoxItem>();
         public MainWindow()
         {
             InitializeComponent();
 
         }
 
-        private void CheckForm()
+        private bool CheckForm()
         {
+            bool FormCheckLeeg = true;
+            if(FormCheckLeeg == true)
+            {
+                Fout_taak.Text = "";
+                Fout_Prioriteit.Text = "";
+                Fout_deadline.Text = "";
+                Fout_door.Text = "";
+            }
             if (Txtbox_Taak.Text == "")
             {
                 Fout_taak.Text = "gelieve een taak in te vullen";
                 Fout_taak.Foreground = Brushes.Red;
+                FormCheckLeeg = false;
             }
-            else
-            {
-                Fout_taak.Text = "";
 
-            } 
             if(ComboBox_Prio.SelectedIndex == -1)
             {
                 Fout_Prioriteit.Text = "gelieve een prioriteit te kiezen";
                 Fout_Prioriteit.Foreground = Brushes.Red;
-            }
-            else
-            {
-                Fout_Prioriteit.Text = "";
+                FormCheckLeeg = false;
             }
             if(DatePicker_Deadline.SelectedDate == null)
             {
                 Fout_deadline.Text = "gelieve een datum te kiezen";
                 Fout_deadline.Foreground = Brushes.Red;
-            }
-            else
-            {
-                Fout_deadline.Text = "";
+                FormCheckLeeg = false;
             }
             if((RadioB_Adam.IsChecked == false && RadioB_Bilal.IsChecked == false && RadioB_Chelsey.IsChecked == false))
             {
                 
                 Fout_door.Text = "gelieve een persoon te kiezen";
                 Fout_door.Foreground = Brushes.Red;
+                FormCheckLeeg = false;
             }
-            else
-            {
-                Fout_door.Text = "";
-            }
+            return FormCheckLeeg;
 
         }
 
         private void Button_Toevoegen_Click(object sender, RoutedEventArgs e)
         {
+            if (CheckForm())
+            {
+                ListBoxItem lijsten = new ListBoxItem();
+                RadioButton rb = new RadioButton();
+
+                if (RadioB_Adam.IsChecked == true)
+                {
+                    rb = RadioB_Adam;
+                }
+                if (RadioB_Bilal.IsChecked == true)
+                {
+                    rb = RadioB_Bilal;
+                }
+                if (RadioB_Chelsey.IsChecked == true)
+                {
+                    rb = RadioB_Chelsey;
+                }
+                lijsten.Content = $"{Txtbox_Taak.Text} (deadline: {DatePicker_Deadline.SelectedDate.Value.ToShortDateString()}; door: {rb.Content})";
+                lijst_box.Items.Add(lijsten);
+                if(ComboBox_Prio.SelectedIndex == 0)
+                {
+                    lijsten.Background = Brushes.Red;
+                }else if (ComboBox_Prio.SelectedIndex == 1)
+                {
+                    lijsten.Background = Brushes.Green;
+                }
+                else
+                {
+                    lijsten.Background = Brushes.Yellow;
+                }
+
+            }
+            Txtbox_Taak.Text = "";
+            ComboBox_Prio.SelectedIndex = -1;
+            DatePicker_Deadline.SelectedDate = null;
+            RadioB_Adam.IsChecked = false;
+            RadioB_Bilal.IsChecked = false;
+            RadioB_Chelsey.IsChecked = false;
             CheckForm();
         }
 
