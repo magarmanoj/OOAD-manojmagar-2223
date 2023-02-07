@@ -8,14 +8,13 @@ namespace ConsoleTafels
 {
     internal class Program
     {
-        
+        int[] result;
         static void Main(string[] args)
         {
 
  
             Console.WriteLine("4x8 tafel: ");
             DrukTafel(4, 8);
-
             Console.WriteLine("\n2x5 tafel: ");
             DrukTafel(2, 5);
 
@@ -35,9 +34,10 @@ namespace ConsoleTafels
             int result;
             for(int i = 1; i <= lengte; i++)
             {
-                result = getal * i;
+                result= getal * i;
                 Console.WriteLine($"{ getal} x {i} = {result}");
             }
+            
            
         }
 
