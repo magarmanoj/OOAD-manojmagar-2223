@@ -20,8 +20,7 @@ namespace WpfTaken
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        Stack<ListBoxItem> LijstItems = new Stack<ListBoxItem>();
+        Stack<ListBoxItem> lijstItems = new Stack<ListBoxItem>();
         int toevoegenIsclicked = 0;
 
         public MainWindow()
@@ -32,34 +31,33 @@ namespace WpfTaken
 
         private bool CheckForm()
         {
-
             Fout_Melding.Foreground = Brushes.Red;
             Fout_Melding.Text = "";
-            bool FormCheckLeeg = true;
+            bool formCheckLeeg = true;
             if (Txtbox_Taak.Text == "")
             {
                 Fout_Melding.Text += "gelieve een taak in te vullen\n";
-                FormCheckLeeg = false;
+                formCheckLeeg = false;
             }
 
             if (ComboBox_Prio.SelectedIndex == -1)
             {
                 Fout_Melding.Text += "gelieve een prioriteit te kiezen\n";
-                FormCheckLeeg = false;
+                formCheckLeeg = false;
             }
             if (DatePicker_Deadline.SelectedDate == null)
             {
                 Fout_Melding.Text += "gelieve een datum te kiezen\n";
-                FormCheckLeeg = false;
+                formCheckLeeg = false;
             }
-            if ((RadioB_Adam.IsChecked == false && RadioB_Bilal.IsChecked == false && RadioB_Chelsey.IsChecked == false))
+            if (RadioB_Adam.IsChecked == false && RadioB_Bilal.IsChecked == false && RadioB_Chelsey.IsChecked == false)
             {
                 Fout_Melding.Text += "gelieve een persoon te kiezen\n";
-                FormCheckLeeg = false;
+                formCheckLeeg = false;
             }
-            return FormCheckLeeg;
-
+            return formCheckLeeg;
         }
+
 
         private void Button_Toevoegen_Click(object sender, RoutedEventArgs e)
         {
@@ -114,7 +112,7 @@ namespace WpfTaken
         // Deze event handler zorgt voor live form checking.
         private void Txtbox_Taak_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (toevoegenIsclicked >= 1)
+            if (toevoegenIsclicked == 1)
             {
                 CheckForm();
             }
@@ -122,7 +120,7 @@ namespace WpfTaken
 
         private void ComboBox_Prio_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (toevoegenIsclicked >= 1)
+            if (toevoegenIsclicked == 1)
             {
                 CheckForm();
             }
@@ -130,7 +128,7 @@ namespace WpfTaken
 
         private void RadioB_Adam_Checked(object sender, RoutedEventArgs e)
         {
-            if (toevoegenIsclicked >= 1)
+            if (toevoegenIsclicked == 1)
             {
                 CheckForm();
             }
@@ -138,7 +136,7 @@ namespace WpfTaken
 
         private void DatePicker_deadline_Picker(object sender, SelectionChangedEventArgs e)
         {
-            if (toevoegenIsclicked >= 1)
+            if (toevoegenIsclicked == 1)
             {
                 CheckForm();
             }
@@ -146,23 +144,22 @@ namespace WpfTaken
 
         private void Button_terugzetten_Click(object sender, RoutedEventArgs e)
         {
-            //als stack lijst meer dan 0 waarde heeft dan ga je die waarde terug poping in een oorspronkelijke lijst.
-            if (LijstItems.Count > 0)
+            // als stack lijst meer dan 0 waarde heeft dan ga je die waarde terug poping in een oorspronkelijke lijst.
+            if (lijstItems.Count > 0)
             {
-                ListBoxItem item = LijstItems.Pop();
+                ListBoxItem item = lijstItems.Pop();
                 Lijst_box.Items.Add(item);
-
             }
         }
 
         private void Button_Verwijderen_Click(object sender, RoutedEventArgs e)
         {
-            //Nieuwe lijst maken die de content van oude lijst 'kopieert' en daarna push je die waarde in stack lijst
-            //en verwijderen van oorspronkelijke lijst.
+            // Nieuwe lijst maken die de content van oude lijst 'kopieert' en daarna push je die waarde in stack lijst
+            // en verwijderen van oorspronkelijke lijst.
             ListBoxItem selectedItem = Lijst_box.SelectedItem as ListBoxItem;
             if (selectedItem != null)
             {
-                LijstItems.Push(selectedItem);
+                lijstItems.Push(selectedItem);
                 Lijst_box.Items.Remove(selectedItem);
             }
         }
@@ -171,7 +168,6 @@ namespace WpfTaken
         {
             Button_Verwijderen.IsEnabled = Lijst_box.SelectedItem != null;
             Button_terugzetten.IsEnabled = Button_Verwijderen.IsEnabled != true;
-
         }
     }
 }
