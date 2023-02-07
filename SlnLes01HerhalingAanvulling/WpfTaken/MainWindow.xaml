@@ -8,20 +8,20 @@
         Title="MainWindow" Height="525" Width="862">
     <Grid>
         <TextBlock x:Name="TaakTxt" HorizontalAlignment="Left" Height="35" Margin="49,71,0,0" TextWrapping="Wrap" Text="Taak:" VerticalAlignment="Top" Width="100"/>
-        <TextBox x:Name="Txtbox_Taak" HorizontalAlignment="Left" Height="35" Margin="173,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="227"/>
+        <TextBox x:Name="Txtbox_Taak" HorizontalAlignment="Left" Height="35" Margin="173,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" TextChanged="Txtbox_Taak_TextChanged"/>
         <TextBlock x:Name="PrioriteitTxt" HorizontalAlignment="Left" Height="35" Margin="49,111,0,0" TextWrapping="Wrap" Text="Prioriteit:" VerticalAlignment="Top" Width="100"/>
-        <ComboBox x:Name="ComboBox_Prio" HorizontalAlignment="Left" Height="35" Margin="173,111,0,0" VerticalAlignment="Top" Width="227">
+        <ComboBox x:Name="ComboBox_Prio" HorizontalAlignment="Left" Height="35" Margin="173,116,0,0" VerticalAlignment="Top" Width="227" SelectionChanged="ComboBox_Prio_SelectionChanged">
             <ComboBoxItem Content="hoog" />
             <ComboBoxItem Content="normaal)"/>
             <ComboBoxItem Content="laag"/>
         </ComboBox>
 
         <TextBlock x:Name="DeadlineTxt" HorizontalAlignment="Left" Height="35" Margin="49,151,0,0" TextWrapping="Wrap" Text="Deadline:" VerticalAlignment="Top" Width="100"/>
-        <DatePicker x:Name="DatePicker_Deadline" HorizontalAlignment="Left" Height="35" Margin="173,151,0,0" VerticalAlignment="Top" Width="227"/>
+        <DatePicker x:Name="DatePicker_Deadline" HorizontalAlignment="Left" Height="35" Margin="173,151,0,0" VerticalAlignment="Top" Width="227" SelectedDateChanged="DatePicker_deadline_Picker"/>
         <TextBlock x:Name="DoorTxt" HorizontalAlignment="Left" Height="35" Margin="49,191,0,0" TextWrapping="Wrap" Text="Door:" VerticalAlignment="Top" Width="100"/>
-        <RadioButton x:Name="RadioB_Adam" Content="Adam" HorizontalAlignment="Left" Height="22" Margin="173,196,0,0" VerticalAlignment="Top" Width="67"/>
-        <RadioButton x:Name="RadioB_Bilal" Content="Bilal" HorizontalAlignment="Left" Height="22" Margin="253,197,0,0" VerticalAlignment="Top" Width="67"/>
-        <RadioButton x:Name="RadioB_Chelsey" Content="Chelsey" HorizontalAlignment="Left" Height="22" Margin="333,197,0,0" VerticalAlignment="Top" Width="67"/>
+        <RadioButton x:Name="RadioB_Adam" Content="Adam" HorizontalAlignment="Left" Height="22" Margin="173,196,0,0" VerticalAlignment="Top" Width="67" Checked="RadioB_Adam_Checked"/>
+        <RadioButton x:Name="RadioB_Bilal" Content="Bilal" HorizontalAlignment="Left" Height="22" Margin="253,197,0,0" VerticalAlignment="Top" Width="67" Checked="RadioB_Adam_Checked"/>
+        <RadioButton x:Name="RadioB_Chelsey" Content="Chelsey" HorizontalAlignment="Left" Height="22" Margin="333,197,0,0" VerticalAlignment="Top" Width="67" Checked="RadioB_Adam_Checked"/>
         <Button x:Name="Button_Toevoegen" Content="TOEVOEGEN" HorizontalAlignment="Left" Height="32" Margin="305,248,0,0" VerticalAlignment="Top" Width="95" Click="Button_Toevoegen_Click"/>
         <ListBox HorizontalAlignment="Left" Height="209" Margin="442,71,0,0" VerticalAlignment="Top" Width="326"/>
         <Button x:Name="Button_terugzetten" Content="TERUGZETTEN" HorizontalAlignment="Left" Height="31" Margin="487,298,0,0" VerticalAlignment="Top" Width="92"/>
