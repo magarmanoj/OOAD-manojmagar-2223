@@ -21,96 +21,128 @@ namespace WpfTaken
     /// </summary>
     public partial class MainWindow : Window
     {
+
         Stack<ListBoxItem> LijstItems = new Stack<ListBoxItem>();
+        int toevoegenIsclicked = 0;
+
         public MainWindow()
         {
             InitializeComponent();
 
         }
 
-        private void CheckForm()
+        private bool CheckForm()
         {
-            //bool FormCheckLeeg;
+            
             Fout_Melding.Foreground = Brushes.Red;
             Fout_Melding.Text = "";
-
+            bool FormCheckLeeg = true;
             if (Txtbox_Taak.Text == "")
             {
-                Fout_Melding.Text = "gelieve een taak in te vullen";               
+                Fout_Melding.Text += "gelieve een taak in te vullen\n";
+                FormCheckLeeg = false;
             }
-            if(ComboBox_Prio.SelectedIndex == -1)
+
+            if (ComboBox_Prio.SelectedIndex == -1)
             {
-                Fout_Melding.Text = "gelieve een prioriteit te kiezen";
+                Fout_Melding.Text += "gelieve een prioriteit te kiezen\n";
+                FormCheckLeeg = false;
             }
-            if(DatePicker_Deadline.SelectedDate == null)
+            if (DatePicker_Deadline.SelectedDate == null)
             {
-                Fout_Melding.Text = "gelieve een datum te kiezen";              
+                Fout_Melding.Text += "gelieve een datum te kiezen\n";
+                FormCheckLeeg = false;
             }
-            if((RadioB_Adam.IsChecked == false && RadioB_Bilal.IsChecked == false && RadioB_Chelsey.IsChecked == false))
+            if ((RadioB_Adam.IsChecked == false && RadioB_Bilal.IsChecked == false && RadioB_Chelsey.IsChecked == false))
             {
-                Fout_Melding.Text = "gelieve een persoon te kiezen";               
+                Fout_Melding.Text += "gelieve een persoon te kiezen\n";
+                FormCheckLeeg = false;
             }
+            return FormCheckLeeg;
 
         }
 
         private void Button_Toevoegen_Click(object sender, RoutedEventArgs e)
         {
-            ListBoxItem lijsten = new ListBoxItem();
-            RadioButton rb = new RadioButton();
+            toevoegenIsclicked = 1;
+            if (CheckForm())
+            {
+                ListBoxItem lijsten = new ListBoxItem();
+                RadioButton rb = new RadioButton();
 
-            if (RadioB_Adam.IsChecked == true)
-            {
-                rb = RadioB_Adam;
-            }
-            if (RadioB_Bilal.IsChecked == true)
-            {
-                rb = RadioB_Bilal;
-            }
-            if (RadioB_Chelsey.IsChecked == true)
-            {
-                rb = RadioB_Chelsey;
-            }
-            lijsten.Content = $"{Txtbox_Taak.Text} (deadline: {DatePicker_Deadline.SelectedDate.Value.ToShortDateString()}; door: {rb.Content})";
-            Lijst_box.Items.Add(lijsten);
-            if (ComboBox_Prio.SelectedIndex == 0)
-            {
-                lijsten.Background = Brushes.Red;
-            }
-            else if (ComboBox_Prio.SelectedIndex == 1)
-            {
-                lijsten.Background = Brushes.Green;
-            }
-            else
-            {
-                lijsten.Background = Brushes.Yellow;
-            }
+                if (RadioB_Adam.IsChecked == true)
+                {
+                    rb = RadioB_Adam;
+                }
+                if (RadioB_Bilal.IsChecked == true)
+                {
+                    rb = RadioB_Bilal;
+                }
+                if (RadioB_Chelsey.IsChecked == true)
+                {
+                    rb = RadioB_Chelsey;
+                }
+                lijsten.Content = $"{Txtbox_Taak.Text} (deadline: {DatePicker_Deadline.SelectedDate.Value.ToShortDateString()}; door: {rb.Content})";
+                Lijst_box.Items.Add(lijsten);
+                if (ComboBox_Prio.SelectedIndex == 0)
+                {
+                    lijsten.Background = Brushes.Red;
+                }
+                else if (ComboBox_Prio.SelectedIndex == 1)
+                {
+                    lijsten.Background = Brushes.Green;
+                }
+                else
+                {
+                    lijsten.Background = Brushes.Yellow;
+                }
 
-            if (lijsten.Content != null)
-            {
-                Button_Verwijderen.IsEnabled = true;
+                if (lijsten.Content != null)
+                {
+                    Button_Verwijderen.IsEnabled = true;
+                }
+            Txtbox_Taak.Text = "";
+            ComboBox_Prio.SelectedIndex = -1;
+            DatePicker_Deadline.SelectedDate = null;
+            RadioB_Adam.IsChecked = false;
+            RadioB_Bilal.IsChecked = false;
+            RadioB_Chelsey.IsChecked = false;
+            CheckForm();
+            Fout_Melding.Text = "";
             }
-
         }
 
         // Deze event handler zorgt voor live form checking.
         private void Txtbox_Taak_TextChanged(object sender, TextChangedEventArgs e)
         {
-            CheckForm();
+            if(toevoegenIsclicked > 1)
+            {
+                CheckForm();
+            }
         }
 
         private void ComboBox_Prio_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CheckForm();
+            if (toevoegenIsclicked > 1)
+            {
+                CheckForm();
+            }
         }
 
         private void RadioB_Adam_Checked(object sender, RoutedEventArgs e)
         {
-            CheckForm();
+            if (toevoegenIsclicked > 1)
+            {
+                CheckForm();
+            }
         }
 
         private void DatePicker_deadline_Picker(object sender, SelectionChangedEventArgs e)
         {
-            CheckForm();
+            if (toevoegenIsclicked > 1)
+            {
+                CheckForm();
+            }
         }
 
         private void Button_terugzetten_Click(object sender, RoutedEventArgs e)
@@ -120,8 +152,8 @@ namespace WpfTaken
             {
                 ListBoxItem item = LijstItems.Pop();
                 Lijst_box.Items.Add(item);
-                           
-            }           
+
+            }
         }
 
         private void Button_Verwijderen_Click(object sender, RoutedEventArgs e)
