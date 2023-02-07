@@ -21,12 +21,11 @@ namespace WpfTaken
     public partial class MainWindow : Window
     {
         Stack<ListBoxItem> lijstItems = new Stack<ListBoxItem>();
-        int toevoegenIsclicked = 0;
+        bool toevoegenIsclicked = false;
 
         public MainWindow()
         {
             InitializeComponent();
-
         }
 
         private bool CheckForm()
@@ -34,26 +33,29 @@ namespace WpfTaken
             Fout_Melding.Foreground = Brushes.Red;
             Fout_Melding.Text = "";
             bool formCheckLeeg = true;
-            if (Txtbox_Taak.Text == "")
+            if (toevoegenIsclicked)
             {
-                Fout_Melding.Text += "gelieve een taak in te vullen\n";
-                formCheckLeeg = false;
-            }
+                if (Txtbox_Taak.Text == "")
+                {
+                    Fout_Melding.Text += "gelieve een taak in te vullen\n";
+                    formCheckLeeg = false;
+                }
 
-            if (ComboBox_Prio.SelectedIndex == -1)
-            {
-                Fout_Melding.Text += "gelieve een prioriteit te kiezen\n";
-                formCheckLeeg = false;
-            }
-            if (DatePicker_Deadline.SelectedDate == null)
-            {
-                Fout_Melding.Text += "gelieve een datum te kiezen\n";
-                formCheckLeeg = false;
-            }
-            if (RadioB_Adam.IsChecked == false && RadioB_Bilal.IsChecked == false && RadioB_Chelsey.IsChecked == false)
-            {
-                Fout_Melding.Text += "gelieve een persoon te kiezen\n";
-                formCheckLeeg = false;
+                if (ComboBox_Prio.SelectedIndex == -1)
+                {
+                    Fout_Melding.Text += "gelieve een prioriteit te kiezen\n";
+                    formCheckLeeg = false;
+                }
+                if (DatePicker_Deadline.SelectedDate == null)
+                {
+                    Fout_Melding.Text += "gelieve een datum te kiezen\n";
+                    formCheckLeeg = false;
+                }
+                if (RadioB_Adam.IsChecked == false && RadioB_Bilal.IsChecked == false && RadioB_Chelsey.IsChecked == false)
+                {
+                    Fout_Melding.Text += "gelieve een persoon te kiezen\n";
+                    formCheckLeeg = false;
+                }
             }
             return formCheckLeeg;
         }
@@ -61,7 +63,7 @@ namespace WpfTaken
 
         private void Button_Toevoegen_Click(object sender, RoutedEventArgs e)
         {
-            toevoegenIsclicked = 1;
+            toevoegenIsclicked = true;
             if (CheckForm())
             {
                 ListBoxItem lijsten = new ListBoxItem();
@@ -80,7 +82,7 @@ namespace WpfTaken
                     rb = RadioB_Chelsey;
                 }
                 lijsten.Content = $"{Txtbox_Taak.Text} (deadline: {DatePicker_Deadline.SelectedDate.Value.ToShortDateString()}; door: {rb.Content})";
-                Lijst_box.Items.Add(lijsten);
+                
                 if (ComboBox_Prio.SelectedIndex == 0)
                 {
                     lijsten.Background = Brushes.Red;
@@ -98,48 +100,38 @@ namespace WpfTaken
                 {
                     Button_Verwijderen.IsEnabled = true;
                 }
+                Lijst_box.Items.Add(lijsten);
                 Txtbox_Taak.Text = "";
                 ComboBox_Prio.SelectedIndex = -1;
                 DatePicker_Deadline.SelectedDate = null;
                 RadioB_Adam.IsChecked = false;
                 RadioB_Bilal.IsChecked = false;
-                RadioB_Chelsey.IsChecked = false;
+                RadioB_Chelsey.IsChecked = false;                
                 CheckForm();
                 Fout_Melding.Text = "";
+                toevoegenIsclicked = false;               
             }
         }
 
         // Deze event handler zorgt voor live form checking.
         private void Txtbox_Taak_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (toevoegenIsclicked == 1)
-            {
-                CheckForm();
-            }
+            CheckForm();          
         }
 
         private void ComboBox_Prio_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (toevoegenIsclicked == 1)
-            {
-                CheckForm();
-            }
+            CheckForm();
         }
 
         private void RadioB_Adam_Checked(object sender, RoutedEventArgs e)
         {
-            if (toevoegenIsclicked == 1)
-            {
-                CheckForm();
-            }
+            CheckForm();
         }
 
         private void DatePicker_deadline_Picker(object sender, SelectionChangedEventArgs e)
         {
-            if (toevoegenIsclicked == 1)
-            {
-                CheckForm();
-            }
+            CheckForm();
         }
 
         private void Button_terugzetten_Click(object sender, RoutedEventArgs e)
@@ -149,6 +141,10 @@ namespace WpfTaken
             {
                 ListBoxItem item = lijstItems.Pop();
                 Lijst_box.Items.Add(item);
+            }
+            if (lijstItems.Count == 0)
+            {
+                Button_terugzetten.IsEnabled = false;
             }
         }
 
