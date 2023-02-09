@@ -7,26 +7,25 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TextBlock x:Name="TaakTxt" HorizontalAlignment="Left" Height="35" Margin="49,71,0,0" TextWrapping="Wrap" Text="Taak:" VerticalAlignment="Top" Width="100"/>
-        <TextBox x:Name="Txtbox_Taak" HorizontalAlignment="Left" Height="35" Margin="173,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" TextChanged="Txtbox_Taak_TextChanged"/>
-        <TextBlock x:Name="PrioriteitTxt" HorizontalAlignment="Left" Height="35" Margin="49,111,0,0" TextWrapping="Wrap" Text="Prioriteit:" VerticalAlignment="Top" Width="100"/>
-        <ComboBox x:Name="ComboBox_Prio" HorizontalAlignment="Left" Height="35" Margin="173,111,0,0" VerticalAlignment="Top" Width="227" SelectionChanged="ComboBox_Prio_SelectionChanged">
+        <TextBlock x:Name="taakTxt" HorizontalAlignment="Left" Height="35" Margin="50,70,0,0" TextWrapping="Wrap" Text="Taak:" VerticalAlignment="Top" Width="100"/>
+        <TextBox x:Name="txtbox_Taak" HorizontalAlignment="Left" Height="35" Margin="175,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" TextChanged="SelectionChanged"/>
+        <TextBlock x:Name="prioriteitTxt" HorizontalAlignment="Left" Height="35" Margin="50,110,0,0" TextWrapping="Wrap" Text="Prioriteit:" VerticalAlignment="Top" Width="100"/>
+        <ComboBox x:Name="comboBox_Prio" HorizontalAlignment="Left" Height="35" Margin="175,110,0,0" VerticalAlignment="Top" Width="230" SelectionChanged="SelectionChanged">
             <ComboBoxItem Content="hoog" />
-            <ComboBoxItem Content="normaal)"/>
+            <ComboBoxItem Content="normaal"/>
             <ComboBoxItem Content="laag"/>
         </ComboBox>
 
-        <TextBlock x:Name="DeadlineTxt" HorizontalAlignment="Left" Height="35" Margin="49,151,0,0" TextWrapping="Wrap" Text="Deadline:" VerticalAlignment="Top" Width="100"/>
-        <DatePicker x:Name="DatePicker_Deadline" HorizontalAlignment="Left" Height="35" Margin="173,151,0,0" VerticalAlignment="Top" Width="227" SelectedDateChanged="DatePicker_deadline_Picker"/>
-        <TextBlock x:Name="DoorTxt" HorizontalAlignment="Left" Height="35" Margin="49,191,0,0" TextWrapping="Wrap" Text="Door:" VerticalAlignment="Top" Width="100"/>
-        <RadioButton x:Name="RadioB_Adam" Content="Adam" HorizontalAlignment="Left" Height="22" Margin="173,196,0,0" VerticalAlignment="Top" Width="67" Checked="RadioB_Adam_Checked"/>
-        <RadioButton x:Name="RadioB_Bilal" Content="Bilal" HorizontalAlignment="Left" Height="22" Margin="253,197,0,0" VerticalAlignment="Top" Width="67" Checked="RadioB_Adam_Checked"/>
-        <RadioButton x:Name="RadioB_Chelsey" Content="Chelsey" HorizontalAlignment="Left" Height="22" Margin="333,197,0,0" VerticalAlignment="Top" Width="67" Checked="RadioB_Adam_Checked"/>
-        <Button x:Name="Button_Toevoegen" Content="TOEVOEGEN" HorizontalAlignment="Left" Height="32" Margin="305,248,0,0" VerticalAlignment="Top" Width="95" Click="Button_Toevoegen_Click"/>
-        <ListBox x:Name="Lijst_box" HorizontalAlignment="Left" Height="209" Margin="442,71,0,0" VerticalAlignment="Top" Width="326" SelectionChanged="Lijst_box_SelectionChanged"/>
-        <Button x:Name="Button_terugzetten" IsEnabled="False" Content="TERUGZETTEN" HorizontalAlignment="Left" Height="31" Margin="487,298,0,0" VerticalAlignment="Top" Width="92" Click="Button_terugzetten_Click"/>
-        <Button x:Name="Button_Verwijderen" IsEnabled="False" Content="VERWIJDEREN" HorizontalAlignment="Left" Height="31" Margin="614,298,0,0" VerticalAlignment="Top" Width="96" Click="Button_Verwijderen_Click"/>
-        <TextBlock x:Name="Fout_Melding" HorizontalAlignment="Left" Height="201" Margin="49,298,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="237"/>
-
+        <TextBlock x:Name="deadlineTxt" HorizontalAlignment="Left" Height="35" Margin="50,150,0,0" TextWrapping="Wrap" Text="Deadline:" VerticalAlignment="Top" Width="100"/>
+        <DatePicker x:Name="datePicker_Deadline" HorizontalAlignment="Left" Height="35" Margin="175,150,0,0" VerticalAlignment="Top" Width="230" SelectedDateChanged="SelectionChanged"/>
+        <TextBlock x:Name="doorTxt" HorizontalAlignment="Left" Height="35" Margin="50,190,0,0" TextWrapping="Wrap" Text="Door:" VerticalAlignment="Top" Width="100"/>
+        <RadioButton x:Name="radioB_Adam" Content="Adam" HorizontalAlignment="Left" Height="25" Margin="175,195,0,0" VerticalAlignment="Top" Width="65" Checked="SelectionChanged"/>
+        <RadioButton x:Name="radioB_Bilal" Content="Bilal" HorizontalAlignment="Left" Height="25" Margin="255,200,0,0" VerticalAlignment="Top" Width="65" Checked="SelectionChanged"/>
+        <RadioButton x:Name="radioB_Chelsey" Content="Chelsey" HorizontalAlignment="Left" Height="20" Margin="335,200,0,0" VerticalAlignment="Top" Width="65" Checked="SelectionChanged"/>
+        <Button x:Name="button_Toevoegen" Content="TOEVOEGEN" HorizontalAlignment="Left" Height="32" Margin="305,250,0,0" VerticalAlignment="Top" Width="95" Click="Button_Toevoegen_Click"/>
+        <ListBox x:Name="lijst_box" HorizontalAlignment="Left" Height="209" Margin="442,71,0,0" VerticalAlignment="Top" Width="326" SelectionChanged="Lijst_box_SelectionChanged"/>
+        <Button x:Name="button_terugzetten" IsEnabled="False" Content="TERUGZETTEN" HorizontalAlignment="Left" Height="30" Margin="490,300,0,0" VerticalAlignment="Top" Width="95" Click="Button_terugzetten_Click"/>
+        <Button x:Name="button_Verwijderen" IsEnabled="False" Content="VERWIJDEREN" HorizontalAlignment="Left" Height="30" Margin="615,300,0,0" VerticalAlignment="Top" Width="95" Click="Button_Verwijderen_Click"/>
+        <TextBlock x:Name="fout_Melding" HorizontalAlignment="Left" Height="200" Margin="50,300,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="240"/>
     </Grid>
 </Window>

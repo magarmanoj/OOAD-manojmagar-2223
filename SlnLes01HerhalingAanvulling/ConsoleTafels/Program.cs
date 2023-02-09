@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,47 +9,42 @@ namespace ConsoleTafels
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-
-
             Console.WriteLine("4x8 tafel: ");
-            DrukTafel(4, 8);
+            Console.WriteLine(DrukTafel(4, 8));
             Console.WriteLine("\n2x5 tafel: ");
-            DrukTafel(2, 5);
+            Console.WriteLine(DrukTafel(2, 5));
 
-
-            Console.Write("\nGeef een getal: ");
-            int getal = VraagPositiefGetal();
-            Console.Write("Geef de lengte: ");
-            int lengte = VraagPositiefGetal();
+            int getal = VraagPositiefGetal("\nGeef een getal: ");
+            int lengte = VraagPositiefGetal("Geef de lengte: ");
             Console.WriteLine($"{getal}x{lengte} tafel: ");
-            DrukTafel(getal, lengte);
+            Console.Write(DrukTafel(getal, lengte));
             Console.ReadKey(true);
-
         }
 
-        private static void DrukTafel(int getal, int lengte)
+        private static string DrukTafel(int getal, int lengte)
         {
             int result;
+            string tafel = "";
             for (int i = 1; i <= lengte; i++)
             {
                 result = getal * i;
-                Console.WriteLine($"{getal} x {i} = {result}");
+                tafel += $"{getal} x {i} = {result}\n";
             }
-
+            return tafel;
         }
-        private static int VraagPositiefGetal()
-        {
-            int result;
-            while (!int.TryParse(Console.ReadLine(), out result) || result <= 0)
+
+        private static int VraagPositiefGetal(string geef)
+        { 
+            Console.Write(geef);
+            int result = int.Parse(Console.ReadLine());
+            while (result < 0)
             {
                 Console.Write("Het geal moet positief zijn! Geef een getal: ");
+                result = int.Parse(Console.ReadLine());
             }
             return result;
-
         }
-
-
     }
 }

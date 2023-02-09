@@ -21,6 +21,7 @@ namespace WpfTaken
     public partial class MainWindow : Window
     {
         Stack<ListBoxItem> lijstItems = new Stack<ListBoxItem>();
+        List<SolidColorBrush> color = new List<SolidColorBrush>() { Brushes.Red, Brushes.Green, Brushes.Yellow};
         bool toevoegenIsclicked = false;
 
         public MainWindow()
@@ -30,30 +31,30 @@ namespace WpfTaken
 
         private bool CheckForm()
         {
-            Fout_Melding.Foreground = Brushes.Red;
-            Fout_Melding.Text = "";
+            fout_Melding.Foreground = Brushes.Red;
+            fout_Melding.Text = "";
             bool formCheckLeeg = true;
             if (toevoegenIsclicked)
             {
-                if (Txtbox_Taak.Text == "")
+                if (txtbox_Taak.Text == "")
                 {
-                    Fout_Melding.Text += "gelieve een taak in te vullen\n";
+                    fout_Melding.Text += "gelieve een taak in te vullen\n";
                     formCheckLeeg = false;
                 }
 
-                if (ComboBox_Prio.SelectedIndex == -1)
+                if (comboBox_Prio.SelectedIndex == -1)
                 {
-                    Fout_Melding.Text += "gelieve een prioriteit te kiezen\n";
+                    fout_Melding.Text += "gelieve een prioriteit te kiezen\n";
                     formCheckLeeg = false;
                 }
-                if (DatePicker_Deadline.SelectedDate == null)
+                if (datePicker_Deadline.SelectedDate == null)
                 {
-                    Fout_Melding.Text += "gelieve een datum te kiezen\n";
+                    fout_Melding.Text += "gelieve een datum te kiezen\n";
                     formCheckLeeg = false;
                 }
-                if (RadioB_Adam.IsChecked == false && RadioB_Bilal.IsChecked == false && RadioB_Chelsey.IsChecked == false)
+                if (radioB_Adam.IsChecked == false && radioB_Bilal.IsChecked == false && radioB_Chelsey.IsChecked == false)
                 {
-                    Fout_Melding.Text += "gelieve een persoon te kiezen\n";
+                    fout_Melding.Text += "gelieve een persoon te kiezen\n";
                     formCheckLeeg = false;
                 }
             }
@@ -67,70 +68,36 @@ namespace WpfTaken
             if (CheckForm())
             {
                 ListBoxItem lijsten = new ListBoxItem();
-                RadioButton rb = new RadioButton();
+                RadioButton rbutton = new RadioButton();
 
-                if (RadioB_Adam.IsChecked == true)
+                if (radioB_Adam.IsChecked == true)
                 {
-                    rb = RadioB_Adam;
+                    rbutton = radioB_Adam;
                 }
-                if (RadioB_Bilal.IsChecked == true)
+                if (radioB_Bilal.IsChecked == true)
                 {
-                    rb = RadioB_Bilal;
+                    rbutton = radioB_Bilal;
                 }
-                if (RadioB_Chelsey.IsChecked == true)
+                if (radioB_Chelsey.IsChecked == true)
                 {
-                    rb = RadioB_Chelsey;
+                    rbutton = radioB_Chelsey;
                 }
-                lijsten.Content = $"{Txtbox_Taak.Text} (deadline: {DatePicker_Deadline.SelectedDate.Value.ToShortDateString()}; door: {rb.Content})";
-                Lijst_box.Items.Add(lijsten);
+                lijsten.Content = $"{txtbox_Taak.Text} (deadline: {datePicker_Deadline.SelectedDate.Value.ToShortDateString()}; door: {rbutton.Content})";
+                lijst_box.Items.Add(lijsten);
+                lijsten.Background = color[comboBox_Prio.SelectedIndex];
                 
-                if (ComboBox_Prio.SelectedIndex == 0)
-                {
-                    lijsten.Background = Brushes.Red;
-                }
-                else if (ComboBox_Prio.SelectedIndex == 1)
-                {
-                    lijsten.Background = Brushes.Green;
-                }
-                else
-                {
-                    lijsten.Background = Brushes.Yellow;
-                }
-
-                if (lijsten.Content != null)
-                {
-                    Button_Verwijderen.IsEnabled = true;
-                }
-                
-                Txtbox_Taak.Text = "";
-                ComboBox_Prio.SelectedIndex = -1;
-                DatePicker_Deadline.SelectedDate = null;
-                RadioB_Adam.IsChecked = false;
-                RadioB_Bilal.IsChecked = false;
-                RadioB_Chelsey.IsChecked = false;                
+                txtbox_Taak.Text = "";
+                comboBox_Prio.SelectedIndex = -1;
+                datePicker_Deadline.SelectedDate = null;
+                rbutton.IsChecked = false;
                 CheckForm();
-                Fout_Melding.Text = "";
+                fout_Melding.Text = "";
                 toevoegenIsclicked = false;               
             }
         }
 
-        // Deze event handler zorgt voor live form checking.
-        private void Txtbox_Taak_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            CheckForm();          
-        }
-
-        private void ComboBox_Prio_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            CheckForm();
-        }
-
-        private void RadioB_Adam_Checked(object sender, RoutedEventArgs e)
-        {
-            CheckForm();
-        }
-
-        private void DatePicker_deadline_Picker(object sender, SelectionChangedEventArgs e)
+        // Deze event handler zorgt voor live form checking. Met (EventArgs e) geef je voor alle andere eventhadle zelfde taak
+        private void SelectionChanged(object sender, EventArgs e)
         {
             CheckForm();
         }
@@ -140,12 +107,11 @@ namespace WpfTaken
             // als stack lijst meer dan 0 waarde heeft dan ga je die waarde terug poping in een oorspronkelijke lijst.
             if (lijstItems.Count > 0)
             {
-                ListBoxItem item = lijstItems.Pop();
-                Lijst_box.Items.Add(item);
+                lijst_box.Items.Add(lijstItems.Pop());
             }
             if (lijstItems.Count == 0)
             {
-                Button_terugzetten.IsEnabled = false;
+                button_terugzetten.IsEnabled = false;
             }
         }
 
@@ -153,18 +119,18 @@ namespace WpfTaken
         {
             // Nieuwe lijst maken die de content van oude lijst 'kopieert' en daarna push je die waarde in stack lijst
             // en verwijderen van oorspronkelijke lijst.
-            ListBoxItem selectedItem = Lijst_box.SelectedItem as ListBoxItem;
+            ListBoxItem selectedItem = lijst_box.SelectedItem as ListBoxItem;
             if (selectedItem != null)
             {
                 lijstItems.Push(selectedItem);
-                Lijst_box.Items.Remove(selectedItem);
+                lijst_box.Items.Remove(selectedItem);
             }
         }
 
         private void Lijst_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Button_Verwijderen.IsEnabled = Lijst_box.SelectedItem != null;
-            Button_terugzetten.IsEnabled = Button_Verwijderen.IsEnabled != true;
+            button_Verwijderen.IsEnabled = lijst_box.SelectedItem != null;
+            button_terugzetten.IsEnabled = button_Verwijderen.IsEnabled != true;
         }
     }
 }
