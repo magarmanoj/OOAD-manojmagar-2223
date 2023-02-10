@@ -8,52 +8,52 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button x:Name="beeB" Margin="165,39,542,330" Tag="1" Click="Button_Click">
-            <Image Source="/MatchImages/bee.png"/>
+            <Image x:Name ="beeIm" Source="/MatchImages/bee.png"/>
         </Button>
         <Button x:Name="eggB" Margin="258,39,449,330" Tag="0" Click="Button_Click">
-            <Image Source="/MatchImages/egg.png"/>
+            <Image x:Name="eegIm" Source="/MatchImages/egg.png"/>
         </Button>
         <Button x:Name="chickenB" Margin="351,39,356,330" Tag="0" Click="Button_Click">
-            <Image Source="/MatchImages/chicken.png"/>
+            <Image x:Name="chickenIm" Source="/MatchImages/chicken.png"/>
         </Button>
         <Button x:Name="houseB" Margin="444,39,263,330" Tag="2" Click="Button_Click">
-            <Image Source="/MatchImages/birdhouse.png"/>
+            <Image x:Name="houseIm" Source="/MatchImages/birdhouse.png"/>
         </Button>
         <Button x:Name="leashB" Margin="165,104,542,265" Tag="3" Click="Button_Click">
-            <Image Source="/MatchImages/leash.png"/>
+            <Image x:Name="leashIm" Source="/MatchImages/leash.png"/>
         </Button>
         <Button x:Name="postB" Margin="258,104,449,265" Tag="5" Click="Button_Click">
-            <Image Source="/MatchImages/post.png"/>
+            <Image x:Name="postIm" Source="/MatchImages/post.png"/>
         </Button>
         <Button x:Name="cowB" Margin="351,104,356,265" Tag="4" Click="Button_Click">
-            <Image Source="/MatchImages/cow.png"/>
+            <Image x:Name="cowIm" Source="/MatchImages/cow.png"/>
         </Button>
         <Button x:Name="penguinB" Margin="444,104,263,265" Tag="7" Click="Button_Click">
-            <Image Source="/MatchImages/penguin.png"/>
+            <Image x:Name="penguinIm" Source="/MatchImages/penguin.png"/>
         </Button>
         <Button x:Name="hiveB" Margin="165,169,542,200" Tag="1" Click="Button_Click">
-            <Image Source="/MatchImages/hive.png"/>
+            <Image x:Name="hiveIm" Source="/MatchImages/hive.png"/>
         </Button>
         <Button x:Name="dogB" Margin="258,169,449,200" Tag="3" Click="Button_Click">
-            <Image Source="/MatchImages/dog.png"/>
+            <Image x:Name="dogIm" Source="/MatchImages/dog.png"/>
         </Button>
         <Button x:Name="catB" Margin="351,169,356,200" Tag="5" Click="Button_Click">
-            <Image Source="/MatchImages/cat.png"/>
+            <Image x:Name="catIm" Source="/MatchImages/cat.png"/>
         </Button>
         <Button x:Name="birdB" Margin="444,169,263,200" Tag="2" Click="Button_Click">
-            <Image Source="/MatchImages/bird.png"/>
+            <Image x:Name="birdIm" Source="/MatchImages/bird.png"/>
         </Button>
         <Button x:Name="owlB" Margin="165,234,542,135" Tag="6" Click="Button_Click">
-            <Image Source="/MatchImages/owl.png"/>
+            <Image x:Name="owlIm" Source="/MatchImages/owl.png"/>
         </Button>
         <Button x:Name="nightB" Margin="258,234,449,135" Tag="6" Click="Button_Click">
-            <Image Source="/MatchImages/night.png"/>
+            <Image x:Name="nightIm" Source="/MatchImages/night.png"/>
         </Button>
         <Button x:Name="milkB" Margin="351,234,356,135" Tag="4" Click="Button_Click">
-            <Image Source="/MatchImages/milk.png"/>
+            <Image x:Name="milkIm" Source="/MatchImages/milk.png"/>
         </Button>
         <Button x:Name="snowB" Margin="444,234,263,135" Tag="7" Click="Button_Click">
-            <Image Source="/MatchImages/snow.png"/>
+            <Image x:Name="snowIm" Source="/MatchImages/snow.png"/>
         </Button>
         <Label x:Name="lblJuistAntw" Content="" HorizontalAlignment="Left" Height="26" Margin="165,346,0,0" VerticalAlignment="Top" Width="186"/>
         <Label x:Name="lblTimer"  Content="" HorizontalAlignment="Left" Height="26" Margin="165,384,0,0" VerticalAlignment="Top" Width="186"/>
