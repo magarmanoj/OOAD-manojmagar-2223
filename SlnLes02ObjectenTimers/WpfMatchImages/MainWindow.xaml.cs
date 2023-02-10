@@ -24,5 +24,10 @@ namespace WpfMatchImages
         {
             InitializeComponent();
         }
+
+        private void Button_Click()
+        {
+
+        }
     }
 }

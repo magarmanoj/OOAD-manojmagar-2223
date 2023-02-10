@@ -94,5 +94,25 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MatchImages\bee.png" />
+    <Resource Include="MatchImages\bird.png" />
+    <Resource Include="MatchImages\birdhouse.png" />
+    <Resource Include="MatchImages\cat.png" />
+    <Resource Include="MatchImages\chicken.png" />
+    <Resource Include="MatchImages\cow.png" />
+    <Resource Include="MatchImages\dog.png" />
+    <Resource Include="MatchImages\egg.png" />
+    <Resource Include="MatchImages\hive.png" />
+    <Resource Include="MatchImages\leash.png" />
+    <Resource Include="MatchImages\milk.png" />
+    <Resource Include="MatchImages\owl.png" />
+    <Resource Include="MatchImages\penguin.png" />
+    <Resource Include="MatchImages\post.png" />
+    <Resource Include="MatchImages\snow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MatchImages\night.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
