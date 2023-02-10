@@ -1,0 +1,62 @@
+﻿<Window x:Class="WpfMatchImages.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfMatchImages"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Button Margin="165,39,542,330">
+            <Image Source="/MatchImages/bee.png"/>
+        </Button>
+        <Button Margin="258,39,449,330">
+            <Image Source="/MatchImages/egg.png"/>
+        </Button>
+        <Button Margin="351,39,356,330">
+            <Image Source="/MatchImages/chicken.png"/>
+        </Button>
+        <Button Margin="444,39,263,330">
+            <Image Source="/MatchImages/birdhouse.png"/>
+        </Button>
+        <Button Margin="165,104,542,265">
+            <Image Source="/MatchImages/leash.png"/>
+        </Button>
+        <Button Margin="258,104,449,265">
+            <Image Source="/MatchImages/post.png"/>
+        </Button>
+        <Button Margin="351,104,356,265">
+            <Image Source="/MatchImages/cow.png"/>
+        </Button>
+        <Button Margin="444,104,263,265">
+            <Image Source="/MatchImages/penguin.png"/>
+        </Button>
+        <Button Margin="165,169,542,200">
+            <Image Source="/MatchImages/hive.png"/>
+        </Button>
+        <Button Margin="258,169,449,200">
+            <Image Source="/MatchImages/dog.png"/>
+        </Button>
+        <Button Margin="351,169,356,200">
+            <Image Source="/MatchImages/cat.png"/>
+        </Button>
+        <Button Margin="444,169,263,200">
+            <Image Source="/MatchImages/bird.png"/>
+        </Button>
+        <Button Margin="165,234,542,135">
+            <Image Source="/MatchImages/owl.png"/>
+        </Button>
+        <Button Margin="258,234,449,135">
+            <Image Source="/MatchImages/night.png"/>
+        </Button>
+        <Button Margin="351,234,356,135">
+            <Image Source="/MatchImages/milk.png"/>
+        </Button>
+        <Button Margin="444,234,263,135">
+            <Image Source="/MatchImages/snow.png"/>
+        </Button>
+        <Label x:Name="juistAntw" Content="" HorizontalAlignment="Left" Height="26" Margin="165,346,0,0" VerticalAlignment="Top" Width="186"/>
+        <Label x:Name="timer"  Content="" HorizontalAlignment="Left" Height="26" Margin="165,384,0,0" VerticalAlignment="Top" Width="186"/>
+
+    </Grid>
+</Window>
