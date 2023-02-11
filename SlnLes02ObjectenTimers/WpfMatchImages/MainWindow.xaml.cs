@@ -24,80 +24,75 @@ namespace WpfMatchImages
     {
 
         private Stopwatch watch = new Stopwatch();
-        private int ticks;
         private DispatcherTimer timer;
+        private Button previousButton;
+        private Button currentButton;
+        
+        int matchLeft = 8;
+
 
         public MainWindow()
         {
             InitializeComponent();
-            ticks = 0;
+
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(200);
             timer.Tick += DoSomething;
-            timer.Start();
 
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            watch.Start();
-            Button clickedButton = (Button)sender;
 
-            while (clickedButton != null)
+            TimerStart();
+
+            currentButton = (Button)sender;
+
+            if (previousButton != null)
             {
-                if (clickedButton.Tag == hiveB.Tag)
+                if (previousButton == currentButton || currentButton.Opacity == 0.5 || previousButton.Opacity == 0.5)
                 {
-                    beeIm.Opacity = 0.5;
-                    hiveIm.Opacity = 0.5;
-                }
-                if (clickedButton.Tag == dogB.Tag)
-                {
-                    leashIm.Opacity = 0.5;
-                    dogIm.Opacity = 0.5;
-                }
-                if (clickedButton.Tag == catB.Tag)
-                {
-                    catIm.Opacity = 0.5;
-                    postB.Opacity = 0.5;
-                }
-                if (clickedButton.Tag == penguinB.Tag)
-                {
-                    penguinIm.Opacity = 0.5;
-                    snowIm.Opacity = 0.5;
-                }
-                if (clickedButton.Tag == owlB.Tag)
-                {
-                    owlIm.Opacity = 0.5;
-                    nightIm.Opacity = 0.5;
-                }
-                if (clickedButton.Tag == cowB.Tag)
-                {
-                    cowIm.Opacity = 0.5;
-                    milkIm.Opacity = 0.5;
-                }
-                if (clickedButton.Tag == chickenB.Tag)
-                {
-                    chickenIm.Opacity = 0.5;
-                    eegIm.Opacity = 0.5;
-                }
-                if (clickedButton.Tag == birdB.Tag)
-                {
-                    birdIm.Opacity = 0.5;
-                    houseIm.Opacity = 0.5;
+                    return;
                 }
 
+                if (previousButton.Tag != currentButton.Tag)
+                {
+                    previousButton.Opacity = 0.5;
+                    currentButton.Opacity = 0.5;
+                    matchLeft--;
+                    lblJuistAntw.Content = $"Jusit! nog {matchLeft}";
+                }
+
+                previousButton = null;
+            }
+            else
+            {
+                previousButton = currentButton;
             }
 
 
 
-            lblTimer.Content = watch;
         }
+
         private void DoSomething(object sender, EventArgs e)
         {
-            // elke 200 milliseconden uitgevoerd
-            ticks++;
-            // lblTimer.Content = ticks;
-            
+            TimeSpan elapsed = watch.Elapsed;
+            lblTimer.Content = string.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                elapsed.Hours, elapsed.Minutes, elapsed.Seconds, elapsed.Milliseconds / 10);
         }
+
+        private void TimerStart()
+        {
+            watch.Start();
+            timer.Start();
+        }
+
+        private void TimerStop()
+        {
+            watch.Stop();
+            timer.Stop();
+        }
+
+
     }
 }
