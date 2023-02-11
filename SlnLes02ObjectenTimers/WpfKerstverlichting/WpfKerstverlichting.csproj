@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3C45475F-B53A-4022-BE8A-AB870CA2EC0C}</ProjectGuid>
+    <ProjectGuid>{33C9DA31-A26D-4816-B098-807C93C491C7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>WpfMatchImages</RootNamespace>
-    <AssemblyName>WpfMatchImages</AssemblyName>
+    <RootNamespace>WpfKerstverlichting</RootNamespace>
+    <AssemblyName>WpfKerstverlichting</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -94,26 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="MatchImages\bee.png" />
-    <Resource Include="MatchImages\bird.png" />
-    <Resource Include="MatchImages\birdhouse.png" />
-    <Resource Include="MatchImages\cat.png" />
-    <Resource Include="MatchImages\chicken.png" />
-    <Resource Include="MatchImages\cow.png" />
-    <Resource Include="MatchImages\dog.png" />
-    <Resource Include="MatchImages\egg.png" />
-    <Resource Include="MatchImages\hive.png" />
-    <Resource Include="MatchImages\leash.png" />
-    <Resource Include="MatchImages\milk.png" />
-    <Resource Include="MatchImages\owl.png" />
-    <Resource Include="MatchImages\penguin.png" />
-    <Resource Include="MatchImages\post.png" />
-    <Resource Include="MatchImages\snow.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="MatchImages\night.png" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />

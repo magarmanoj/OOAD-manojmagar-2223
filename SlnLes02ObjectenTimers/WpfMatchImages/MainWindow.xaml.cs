@@ -34,11 +34,9 @@ namespace WpfMatchImages
         public MainWindow()
         {
             InitializeComponent();
-
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(200);
             timer.Tick += DoSomething;
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -50,17 +48,23 @@ namespace WpfMatchImages
 
             if (previousButton != null)
             {
-                if (previousButton == currentButton || currentButton.Opacity == 0.5 || previousButton.Opacity == 0.5)
+                if (currentButton.Opacity == 0.5 || previousButton.Opacity == 0.5)
                 {
                     return;
                 }
 
-                if (previousButton.Tag != currentButton.Tag)
+                if ((string)previousButton.Tag == (string)currentButton.Tag)
                 {
                     previousButton.Opacity = 0.5;
                     currentButton.Opacity = 0.5;
                     matchLeft--;
+                    ButtonEnabled();
                     lblJuistAntw.Content = $"Jusit! nog {matchLeft}";
+                }
+                if(matchLeft == 0)
+                {
+                    lblJuistAntw.Content = $"Alles gevonden!";
+                    TimerStop();
                 }
 
                 previousButton = null;
@@ -69,9 +73,12 @@ namespace WpfMatchImages
             {
                 previousButton = currentButton;
             }
+        }
 
-
-
+        private void ButtonEnabled()
+        {
+            previousButton.IsEnabled = false;
+            currentButton.IsEnabled = false;
         }
 
         private void DoSomething(object sender, EventArgs e)
