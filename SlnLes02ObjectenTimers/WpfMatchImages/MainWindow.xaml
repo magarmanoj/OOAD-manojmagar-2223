@@ -11,7 +11,7 @@
             <Image x:Name ="beeIm" Source="/MatchImages/bee.png"/>
         </Button>
         <Button x:Name="eggB" Margin="258,39,449,330" Tag="0" Click="Button_Click">
-            <Image x:Name="eggIm" Source="/MatchImages/egg.png"/>
+            <Image x:Name="eegIm" Source="/MatchImages/egg.png"/>
         </Button>
         <Button x:Name="chickenB" Margin="351,39,356,330" Tag="0" Click="Button_Click">
             <Image x:Name="chickenIm" Source="/MatchImages/chicken.png"/>
@@ -55,8 +55,8 @@
         <Button x:Name="snowB" Margin="444,234,263,135" Tag="7" Click="Button_Click">
             <Image x:Name="snowIm" Source="/MatchImages/snow.png"/>
         </Button>
-        <Label x:Name="lblJuistAntw" Content="" HorizontalAlignment="Left" Height="26" Margin="165,316,0,0" VerticalAlignment="Top" Width="186"/>
-        <Label x:Name="lblTimer" Content="" HorizontalAlignment="Left" Height="26" Margin="165,347,0,0" VerticalAlignment="Top" Width="186"/>
+        <Label x:Name="lblJuistAntw" Content="" HorizontalAlignment="Left" Height="26" Margin="165,346,0,0" VerticalAlignment="Top" Width="186"/>
+        <Label x:Name="lblTimer" Content="" HorizontalAlignment="Left" Height="26" Margin="165,372,0,0" VerticalAlignment="Top" Width="186"/>
 
     </Grid>
 </Window>

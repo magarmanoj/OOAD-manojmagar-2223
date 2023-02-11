@@ -47,12 +47,7 @@ namespace WpfMatchImages
             currentButton = (Button)sender;
 
             if (previousButton != null)
-            {
-                if (currentButton.Opacity == 0.5 || previousButton.Opacity == 0.5)
-                {
-                    return;
-                }
-
+            {            
                 if ((string)previousButton.Tag == (string)currentButton.Tag && previousButton != currentButton)
                 {
                     previousButton.Opacity = 0.5;
