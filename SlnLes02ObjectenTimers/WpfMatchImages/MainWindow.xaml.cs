@@ -29,8 +29,6 @@ namespace WpfMatchImages
         private Button currentButton;
         
         int matchLeft = 8;
-
-
         public MainWindow()
         {
             InitializeComponent();
@@ -41,7 +39,6 @@ namespace WpfMatchImages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
             TimerStart();
 
             currentButton = (Button)sender;
