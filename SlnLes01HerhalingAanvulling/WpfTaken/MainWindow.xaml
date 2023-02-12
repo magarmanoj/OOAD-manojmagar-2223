@@ -22,8 +22,8 @@
         <RadioButton x:Name="radioB_Adam" Content="Adam" HorizontalAlignment="Left" Height="25" Margin="175,195,0,0" VerticalAlignment="Top" Width="65" Checked="SelectionChanged"/>
         <RadioButton x:Name="radioB_Bilal" Content="Bilal" HorizontalAlignment="Left" Height="25" Margin="255,200,0,0" VerticalAlignment="Top" Width="65" Checked="SelectionChanged"/>
         <RadioButton x:Name="radioB_Chelsey" Content="Chelsey" HorizontalAlignment="Left" Height="20" Margin="335,200,0,0" VerticalAlignment="Top" Width="65" Checked="SelectionChanged"/>
-        <Button x:Name="button_Toevoegen" Content="TOEVOEGEN" HorizontalAlignment="Left" Height="32" Margin="305,250,0,0" VerticalAlignment="Top" Width="95" Click="Button_Toevoegen_Click"/>
-        <ListBox x:Name="lijst_box" HorizontalAlignment="Left" Height="209" Margin="445,70,0,0" VerticalAlignment="Top" Width="326" SelectionChanged="Lijst_box_SelectionChanged"/>
+        <Button x:Name="button_Toevoegen" Content="TOEVOEGEN" HorizontalAlignment="Left" Height="35" Margin="305,250,0,0" VerticalAlignment="Top" Width="95" Click="Button_Toevoegen_Click"/>
+        <ListBox x:Name="lijst_box" HorizontalAlignment="Left" Height="210" Margin="445,70,0,0" VerticalAlignment="Top" Width="326" SelectionChanged="Lijst_box_SelectionChanged"/>
         <Button x:Name="button_terugzetten" IsEnabled="False" Content="TERUGZETTEN" HorizontalAlignment="Left" Height="30" Margin="490,300,0,0" VerticalAlignment="Top" Width="95" Click="Button_terugzetten_Click"/>
         <Button x:Name="button_Verwijderen" IsEnabled="False" Content="VERWIJDEREN" HorizontalAlignment="Left" Height="30" Margin="615,300,0,0" VerticalAlignment="Top" Width="95" Click="Button_Verwijderen_Click"/>
         <TextBlock x:Name="fout_Melding" HorizontalAlignment="Left" Height="200" Margin="50,300,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="240"/>
