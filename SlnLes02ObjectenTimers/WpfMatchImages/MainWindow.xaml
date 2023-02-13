@@ -55,8 +55,8 @@
         <Button x:Name="snowB" Tag="8" HorizontalAlignment="Left" Margin="225,210,0,0" VerticalAlignment="Top" Height="60" Width="65" Click="Button_Click">
             <Image x:Name="snowIm" Source="/MatchImages/snow.png"/>
         </Button>
-        <Label x:Name="lblJuistAntw" Content="" HorizontalAlignment="Left" Height="26" Margin="30,289,0,0" VerticalAlignment="Top" Width="186"/>
-        <Label x:Name="lblTimer" Content="" HorizontalAlignment="Left" Height="26" Margin="30,328,0,0" VerticalAlignment="Top" Width="186"/>
+        <Label x:Name="lblJuistAntw" Content="" HorizontalAlignment="Left" Height="25" Margin="30,290,0,0" VerticalAlignment="Top" Width="185"/>
+        <Label x:Name="lblTimer" Content="" HorizontalAlignment="Left" Height="25" Margin="30,330,0,0" VerticalAlignment="Top" Width="185"/>
 
 
     </Grid>
