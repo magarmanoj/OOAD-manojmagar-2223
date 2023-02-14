@@ -61,7 +61,7 @@ namespace WpfMatchImages
                 currentButton.Opacity = 0.5;
                 matchLeft--;
                 ButtonEnabled();
-                lblJuistAntw.Content = $"Jusit! nog {matchLeft}";
+                lblJuistAntw.Content = $"Jusit! nog {matchLeft} te gaan";
             }
             if (matchLeft == 0)
             {
