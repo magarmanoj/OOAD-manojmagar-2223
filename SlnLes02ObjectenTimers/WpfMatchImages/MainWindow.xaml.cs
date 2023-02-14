@@ -44,26 +44,29 @@ namespace WpfMatchImages
             currentButton = (Button)sender;
 
             if (previousButton != null)
-            {            
-                if ((string)previousButton.Tag == (string)currentButton.Tag && previousButton != currentButton)
-                {
-                    previousButton.Opacity = 0.5;
-                    currentButton.Opacity = 0.5;
-                    matchLeft--;
-                    ButtonEnabled();
-                    lblJuistAntw.Content = $"Jusit! nog {matchLeft}";
-                }
-                if (matchLeft == 0)
-                {
-                    lblJuistAntw.Content = $"Alles gevonden!";
-                    TimerStop();
-                }
-
+            {
+                CheckMatching();
                 previousButton = null;
             }
             else
             {
                 previousButton = currentButton;
+            }
+        }
+        private void CheckMatching()
+        {
+            if ((string)previousButton.Tag == (string)currentButton.Tag && previousButton != currentButton)
+            {
+                previousButton.Opacity = 0.5;
+                currentButton.Opacity = 0.5;
+                matchLeft--;
+                ButtonEnabled();
+                lblJuistAntw.Content = $"Jusit! nog {matchLeft}";
+            }
+            if (matchLeft == 0)
+            {
+                lblJuistAntw.Content = $"Alles gevonden!";
+                TimerStop();
             }
         }
 
