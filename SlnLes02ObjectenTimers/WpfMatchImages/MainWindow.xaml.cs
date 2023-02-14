@@ -33,7 +33,7 @@ namespace WpfMatchImages
             InitializeComponent();
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(200);
-            timer.Tick += DoSomething;
+            timer.Tick += FormatWatch;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -76,10 +76,10 @@ namespace WpfMatchImages
             currentButton.IsEnabled = false;
         }
 
-        private void DoSomething(object sender, EventArgs e)
+        private void FormatWatch(object sender, EventArgs e)
         {
             TimeSpan elapsed = watch.Elapsed;
-            lblTimer.Content = $"{elapsed.Hours:00}:{elapsed.Minutes:00}:{elapsed.Seconds:00}.{elapsed.Milliseconds / 10:00}";
+            lblTimer.Content = $"{elapsed.Hours:00}:{elapsed.Minutes:00}:{elapsed.Seconds:00}.{elapsed.Milliseconds / 10:00}";          
         }
 
         private void TimerStart()
