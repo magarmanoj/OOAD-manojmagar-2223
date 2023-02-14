@@ -22,7 +22,6 @@ namespace WpfMatchImages
     /// </summary>
     public partial class MainWindow : Window
     {
-
         private Stopwatch watch = new Stopwatch();
         private DispatcherTimer timer;
         private Button previousButton;
@@ -53,6 +52,7 @@ namespace WpfMatchImages
                 previousButton = currentButton;
             }
         }
+
         private void CheckMatching()
         {
             if ((string)previousButton.Tag == (string)currentButton.Tag && previousButton != currentButton)
