@@ -55,7 +55,7 @@ namespace WpfMatchImages
 
         private void CheckMatching()
         {
-            if ((string)previousButton.Tag == (string)currentButton.Tag && previousButton != currentButton)
+            if ((string)previousButton.Tag == (string)currentButton.Tag)
             {
                 previousButton.Opacity = 0.5;
                 currentButton.Opacity = 0.5;
