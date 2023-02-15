@@ -32,7 +32,7 @@ namespace WpfMatchImages
         {
             InitializeComponent();
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(200);
+            timer.Interval = TimeSpan.FromMilliseconds(2);
             timer.Tick += FormatWatch;
         }
 
@@ -44,29 +44,24 @@ namespace WpfMatchImages
 
             if (previousButton != null)
             {
-                CheckMatching();
+                if ((string)previousButton.Tag == (string)currentButton.Tag)
+                {
+                    previousButton.Opacity = 0.5;
+                    currentButton.Opacity = 0.5;
+                    matchLeft--;
+                    ButtonEnabled();
+                    lblJuistAntw.Content = $"Jusit! nog {matchLeft} te gaan";
+                }
+                if (matchLeft == 0)
+                {
+                    lblJuistAntw.Content = $"Alles gevonden!";
+                    TimerStop();
+                }
                 previousButton = null;
             }
             else
             {
                 previousButton = currentButton;
-            }
-        }
-
-        private void CheckMatching()
-        {
-            if ((string)previousButton.Tag == (string)currentButton.Tag)
-            {
-                previousButton.Opacity = 0.5;
-                currentButton.Opacity = 0.5;
-                matchLeft--;
-                ButtonEnabled();
-                lblJuistAntw.Content = $"Jusit! nog {matchLeft} te gaan";
-            }
-            if (matchLeft == 0)
-            {
-                lblJuistAntw.Content = $"Alles gevonden!";
-                TimerStop();
             }
         }
 
