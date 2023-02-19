@@ -33,10 +33,35 @@ namespace WpfFileInfo
                 string fileContent = File.ReadAllText(chosenFileName);
                 string[] words = fileContent.Split(new char[] { ' ', '.',','}, StringSplitOptions.RemoveEmptyEntries);
                 int wordCount = words.Length;
- 
-                FileInfo fi = new FileInfo(chosenFileName);
 
-                lblVenster.Content = $"bestandsnaam: {fi.Name}\nextensie: {fi.Extension}\ngemaakt op: {fi.CreationTime}\nmapnaam: {fi.Directory.Name}\naantal woorden: {wordCount}";
+                // sortedDictionary is een collectie of key-values pairs (vb apple: 1 apples = key en 1 = values) 
+                // uitleg opgezoekt in internet/chatgpt
+                SortedDictionary<string, int> wordCounts = new SortedDictionary<string, int>();
+
+                // maakt een loop door alle woorden in de array en telt het aantal van die woorden op 
+                foreach (string word in words)
+                {
+                    if (wordCounts.ContainsKey(word))
+                    {
+                        wordCounts[word]++;
+                    }
+                    else
+                    {
+                        wordCounts[word] = 1;
+                    }
+                }
+
+
+                // maakt een loop om string key (dus word) terug te geven 
+                // voorbeeld code opgezocht in internet/chatgpt en aangepast om in hier te laten werken
+                string wordCountString = " ";
+                foreach (KeyValuePair<string, int> pair in wordCounts)
+                {
+                    wordCountString += $"{pair.Key}, ";
+                }
+
+                FileInfo fi = new FileInfo(chosenFileName);
+                lblVenster.Content = $"bestandsnaam: {fi.Name}\nextensie: {fi.Extension}\ngemaakt op: {fi.CreationTime}\nmapnaam: {fi.Directory.Name}\naantal woorden: {wordCount}\nmeest voorkomend: {wordCountString}";
             }
         }
     }
