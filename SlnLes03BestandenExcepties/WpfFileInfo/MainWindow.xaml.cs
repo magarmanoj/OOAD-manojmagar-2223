@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace WpfFileInfo
 {
@@ -23,6 +17,27 @@ namespace WpfFileInfo
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void BtnKies_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            dialog.Filter = "Tekstbestanden|*.TXT;*.TEXT";
+            string chosenFileName;
+            bool? dialogResult = dialog.ShowDialog();
+            if (dialogResult == true)
+            {
+                // user picked a file and pressed OK
+                chosenFileName = dialog.FileName;
+                string fileContent = File.ReadAllText(chosenFileName);
+                string[] words = fileContent.Split(new char[] { ' ', '.',','}, StringSplitOptions.RemoveEmptyEntries);
+                int wordCount = words.Length;
+ 
+                FileInfo fi = new FileInfo(chosenFileName);
+
+                lblVenster.Content = $"bestandsnaam: {fi.Name}\nextensie: {fi.Extension}\ngemaakt op: {fi.CreationTime}\nmapnaam: {fi.Directory.Name}\naantal woorden: {wordCount}";
+            }
         }
     }
 }
