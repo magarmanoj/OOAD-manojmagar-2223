@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B2C0582C-FFEB-4EB7-804A-54181E7C517F}</ProjectGuid>
+    <ProjectGuid>{72B4AF14-381B-4687-86B0-98169D838A60}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>ConsoleCsv</RootNamespace>
     <AssemblyName>ConsoleCsv</AssemblyName>
@@ -48,11 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
