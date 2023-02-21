@@ -21,7 +21,7 @@ namespace ConsoleCsv
             using (StreamWriter writer = new StreamWriter(filePath))
             {
                 // 100 spelers 
-                for(int i= 0; i < 100; i++)
+                for (int i = 0; i < 100; i++)
                 {
                     // 2 randoms spelers
                     string speler1 = spelers[rand.Next(spelers.Length)];
@@ -30,6 +30,7 @@ namespace ConsoleCsv
                     {
                         speler1 = spelers[rand.Next(spelers.Length)];
                     }
+
                     // random games
                     string game = games[rand.Next(games.Length)];
                     int score1 = rand.Next(3);

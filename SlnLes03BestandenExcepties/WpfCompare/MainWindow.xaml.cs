@@ -16,10 +16,8 @@ namespace WpfCompare
         public MainWindow()
         {
             InitializeComponent();
-            //string dinfo = new DirectoryInfo(@"C:\Users\magar\OneDrive\Desktop\New folder\New folder\");
             EersteFile();
             TweedeFile();
-
         }
 
         private void EersteFile()
@@ -50,9 +48,7 @@ namespace WpfCompare
                 lb2.Items.Add(fileName);
             }
             lb2.SelectionChanged += Items_SelectionChanged;
-
         }
-
 
         private void Items_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -72,45 +68,5 @@ namespace WpfCompare
                 lbl2.Content = fileContent;
             }
         }
-
-        private void BtnCompare_Click(object sender, RoutedEventArgs e)
-        {
-            if (lb1.SelectedItem != null && lb2.SelectedItem != null)
-            {
-                string folderPath1 = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                string startfolder1 = System.IO.Path.Combine(folderPath1, "text1", lb1.SelectedItem.ToString());
-                string startfolder2 = System.IO.Path.Combine(folderPath1, "text2", lb2.SelectedItem.ToString());
-
-                string fileContent1 = File.ReadAllText(startfolder1);
-                string fileContent2 = File.ReadAllText(startfolder2);
-
-                StringBuilder diffContent = new StringBuilder();
-                int length = Math.Min(fileContent1.Length, fileContent2.Length);
-
-                for (int i = 0; i < length; i++)
-                {
-                    if (fileContent1[i] != fileContent2[i])
-                    {
-                        diffContent.Append("<span style='color:red'>" + fileContent1[i] + "</span>");
-                    }
-                    else
-                    {
-                        diffContent.Append(fileContent1[i]);
-                    }
-                }
-
-                if (fileContent1.Length > length)
-                {
-                    diffContent.Append("<span style='color:red'>" + fileContent1.Substring(length) + "</span>");
-                }
-                else if (fileContent2.Length > length)
-                {
-                    diffContent.Append("<span style='color:red'>" + fileContent2.Substring(length) + "</span>");
-                }
-
-                lbl1.Content = diffContent.ToString();
-            }
-        }
-
     }
 }

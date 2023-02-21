@@ -31,7 +31,7 @@ namespace WpfFileInfo
                 // user picked a file and pressed OK
                 chosenFileName = dialog.FileName;
                 string fileContent = File.ReadAllText(chosenFileName);
-                string[] words = fileContent.Split(new char[] { ' ', '.',','}, StringSplitOptions.RemoveEmptyEntries);
+                string[] words = fileContent.Split(new char[] { ' ', '.', ',' }, StringSplitOptions.RemoveEmptyEntries);
                 int wordCount = words.Length;
 
                 // sortedDictionary is een collectie of key-values pairs (vb apple: 1 apples = key en 1 = values) 
@@ -51,7 +51,6 @@ namespace WpfFileInfo
                     }
                 }
                 IEnumerable<KeyValuePair<string, int>> sortedWordCounts = wordCounts.OrderByDescending(x => x.Value);
-
 
                 // maakt een loop om string key (dus word) terug te geven 
                 // voorbeeld code opgezocht in internet/chatgpt en aangepast om in hier te laten werken
