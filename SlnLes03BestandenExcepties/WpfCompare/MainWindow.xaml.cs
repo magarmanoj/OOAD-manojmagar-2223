@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Microsoft.Win32;
 
 namespace WpfCompare
@@ -16,56 +18,69 @@ namespace WpfCompare
         public MainWindow()
         {
             InitializeComponent();
-            EersteFile();
-            TweedeFile();
+            LoadFiles(lb1);
+            LoadFiles(lb2);
         }
 
-        private void EersteFile()
+        private void LoadFiles(ListBox liijst)
         {
+            liijst.Items.Clear();
             string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string startfolder = System.IO.Path.Combine(folderPath, "text1");
-
-            string[] files = Directory.GetFiles(startfolder, "*.txt");
-            foreach (string filePath in files)
+            string startfolder = Path.Combine(folderPath, "text");
+            if (Directory.Exists(startfolder))
             {
-                string fileName = Path.GetFileName(filePath);
-                lb1.Items.Add(fileName);
+                string[] files = Directory.GetFiles(startfolder, "*.txt");
+                foreach (string filePath in files)
+                {
+                    string fileName = Path.GetFileName(filePath);
+                    liijst.Items.Add(fileName);
+                }
 
             }
-            lb1.SelectionChanged += Items_SelectionChanged;
-        }
-
-        private void TweedeFile()
-        {
-
-            string folderPath1 = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string startfolder1 = System.IO.Path.Combine(folderPath1, "text2");
-
-            string[] files1 = Directory.GetFiles(startfolder1, "*.txt");
-            foreach (string filePath in files1)
-            {
-                string fileName = Path.GetFileName(filePath);
-                lb2.Items.Add(fileName);
-            }
-            lb2.SelectionChanged += Items_SelectionChanged;
         }
 
         private void Items_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ListBox listBox = (ListBox)sender;
+             ListBox listBox = (ListBox)sender;
             if (listBox == lb1 && lb1.SelectedItem != null)
             {
+                lbMsg1.Items.Clear();
                 string folderPath1 = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                string startfolder1 = System.IO.Path.Combine(folderPath1, "text1", lb1.SelectedItem.ToString());
-                string fileContent = File.ReadAllText(startfolder1);
-                lbl1.Content = fileContent;
+                string startfolder1 = System.IO.Path.Combine(folderPath1, "text", lb1.SelectedItem.ToString());
+                string[] fileLines = File.ReadAllLines(startfolder1);
+                foreach (string line in fileLines)
+                {
+                    lbMsg1.Items.Add(line);
+                }
             }
             else if (listBox == lb2 && lb2.SelectedItem != null)
             {
+                lbMsg2.Items.Clear();
                 string folderPath2 = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                string startfolder2 = System.IO.Path.Combine(folderPath2, "text2", lb2.SelectedItem.ToString());
-                string fileContent = File.ReadAllText(startfolder2);
-                lbl2.Content = fileContent;
+                string startfolder2 = System.IO.Path.Combine(folderPath2, "text", lb2.SelectedItem.ToString());
+                string[] fileLines = File.ReadAllLines(startfolder2);
+                foreach (string line in fileLines)
+                {
+                    lbMsg2.Items.Add(line);
+                }
+            }
+        }
+
+        private void BtnCompare_Click(object sender, RoutedEventArgs e)
+        {
+            // loopt door al de items (woorden) van lbmsg1 en lbMsg2 en vergelijkt dezelfde items met elkaar om te zien of de value er van zelfde is 
+            // dus (vb woord gelijk - gelik) je ziet dat item = gelijk maar hun value is anders gelijk = 6 en gelik = 5 dus fout= rode kleur
+            for (int i = 0; i < lbMsg1.Items.Count; i++)
+            {
+                if (i < lbMsg2.Items.Count && lbMsg1.Items[i].ToString() != lbMsg2.Items[i].ToString())
+                {
+                    // juist regels aan duiden leukt maar niet om kleuren aan te passen dus heb via chatgpt volgens code gevonden
+                    ListBoxItem listBoxItem = lbMsg2.ItemContainerGenerator.ContainerFromIndex(i) as ListBoxItem;
+                    if (listBoxItem != null)
+                    {
+                        listBoxItem.Background = Brushes.Red;
+                    }
+                }
             }
         }
     }
