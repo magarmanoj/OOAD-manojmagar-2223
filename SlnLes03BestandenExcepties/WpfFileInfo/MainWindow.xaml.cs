@@ -50,12 +50,13 @@ namespace WpfFileInfo
                         wordCounts[word] = 1;
                     }
                 }
+                IEnumerable<KeyValuePair<string, int>> sortedWordCounts = wordCounts.OrderByDescending(x => x.Value);
 
 
                 // maakt een loop om string key (dus word) terug te geven 
                 // voorbeeld code opgezocht in internet/chatgpt en aangepast om in hier te laten werken
                 string wordCountString = " ";
-                foreach (KeyValuePair<string, int> pair in wordCounts)
+                foreach (KeyValuePair<string, int> pair in sortedWordCounts)
                 {
                     wordCountString += $"{pair.Key}, ";
                 }

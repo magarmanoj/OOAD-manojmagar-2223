@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <ListBox x:Name="lb1" HorizontalAlignment="Left" Height="120" Margin="75,45,0,0" VerticalAlignment="Top" Width="250" SelectionChanged="Items_SelectionChanged" />
+        <ListBox x:Name="lb2" HorizontalAlignment="Left" Height="120" Margin="505,45,0,0" VerticalAlignment="Top" Width="250" SelectionChanged="Items_SelectionChanged" />
+        <Label x:Name="lbl1" Content="" HorizontalAlignment="Left" Height="185" Margin="75,215,0,0" VerticalAlignment="Top" Width="250"/>
+        <Label x:Name="lbl2" Content="" HorizontalAlignment="Left" Height="185" Margin="505,215,0,0" VerticalAlignment="Top" Width="250"/>
+        <Button x:Name="btnCompare" Content="Compare!" HorizontalAlignment="Left" Height="32" Margin="360,368,0,0" VerticalAlignment="Top" Width="126" Click="BtnCompare_Click"/>
     </Grid>
 </Window>

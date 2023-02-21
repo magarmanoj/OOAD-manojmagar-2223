@@ -12,7 +12,6 @@ namespace WpfCopy
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<string> newString = new List<string>();
         public MainWindow()
         {
             InitializeComponent();
