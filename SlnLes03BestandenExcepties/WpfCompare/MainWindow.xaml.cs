@@ -35,14 +35,13 @@ namespace WpfCompare
                     string fileName = Path.GetFileName(filePath);
                     liijst.Items.Add(fileName);
                 }
-
             }
         }
 
         private void Items_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
              ListBox listBox = (ListBox)sender;
-            if (listBox == lb1 && lb1.SelectedItem != null)
+             if (listBox == lb1 && lb1.SelectedItem != null)
             {
                 lbMsg1.Items.Clear();
                 string folderPath1 = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
