@@ -61,7 +61,6 @@ namespace WpfKerstverlichting
                 cnvTree.Children.Add(newLight);
                 lights.Add(newLight);
             }
-
         }
 
         public static bool PixelIsWhite(Image img, int x, int y)
@@ -108,7 +107,6 @@ namespace WpfKerstverlichting
                 if (rand.NextDouble() >= 0.5)
                 {
                     light.Fill = colors[rand.Next(0, colors.Count)];
-
                 }
                 else
                 {
@@ -117,10 +115,9 @@ namespace WpfKerstverlichting
             }
         }
 
-
         // chatgpt om te kijken hoe je andere soort animatie kan toevoegen
-        //private void ColorChange(object sender, EventArgs e)
-        //{
+        // private void ColorChange(object sender, EventArgs e)
+        // {
         //    Random rand = new Random();
         //    foreach (Ellipse light in cnvTree.Children.OfType<Ellipse>())
         //    {
@@ -148,8 +145,6 @@ namespace WpfKerstverlichting
         //            light.BeginAnimation(Ellipse.OpacityProperty, animation);
         //        }
         //    }
-        //}
-
-
+        // }
     }
 }
