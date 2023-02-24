@@ -24,7 +24,7 @@ namespace WpfKerstverlichting
     /// </summary>
     public partial class MainWindow : Window
     {
-        private DispatcherTimer timer;
+        private DispatcherTimer timer = new DispatcherTimer();
         private bool lightsON = false;
         private List<Ellipse> lights = new List<Ellipse>();
 
@@ -59,6 +59,8 @@ namespace WpfKerstverlichting
 
                 // voeg ellips toe aan het canvas
                 cnvTree.Children.Add(newLight);
+                
+                // voeg newlight is list lights
                 lights.Add(newLight);
             }
         }
@@ -80,7 +82,6 @@ namespace WpfKerstverlichting
             {
                 lightsON = true;
                 btnSwitch.Content = "Switch Off";
-                timer = new DispatcherTimer();
                 timer.Interval = TimeSpan.FromMilliseconds(500);
                 timer.Tick += ColorChange;
                 timer.Start();
@@ -90,7 +91,7 @@ namespace WpfKerstverlichting
                 lightsON = false;
                 btnSwitch.Content = "Switch On";
                 timer.Stop();
-                foreach (Ellipse light in cnvTree.Children.OfType<Ellipse>())
+                foreach (Ellipse light in lights)
                 {
                     light.Fill = Brushes.Gray;
                 }
@@ -103,7 +104,7 @@ namespace WpfKerstverlichting
             Random rand = new Random();
             foreach (Ellipse light in lights)
             {
-                List<Brush> colors = new List<Brush>() { Brushes.Gray, Brushes.White, Brushes.Red, Brushes.Yellow, Brushes.Blue };
+                List<Brush> colors = new List<Brush>() {Brushes.White, Brushes.Red, Brushes.Yellow, Brushes.Blue, Brushes.Purple };
                 if (rand.NextDouble() >= 0.5)
                 {
                     light.Fill = colors[rand.Next(0, colors.Count)];
@@ -114,37 +115,5 @@ namespace WpfKerstverlichting
                 }
             }
         }
-
-        // chatgpt om te kijken hoe je andere soort animatie kan toevoegen
-        // private void ColorChange(object sender, EventArgs e)
-        // {
-        //    Random rand = new Random();
-        //    foreach (Ellipse light in cnvTree.Children.OfType<Ellipse>())
-        //    {
-        //        List<Brush> colors = new List<Brush>() { Brushes.Gray, Brushes.White, Brushes.Red, Brushes.Yellow, Brushes.Blue };
-        //        if (rand.NextDouble() >= 0.5)
-        //        {
-        //            light.Fill = colors[rand.Next(0, colors.Count)];
-        //            DoubleAnimation animation = new DoubleAnimation();
-        //            animation.From = 0.0;
-        //            animation.To = 1.0;
-        //            animation.AutoReverse = true;
-        //            animation.Duration = TimeSpan.FromSeconds(5);
-        //            animation.RepeatBehavior = RepeatBehavior.Forever;
-        //            light.BeginAnimation(Ellipse.OpacityProperty, animation);
-        //        }
-        //        else
-        //        {
-        //            light.Fill = colors[rand.Next(0, colors.Count)];
-        //            DoubleAnimation animation = new DoubleAnimation();
-        //            animation.From = 1.0;
-        //            animation.To = 0.0;
-        //            animation.AutoReverse = true;
-        //            animation.Duration = TimeSpan.FromSeconds(0.5);
-        //            animation.RepeatBehavior = RepeatBehavior.Forever;
-        //            light.BeginAnimation(Ellipse.OpacityProperty, animation);
-        //        }
-        //    }
-        // }
     }
 }
