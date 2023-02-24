@@ -12,12 +12,14 @@ namespace ConsoleCsv
     {
         static void Main(string[] args)
         {
+            Random rand = new Random();
             string[] spelers = { "Zakaria", "Saleha", "Indra", "Ralph", "Francisco", "Marie" };
             string[] games = { "schaak", "dammen", "backgammon" };
-            Random rand = new Random();
+            
 
             // creeert een CSV bestand en slaagt op in desktop met naam "wedstrijden.csv"
-            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\wedstrijden.csv";
+            string FolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string filePath = System.IO.Path.Combine(FolderPath , "wedstrijden.csv");
             using (StreamWriter writer = new StreamWriter(filePath))
             {
                 // 100 spelers 
@@ -39,8 +41,7 @@ namespace ConsoleCsv
                     {
                         score2 = rand.Next(3);
                     }
-                    Console.WriteLine($"{speler1};{speler2};{game};{score1}-{score2}");
-
+                    writer.WriteLine($"{speler1};{speler2};{game};{score1}-{score2}");
                 }
             }
             Console.WriteLine("Data saved to " + filePath);

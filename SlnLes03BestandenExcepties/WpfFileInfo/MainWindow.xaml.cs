@@ -50,6 +50,8 @@ namespace WpfFileInfo
                         wordCounts[word] = 1;
                     }
                 }
+
+                // van Chatgpt 
                 IEnumerable<KeyValuePair<string, int>> sortedWordCounts = wordCounts.OrderByDescending(x => x.Value);
 
                 // maakt een loop om string key (dus word) terug te geven 

@@ -22,9 +22,9 @@ namespace WpfCompare
             LoadFiles(lb2);
         }
 
-        private void LoadFiles(ListBox liijst)
+        private void LoadFiles(ListBox lijst)
         {
-            liijst.Items.Clear();
+            lijst.Items.Clear();
             string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string startfolder = Path.Combine(folderPath, "text");
             if (Directory.Exists(startfolder))
@@ -33,7 +33,7 @@ namespace WpfCompare
                 foreach (string filePath in files)
                 {
                     string fileName = Path.GetFileName(filePath);
-                    liijst.Items.Add(fileName);
+                    lijst.Items.Add(fileName);
                 }
             }
         }
@@ -73,7 +73,7 @@ namespace WpfCompare
             {
                 if (i < lbMsg2.Items.Count && lbMsg1.Items[i].ToString() != lbMsg2.Items[i].ToString())
                 {
-                    // juist regels aan duiden leukt maar niet om kleuren aan te passen dus heb via chatgpt volgens code gevonden
+                    // juist regels aan duiden leukt maar niet om kleuren aan te passen dus heb via chatgpt volgende code gevonden
                     ListBoxItem listBoxItem = lbMsg2.ItemContainerGenerator.ContainerFromIndex(i) as ListBoxItem;
                     if (listBoxItem != null)
                     {
