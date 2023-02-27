@@ -28,14 +28,11 @@ namespace WpfCompare
         {
             lijst.Items.Clear();
             string startfolder = Path.Combine(folderPath, "text");
-            if (Directory.Exists(startfolder))
+            string[] files = Directory.GetFiles(startfolder, "*.txt");
+            foreach (string filePath in files)
             {
-                string[] files = Directory.GetFiles(startfolder, "*.txt");
-                foreach (string filePath in files)
-                {
-                    string fileName = Path.GetFileName(filePath);
-                    lijst.Items.Add(fileName);
-                }
+                string fileName = Path.GetFileName(filePath);
+                lijst.Items.Add(fileName);
             }
         }
 
