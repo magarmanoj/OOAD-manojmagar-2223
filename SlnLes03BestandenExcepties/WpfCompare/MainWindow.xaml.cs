@@ -15,6 +15,8 @@ namespace WpfCompare
     /// </summary>
     public partial class MainWindow : Window
     {
+        string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -25,7 +27,6 @@ namespace WpfCompare
         private void LoadFiles(ListBox lijst)
         {
             lijst.Items.Clear();
-            string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string startfolder = Path.Combine(folderPath, "text");
             if (Directory.Exists(startfolder))
             {
@@ -44,8 +45,7 @@ namespace WpfCompare
              if (listBox == lb1 && lb1.SelectedItem != null)
             {
                 lbMsg1.Items.Clear();
-                string folderPath1 = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                string startfolder1 = System.IO.Path.Combine(folderPath1, "text", lb1.SelectedItem.ToString());
+                string startfolder1 = System.IO.Path.Combine(folderPath, "text", lb1.SelectedItem.ToString());
                 string[] fileLines = File.ReadAllLines(startfolder1);
                 foreach (string line in fileLines)
                 {
@@ -55,8 +55,7 @@ namespace WpfCompare
             else if (listBox == lb2 && lb2.SelectedItem != null)
             {
                 lbMsg2.Items.Clear();
-                string folderPath2 = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                string startfolder2 = System.IO.Path.Combine(folderPath2, "text", lb2.SelectedItem.ToString());
+                string startfolder2 = System.IO.Path.Combine(folderPath, "text", lb2.SelectedItem.ToString());
                 string[] fileLines = File.ReadAllLines(startfolder2);
                 foreach (string line in fileLines)
                 {
@@ -73,11 +72,12 @@ namespace WpfCompare
             {
                 if (i < lbMsg2.Items.Count && lbMsg1.Items[i].ToString() != lbMsg2.Items[i].ToString())
                 {
-                    // juist regels aan duiden leukt maar niet om kleuren aan te passen dus heb via chatgpt volgende code gevonden
-                    ListBoxItem listBoxItem = lbMsg2.ItemContainerGenerator.ContainerFromIndex(i) as ListBoxItem;
-                    if (listBoxItem != null)
+                    // https://stackoverflow.com/questions/22091772/how-to-change-background-color-of-selected-item-in-a-listbox-programmatically 
+                    // zorgt voor het veranderen van backgound kleur, != item wordt in listBoxItem item toegevoegd en kleuren ervan wordt veranderd
+                    ListBoxItem item = lbMsg2.ItemContainerGenerator.ContainerFromIndex(i) as ListBoxItem;
+                    if (item != null)
                     {
-                        listBoxItem.Background = Brushes.Red;
+                        item.Background = Brushes.Red;
                     }
                 }
             }
