@@ -41,8 +41,8 @@ namespace WpfCompare
 
         private void Items_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-             ListBox listBox = (ListBox)sender;
-             if (listBox == lb1 && lb1.SelectedItem != null)
+            ListBox listBox = (ListBox)sender;
+            if (listBox == lb1 && lb1.SelectedItem != null)
             {
                 lbMsg1.Items.Clear();
                 string startfolder1 = System.IO.Path.Combine(folderPath, "text", lb1.SelectedItem.ToString());
