@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleCsv
 {
@@ -43,8 +38,6 @@ namespace ConsoleCsv
                     writer.WriteLine($"{speler1};{speler2};{game};{score1}-{score2}");
                 }
             }
-            Console.WriteLine("Data saved to " + filePath);
-            Console.ReadKey();
         }
     }
 }
