@@ -51,16 +51,47 @@ namespace WpfFileInfo
                     }
                 }
 
-                // van Chatgpt 
-                IEnumerable<KeyValuePair<string, int>> sortedWordCounts = wordCounts.OrderByDescending(x => x.Value);
+                //// van Chatgpt 
+                // IEnumerable<KeyValuePair<string, int>> sortedWordCounts = wordCounts.OrderByDescending(x => x.Value);
 
-                // maakt een loop om string key (dus word) terug te geven 
-                // voorbeeld code opgezocht in internet/chatgpt en aangepast om in hier te laten werken
-                string wordCountString = " ";
-                foreach (KeyValuePair<string, int> pair in sortedWordCounts)
+                //// maakt een loop om string key (dus word) terug te geven 
+                //// voorbeeld code opgezocht in internet/chatgpt en aangepast om in hier te laten werken
+                // string wordCountString = " ";
+                // foreach (KeyValuePair<string, int> pair in sortedWordCounts)
+                // {
+                //    wordCountString += $"{pair.Key}, ";
+                // }
+
+                //// van Chatgpt 
+
+                string[] mostCommonWords = new string[3];
+                int[] mostCommonCounts = new int[3];
+                foreach (KeyValuePair<string, int> pair in wordCounts)
                 {
-                    wordCountString += $"{pair.Key}, ";
+                    int count = pair.Value;
+                    if (count > mostCommonCounts[0])
+                    {
+                        mostCommonCounts[2] = mostCommonCounts[1];
+                        mostCommonCounts[1] = mostCommonCounts[0];
+                        mostCommonCounts[0] = count;
+                        mostCommonWords[2] = mostCommonWords[1];
+                        mostCommonWords[1] = mostCommonWords[0];
+                        mostCommonWords[0] = pair.Key;
+                    }
+                    else if (count > mostCommonCounts[1])
+                    {
+                        mostCommonCounts[2] = mostCommonCounts[1];
+                        mostCommonCounts[1] = count;
+                        mostCommonWords[2] = mostCommonWords[1];
+                        mostCommonWords[1] = pair.Key;
+                    }
+                    else if (count > mostCommonCounts[2])
+                    {
+                        mostCommonCounts[2] = count;
+                        mostCommonWords[2] = pair.Key;
+                    }
                 }
+                string wordCountString = string.Join(", ", mostCommonWords);
 
                 FileInfo fi = new FileInfo(chosenFileName);
                 lblVenster.Content = $"bestandsnaam: {fi.Name}\nextensie: {fi.Extension}\ngemaakt op: {fi.CreationTime}\nmapnaam: {fi.Directory.Name}\naantal woorden: {wordCount}\nmeest voorkomend: {wordCountString}";
