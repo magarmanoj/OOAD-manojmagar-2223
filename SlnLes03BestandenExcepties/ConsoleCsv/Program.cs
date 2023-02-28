@@ -30,11 +30,7 @@ namespace ConsoleCsv
                     // random games
                     string game = games[rand.Next(games.Length)];
                     int score1 = rand.Next(3);
-                    int score2 = rand.Next(3);
-                    while (score1 == score2)
-                    {
-                        score2 = rand.Next(3);
-                    }
+                    int score2 = 3 - score1;
                     writer.WriteLine($"{speler1};{speler2};{game};{score1}-{score2}");
                 }
             }
