@@ -16,6 +16,8 @@ namespace WpfCopy
         {
             InitializeComponent();
         }
+        string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        string txtContent;
 
         private void BtnKies_Click(object sender, RoutedEventArgs e)
         {
@@ -30,8 +32,6 @@ namespace WpfCopy
                 chosenFileName = dialog.FileName;
                 txtBoxvenster.Text = chosenFileName;
 
-                string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                string txtContent = "";
                 try
                 {
                     string filePath = System.IO.Path.Combine(folderPath, chosenFileName);
@@ -40,7 +40,7 @@ namespace WpfCopy
                 catch (FileNotFoundException ex)
                 {
                     MessageBox.Show(
-                        $"{ex.FileName} kon niet gevonden worden", // boodschap
+                        $"{ex.FileName} niet gevonden", // boodschap
                         "Oeps!", // titel
                         MessageBoxButton.OK, // buttons
                         MessageBoxImage.Error);
@@ -55,11 +55,12 @@ namespace WpfCopy
             dialog.Filter = "Tekstbestanden|*.TXT;*.TEXT";
             dialog.FileName = "savedfile.txt";
             if (dialog.ShowDialog() != true) return;
-
-            string txtSource = "";
+            string txtSource;
             try
             {
-                txtSource = File.ReadAllText(txtSource);
+                txtSource = File.ReadAllText(txtBoxvenster.Text);
+                File.WriteAllText(dialog.FileName, txtSource);
+                lblMsg.Content = "Bestand is overgezet";
             }
             catch (IOException)
             {

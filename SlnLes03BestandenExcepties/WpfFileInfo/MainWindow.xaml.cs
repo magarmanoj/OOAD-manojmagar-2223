@@ -21,7 +21,7 @@ namespace WpfFileInfo
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             dialog.Filter = "Tekstbestanden|*.TXT;*.TEXT";
-            string chosenFileName;
+            string chosenFileName; 
             bool? dialogResult = dialog.ShowDialog();
             if (dialogResult == true)
             {
@@ -47,17 +47,6 @@ namespace WpfFileInfo
                         wordCounts[word] = 1;
                     }
                 }
-
-                //// van Chatgpt 
-                // IEnumerable<KeyValuePair<string, int>> sortedWordCounts = wordCounts.OrderByDescending(x => x.Value);
-
-                //// maakt een loop om string key (dus word) terug te geven 
-                //// voorbeeld code opgezocht in internet/chatgpt en aangepast om in hier te laten werken
-                // string wordCountString = " ";
-                // foreach (KeyValuePair<string, int> pair in sortedWordCounts)
-                // {
-                //    wordCountString += $"{pair.Key}, ";
-                // }
 
                 //// van Chatgpt 
 

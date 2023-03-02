@@ -14,6 +14,7 @@ namespace ConsoleCsv
             // creeert een CSV bestand en slaagt op in desktop met naam "wedstrijden.csv"
             string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string filePath = System.IO.Path.Combine(folderPath, "wedstrijden.csv");
+
             using (StreamWriter writer = new StreamWriter(filePath))
             {
                 // 100 spelers 
