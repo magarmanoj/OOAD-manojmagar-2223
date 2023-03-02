@@ -15,25 +15,28 @@ namespace ConsoleCsv
             string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string filePath = System.IO.Path.Combine(folderPath, "wedstrijden.csv");
 
-            using (StreamWriter writer = new StreamWriter(filePath))
+            string line = "";
+            
+            // 100 spelers 
+            for (int i = 0; i < 100; i++)
             {
-                // 100 spelers 
-                for (int i = 0; i < 100; i++)
+                // 2 randoms spelers
+                string speler1 = spelers[rand.Next(spelers.Length)];
+                string speler2 = spelers[rand.Next(spelers.Length)];
+                while (speler2 == speler1)
                 {
-                    // 2 randoms spelers
-                    string speler1 = spelers[rand.Next(spelers.Length)];
-                    string speler2 = spelers[rand.Next(spelers.Length)];
-                    while (speler2 == speler1)
-                    {
-                        speler1 = spelers[rand.Next(spelers.Length)];
-                    }
-
-                    // random games
-                    string game = games[rand.Next(games.Length)];
-                    int score1 = rand.Next(3);
-                    int score2 = 3 - score1;
-                    writer.WriteLine($"{speler1};{speler2};{game};{score1}-{score2}");
+                    speler1 = spelers[rand.Next(spelers.Length)];
                 }
+
+                // random games
+                string game = games[rand.Next(games.Length)];
+                int score1 = rand.Next(3);
+                int score2 = 3 - score1;
+                line += $"{speler1};{speler2};{game};{score1}-{score2}\n";
+            }
+            using (StreamWriter writer = File.CreateText(filePath))
+            {
+                writer.WriteLine(line);
             }
         }
     }
