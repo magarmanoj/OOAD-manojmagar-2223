@@ -27,6 +27,22 @@ namespace WpfFileInfo
             {
                 // user picked a file and pressed OK
                 chosenFileName = dialog.FileName;
+                string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string txtContent;
+                try
+                {
+                    string filePath = System.IO.Path.Combine(folderPath, chosenFileName);
+                    txtContent = File.ReadAllText(filePath);
+                }
+                catch (FileNotFoundException ex)
+                {
+                    MessageBox.Show(
+                        $"{ex.FileName} niet gevonden", // boodschap
+                        "Oeps!", // titel
+                        MessageBoxButton.OK, // buttons
+                        MessageBoxImage.Error);
+                }
+
                 string fileContent = File.ReadAllText(chosenFileName);
                 string[] words = fileContent.Split(new char[] { ' ', '.', ',' }, StringSplitOptions.RemoveEmptyEntries);
                 int wordCount = words.Length;
