@@ -9,7 +9,7 @@
     <Grid>
         <Label x:Name="lblFile" Content="File in: " HorizontalAlignment="Left" Height="40" Margin="70,120,0,0" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btnKies" Content="Kies" HorizontalAlignment="Left" Height="35" Margin="595,120,0,0" VerticalAlignment="Top" Width="95" Click="BtnKies_Click"/>
-        <Button x:Name="btnGo" Content="GO!" HorizontalAlignment="Left" Height="55" Margin="544,215,0,0" VerticalAlignment="Top" Width="145" Click="BtnGo_Click"/>
+        <Button x:Name="btnGo" Content="GO!" HorizontalAlignment="Left" Height="55" Margin="545,215,0,0" VerticalAlignment="Top" Width="145" Click="BtnGo_Click"/>
         <Label x:Name="lblMsg" Content="" HorizontalAlignment="Left" Height="25" Margin="345,215,0,0" VerticalAlignment="Top" Width="170"/>
         <TextBox x:Name="txtBoxvenster" HorizontalAlignment="Left" Height="30" Margin="195,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="365"/>
 

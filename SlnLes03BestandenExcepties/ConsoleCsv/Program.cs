@@ -9,11 +9,11 @@ namespace ConsoleCsv
         {
             Random rand = new Random();
             string[] spelers = { "Zakaria", "Saleha", "Indra", "Ralph", "Francisco", "Marie" };
-            string[] games = { "schaak", "dammen", "backgammon" }; 
+            string[] games = { "schaak", "dammen", "backgammon" };
 
             // creeert een CSV bestand en slaagt op in desktop met naam "wedstrijden.csv"
             string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string filePath = System.IO.Path.Combine(folderPath , "wedstrijden.csv");
+            string filePath = System.IO.Path.Combine(folderPath, "wedstrijden.csv");
             using (StreamWriter writer = new StreamWriter(filePath))
             {
                 // 100 spelers 
@@ -37,4 +37,3 @@ namespace ConsoleCsv
         }
     }
 }
-

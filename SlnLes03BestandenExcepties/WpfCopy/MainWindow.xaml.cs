@@ -28,7 +28,23 @@ namespace WpfCopy
             {
                 // user picked a file and pressed OK
                 chosenFileName = dialog.FileName;
-                txtBoxvenster.Text = chosenFileName;              
+                txtBoxvenster.Text = chosenFileName;
+
+                string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string txtContent = "";
+                try
+                {
+                    string filePath = System.IO.Path.Combine(folderPath, chosenFileName);
+                    txtContent = File.ReadAllText(filePath);
+                }
+                catch (FileNotFoundException ex)
+                {
+                    MessageBox.Show(
+                        $"{ex.FileName} kon niet gevonden worden", // boodschap
+                        "Oeps!", // titel
+                        MessageBoxButton.OK, // buttons
+                        MessageBoxImage.Error);
+                }
             }
         }
 
@@ -38,12 +54,29 @@ namespace WpfCopy
             dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             dialog.Filter = "Tekstbestanden|*.TXT;*.TEXT";
             dialog.FileName = "savedfile.txt";
-            if (dialog.ShowDialog() == true)
+            if (dialog.ShowDialog() != true) return;
+
+            string txtSource = "";
+            try
             {
-                File.WriteAllText(dialog.FileName, "tekstinhoud hier");
-                lblMsg.Content = "bestand is overgezet";
-                btnGo.IsEnabled = false;
+                txtSource = File.ReadAllText(txtSource);
             }
+            catch (IOException)
+            {
+                lblMsg.Content = "FOUT: kan bronbestand niet lezen";
+                return;
+            }
+            try
+            {
+                File.WriteAllText(dialog.FileName, txtSource);
+            }
+            catch (IOException)
+            {
+                lblMsg.Content = "FOUT: kan doelbestand niet schrijven";
+                return;
+            }
+            txtBoxvenster.Text = "";
+            btnGo.IsEnabled = false;              
         }
     }
 }

@@ -8,8 +8,8 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <ListBox x:Name="lb1" HorizontalAlignment="Left" Height="120" Margin="75,45,0,0" VerticalAlignment="Top" Width="250" SelectionChanged="Items_SelectionChanged" />
-        <ListBox x:Name="lb2" HorizontalAlignment="Left" Height="120" Margin="491,45,0,0" VerticalAlignment="Top" Width="250" SelectionChanged="Items_SelectionChanged" />
-        <Button x:Name="btnCompare" Content="Compare!" HorizontalAlignment="Left" Height="32" Margin="345,365,0,0" VerticalAlignment="Top" Width="125" Click="BtnCompare_Click"/>
+        <ListBox x:Name="lb2" HorizontalAlignment="Left" Height="120" Margin="490,45,0,0" VerticalAlignment="Top" Width="250" SelectionChanged="Items_SelectionChanged" />
+        <Button x:Name="btnCompare" Content="Compare!" HorizontalAlignment="Left" Height="35" Margin="345,365,0,0" VerticalAlignment="Top" Width="125" Click="BtnCompare_Click"/>
         <ListBox x:Name="lbMsg1" HorizontalAlignment="Left" Height="185" Margin="25,215,0,0" VerticalAlignment="Top" Width="300" />
         <ListBox x:Name="lbMsg2" HorizontalAlignment="Left" Height="185" Margin="490,215,0,0" VerticalAlignment="Top" Width="300"/>
     </Grid>

@@ -24,14 +24,16 @@ namespace WpfKerstverlichting
     /// </summary>
     public partial class MainWindow : Window
     {
-        private DispatcherTimer timer = new DispatcherTimer();
-        private bool lightsON = false;
+        private DispatcherTimer timer = new DispatcherTimer();      
         private List<Ellipse> lights = new List<Ellipse>();
+        private bool lightsON = false;
 
         public MainWindow()
         {
             // code uit ppt
             InitializeComponent();
+            timer.Interval = TimeSpan.FromMilliseconds(500);
+            timer.Tick += ColorChange;
             Random rand = new Random();
 
             // maak het lampje met een ellips (cirkel)
@@ -82,8 +84,6 @@ namespace WpfKerstverlichting
             {
                 lightsON = true;
                 btnSwitch.Content = "Switch Off";
-                timer.Interval = TimeSpan.FromMilliseconds(500);
-                timer.Tick += ColorChange;
                 timer.Start();
             }
             else

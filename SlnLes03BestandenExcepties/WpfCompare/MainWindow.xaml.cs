@@ -42,7 +42,10 @@ namespace WpfCompare
                 string[] fileLines = File.ReadAllLines(startfolder1);
                 foreach (string line in fileLines)
                 {
-                    lbMsg1.Items.Add(line);
+                    lbMsg1.Items.Add(new ListBoxItem()
+                    {
+                        Content = line
+                    });
                 }
             }
             else if (listBox == lb2 && lb2.SelectedItem != null)
@@ -52,7 +55,10 @@ namespace WpfCompare
                 string[] fileLines = File.ReadAllLines(startfolder2);
                 foreach (string line in fileLines)
                 {
-                    lbMsg2.Items.Add(line);
+                    lbMsg2.Items.Add(new ListBoxItem()
+                    {
+                        Content = line
+                    });
                 }
             }
         }
