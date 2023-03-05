@@ -21,20 +21,68 @@
         </Menu>
         <TabControl DockPanel.Dock="Top">
             <TabItem Header="Persoonlijk" Margin="0" Padding="10,5">
-                <TextBox Padding="10">tab 1 content here...</TextBox>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label>Name:</Label>
+                    <TextBox Grid.Column="1" Margin="0,5,0,10" />
+                    <Label Grid.Row="1">E-mail:</Label>
+                    <TextBox Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" />
+                    <Label Grid.Row="2">Comment:</Label>
+                    <TextBox Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" AcceptsReturn="True" />
+                </Grid>
             </TabItem>
             <TabItem Header="Werk" Margin="0" Padding="10,5">
-                <TextBox Padding="10">tab 2 content here...</TextBox>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label>Name:</Label>
+                    <TextBox Grid.Column="1" Margin="0,5,0,10" />
+                    <Label Grid.Row="1">E-mail:</Label>
+                    <TextBox Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" />
+                    <Label Grid.Row="2">Comment:</Label>
+                    <TextBox Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" AcceptsReturn="True" />
+                </Grid>
             </TabItem>
             <TabItem Header="Sociaal" Margin="0" Padding="10,5">
-                <TextBox Padding="10">tab 3 content here...</TextBox>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label>Name:</Label>
+                    <TextBox Grid.Column="1" Margin="0,5,0,10" />
+                    <Label Grid.Row="1">E-mail:</Label>
+                    <TextBox Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" />
+                    <Label Grid.Row="2">Comment:</Label>
+                    <TextBox Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" AcceptsReturn="True" />
+                </Grid>
             </TabItem>
         </TabControl>
         <DockPanel LastChildFill="True">
             <StatusBar DockPanel.Dock="Bottom">
                 <Label Content="all ready" Padding="10,2" FontSize="10" />
             </StatusBar>
-            <Grid></Grid>
+
         </DockPanel>
     </DockPanel>
 </Window>
