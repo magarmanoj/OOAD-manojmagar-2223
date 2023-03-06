@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfVcardEditor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_vCard">
@@ -28,12 +28,12 @@
             </StatusBarItem>
         </StatusBar>
         <Grid>
-            <TabControl DockPanel.Dock="Top">
+            <TabControl DockPanel.Dock="Top" Margin="5">
                 <TabItem Header="Persoonlijk" Margin="0" Padding="5">
-                    <Grid>
+                    <Grid Margin="15">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="150" />
-                            <ColumnDefinition Width="250" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition MaxWidth="600" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -45,6 +45,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Label>Voornaam:</Label>
                         <TextBox Name="txtName" Grid.Column="1" Margin="0,5,0,10" />
@@ -92,8 +93,8 @@
                 <TabItem Header="Werk" Margin="0" Padding="5">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="150" />
-                            <ColumnDefinition Width="250" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="600" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -115,8 +116,8 @@
                 <TabItem Header="Sociaal" Margin="0" Padding="5">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="150" />
-                            <ColumnDefinition Width="250" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="600" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
