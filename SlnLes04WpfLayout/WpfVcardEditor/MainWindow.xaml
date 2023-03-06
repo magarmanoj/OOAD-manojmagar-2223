@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfVcardEditor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800">
+        Title="MainWindow" Height="550" Width="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_vCard">
@@ -21,10 +21,10 @@
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
-                <Label Content="huidige kaart:(geen geopend)" Padding="10,2" FontSize="10" />
+                <Label Content="huidige kaart:(geen geopend)" Padding="10" FontSize="10" />
             </StatusBarItem>
             <StatusBarItem HorizontalAlignment="Right">
-                <Label Content="percentage ingevuld: n.a" Padding="10,2" FontSize="10" />
+                <Label Content="percentage ingevuld: n.a" Padding="10" FontSize="10" />
             </StatusBarItem>
         </StatusBar>
         <Grid>
@@ -48,11 +48,11 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Label>Voornaam:</Label>
-                        <TextBox Name="txtName" Grid.Column="1" Margin="0,5,0,10" />
+                        <TextBox Name="txtName" Grid.Column="1" Margin="0,5,0,10" Padding="5" />
                         <Label Grid.Row="1">Achternaam:</Label>
-                        <TextBox Name="txtAchternaam" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" />
+                        <TextBox Name="txtAchternaam" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
                         <Label Grid.Row="2">Geboortedatum:</Label>
-                        <DatePicker Name="dateBirth" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" />
+                        <DatePicker Name="dateBirth" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" Width="100" HorizontalAlignment="Left" Padding="5"  />
                         <Label Grid.Row="3">Geslacht:</Label>
                         <Grid Grid.Row="3" Grid.Column="1" Margin="0,5,0,10">
                             <Grid.ColumnDefinitions>
@@ -65,9 +65,9 @@
                             <RadioButton Content="Onbekend" GroupName="Gender" Grid.Column="2" />
                         </Grid>
                         <Label Grid.Row="4">Privé email:</Label>
-                        <TextBox Name="txtEmail" Grid.Row="4" Grid.Column="1" Margin="0,5,0,10" />
+                        <TextBox Name="txtEmail" Grid.Row="4" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
                         <Label Grid.Row="6">Privé telefoon:</Label>
-                        <TextBox Name="txtTelefoon" Grid.Row="6" Grid.Column="1" Margin="0,5,0,10" />
+                        <TextBox Name="txtTelefoon" Grid.Row="6" Grid.Column="1" Margin="0,5,0,10" Width="200" Padding="5" HorizontalAlignment="Left" />
                         <Label Grid.Row="7">foto:</Label>
                         <Grid Grid.Row="7" Grid.Column="1" Margin="0,5,0,10">
                             <Grid.ColumnDefinitions>
@@ -75,7 +75,7 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <Button Content="SELECTEER" Grid.Column="0" />
-                            <Label Name="lblMessage" Content="(geen geselecteerd)" Grid.Column="1" Margin="10,0,0,0" />
+                            <Label Name="lblMessage" Content="(geen geselecteerd)" Grid.Column="1" Margin="10,0,0,0" Padding="5"  />
                         </Grid>
                         <Grid Grid.Row="8" Grid.Column="1" Margin="0,5,0,10">
                             <Grid.ColumnDefinitions>
@@ -95,7 +95,7 @@
                     <Grid Margin="15">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="600" />
+                            <ColumnDefinition MaxWidth="600" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -105,20 +105,21 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Label>Bedrijf:</Label>
-                        <TextBox Name="txtBedrijf" Grid.Column="1" Margin="0,5,0,10" />
+                        <TextBox Name="txtBedrijf" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
                         <Label Grid.Row="1">Jobtitel:</Label>
-                        <TextBox Name="txtJobTitel" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" />
+                        <TextBox Name="txtJobtitel" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
                         <Label Grid.Row="2">Werk email:</Label>
-                        <TextBox Name="txtWerkEm" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" />
+                        <TextBox Name="txtWerkE" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
                         <Label Grid.Row="3">Werk telefoon:</Label>
-                        <TextBox Name="txtWerkTel" Grid.Row="3" Grid.Column="1" Margin="0,5,0,10" />
+                        <TextBox Name="txtWerkT" Grid.Row="3" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
                     </Grid>
                 </TabItem>
+                
                 <TabItem Header="Sociaal" Margin="0" Padding="5">
-                    <Grid>
+                    <Grid Margin="15">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="600" />
+                            <ColumnDefinition MaxWidth="600" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -128,13 +129,13 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Label>Linkedin:</Label>
-                        <TextBox Name="txtLindkedin" Grid.Column="1" Margin="0,5,0,10" />
+                        <TextBox Name="txtLinkedin" Grid.Column="1" Margin="0,5,0,10" Padding="5"/>
                         <Label Grid.Row="1">Facebook:</Label>
-                        <TextBox Name="txtFacebook" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" />
+                        <TextBox Name="txtFacebook" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" Padding="5"/>
                         <Label Grid.Row="2">Instagram:</Label>
-                        <TextBox Name="txtInsta" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" />
+                        <TextBox Name="txtInsta" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" Padding="5"/>
                         <Label Grid.Row="3">Youtube:</Label>
-                        <TextBox Name="txtYoutube" Grid.Row="3" Grid.Column="1" Margin="0,5,0,10" />
+                        <TextBox Name="txtYoutube" Grid.Row="3" Grid.Column="1" Margin="0,5,0,10" Padding="5"/>
                     </Grid>
                 </TabItem>
             </TabControl>
