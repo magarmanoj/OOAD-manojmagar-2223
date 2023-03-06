@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfVcardEditor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="800">
+        Title="MainWindow" Height="550" Width="600">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_vCard">
@@ -67,7 +67,7 @@
                         <Label Grid.Row="4">Privé email:</Label>
                         <TextBox Name="txtEmail" Grid.Row="4" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
                         <Label Grid.Row="6">Privé telefoon:</Label>
-                        <TextBox Name="txtTelefoon" Grid.Row="6" Grid.Column="1" Margin="0,5,0,10" Width="200" Padding="5" HorizontalAlignment="Left" />
+                        <TextBox Name="txtTelefoon" Grid.Row="6" Grid.Column="1" Margin="0,5,0,10" MinWidth="200" MaxWidth="400" Padding="5" HorizontalAlignment="Left" />
                         <Label Grid.Row="7">foto:</Label>
                         <Grid Grid.Row="7" Grid.Column="1" Margin="0,5,0,10">
                             <Grid.ColumnDefinitions>
@@ -84,7 +84,7 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="3" Width="80" Height="80" Margin="10,0,0,0">
+                            <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="3" Width="100" Height="100" Margin="10,0,0,0">
                                 <Image Name="imgFoto" Stretch="UniformToFill" />
                             </Border>
                         </Grid>
