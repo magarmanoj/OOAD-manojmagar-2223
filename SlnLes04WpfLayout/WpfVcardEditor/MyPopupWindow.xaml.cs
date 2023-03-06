@@ -28,6 +28,5 @@ namespace WpfVcardEditor
         {
             this.Close();
         }
-
     }
 }

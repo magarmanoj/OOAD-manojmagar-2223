@@ -90,8 +90,9 @@
                         </Grid>
                     </Grid>
                 </TabItem>
+                
                 <TabItem Header="Werk" Margin="0" Padding="5">
-                    <Grid>
+                    <Grid Margin="15">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="200" />
                             <ColumnDefinition Width="600" />

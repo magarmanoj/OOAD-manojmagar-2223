@@ -25,9 +25,6 @@ namespace WpfVcardEditor
         {
             // create a new instance of the popUpWindow
             new MyPopupWindow().Show();
-
         }
-
-
     }
 }
