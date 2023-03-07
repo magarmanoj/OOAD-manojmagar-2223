@@ -60,9 +60,9 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <RadioButton Content="Man" GroupName="Gender" Grid.Column="0" Padding="5" />
-                            <RadioButton Content="Vrouw" GroupName="Gender" Grid.Column="1" Padding="5" />
-                            <RadioButton Content="Onbekend" GroupName="Gender" Grid.Column="2" Padding="5" />
+                            <RadioButton Name="rbMan" Content="Man" GroupName="Gender" Grid.Column="0" Padding="5" />
+                            <RadioButton Name="rbVrouw" Content="Vrouw" GroupName="Gender" Grid.Column="1" Padding="5" />
+                            <RadioButton Name="rbOnbekend" Content="Onbekend" GroupName="Gender" Grid.Column="2" Padding="5" />
                         </Grid>
                         <Label Name="lblEmail" Grid.Row="4">Privé email:</Label>
                         <TextBox Name="txtEmail" Grid.Row="4" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
