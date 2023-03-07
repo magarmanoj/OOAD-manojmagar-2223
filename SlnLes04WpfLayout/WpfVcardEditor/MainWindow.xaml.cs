@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using Microsoft.Win32;
+using System;
+using System.Windows;
 
 namespace WpfVcardEditor
 {
@@ -25,6 +27,21 @@ namespace WpfVcardEditor
         {
             // create a new instance of the popUpWindow
             new MyPopupWindow().Show();
+        }
+
+        private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            dialog.Filter = "VCFBestand|*.VCF";
+            string chosenFileName;
+            bool? dialogResult = dialog.ShowDialog();
+            if (dialogResult == true)
+            {
+                // user picked a file and pressed OK
+                chosenFileName = dialog.FileName;
+                txtAchternaam.Text = chosenFileName;   
+            }
         }
     }
 }

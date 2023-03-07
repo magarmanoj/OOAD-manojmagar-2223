@@ -10,7 +10,7 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_vCard">
                 <MenuItem Header="_New"/>
-                <MenuItem Header="_Open"/>
+                <MenuItem Header="_Open" Click="OpenMenuItem_Click" Name="openMenuItem"/>
                 <MenuItem Header="_Save"/>
                 <MenuItem Header="Save _As..."/>
                 <MenuItem Header="E_xit" Click="ExitMenuItem_Click" Name="exitMenuItem"/>
@@ -47,13 +47,13 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Label>Voornaam:</Label>
+                        <Label Name="lblNaam" >Voornaam:</Label>
                         <TextBox Name="txtName" Grid.Column="1" Margin="0,5,0,10" Padding="5" />
-                        <Label Grid.Row="1">Achternaam:</Label>
+                        <Label Name="lblachternaam" Grid.Row="1">Achternaam:</Label>
                         <TextBox Name="txtAchternaam" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
-                        <Label Grid.Row="2">Geboortedatum:</Label>
+                        <Label Name="lblGebDate" Grid.Row="2">Geboortedatum:</Label>
                         <DatePicker Name="dateBirth" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" Width="100" HorizontalAlignment="Left" Padding="5"  />
-                        <Label Grid.Row="3">Geslacht:</Label>
+                        <Label Name="lblGeslacht" Grid.Row="3">Geslacht:</Label>
                         <Grid Grid.Row="3" Grid.Column="1" Margin="0,5,0,10">
                             <Grid.ColumnDefinitions >
                                 <ColumnDefinition Width="Auto" />
@@ -64,11 +64,11 @@
                             <RadioButton Content="Vrouw" GroupName="Gender" Grid.Column="1" Padding="5" />
                             <RadioButton Content="Onbekend" GroupName="Gender" Grid.Column="2" Padding="5" />
                         </Grid>
-                        <Label Grid.Row="4">Privé email:</Label>
+                        <Label Name="lblEmail" Grid.Row="4">Privé email:</Label>
                         <TextBox Name="txtEmail" Grid.Row="4" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
-                        <Label Grid.Row="6">Privé telefoon:</Label>
+                        <Label Name="lblTelefoon" Grid.Row="6">Privé telefoon:</Label>
                         <TextBox Name="txtTelefoon" Grid.Row="6" Grid.Column="1" Margin="0,5,0,10" MinWidth="200" MaxWidth="400" Padding="5" HorizontalAlignment="Left" />
-                        <Label Grid.Row="7">foto:</Label>
+                        <Label Name="lblFoto" Grid.Row="7">foto:</Label>
                         <Grid Grid.Row="7" Grid.Column="1" Margin="0,5,0,10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -104,13 +104,13 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Label>Bedrijf:</Label>
+                        <Label Name="lblBedrijf">Bedrijf:</Label>
                         <TextBox Name="txtBedrijf" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
-                        <Label Grid.Row="1">Jobtitel:</Label>
+                        <Label Name="lblTitel" Grid.Row="1">Jobtitel:</Label>
                         <TextBox Name="txtJobtitel" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
-                        <Label Grid.Row="2">Werk email:</Label>
+                        <Label Name="lblWemail" Grid.Row="2">Werk email:</Label>
                         <TextBox Name="txtWerkE" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
-                        <Label Grid.Row="3">Werk telefoon:</Label>
+                        <Label Name="lblWtelefoon" Grid.Row="3">Werk telefoon:</Label>
                         <TextBox Name="txtWerkT" Grid.Row="3" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
                     </Grid>
                 </TabItem>
@@ -128,13 +128,13 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Label>Linkedin:</Label>
+                        <Label Name="lblLinkedin">Linkedin:</Label>
                         <TextBox Name="txtLinkedin" Grid.Column="1" Margin="0,5,0,10" Padding="5"/>
-                        <Label Grid.Row="1">Facebook:</Label>
+                        <Label Name="lblFacebook" Grid.Row="1">Facebook:</Label>
                         <TextBox Name="txtFacebook" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" Padding="5"/>
-                        <Label Grid.Row="2">Instagram:</Label>
+                        <Label Name="lblInstagram" Grid.Row="2">Instagram:</Label>
                         <TextBox Name="txtInsta" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" Padding="5"/>
-                        <Label Grid.Row="3">Youtube:</Label>
+                        <Label Name="lblYoutube" Grid.Row="3">Youtube:</Label>
                         <TextBox Name="txtYoutube" Grid.Row="3" Grid.Column="1" Margin="0,5,0,10" Padding="5"/>
                     </Grid>
                 </TabItem>
