@@ -5,9 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfVcardEditor"
         mc:Ignorable="d"
-        Title="MyPopupWindow" Height="400" Width="400">
-
-
+        Title="MyPopupWindow" Height="400" MaxHeight="500" Width="400" MinWidth="400">
+    
     <Grid Margin="5" VerticalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -21,13 +20,14 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        
         <Image Source="images/odisee.jpg" Width="350" Height="150" Grid.Row="0" Grid.ColumnSpan="2"/>
-        <TextBlock Text="Gemaakt door:"  FontSize="16" FontWeight="Bold" Margin="50,20,0,10" Grid.Row="1" Grid.Column="0" Padding="5"/>
-        <TextBlock Text="Rogier van der Linde" FontSize="16" FontWeight="Normal" Margin="5,20,0,10" Grid.Row="1" Grid.Column="1" Padding="5"/>
-        <TextBlock Text="Vak:" FontSize="16" FontWeight="Bold" Margin="50,0,0,5" Grid.Row="2" Grid.Column="0" Padding="5"/>
-        <TextBlock Text="OO Application Development" FontSize="16" FontWeight="Normal" Margin="90,0,0, 0" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Padding="5"/>
-        <TextBlock Text="Academiejaar:" FontSize="16" FontWeight="Bold" Margin="50,0,0,5" Grid.Row="3" Grid.Column="0" Padding="5"/>
-        <TextBlock Text="2022-2023" FontSize="16" FontWeight="Normal" Margin="0,0,0,5" Grid.Row="3" Grid.Column="1" Padding="5"/>
-        <Button Content="SLUITEN" Margin="0,20,0,0" Click="Sluiten_Click" Height="30" Width="80" HorizontalAlignment="Center" Grid.Row="4" Grid.ColumnSpan="2" Padding="5"/>
+        <TextBlock x:Name="txtGemaakt" Text="Gemaakt door:"  FontSize="16" FontWeight="Bold" Margin="50,20,0,10" Grid.Row="1" Grid.Column="0" Padding="5"/>
+        <TextBlock x:Name="txtNaam" Text="Rogier van der Linde" FontSize="16" FontWeight="Normal" Margin="5,20,0,10" Grid.Row="1" Grid.Column="1" Padding="5"/>
+        <TextBlock x:Name="txtVak" Text="Vak:" FontSize="16" FontWeight="Bold" Margin="50,0,0,5" Grid.Row="2" Grid.Column="0" Padding="5"/>
+        <TextBlock x:Name="txtOOAD" Text="OO Application Development" FontSize="16" FontWeight="Normal" Margin="90,0,0, 0" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Padding="5"/>
+        <TextBlock x:Name="txtAcadmiejaar" Text="Academiejaar:" FontSize="16" FontWeight="Bold" Margin="50,0,0,5" Grid.Row="3" Grid.Column="0" Padding="5"/>
+        <TextBlock x:Name="txtJaartaal" Text="2022-2023" FontSize="16" FontWeight="Normal" Margin="0,0,0,5" Grid.Row="3" Grid.Column="1" Padding="5"/>
+        <Button Name="btnSluiten" Content="SLUITEN" Margin="0,20,0,0" Click="Sluiten_Click" Height="30" Width="80" HorizontalAlignment="Center" Grid.Row="4" Grid.ColumnSpan="2" Padding="5"/>
     </Grid>
 </Window>
