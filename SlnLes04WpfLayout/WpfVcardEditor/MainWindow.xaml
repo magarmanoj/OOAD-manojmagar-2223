@@ -10,9 +10,9 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_vCard">
                 <MenuItem Header="_New"/>
-                <MenuItem Header="_Open" Click="OpenMenuItem_Click" Name="openMenuItem"/>
-                <MenuItem Header="_Save"/>
-                <MenuItem Header="Save _As..."/>
+                <MenuItem Header="_Open"/>
+                <MenuItem Header="_Save" IsEnabled="False"/>
+                <MenuItem Header="Save _As..." IsEnabled="False"/>
                 <MenuItem Header="E_xit" Click="ExitMenuItem_Click" Name="exitMenuItem"/>
             </MenuItem>
             <MenuItem Header="_Help" Click="HelpMenuItem_Click">
@@ -128,7 +128,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Label Name="lblLinkedin">Linkedin:</Label>
+                        <Label Name="lblLinkedin" >Linkedin:</Label>
                         <TextBox Name="txtLinkedin" Grid.Column="1" Margin="0,5,0,10" Padding="5"/>
                         <Label Name="lblFacebook" Grid.Row="1">Facebook:</Label>
                         <TextBox Name="txtFacebook" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" Padding="5"/>
