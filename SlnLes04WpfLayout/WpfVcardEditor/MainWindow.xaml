@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfVcardEditor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="600">
+        Title="MainWindow" MinWidth="515" MinHeight="600" Height="600" Width="600">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_vCard">
@@ -45,7 +45,6 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Label Name="lblNaam" >Voornaam:</Label>
                         <TextBox Name="txtName" Grid.Column="1" Margin="0,5,0,10" Padding="5" />
@@ -54,20 +53,20 @@
                         <Label Name="lblGebDate" Grid.Row="2">Geboortedatum:</Label>
                         <DatePicker Name="dateBirth" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" Width="100" HorizontalAlignment="Left" Padding="5"  />
                         <Label Name="lblGeslacht" Grid.Row="3">Geslacht:</Label>
-                        <Grid Grid.Row="3" Grid.Column="1" Margin="0,5,0,10">
+                        <Grid Grid.Row="3" Grid.Column="1" Margin="0,5,0,10" >
                             <Grid.ColumnDefinitions >
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <RadioButton Name="rbMan" Content="Man" GroupName="Gender" Grid.Column="0" Padding="5" />
-                            <RadioButton Name="rbVrouw" Content="Vrouw" GroupName="Gender" Grid.Column="1" Padding="5" />
-                            <RadioButton Name="rbOnbekend" Content="Onbekend" GroupName="Gender" Grid.Column="2" Padding="5" />
+                            <RadioButton Name="rbMan" Content="Man" GroupName="Gender" Grid.Column="0"  VerticalAlignment="Center" />
+                            <RadioButton Name="rbVrouw" Content="Vrouw" GroupName="Gender" Grid.Column="1"  VerticalAlignment="Center" />
+                            <RadioButton Name="rbOnbekend" Content="Onbekend" GroupName="Gender" Grid.Column="2" VerticalAlignment="Center" />
                         </Grid>
                         <Label Name="lblEmail" Grid.Row="4">Privé email:</Label>
                         <TextBox Name="txtEmail" Grid.Row="4" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
                         <Label Name="lblTelefoon" Grid.Row="6">Privé telefoon:</Label>
-                        <TextBox Name="txtTelefoon" Grid.Row="6" Grid.Column="1" Margin="0,5,0,10" MinWidth="200" MaxWidth="400" Padding="5" HorizontalAlignment="Left" />
+                        <TextBox Name="txtTelefoon" Grid.Row="6" Grid.Column="1" Margin="0,5,0,10" Width="250" Padding="5" HorizontalAlignment="Left" />
                         <Label Name="lblFoto" Grid.Row="7">foto:</Label>
                         <Grid Grid.Row="7" Grid.Column="1" Margin="0,5,0,10">
                             <Grid.ColumnDefinitions>
@@ -102,7 +101,6 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Label Name="lblBedrijf">Bedrijf:</Label>
                         <TextBox Name="txtBedrijf" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
