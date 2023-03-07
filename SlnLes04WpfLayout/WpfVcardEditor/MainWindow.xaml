@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfVcardEditor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="600">
+        Title="MainWindow" Height="600" Width="600">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_vCard">
@@ -55,14 +55,14 @@
                         <DatePicker Name="dateBirth" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" Width="100" HorizontalAlignment="Left" Padding="5"  />
                         <Label Grid.Row="3">Geslacht:</Label>
                         <Grid Grid.Row="3" Grid.Column="1" Margin="0,5,0,10">
-                            <Grid.ColumnDefinitions>
+                            <Grid.ColumnDefinitions >
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <RadioButton Content="Man" GroupName="Gender" Grid.Column="0" />
-                            <RadioButton Content="Vrouw" GroupName="Gender" Grid.Column="1" />
-                            <RadioButton Content="Onbekend" GroupName="Gender" Grid.Column="2" />
+                            <RadioButton Content="Man" GroupName="Gender" Grid.Column="0" Padding="5" />
+                            <RadioButton Content="Vrouw" GroupName="Gender" Grid.Column="1" Padding="5" />
+                            <RadioButton Content="Onbekend" GroupName="Gender" Grid.Column="2" Padding="5" />
                         </Grid>
                         <Label Grid.Row="4">Privé email:</Label>
                         <TextBox Name="txtEmail" Grid.Row="4" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
