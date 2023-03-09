@@ -14,6 +14,8 @@ namespace WpfVcardEditor
 
         private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
         {
+
+            // MessageBox("Ben je zeker dat je de applicatie wil afsluiten?, Toepassing sluiten", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
             MessageBoxResult result = MessageBox.Show("Ben je zeker dat je de applicatie wil afsluiten?", "Toepassing sluiten", MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.OK)
             {
