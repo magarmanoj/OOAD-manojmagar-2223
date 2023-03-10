@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using Microsoft.Win32;
+using System;
+using System.IO;
+using System.Windows;
 
 namespace WpfVcardEditor
 {
@@ -7,6 +10,8 @@ namespace WpfVcardEditor
     /// </summary>
     public partial class MainWindow : Window
     {
+        string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
         public MainWindow()
         {
             InitializeComponent();
@@ -29,46 +34,32 @@ namespace WpfVcardEditor
             new MyPopupWindow().Show();
         }
 
-        // private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
-        // {
-        //    OpenFileDialog dialog = new OpenFileDialog();
-        //    dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        //    dialog.Filter = "VCFBestand|*.VCF";
-        //    string chosenFileName;
-        //    bool? dialogResult = dialog.ShowDialog();
-        //    if (dialogResult == true)
-        //    {
-        //        // user picked a file and pressed OK
-        //        chosenFileName = dialog.FileName;
-        //        txtAchternaam.Text = chosenFileName;
+        private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            dialog.Filter = "VCFBestand|*.VCF";
+            string chosenFileName;
+            bool? dialogResult = dialog.ShowDialog();
+            if (dialogResult == true)
+            {
+                // user picked a file and pressed OK
+                chosenFileName = dialog.FileName;
+                txtAchternaam.Text = chosenFileName;
 
-        // try
-        //        {
-        //            string filePath = System.IO.Path.Combine(folderPath, chosenFileName);
-        //            string txtContent = File.ReadAllText(filePath);
-        //        }
-        //        catch (FileNotFoundException ex)
-        //        {
-        //            MessageBox.Show(
-        //                $"{ex.FileName} niet gevonden", // boodschap
-        //                "Oeps!", // titel
-        //                MessageBoxButton.OK, // buttons
-        //                MessageBoxImage.Error);
-        //        }
-
-        // // Hier moet ook try catch komen
-        //        string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        //        string startfolder = System.IO.Path.Combine(folderPath, "vcf");
-        //        string[] fileLines = File.ReadAllLines(startfolder);
-        //        foreach (string line in fileLines)
-        //        {
-        //            if (line == lblachternaam.ToString())
-        //            {
-        //                txtAchternaam.Text = line;
-        //            }
-
-        // }
-        //    }
-        //  }
+                try
+                {
+                    string txtContent = File.ReadAllText(chosenFileName);
+                }
+                catch (FileNotFoundException ex)
+                {
+                    MessageBox.Show(
+                        $"{ex.FileName} niet gevonden", // boodschap
+                        "Oeps!", // titel
+                        MessageBoxButton.OK, // buttons
+                        MessageBoxImage.Error);
+                }
+            }
+        }
     }
 }
