@@ -45,11 +45,25 @@ namespace WpfVcardEditor
             {
                 // user picked a file and pressed OK
                 chosenFileName = dialog.FileName;
-                txtAchternaam.Text = chosenFileName;
 
                 try
                 {
                     string txtContent = File.ReadAllText(chosenFileName);
+                    string[] lines = txtContent.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (string line in lines)
+                    {
+                        if (line.Contains("FN") && !line.Contains("PHOTO"))
+                        {
+                            string[] words = line.Split(':');
+                            txtName.Text = words[1];
+                        } else if (line.Contains("N"))
+                        {
+                            string[] words = line.Split(':');
+                            txtAchternaam.Text = words[1];
+                        }
+                    }
+
+
                 }
                 catch (FileNotFoundException ex)
                 {
@@ -61,5 +75,6 @@ namespace WpfVcardEditor
                 }
             }
         }
+
     }
 }
