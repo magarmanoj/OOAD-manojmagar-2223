@@ -16,7 +16,7 @@ namespace WpfVcardEditor
     public partial class MainWindow : Window
     {
         string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
+        bool txtBoxChanged = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -93,6 +93,7 @@ namespace WpfVcardEditor
                         else if (line.StartsWith("BDAY"))
                         {
                             string dateString = words[1];
+
                             // https://learn.microsoft.com/en-us/dotnet/api/system.datetime.parseexact?view=net-7.0#system-datetime-parseexact(system-string-system-string-system-iformatprovider) 
                             DateTime date = DateTime.ParseExact(dateString, "yyyyMMdd", CultureInfo.InvariantCulture);
                             dateBirth.SelectedDate = date;
@@ -140,13 +141,39 @@ namespace WpfVcardEditor
                         MessageBoxImage.Error);
                 }
             }
-
-
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            if (txtBoxChanged)
+            {
+                MessageBoxResult result = MessageBox.Show("Weet je zeker dat je de naam wil wijzigen?", "Naam wijzigen", MessageBoxButton.OKCancel);
+                if (result == MessageBoxResult.Cancel)
+                {
+                    txtBoxChanged = false;
+                }
+            }
+            else
+            {
+                if (txtName.Text != " " && txtAchternaam.Text != "" && txtEmail.Text != "" && txtTelefoon.Text != ""
+    && (rbMan.IsEnabled == true || rbVrouw.IsEnabled == true || rbOnbekend.IsEnabled == true) && dateBirth.SelectedDate != null)
+                {
+                    MessageBox.Show("Bestand is opgeslagen");
+                    txtName.Text = "";
+                    txtAchternaam.Text = "";
+                    txtEmail.Text = "";
+                    txtTelefoon.Text = "";
+                    rbMan.IsChecked = false;
+                    rbVrouw.IsChecked = false;
+                    rbOnbekend.IsChecked = false;
+                    dateBirth.SelectedDate = null;
+                }
+            }
+        }
 
+        private void Card_Changed(object sender, TextChangedEventArgs e)
+        {
+            txtBoxChanged = true;
         }
     }
 }
