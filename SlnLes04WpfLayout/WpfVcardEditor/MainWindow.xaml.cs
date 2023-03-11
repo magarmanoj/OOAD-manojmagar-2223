@@ -73,18 +73,7 @@ namespace WpfVcardEditor
                         // can be in methode
                         if (line.StartsWith("GENDER"))
                         {
-                            if (line.Contains("M"))
-                            {
-                                rbMan.IsChecked = true;
-                            }
-                            else if (line.Contains("F"))
-                            {
-                                rbVrouw.IsChecked = true;
-                            }
-                            else
-                            {
-                                rbOnbekend.IsChecked = true;
-                            }
+                            Geslacht(line);
                         }
                         else if (line.StartsWith("EMAIL") && line.Contains("type=HOME"))
                         {
@@ -106,34 +95,8 @@ namespace WpfVcardEditor
                         {
                             txtTelefoon.Text = line.Substring(20);
                         }
-                        else if (line.StartsWith("TEL") && line.Contains("TYPE=WORK"))
-                        {
-                            txtWerkT.Text = line.Substring(20);
-                        }
-                        else if (line.StartsWith("ROLE"))
-                        {
-                            txtJobtitel.Text = line.Substring(19);
-                        }
-                        else if (line.StartsWith("ORG"))
-                        {
-                            txtBedrijf.Text = line.Substring(18);
-                        }
-                        else if (line.Contains("TYPE=facebook"))
-                        {
-                            txtFacebook.Text = line.Substring(30);
-                        }
-                        else if (line.Contains("TYPE=linkedin"))
-                        {
-                            txtLinkedin.Text = line.Substring(30);
-                        }
-                        else if (line.Contains("TYPE=youtube"))
-                        {
-                            txtYoutube.Text = line.Substring(29);
-                        }
-                        else if (line.Contains("TYPE=instagram"))
-                        {
-                            txtInsta.Text = line.Substring(31);
-                        }
+                        Work(line);
+                        Social(line);          
                     }
                 }
                 catch (FileNotFoundException ex)
@@ -144,6 +107,58 @@ namespace WpfVcardEditor
                         MessageBoxButton.OK, // buttons
                         MessageBoxImage.Error);
                 }
+            }
+        }
+
+        private void Geslacht(string line)
+        {
+            if (line.Contains("M"))
+            {
+                rbMan.IsChecked = true;
+            }
+            else if (line.Contains("F"))
+            {
+                rbVrouw.IsChecked = true;
+            }
+            else
+            {
+                rbOnbekend.IsChecked = true;
+            }
+        }
+
+        private void Social(string line)
+        {
+            if (line.Contains("TYPE=facebook"))
+            {
+                txtFacebook.Text = line.Substring(30);
+            }
+            else if (line.Contains("TYPE=linkedin"))
+            {
+                txtLinkedin.Text = line.Substring(30);
+            }
+            else if (line.Contains("TYPE=youtube"))
+            {
+                txtYoutube.Text = line.Substring(29);
+            }
+            else if (line.Contains("TYPE=instagram"))
+            {
+                txtInsta.Text = line.Substring(31);
+            }
+        }
+
+        private void Work(string line)
+        {
+            if (line.StartsWith("TEL") && line.Contains("TYPE=WORK"))
+            {
+                txtWerkT.Text = line.Substring(20);
+            }
+            else if (line.StartsWith("ROLE"))
+            {
+                txtJobtitel.Text = line.Substring(19);
+            }
+            else if (line.StartsWith("ORG"))
+            {
+                txtBedrijf.Text = line.Substring(18);
             }
         }
 
