@@ -1,7 +1,12 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Shapes;
 
 namespace WpfVcardEditor
 {
@@ -45,30 +50,85 @@ namespace WpfVcardEditor
             {
                 // user picked a file and pressed OK
                 chosenFileName = dialog.FileName;
+                save.IsEnabled = true;
 
                 try
                 {
                     string[] lines = File.ReadAllLines(chosenFileName);
-                    //string[] lines = txtContent.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+
+                    // string[] lines = txtContent.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (string line in lines)
                     {
+                        string[] words = line.Split(':', ';');
                         if (line.StartsWith("N"))
                         {
-                            string[] words = line.Split(':', ';');
                             string naam = words[3];
                             string achternaam = words[2];
                             txtAchternaam.Text = achternaam;
                             txtName.Text = naam;
-                        } 
-                        else if (line.StartsWith("EMAIL"))
+                        }
+                        if (line.StartsWith("GENDER"))
+                        {
+                            if (line.Contains("M"))
+                            {
+                                rbMan.IsChecked = true;
+                            }
+                            else if (line.Contains("F"))
+                            {
+                                rbVrouw.IsChecked = true;
+                            }
+                            else
+                            {
+                                rbOnbekend.IsChecked = true;
+                            }
+                        }
+                        else if (line.StartsWith("EMAIL") && line.Contains("type=HOME"))
                         {
                             txtEmail.Text = line.Substring(39);
                         }
+                        else if (line.StartsWith("EMAIL") && line.Contains("type=WORK"))
+                        {
+                            txtWerkE.Text = line.Substring(39);
+                        }
                         else if (line.StartsWith("BDAY"))
                         {
-                            dateBirth.SelectedDate = line.Substring(1);
+                            string dateString = words[1];
+                            // https://learn.microsoft.com/en-us/dotnet/api/system.datetime.parseexact?view=net-7.0#system-datetime-parseexact(system-string-system-string-system-iformatprovider) 
+                            DateTime date = DateTime.ParseExact(dateString, "yyyyMMdd", CultureInfo.InvariantCulture);
+                            dateBirth.SelectedDate = date;
                         }
-
+                        else if (line.StartsWith("TEL") && line.Contains("TYPE=HOME"))
+                        {
+                            txtTelefoon.Text = line.Substring(21);
+                        }
+                        else if (line.StartsWith("TEL") && line.Contains("TYPE=WORK"))
+                        {
+                            txtWerkT.Text = line.Substring(21);
+                        }
+                        else if (line.StartsWith("ROLE"))
+                        {
+                            txtJobtitel.Text = line.Substring(19);
+                        }
+                        else if (line.StartsWith("ORG"))
+                        {
+                            txtBedrijf.Text = line.Substring(18);
+                        }
+                        else if (line.Contains("TYPE=facebook"))
+                        {
+                            txtFacebook.Text = line.Substring(30);
+                        }
+                        else if (line.Contains("TYPE=linkedin"))
+                        {
+                            txtLinkedin.Text = line.Substring(30);
+                        }
+                        else if (line.Contains("TYPE=youtube"))
+                        {
+                            txtYoutube.Text = line.Substring(29);
+                        }
+                        else if (line.Contains("TYPE=instagram"))
+                        {
+                            txtInsta.Text = line.Substring(31);
+                        }
                     }
                 }
                 catch (FileNotFoundException ex)
@@ -80,6 +140,13 @@ namespace WpfVcardEditor
                         MessageBoxImage.Error);
                 }
             }
+
+
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
