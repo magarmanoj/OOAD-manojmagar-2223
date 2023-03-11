@@ -67,6 +67,8 @@ namespace WpfVcardEditor
                             txtAchternaam.Text = achternaam;
                             txtName.Text = naam;
                         }
+
+                        // can be in methode
                         if (line.StartsWith("GENDER"))
                         {
                             if (line.Contains("M"))
