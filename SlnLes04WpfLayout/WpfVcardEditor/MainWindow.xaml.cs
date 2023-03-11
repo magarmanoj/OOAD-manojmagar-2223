@@ -48,22 +48,28 @@ namespace WpfVcardEditor
 
                 try
                 {
-                    string txtContent = File.ReadAllText(chosenFileName);
-                    string[] lines = txtContent.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] lines = File.ReadAllLines(chosenFileName);
+                    //string[] lines = txtContent.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (string line in lines)
                     {
-                        if (line.Contains("FN") && !line.Contains("PHOTO"))
+                        if (line.StartsWith("N"))
                         {
-                            string[] words = line.Split(':');
-                            txtName.Text = words[1];
-                        } else if (line.Contains("N"))
+                            string[] words = line.Split(':', ';');
+                            string naam = words[3];
+                            string achternaam = words[2];
+                            txtAchternaam.Text = achternaam;
+                            txtName.Text = naam;
+                        } 
+                        else if (line.StartsWith("EMAIL"))
                         {
-                            string[] words = line.Split(':');
-                            txtAchternaam.Text = words[1];
+                            txtEmail.Text = line.Substring(39);
                         }
+                        else if (line.StartsWith("BDAY"))
+                        {
+                            dateBirth.SelectedDate = line.Substring(1);
+                        }
+
                     }
-
-
                 }
                 catch (FileNotFoundException ex)
                 {
@@ -75,6 +81,5 @@ namespace WpfVcardEditor
                 }
             }
         }
-
     }
 }
