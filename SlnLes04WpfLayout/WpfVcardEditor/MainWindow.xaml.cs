@@ -164,14 +164,7 @@ namespace WpfVcardEditor
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            if (txtBoxChanged == true)
-            {
-                MessageBoxResult result = MessageBox.Show("Weet je zeker dat je de naam wil wijzigen?", "Naam wijzigen", MessageBoxButton.OKCancel);
-                if (result == MessageBoxResult.Cancel)
-                {
-                    txtBoxChanged = false;
-                }
-            }
+            
             using (StreamWriter sw = new StreamWriter(chosenFileName))
             {
                 if (txtName.Text != " " && txtAchternaam.Text != "" && txtEmail.Text != "" && txtTelefoon.Text != ""
@@ -185,7 +178,7 @@ namespace WpfVcardEditor
                     sw.WriteLine("GENDER:M");
                     sw.WriteLine("GENDER:F");
                     sw.WriteLine("GENDER:O");
-                    sw.WriteLine($"BDAY:{dateBirth}");
+                    sw.WriteLine($"BDAY:{dateBirth.SelectedDate}");
                     sw.WriteLine($"EMAIL;CHARSET=UTF-8;type=HOME,INTERNET:{txtEmail.Text}");
                     sw.WriteLine($"TEL;TYPE=HOME,VOICE:{txtTelefoon.Text}");
                     sw.WriteLine("END:VCARD"); 
@@ -209,6 +202,18 @@ namespace WpfVcardEditor
             string txtSource;
             txtSource = File.ReadAllText(chosenFileName);
             File.WriteAllText(dialog.FileName, txtSource);
+        }
+
+        private void New_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtBoxChanged == true)
+            {
+                MessageBoxResult result = MessageBox.Show("Weet je zeker dat je de naam wil wijzigen?", "Naam wijzigen", MessageBoxButton.OKCancel);
+                if (result == MessageBoxResult.Cancel)
+                {
+                    txtBoxChanged = false;
+                }
+            }
         }
     }
 }
