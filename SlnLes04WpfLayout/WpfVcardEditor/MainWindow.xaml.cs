@@ -62,7 +62,7 @@ namespace WpfVcardEditor
                     foreach (string line in lines)
                     {
                         string[] words = line.Split(':', ';');
-                        if (line.StartsWith("N"))
+                        if (line.StartsWith("N;"))
                         {
                             string naam = words[3];
                             string achternaam = words[2];
@@ -71,7 +71,7 @@ namespace WpfVcardEditor
                         }
 
                         // can be in methode
-                        if (line.StartsWith("GENDER"))
+                        else if (line.StartsWith("GENDER"))
                         {
                             Geslacht(line);
                         }
@@ -172,19 +172,25 @@ namespace WpfVcardEditor
                     txtBoxChanged = false;
                 }
             }
-            if (txtName.Text != " " && txtAchternaam.Text != "" && txtEmail.Text != "" && txtTelefoon.Text != ""
-&& (rbMan.IsEnabled == true || rbVrouw.IsEnabled == true || rbOnbekend.IsEnabled == true) && dateBirth.SelectedDate != null)
+            using (StreamWriter sw = new StreamWriter(chosenFileName))
             {
-                MessageBox.Show("Bestand is opgeslagen");
-
-                txtName.Text = "";
-                txtAchternaam.Text = "";
-                txtEmail.Text = "";
-                txtTelefoon.Text = "";
-                rbMan.IsChecked = false;
-                rbVrouw.IsChecked = false;
-                rbOnbekend.IsChecked = false;
-                dateBirth.SelectedDate = null;
+                if (txtName.Text != " " && txtAchternaam.Text != "" && txtEmail.Text != "" && txtTelefoon.Text != ""
+&& (rbMan.IsEnabled == true || rbVrouw.IsEnabled == true || rbOnbekend.IsEnabled == true) && dateBirth.SelectedDate != null && txtEmail.Text != "" && txtTelefoon.Text != "")
+                {                  
+                    sw.WriteLine($"BEGIN:VCARD");
+                    sw.WriteLine($"VERSION:3.0");
+                    sw.WriteLine($"FN;CHARSET=UTF-8:{txtName.Text} {txtAchternaam.Text}");
+                    sw.WriteLine($"N;CHARSET=UTF-8:{txtAchternaam.Text};{txtName.Text};;;");
+                    sw.WriteLine($"NICKNAME;CHARSET=UTF-8:{txtName.Text}");
+                    sw.WriteLine("GENDER:M");
+                    sw.WriteLine("GENDER:F");
+                    sw.WriteLine("GENDER:O");
+                    sw.WriteLine($"BDAY:{dateBirth}");
+                    sw.WriteLine($"EMAIL;CHARSET=UTF-8;type=HOME,INTERNET:{txtEmail.Text}");
+                    sw.WriteLine($"TEL;TYPE=HOME,VOICE:{txtTelefoon.Text}");
+                    sw.WriteLine("END:VCARD"); 
+                    MessageBox.Show("Bestand is opgeslagen");
+                }
             }
         }
 
