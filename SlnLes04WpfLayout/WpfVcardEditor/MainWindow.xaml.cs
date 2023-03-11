@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.TextFormatting;
 using System.Windows.Shapes;
 
 namespace WpfVcardEditor
@@ -17,6 +18,7 @@ namespace WpfVcardEditor
     {
         string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         bool txtBoxChanged = false;
+        string chosenFileName = null;
         public MainWindow()
         {
             InitializeComponent();
@@ -43,8 +45,7 @@ namespace WpfVcardEditor
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            dialog.Filter = "VCFBestand|*.VCF";
-            string chosenFileName;
+            dialog.Filter = "VCFBestand|*.VCF";    
             bool? dialogResult = dialog.ShowDialog();
             if (dialogResult == true)
             {
@@ -54,6 +55,7 @@ namespace WpfVcardEditor
 
                 try
                 {
+                    // probeer dictonary 
                     string[] lines = File.ReadAllLines(chosenFileName);
 
                     // string[] lines = txtContent.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
@@ -102,11 +104,11 @@ namespace WpfVcardEditor
                         }
                         else if (line.StartsWith("TEL") && line.Contains("TYPE=HOME"))
                         {
-                            txtTelefoon.Text = line.Substring(21);
+                            txtTelefoon.Text = line.Substring(20);
                         }
                         else if (line.StartsWith("TEL") && line.Contains("TYPE=WORK"))
                         {
-                            txtWerkT.Text = line.Substring(21);
+                            txtWerkT.Text = line.Substring(20);
                         }
                         else if (line.StartsWith("ROLE"))
                         {
@@ -147,7 +149,7 @@ namespace WpfVcardEditor
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            if (txtBoxChanged)
+            if (txtBoxChanged == true)
             {
                 MessageBoxResult result = MessageBox.Show("Weet je zeker dat je de naam wil wijzigen?", "Naam wijzigen", MessageBoxButton.OKCancel);
                 if (result == MessageBoxResult.Cancel)
@@ -155,27 +157,37 @@ namespace WpfVcardEditor
                     txtBoxChanged = false;
                 }
             }
-            else
+            if (txtName.Text != " " && txtAchternaam.Text != "" && txtEmail.Text != "" && txtTelefoon.Text != ""
+&& (rbMan.IsEnabled == true || rbVrouw.IsEnabled == true || rbOnbekend.IsEnabled == true) && dateBirth.SelectedDate != null)
             {
-                if (txtName.Text != " " && txtAchternaam.Text != "" && txtEmail.Text != "" && txtTelefoon.Text != ""
-    && (rbMan.IsEnabled == true || rbVrouw.IsEnabled == true || rbOnbekend.IsEnabled == true) && dateBirth.SelectedDate != null)
-                {
-                    MessageBox.Show("Bestand is opgeslagen");
-                    txtName.Text = "";
-                    txtAchternaam.Text = "";
-                    txtEmail.Text = "";
-                    txtTelefoon.Text = "";
-                    rbMan.IsChecked = false;
-                    rbVrouw.IsChecked = false;
-                    rbOnbekend.IsChecked = false;
-                    dateBirth.SelectedDate = null;
-                }
+                MessageBox.Show("Bestand is opgeslagen");
+
+                txtName.Text = "";
+                txtAchternaam.Text = "";
+                txtEmail.Text = "";
+                txtTelefoon.Text = "";
+                rbMan.IsChecked = false;
+                rbVrouw.IsChecked = false;
+                rbOnbekend.IsChecked = false;
+                dateBirth.SelectedDate = null;
             }
         }
 
-        private void Card_Changed(object sender, TextChangedEventArgs e)
+        private void Card_Changed(object sender, RoutedEventArgs e)
         {
             txtBoxChanged = true;
+        }
+
+        private void SaveAs_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            dialog.Filter = "VCFBestand|*.VCF";
+            dialog.FileName = "Save a vcf file";
+            if (dialog.ShowDialog() != true) return;
+            string txtSource;
+            txtSource = File.ReadAllText(chosenFileName);
+            File.WriteAllText(dialog.FileName, txtSource);
         }
     }
 }

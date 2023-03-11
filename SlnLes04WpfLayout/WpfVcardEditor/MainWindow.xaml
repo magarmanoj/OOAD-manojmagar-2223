@@ -12,7 +12,7 @@
                 <MenuItem Header="_New"/>
                 <MenuItem Header="_Open" Click="OpenMenuItem_Click"/>
                 <MenuItem Name="save" Header="_Save" IsEnabled="False" Click="Save_Click"/>
-                <MenuItem Header="Save _As..."/>
+                <MenuItem Header="Save _As..." Click="SaveAs_Click"/>
                 <Separator/>
                 <MenuItem Header="E_xit" Click="ExitMenuItem_Click" Name="exitMenuItem"/>
             </MenuItem>
@@ -46,9 +46,9 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Label Name="lblNaam" >Voornaam:</Label>
-                    <TextBox Name="txtName" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center" SelectionChanged="Card_Changed"/>
+                    <TextBox Name="txtName" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center" TextChanged="Card_Changed"/>
                     <Label Name="lblachternaam" Grid.Row="1">Achternaam:</Label>
-                    <TextBox Name="txtAchternaam" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center" SelectionChanged="Card_Changed"/>
+                    <TextBox Name="txtAchternaam" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center" TextChanged="Card_Changed"/>
                     <Label Name="lblGebDate" Grid.Row="2">Geboortedatum:</Label>
                     <DatePicker Name="dateBirth" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" Width="100" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
                     <Label Name="lblGeslacht" Grid.Row="3">Geslacht:</Label>
@@ -58,9 +58,9 @@
                         <RadioButton Name="rbOnbekend" Content="Onbekend" GroupName="Gender" Grid.Column="2" VerticalAlignment="Center" />
                     </StackPanel>
                     <Label Name="lblEmail" Grid.Row="4">Privé email:</Label>
-                    <TextBox Name="txtEmail" Grid.Row="4" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center" SelectionChanged="Card_Changed"/>
+                    <TextBox Name="txtEmail" Grid.Row="4" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center" TextChanged="Card_Changed"/>
                     <Label Name="lblTelefoon" Grid.Row="5">Privé telefoon:</Label>
-                    <TextBox Name="txtTelefoon" Grid.Row="5" Grid.Column="1" Margin="0,5,0,10" Width="250" HorizontalAlignment="Left" VerticalContentAlignment="Center" SelectionChanged="Card_Changed"/>
+                    <TextBox Name="txtTelefoon" Grid.Row="5" Grid.Column="1" Margin="0,5,0,10" Width="250" HorizontalAlignment="Left" VerticalContentAlignment="Center" TextChanged="Card_Changed"/>
                     <Label Name="lblFoto" Grid.Row="6">foto:</Label>
                     <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal">
                         <Button x:Name="btnSelecteer" Content="SELECTEER" VerticalContentAlignment="Center"/>
