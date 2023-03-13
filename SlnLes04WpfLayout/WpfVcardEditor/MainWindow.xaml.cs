@@ -192,7 +192,6 @@ namespace WpfVcardEditor
                     {
                         sw.WriteLine("GENDER:O");
                     }
-
                     sw.WriteLine("END:VCARD");
                 }
             }
