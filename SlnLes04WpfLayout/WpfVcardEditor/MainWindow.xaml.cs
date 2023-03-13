@@ -259,9 +259,7 @@ namespace WpfVcardEditor
             txtName.Text = "";
             txtAchternaam.Text = "";
             dateBirth.SelectedDate = null;
-            rbMan.IsChecked = false;
-            rbVrouw.IsChecked = false;
-            rbOnbekend.IsChecked = false;
+            rbMan.IsChecked = rbVrouw.IsChecked = rbOnbekend.IsChecked = false;
             txtEmail.Text = "";
             txtTelefoon.Text = "";
             txtWerkT.Text = "";
