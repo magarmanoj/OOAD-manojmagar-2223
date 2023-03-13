@@ -23,5 +23,4 @@
         </StackPanel>
         <Button Name="btnSluiten" Content="SLUITEN" Margin="0,20,0,0" Click="Sluiten_Click" Height="30" Width="80" HorizontalAlignment="Center"/>
     </StackPanel>
-
 </Window>
