@@ -136,6 +136,7 @@ namespace WpfVcardEditor
                 }
             }
         }
+
         // Gender 
         private void Geslacht(string line)
         {
@@ -155,55 +156,69 @@ namespace WpfVcardEditor
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            {
+                dict.Add("FN;CHARSET=UTF-8:", $"{txtName.Text} {txtAchternaam.Text}");
+                dict.Add("N;CHARSET=UTF-8:", $"{txtAchternaam.Text};{txtName.Text};;;;");
+                dict.Add("EMAIL;CHARSET=UTF-8;type=HOME,INTERNET:", txtEmail.Text);
+                dict.Add("EMAIL;CHARSET=UTF-8;type=WORK,INTERNET:", txtWerkE.Text);
+
+                dict.Add("TEL;TYPE=HOME,VOICE:",txtTelefoon.Text);
+                dict.Add("TEL;TYPE=WORK,VOICE:", txtWerkT.Text);
+
+                dict.Add("ROLE;CHARSET=UTF-8:", txtJobtitel.Text);
+                dict.Add("ORG;CHARSET=UTF-8:", txtBedrijf.Text);
+
+                dict.Add("X-SOCIALPROFILE;TYPE=facebook:", txtEmail.Text);
+                dict.Add("X-SOCIALPROFILE;TYPE=twitter:", txtEmail.Text);
+                dict.Add("X-SOCIALPROFILE;TYPE=linkedin:", txtEmail.Text);
+                dict.Add("X-SOCIALPROFILE;TYPE=instagram:", txtEmail.Text);
+                dict.Add("X-SOCIALPROFILE;TYPE=youtube:", txtEmail.Text);
+            }
+
             using (StreamWriter sw = new StreamWriter(chosenFileName))
             {
-                if (txtName.Text != " " && txtAchternaam.Text != "" && txtEmail.Text != "" && txtTelefoon.Text != ""
-&& (rbMan.IsEnabled == true || rbVrouw.IsEnabled == true || rbOnbekend.IsEnabled == true) && dateBirth.SelectedDate != null && txtEmail.Text != "" && txtTelefoon.Text != "")
-                {                  
-                    sw.WriteLine($"BEGIN:VCARD");
-                    sw.WriteLine($"VERSION:3.0");
-                    sw.WriteLine($"FN;CHARSET=UTF-8:{txtName.Text} {txtAchternaam.Text}");
-                    sw.WriteLine($"N;CHARSET=UTF-8:{txtAchternaam.Text};{txtName.Text};;;");
-                    sw.WriteLine($"NICKNAME;CHARSET=UTF-8:{txtName.Text}");
-                    sw.WriteLine("GENDER:M");
-                    sw.WriteLine("GENDER:F");
-                    sw.WriteLine("GENDER:O");
-                    sw.WriteLine($"BDAY:{dateBirth.SelectedDate}");
-                    sw.WriteLine($"EMAIL;CHARSET=UTF-8;type=HOME,INTERNET:{txtEmail.Text}");
-                    sw.WriteLine($"TEL;TYPE=HOME,VOICE:{txtTelefoon.Text}");
-                    sw.WriteLine("END:VCARD"); 
-                    MessageBox.Show("Bestand is opgeslagen");
+                sw.WriteLine("BEGIN:VCARD");
+                sw.WriteLine("VERSION:3.0");
+                foreach (KeyValuePair<string, string> change in dict)
+                {
+                    if (!string.IsNullOrEmpty(change.Key))
+                    {
+                        sw.WriteLine($"{change.Key}{change.Value}");
+                    }
                 }
+                sw.WriteLine("END:VCARD");
             }
         }
 
-        private void Card_Changed(object sender, RoutedEventArgs e)
-        {
-            txtBoxChanged = true;
-        }
+        //private void Card_Changed(object sender, RoutedEventArgs e)
+        //{
+        //    txtBoxChanged = true;
+        //}
 
         private void SaveAs_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            dialog.Filter = "VCFBestand|*.VCF";
-            dialog.FileName = "Save a vcf file";
+            dialog.Filter = "vCard files (*.vcf)|*.vcf|All files (*.*)|*.*";
+            dialog.FileName = "savedfile.txt";
             if (dialog.ShowDialog() != true) return;
-            string txtSource;
-            txtSource = File.ReadAllText(chosenFileName);
-            File.WriteAllText(dialog.FileName, txtSource);
+            string[] txtSource;
+            chosenFileName = dialog.FileName;
+            txtSource = File.ReadAllLines(chosenFileName);
+            File.WriteAllText(chosenFileName, txtSource.ToString());
         }
 
-        private void New_Click(object sender, RoutedEventArgs e)
-        {
-            if (txtBoxChanged == true)
-            {
-                MessageBoxResult result = MessageBox.Show("Weet je zeker dat je de naam wil wijzigen?", "Naam wijzigen", MessageBoxButton.OKCancel);
-                if (result == MessageBoxResult.Cancel)
-                {
-                    txtBoxChanged = false;
-                }
-            }
-        }
+        //private void New_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (txtBoxChanged == true)
+        //    {
+        //        MessageBoxResult result = MessageBox.Show("Weet je zeker dat je de naam wil wijzigen?", "Naam wijzigen", MessageBoxButton.OKCancel);
+        //        if (result == MessageBoxResult.Cancel)
+        //        {
+        //            txtBoxChanged = false;
+        //        }
+        //    }
+        //}
     }
 }
