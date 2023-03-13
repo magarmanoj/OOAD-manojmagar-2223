@@ -61,7 +61,6 @@ namespace WpfVcardEditor
                 // user picked a file and pressed OK
                 chosenFileName = dialog.FileName;
                 
-
                 try
                 {
                     // dictonary https://www.tutorialsteacher.com/csharp/csharp-dictionary 
@@ -249,7 +248,7 @@ namespace WpfVcardEditor
                 {
                     return;
                 }
-                Save_Click(sender,e);
+                Save_Click(sender, e);
             }
             txtName.Text = "";
             txtAchternaam.Text = "";
