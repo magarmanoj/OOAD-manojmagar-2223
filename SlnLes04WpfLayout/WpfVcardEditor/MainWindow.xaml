@@ -87,13 +87,13 @@
                         <RowDefinition Height="45" />
                     </Grid.RowDefinitions>
                     <Label Name="lblBedrijf">Bedrijf:</Label>
-                    <TextBox Name="txtBedrijf" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center"/>
+                    <TextBox Name="txtBedrijf" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center" TextChanged="Card_Changed"/>
                     <Label Name="lblTitel" Grid.Row="1">Jobtitel:</Label>
-                    <TextBox Name="txtJobtitel" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center"/>
+                    <TextBox Name="txtJobtitel" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center" TextChanged="Card_Changed"/>
                     <Label Name="lblWemail" Grid.Row="2">Werk email:</Label>
-                    <TextBox Name="txtWerkE" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center"/>
+                    <TextBox Name="txtWerkE" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center" TextChanged="Card_Changed"/>
                     <Label Name="lblWtelefoon" Grid.Row="3">Werk telefoon:</Label>
-                    <TextBox Name="txtWerkT" Grid.Row="3" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center"/>
+                    <TextBox Name="txtWerkT" Grid.Row="3" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center" TextChanged="Card_Changed"/>
                 </Grid>
             </TabItem>
 
@@ -111,13 +111,13 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Label Name="lblLinkedin" >Linkedin:</Label>
-                    <TextBox Name="txtLinkedin" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center"/>
+                    <TextBox Name="txtLinkedin" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center" TextChanged="Card_Changed"/>
                     <Label Name="lblFacebook" Grid.Row="1">Facebook:</Label>
-                    <TextBox Name="txtFacebook" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center"/>
+                    <TextBox Name="txtFacebook" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center" TextChanged="Card_Changed"/>
                     <Label Name="lblInstagram" Grid.Row="2">Instagram:</Label>
-                    <TextBox Name="txtInsta" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center" />
+                    <TextBox Name="txtInsta" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center" TextChanged="Card_Changed" />
                     <Label Name="lblYoutube" Grid.Row="3">Youtube:</Label>
-                    <TextBox Name="txtYoutube" Grid.Row="3" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center" />
+                    <TextBox Name="txtYoutube" Grid.Row="3" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center" TextChanged="Card_Changed"/>
                 </Grid>
             </TabItem>
         </TabControl>

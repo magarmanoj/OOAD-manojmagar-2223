@@ -2,13 +2,8 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.IO.Ports;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.TextFormatting;
-using System.Windows.Shapes;
-using System.Xml.XPath;
 using Microsoft.Win32;
 
 namespace WpfVcardEditor
@@ -54,7 +49,7 @@ namespace WpfVcardEditor
             string workTPrefix = "TEL;TYPE=WORK,VOICE:";
             string telefoonPrefix = "TEL;TYPE=HOME,VOICE:";
             string bedrijfPrefix = "ORG;CHARSET=UTF-8:";
-            string titlePrefix = "ROLE;CHARSET=UTF-8:";
+            string titlePrefix = "TITLE;CHARSET=UTF-8:";
             string facebookPrefix = "X-SOCIALPROFILE;TYPE=facebook:";
             string linkedinPrefix = "X-SOCIALPROFILE;TYPE=linkedin:";
             string instagramPrefix = "X-SOCIALPROFILE;TYPE=instagram:";
@@ -65,7 +60,7 @@ namespace WpfVcardEditor
             {
                 // user picked a file and pressed OK
                 chosenFileName = dialog.FileName;
-                save.IsEnabled = true;
+                
 
                 try
                 {
@@ -134,6 +129,7 @@ namespace WpfVcardEditor
                         MessageBoxButton.OK, // buttons
                         MessageBoxImage.Error);
                 }
+                save.IsEnabled = true;
             }
         }
 
@@ -169,11 +165,10 @@ namespace WpfVcardEditor
                 dict.Add("ROLE;CHARSET=UTF-8:", txtJobtitel.Text);
                 dict.Add("ORG;CHARSET=UTF-8:", txtBedrijf.Text);
 
-                dict.Add("X-SOCIALPROFILE;TYPE=facebook:", txtEmail.Text);
-                dict.Add("X-SOCIALPROFILE;TYPE=twitter:", txtEmail.Text);
-                dict.Add("X-SOCIALPROFILE;TYPE=linkedin:", txtEmail.Text);
-                dict.Add("X-SOCIALPROFILE;TYPE=instagram:", txtEmail.Text);
-                dict.Add("X-SOCIALPROFILE;TYPE=youtube:", txtEmail.Text);
+                dict.Add("X-SOCIALPROFILE;TYPE=facebook:", txtFacebook.Text);
+                dict.Add("X-SOCIALPROFILE;TYPE=linkedin:", txtLinkedin.Text);
+                dict.Add("X-SOCIALPROFILE;TYPE=instagram:", txtInsta.Text);
+                dict.Add("X-SOCIALPROFILE;TYPE=youtube:", txtYoutube.Text);
             }
 
             DateTime birthDate;
