@@ -228,7 +228,7 @@ namespace WpfVcardEditor
             dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             dialog.Filter = "vCard files (*.vcf)|*.vcf";
             if (dialog.ShowDialog() != true) return;
-            string[] txtSource = null;          
+            string[] txtSource;          
             try
             { 
                 txtSource = File.ReadAllLines(chosenFileName);             
