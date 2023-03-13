@@ -60,7 +60,7 @@ namespace WpfVcardEditor
             {
                 // user picked a file and pressed OK
                 chosenFileName = dialog.FileName;
-                
+
                 try
                 {
                     // dictonary https://www.tutorialsteacher.com/csharp/csharp-dictionary 
@@ -72,7 +72,7 @@ namespace WpfVcardEditor
                         pair.Add(workTPrefix, txtWerkT);
                         pair.Add(bedrijfPrefix, txtBedrijf);
                         pair.Add(titlePrefix, txtJobtitel);
-                        
+
                         // Persoonlijk
                         pair.Add(emailPrefix, txtEmail);
                         pair.Add(telefoonPrefix, txtTelefoon);
@@ -151,61 +151,48 @@ namespace WpfVcardEditor
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            Dictionary<string, string> dict = new Dictionary<string, string>();
-            {
-                dict.Add("FN;CHARSET=UTF-8:", $"{txtName.Text} {txtAchternaam.Text}");
-                dict.Add("N;CHARSET=UTF-8:", $"{txtAchternaam.Text};{txtName.Text};;;;");
-                dict.Add("EMAIL;CHARSET=UTF-8;type=HOME,INTERNET:", txtEmail.Text);
-                dict.Add("EMAIL;CHARSET=UTF-8;type=WORK,INTERNET:", txtWerkE.Text);
-
-                dict.Add("TEL;TYPE=HOME,VOICE:", txtTelefoon.Text);
-                dict.Add("TEL;TYPE=WORK,VOICE:", txtWerkT.Text);
-
-                dict.Add("ROLE;CHARSET=UTF-8:", txtJobtitel.Text);
-                dict.Add("ORG;CHARSET=UTF-8:", txtBedrijf.Text);
-
-                dict.Add("X-SOCIALPROFILE;TYPE=facebook:", txtFacebook.Text);
-                dict.Add("X-SOCIALPROFILE;TYPE=linkedin:", txtLinkedin.Text);
-                dict.Add("X-SOCIALPROFILE;TYPE=instagram:", txtInsta.Text);
-                dict.Add("X-SOCIALPROFILE;TYPE=youtube:", txtYoutube.Text);
-            }
-
-            DateTime birthDate;
-            string date = null;
-            if (dateBirth.SelectedDate != null)
-            {
-                date = dateBirth.SelectedDate.Value.ToString("yyyyMMdd");
-            }
-            if (!string.IsNullOrEmpty(date) && DateTime.TryParseExact(date, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out birthDate))
-            {
-                dict.Add("BDAY:", $"{birthDate:yyyyMMdd}");
-            }
-            if (rbMan.IsChecked == true)
-            {
-                dict.Add("GENDER:", "M");
-            }
-            else if (rbVrouw.IsChecked == true)
-            {
-                dict.Add("GENDER:", "F");
-            }
-            else if (rbOnbekend.IsChecked == true)
-            {
-                dict.Add("GENDER:", "O");
-            }
-
             try
             {
                 using (StreamWriter sw = new StreamWriter(chosenFileName))
                 {
                     sw.WriteLine("BEGIN:VCARD");
                     sw.WriteLine("VERSION:3.0");
-                    foreach (KeyValuePair<string, string> change in dict)
+                    sw.WriteLine($"FN;CHARSET=UTF-8:{txtName.Text} {txtAchternaam.Text}");
+                    sw.WriteLine($"N;CHARSET=UTF-8:{txtAchternaam.Text};{txtName.Text};;;;");
+                    sw.WriteLine($"EMAIL;CHARSET=UTF-8;type=HOME,INTERNET:{txtEmail.Text}");
+                    sw.WriteLine($"EMAIL;CHARSET=UTF-8;type=WORK,INTERNET:{txtWerkE.Text}");
+                    sw.WriteLine($"TEL;TYPE=HOME,VOICE:{txtTelefoon.Text}");
+                    sw.WriteLine($"TEL;TYPE=WORK,VOICE:{txtWerkT.Text}");
+                    sw.WriteLine($"ROLE;CHARSET=UTF-8:{txtJobtitel.Text}");
+                    sw.WriteLine($"ORG;CHARSET=UTF-8:{txtBedrijf.Text}");
+                    sw.WriteLine($"X-SOCIALPROFILE;TYPE=facebook:{txtFacebook.Text}");
+                    sw.WriteLine($"X-SOCIALPROFILE;TYPE=linkedin:{txtLinkedin.Text}");
+                    sw.WriteLine($"X-SOCIALPROFILE;TYPE=instagram:{txtInsta.Text}");
+                    sw.WriteLine($"X-SOCIALPROFILE;TYPE=youtube:{txtYoutube.Text}");
+
+                    DateTime birthDate;
+                    string date = null;
+                    if (dateBirth.SelectedDate != null)
                     {
-                        if (!string.IsNullOrEmpty(change.Key))
-                        {
-                            sw.WriteLine($"{change.Key}{change.Value}");
-                        }
+                        date = dateBirth.SelectedDate.Value.ToString("yyyyMMdd");
                     }
+                    if (!string.IsNullOrEmpty(date) && DateTime.TryParseExact(date, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out birthDate))
+                    {
+                        sw.WriteLine($"BDAY:{birthDate:yyyyMMdd}");
+                    }
+                    if (rbMan.IsChecked == true)
+                    {
+                        sw.WriteLine("GENDER:M");
+                    }
+                    else if (rbVrouw.IsChecked == true)
+                    {
+                        sw.WriteLine("GENDER:F");
+                    }
+                    else if (rbOnbekend.IsChecked == true)
+                    {
+                        sw.WriteLine("GENDER:O");
+                    }
+
                     sw.WriteLine("END:VCARD");
                 }
             }
@@ -213,7 +200,6 @@ namespace WpfVcardEditor
             {
                 MessageBox.Show($"Fout: Kan doelbestand niet schrijven!{ex.Message}", "Message", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
 
         private void Card_Changed(object sender, RoutedEventArgs e)
@@ -227,15 +213,15 @@ namespace WpfVcardEditor
             dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             dialog.Filter = "vCard files (*.vcf)|*.vcf";
             if (dialog.ShowDialog() != true) return;
-            string[] txtSource;          
+            string[] txtSource;
             try
-            { 
-                txtSource = File.ReadAllLines(chosenFileName);             
+            {
+                txtSource = File.ReadAllLines(chosenFileName);
                 File.WriteAllLines(dialog.FileName, txtSource);
             }
             catch (IOException ex)
             {
-                MessageBox.Show($"Fout: Kan doelbestand niet schrijven!{ex.Message}","Message", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Fout: Kan doelbestand niet schrijven!{ex.Message}", "Message", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
