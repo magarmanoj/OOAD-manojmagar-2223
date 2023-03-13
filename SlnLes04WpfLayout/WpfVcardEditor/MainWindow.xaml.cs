@@ -18,7 +18,7 @@ namespace WpfVcardEditor
     /// </summary>
     public partial class MainWindow : Window
     {
-        string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
         bool txtBoxChanged = false;
         string chosenFileName = null;
         public MainWindow()
@@ -163,7 +163,7 @@ namespace WpfVcardEditor
                 dict.Add("EMAIL;CHARSET=UTF-8;type=HOME,INTERNET:", txtEmail.Text);
                 dict.Add("EMAIL;CHARSET=UTF-8;type=WORK,INTERNET:", txtWerkE.Text);
 
-                dict.Add("TEL;TYPE=HOME,VOICE:",txtTelefoon.Text);
+                dict.Add("TEL;TYPE=HOME,VOICE:", txtTelefoon.Text);
                 dict.Add("TEL;TYPE=WORK,VOICE:", txtWerkT.Text);
 
                 dict.Add("ROLE;CHARSET=UTF-8:", txtJobtitel.Text);
@@ -175,6 +175,30 @@ namespace WpfVcardEditor
                 dict.Add("X-SOCIALPROFILE;TYPE=instagram:", txtEmail.Text);
                 dict.Add("X-SOCIALPROFILE;TYPE=youtube:", txtEmail.Text);
             }
+
+            DateTime birthDate;
+            string date = null;
+            if (dateBirth.SelectedDate != null)
+            {
+                date = dateBirth.SelectedDate.Value.ToString("yyyyMMdd");
+            }
+            if (!string.IsNullOrEmpty(date) && DateTime.TryParseExact(date, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out birthDate))
+            {
+                dict.Add("BDAY:", $"{birthDate:yyyyMMdd}");
+            }
+            if (rbMan.IsChecked == true)
+            {
+                dict.Add("GENDER:", "M");
+            }
+            else if (rbVrouw.IsChecked == true)
+            {
+                dict.Add("GENDER:", "F");
+            }
+            else if (rbOnbekend.IsChecked == true)
+            {
+                dict.Add("GENDER:", "O");
+            }
+
 
             using (StreamWriter sw = new StreamWriter(chosenFileName))
             {
@@ -191,34 +215,57 @@ namespace WpfVcardEditor
             }
         }
 
-        //private void Card_Changed(object sender, RoutedEventArgs e)
-        //{
-        //    txtBoxChanged = true;
-        //}
+        private void Card_Changed(object sender, RoutedEventArgs e)
+        {
+            txtBoxChanged = true;
+        }
 
         private void SaveAs_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            dialog.Filter = "vCard files (*.vcf)|*.vcf|All files (*.*)|*.*";
-            dialog.FileName = "savedfile.txt";
+            dialog.Filter = "vCard files (*.vcf)|*.vcf";
             if (dialog.ShowDialog() != true) return;
-            string[] txtSource;
-            chosenFileName = dialog.FileName;
+            string[] txtSource;          
             txtSource = File.ReadAllLines(chosenFileName);
-            File.WriteAllText(chosenFileName, txtSource.ToString());
+            try
+            {              
+                File.WriteAllLines(dialog.FileName, txtSource);
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show($"Fout: Bron kan niet gelezen worden!{ex.Message}","Message", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
-        //private void New_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (txtBoxChanged == true)
-        //    {
-        //        MessageBoxResult result = MessageBox.Show("Weet je zeker dat je de naam wil wijzigen?", "Naam wijzigen", MessageBoxButton.OKCancel);
-        //        if (result == MessageBoxResult.Cancel)
-        //        {
-        //            txtBoxChanged = false;
-        //        }
-        //    }
-        //}
+        private void New_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtBoxChanged == true)
+            {
+                MessageBoxResult result = MessageBox.Show("Er zijn onopgeslagen wijzigingen. Wilt u het opslagen en door gaan?", "Waarschuwing", MessageBoxButton.OKCancel);
+                if (result == MessageBoxResult.Cancel)
+                {
+                    return;
+                }
+                Save_Click(sender,e);
+            }
+            txtName.Text = "";
+            txtAchternaam.Text = "";
+            dateBirth.SelectedDate = null;
+            rbMan.IsChecked = false;
+            rbVrouw.IsChecked = false;
+            rbOnbekend.IsChecked = false;
+            txtEmail.Text = "";
+            txtTelefoon.Text = "";
+            txtWerkT.Text = "";
+            txtBedrijf.Text = "";
+            txtJobtitel.Text = "";
+            txtWerkE.Text = "";
+            txtFacebook.Text = "";
+            txtInsta.Text = "";
+            txtLinkedin.Text = "";
+            txtYoutube.Text = "";
+            txtBoxChanged = false;
+        }
     }
 }
