@@ -23,30 +23,4 @@
         </StackPanel>
         <Button Name="btnSluiten" Content="SLUITEN" Margin="0,20,0,0" Click="Sluiten_Click" Height="30" Width="80" HorizontalAlignment="Center"/>
     </StackPanel>
-
-<<<<<<< HEAD
-    <Grid Margin="5" VerticalAlignment="Center">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Image Source="images/odisee.jpg" Width="350" Height="150" Grid.Row="0" Grid.ColumnSpan="2"/>
-        <TextBlock Text="Gemaakt door:"  FontSize="15" FontWeight="Bold" Margin="50,20,0,10" Grid.Row="1" Grid.Column="0"/>
-        <TextBlock Text="Rogier van der Linde" FontSize="15" FontWeight="Normal" Margin="5,20,0,10" Grid.Row="1" Grid.Column="1"/>
-        <TextBlock Text="Vak:" FontSize="15" FontWeight="Bold" Margin="50,0,0,5" Grid.Row="2" Grid.Column="0"/>
-        <TextBlock Text="OO Application Development" FontSize="15" FontWeight="Normal" Margin="90,0,0, 0" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
-        <TextBlock Text="Academiejaar:" FontSize="15" FontWeight="Bold" Margin="50,0,0,5" Grid.Row="3" Grid.Column="0"/>
-        <TextBlock Text="2022-2023" FontSize="15" FontWeight="Normal" Margin="0,0,0,5" Grid.Row="3" Grid.Column="1"/>
-        <Button Content="SLUITEN" Margin="0,20,0,0" Click="Sluiten_Click" Height="30" Width="80" HorizontalAlignment="Center" Grid.Row="4" Grid.ColumnSpan="2"/>
-    </Grid>
-=======
->>>>>>> 8723faa72282a3d155fd5e4f0a86ad85e2d90320
 </Window>
