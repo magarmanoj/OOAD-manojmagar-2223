@@ -199,20 +199,27 @@ namespace WpfVcardEditor
                 dict.Add("GENDER:", "O");
             }
 
-
-            using (StreamWriter sw = new StreamWriter(chosenFileName))
+            try
             {
-                sw.WriteLine("BEGIN:VCARD");
-                sw.WriteLine("VERSION:3.0");
-                foreach (KeyValuePair<string, string> change in dict)
+                using (StreamWriter sw = new StreamWriter(chosenFileName))
                 {
-                    if (!string.IsNullOrEmpty(change.Key))
+                    sw.WriteLine("BEGIN:VCARD");
+                    sw.WriteLine("VERSION:3.0");
+                    foreach (KeyValuePair<string, string> change in dict)
                     {
-                        sw.WriteLine($"{change.Key}{change.Value}");
+                        if (!string.IsNullOrEmpty(change.Key))
+                        {
+                            sw.WriteLine($"{change.Key}{change.Value}");
+                        }
                     }
+                    sw.WriteLine("END:VCARD");
                 }
-                sw.WriteLine("END:VCARD");
             }
+            catch (IOException ex)
+            {
+                MessageBox.Show($"Fout: Kan doelbestand niet schrijven!{ex.Message}", "Message", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
 
         private void Card_Changed(object sender, RoutedEventArgs e)
@@ -226,15 +233,15 @@ namespace WpfVcardEditor
             dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             dialog.Filter = "vCard files (*.vcf)|*.vcf";
             if (dialog.ShowDialog() != true) return;
-            string[] txtSource;          
-            txtSource = File.ReadAllLines(chosenFileName);
+            string[] txtSource = null;          
             try
-            {              
+            { 
+                txtSource = File.ReadAllLines(chosenFileName);             
                 File.WriteAllLines(dialog.FileName, txtSource);
             }
             catch (IOException ex)
             {
-                MessageBox.Show($"Fout: Bron kan niet gelezen worden!{ex.Message}","Message", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Fout: Kan doelbestand niet schrijven!{ex.Message}","Message", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -242,7 +249,7 @@ namespace WpfVcardEditor
         {
             if (txtBoxChanged == true)
             {
-                MessageBoxResult result = MessageBox.Show("Er zijn onopgeslagen wijzigingen. Wilt u het opslagen en door gaan?", "Waarschuwing", MessageBoxButton.OKCancel);
+                MessageBoxResult result = MessageBox.Show("Er zijn onopgeslagen wijzigingen. Wilt u het opslagen en door gaan?", "Waarschuwing", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Cancel)
                 {
                     return;
