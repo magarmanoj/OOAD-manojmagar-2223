@@ -1,13 +1,15 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.IO.Ports;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.TextFormatting;
 using System.Windows.Shapes;
+using System.Xml.XPath;
+using Microsoft.Win32;
 
 namespace WpfVcardEditor
 {
@@ -45,7 +47,19 @@ namespace WpfVcardEditor
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            dialog.Filter = "VCFBestand|*.VCF";    
+            dialog.Filter = "VCFBestand|*.VCF";
+
+            string workEPrefix = "EMAIL;CHARSET=UTF-8;type=WORK,INTERNET:";
+            string emailPrefix = "EMAIL;CHARSET=UTF-8;type=HOME,INTERNET:";
+            string workTPrefix = "TEL;TYPE=WORK,VOICE:";
+            string telefoonPrefix = "TEL;TYPE=HOME,VOICE:";
+            string bedrijfPrefix = "ORG;CHARSET=UTF-8:";
+            string titlePrefix = "ROLE;CHARSET=UTF-8:";
+            string facebookPrefix = "X-SOCIALPROFILE;TYPE=facebook:";
+            string linkedinPrefix = "X-SOCIALPROFILE;TYPE=linkedin:";
+            string instagramPrefix = "X-SOCIALPROFILE;TYPE=instagram:";
+            string youtubePrefix = "X-SOCIALPROFILE;TYPE=youtube:";
+
             bool? dialogResult = dialog.ShowDialog();
             if (dialogResult == true)
             {
@@ -55,10 +69,27 @@ namespace WpfVcardEditor
 
                 try
                 {
-                    // probeer dictonary 
+                    // dictonary https://www.tutorialsteacher.com/csharp/csharp-dictionary 
                     string[] lines = File.ReadAllLines(chosenFileName);
+                    Dictionary<string, TextBox> pair = new Dictionary<string, TextBox>();
+                    {
+                        // Werk
+                        pair.Add(workEPrefix, txtWerkE);
+                        pair.Add(workTPrefix, txtWerkT);
+                        pair.Add(bedrijfPrefix, txtBedrijf);
+                        pair.Add(titlePrefix, txtJobtitel);
+                        
+                        // Persoonlijk
+                        pair.Add(emailPrefix, txtEmail);
+                        pair.Add(telefoonPrefix, txtTelefoon);
 
-                    // string[] lines = txtContent.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                        // Sociaal
+                        pair.Add(youtubePrefix, txtYoutube);
+                        pair.Add(facebookPrefix, txtFacebook);
+                        pair.Add(instagramPrefix, txtInsta);
+                        pair.Add(linkedinPrefix, txtLinkedin);
+                    }
+
                     foreach (string line in lines)
                     {
                         string[] words = line.Split(':', ';');
@@ -70,18 +101,20 @@ namespace WpfVcardEditor
                             txtName.Text = naam;
                         }
 
-                        // can be in methode
-                        else if (line.StartsWith("GENDER"))
+                        foreach (KeyValuePair<string, TextBox> ky in pair)
+                        {
+                            string prefix = ky.Key;
+                            TextBox txtBox = ky.Value;
+
+                            if (line.StartsWith(prefix))
+                            {
+                                string value = line.Substring(prefix.Length);
+                                txtBox.Text = value;
+                            }
+                        }
+                        if (line.StartsWith("GENDER"))
                         {
                             Geslacht(line);
-                        }
-                        else if (line.StartsWith("EMAIL") && line.Contains("type=HOME"))
-                        {
-                            txtEmail.Text = line.Substring(39);
-                        }
-                        else if (line.StartsWith("EMAIL") && line.Contains("type=WORK"))
-                        {
-                            txtWerkE.Text = line.Substring(39);
                         }
                         else if (line.StartsWith("BDAY"))
                         {
@@ -91,12 +124,6 @@ namespace WpfVcardEditor
                             DateTime date = DateTime.ParseExact(dateString, "yyyyMMdd", CultureInfo.InvariantCulture);
                             dateBirth.SelectedDate = date;
                         }
-                        else if (line.StartsWith("TEL") && line.Contains("TYPE=HOME"))
-                        {
-                            txtTelefoon.Text = line.Substring(20);
-                        }
-                        Work(line);
-                        Social(line);          
                     }
                 }
                 catch (FileNotFoundException ex)
@@ -109,7 +136,7 @@ namespace WpfVcardEditor
                 }
             }
         }
-
+        // Gender 
         private void Geslacht(string line)
         {
             if (line.Contains("M"))
@@ -126,45 +153,8 @@ namespace WpfVcardEditor
             }
         }
 
-        private void Social(string line)
-        {
-            if (line.Contains("TYPE=facebook"))
-            {
-                txtFacebook.Text = line.Substring(30);
-            }
-            else if (line.Contains("TYPE=linkedin"))
-            {
-                txtLinkedin.Text = line.Substring(30);
-            }
-            else if (line.Contains("TYPE=youtube"))
-            {
-                txtYoutube.Text = line.Substring(29);
-            }
-            else if (line.Contains("TYPE=instagram"))
-            {
-                txtInsta.Text = line.Substring(31);
-            }
-        }
-
-        private void Work(string line)
-        {
-            if (line.StartsWith("TEL") && line.Contains("TYPE=WORK"))
-            {
-                txtWerkT.Text = line.Substring(20);
-            }
-            else if (line.StartsWith("ROLE"))
-            {
-                txtJobtitel.Text = line.Substring(19);
-            }
-            else if (line.StartsWith("ORG"))
-            {
-                txtBedrijf.Text = line.Substring(18);
-            }
-        }
-
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            
             using (StreamWriter sw = new StreamWriter(chosenFileName))
             {
                 if (txtName.Text != " " && txtAchternaam.Text != "" && txtEmail.Text != "" && txtTelefoon.Text != ""
