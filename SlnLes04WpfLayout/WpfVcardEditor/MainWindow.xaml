@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfVcardEditor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="600">
+        Title="Vcard" MinWidth="515" MinHeight="600" Height="600" Width="600">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_vCard">
-                <MenuItem Header="_New"/>
-                <MenuItem Header="_Open"/>
-                <MenuItem Header="_Save" IsEnabled="False"/>
-                <MenuItem Header="Save _As..." IsEnabled="False"/>
+                <MenuItem Header="_New" Click="New_Click"/>
+                <MenuItem Header="_Open" Click="OpenMenuItem_Click"/>
+                <MenuItem Name="save" Header="_Save" IsEnabled="False" Click="Save_Click"/>
+                <MenuItem Header="Save _As..." Click="SaveAs_Click"/>
+                <Separator/>
                 <MenuItem Header="E_xit" Click="ExitMenuItem_Click" Name="exitMenuItem"/>
             </MenuItem>
             <MenuItem Header="_Help" Click="HelpMenuItem_Click">
@@ -27,118 +28,98 @@
                 <Label Content="percentage ingevuld: n.a" Padding="10" FontSize="10" />
             </StatusBarItem>
         </StatusBar>
-        <Grid>
-            <TabControl DockPanel.Dock="Top" Margin="5">
-                <TabItem Header="Persoonlijk" Margin="0" Padding="5">
-                    <Grid Margin="15">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition MaxWidth="600" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Label Name="lblNaam" >Voornaam:</Label>
-                        <TextBox Name="txtName" Grid.Column="1" Margin="0,5,0,10" Padding="5" />
-                        <Label Name="lblachternaam" Grid.Row="1">Achternaam:</Label>
-                        <TextBox Name="txtAchternaam" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
-                        <Label Name="lblGebDate" Grid.Row="2">Geboortedatum:</Label>
-                        <DatePicker Name="dateBirth" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" Width="100" HorizontalAlignment="Left" Padding="5"  />
-                        <Label Name="lblGeslacht" Grid.Row="3">Geslacht:</Label>
-                        <Grid Grid.Row="3" Grid.Column="1" Margin="0,5,0,10">
-                            <Grid.ColumnDefinitions >
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <RadioButton Content="Man" GroupName="Gender" Grid.Column="0" Padding="5" />
-                            <RadioButton Content="Vrouw" GroupName="Gender" Grid.Column="1" Padding="5" />
-                            <RadioButton Content="Onbekend" GroupName="Gender" Grid.Column="2" Padding="5" />
-                        </Grid>
-                        <Label Name="lblEmail" Grid.Row="4">Privé email:</Label>
-                        <TextBox Name="txtEmail" Grid.Row="4" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
-                        <Label Name="lblTelefoon" Grid.Row="6">Privé telefoon:</Label>
-                        <TextBox Name="txtTelefoon" Grid.Row="6" Grid.Column="1" Margin="0,5,0,10" MinWidth="200" MaxWidth="400" Padding="5" HorizontalAlignment="Left" />
-                        <Label Name="lblFoto" Grid.Row="7">foto:</Label>
-                        <Grid Grid.Row="7" Grid.Column="1" Margin="0,5,0,10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Button Content="SELECTEER" Grid.Column="0" />
-                            <Label Name="lblMessage" Content="(geen geselecteerd)" Grid.Column="1" Margin="10,0,0,0" Padding="5"  />
-                        </Grid>
-                        <Grid Grid.Row="8" Grid.Column="1" Margin="0,5,0,10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="3" Width="100" Height="100" Margin="10,0,0,0">
-                                <Image Name="imgFoto" Stretch="UniformToFill" />
-                            </Border>
-                        </Grid>
-                    </Grid>
-                </TabItem>
-                
-                <TabItem Header="Werk" Margin="0" Padding="5">
-                    <Grid Margin="15">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition MaxWidth="600" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Label Name="lblBedrijf">Bedrijf:</Label>
-                        <TextBox Name="txtBedrijf" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
-                        <Label Name="lblTitel" Grid.Row="1">Jobtitel:</Label>
-                        <TextBox Name="txtJobtitel" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
-                        <Label Name="lblWemail" Grid.Row="2">Werk email:</Label>
-                        <TextBox Name="txtWerkE" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
-                        <Label Name="lblWtelefoon" Grid.Row="3">Werk telefoon:</Label>
-                        <TextBox Name="txtWerkT" Grid.Row="3" Grid.Column="1" Margin="0,5,0,10" Padding="5"  />
-                    </Grid>
-                </TabItem>
-                
-                <TabItem Header="Sociaal" Margin="0" Padding="5">
-                    <Grid Margin="15">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition MaxWidth="600" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Label Name="lblLinkedin" >Linkedin:</Label>
-                        <TextBox Name="txtLinkedin" Grid.Column="1" Margin="0,5,0,10" Padding="5"/>
-                        <Label Name="lblFacebook" Grid.Row="1">Facebook:</Label>
-                        <TextBox Name="txtFacebook" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" Padding="5"/>
-                        <Label Name="lblInstagram" Grid.Row="2">Instagram:</Label>
-                        <TextBox Name="txtInsta" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" Padding="5"/>
-                        <Label Name="lblYoutube" Grid.Row="3">Youtube:</Label>
-                        <TextBox Name="txtYoutube" Grid.Row="3" Grid.Column="1" Margin="0,5,0,10" Padding="5"/>
-                    </Grid>
-                </TabItem>
-            </TabControl>
-        </Grid>
+        <TabControl DockPanel.Dock="Top" Margin="5">
+            <TabItem Header="Persoonlijk" Margin="0" Padding="5">
+                <Grid Margin="15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition MaxWidth="600" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label Name="lblNaam" >Voornaam:</Label>
+                    <TextBox Name="txtName" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center" TextChanged="Card_Changed"/>
+                    <Label Name="lblachternaam" Grid.Row="1">Achternaam:</Label>
+                    <TextBox Name="txtAchternaam" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center" TextChanged="Card_Changed"/>
+                    <Label Name="lblGebDate" Grid.Row="2">Geboortedatum:</Label>
+                    <DatePicker Name="dateBirth" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" Width="100" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
+                    <Label Name="lblGeslacht" Grid.Row="3">Geslacht:</Label>
+                    <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+                        <RadioButton Name="rbMan" Content="Man" GroupName="Gender" Grid.Column="0" VerticalAlignment="Center"   />
+                        <RadioButton Name="rbVrouw" Content="Vrouw" GroupName="Gender" Grid.Column="1"  VerticalAlignment="Center" />
+                        <RadioButton Name="rbOnbekend" Content="Onbekend" GroupName="Gender" Grid.Column="2" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <Label Name="lblEmail" Grid.Row="4">Privé email:</Label>
+                    <TextBox Name="txtEmail" Grid.Row="4" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center" TextChanged="Card_Changed"/>
+                    <Label Name="lblTelefoon" Grid.Row="5">Privé telefoon:</Label>
+                    <TextBox Name="txtTelefoon" Grid.Row="5" Grid.Column="1" Margin="0,5,0,10" Width="250" HorizontalAlignment="Left" VerticalContentAlignment="Center" TextChanged="Card_Changed"/>
+                    <Label Name="lblFoto" Grid.Row="6">foto:</Label>
+                    <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal">
+                        <Button x:Name="btnSelecteer" Content="SELECTEER" VerticalContentAlignment="Center"/>
+                        <Label Name="lblMessage" Content="(geen geselecteerd)" Grid.Column="1" Margin="10,0,0,0" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="3" Width="100" Height="100" Margin="10,0,0,0">
+                            <Image Name="imgFoto" Stretch="UniformToFill" />
+                        </Border>
+                    </StackPanel>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Werk" Margin="0" Padding="5">
+                <Grid Margin="15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition MaxWidth="600" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="45" />
+                    </Grid.RowDefinitions>
+                    <Label Name="lblBedrijf">Bedrijf:</Label>
+                    <TextBox Name="txtBedrijf" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center"/>
+                    <Label Name="lblTitel" Grid.Row="1">Jobtitel:</Label>
+                    <TextBox Name="txtJobtitel" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center"/>
+                    <Label Name="lblWemail" Grid.Row="2">Werk email:</Label>
+                    <TextBox Name="txtWerkE" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center"/>
+                    <Label Name="lblWtelefoon" Grid.Row="3">Werk telefoon:</Label>
+                    <TextBox Name="txtWerkT" Grid.Row="3" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Sociaal" Margin="0" Padding="5">
+                <Grid Margin="15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition MaxWidth="600" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label Name="lblLinkedin" >Linkedin:</Label>
+                    <TextBox Name="txtLinkedin" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center"/>
+                    <Label Name="lblFacebook" Grid.Row="1">Facebook:</Label>
+                    <TextBox Name="txtFacebook" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center"/>
+                    <Label Name="lblInstagram" Grid.Row="2">Instagram:</Label>
+                    <TextBox Name="txtInsta" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center" />
+                    <Label Name="lblYoutube" Grid.Row="3">Youtube:</Label>
+                    <TextBox Name="txtYoutube" Grid.Row="3" Grid.Column="1" Margin="0,5,0,10" VerticalContentAlignment="Center" />
+                </Grid>
+            </TabItem>
+        </TabControl>
     </DockPanel>
 </Window>
