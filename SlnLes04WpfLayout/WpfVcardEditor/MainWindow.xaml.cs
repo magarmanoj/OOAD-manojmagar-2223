@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Shapes;
 using Microsoft.Win32;
 
 namespace WpfVcardEditor
@@ -58,65 +59,12 @@ namespace WpfVcardEditor
             {
                 // user picked a file and pressed OK
                 chosenFileName = dialog.FileName;
+                string[] lines = { "" };
 
                 try
                 {
                     // dictonary https://www.tutorialsteacher.com/csharp/csharp-dictionary 
-                    string[] lines = File.ReadAllLines(chosenFileName);
-                    Dictionary<string, TextBox> pair = new Dictionary<string, TextBox>();
-                    {
-                        // Werk
-                        pair.Add(workEPrefix, txtWerkE);
-                        pair.Add(workTPrefix, txtWerkT);
-                        pair.Add(bedrijfPrefix, txtBedrijf);
-                        pair.Add(titlePrefix, txtJobtitel);
-
-                        // Persoonlijk
-                        pair.Add(emailPrefix, txtEmail);
-                        pair.Add(telefoonPrefix, txtTelefoon);
-
-                        // Sociaal
-                        pair.Add(youtubePrefix, txtYoutube);
-                        pair.Add(facebookPrefix, txtFacebook);
-                        pair.Add(instagramPrefix, txtInsta);
-                        pair.Add(linkedinPrefix, txtLinkedin);
-                    }
-
-                    foreach (string line in lines)
-                    {
-                        string[] words = line.Split(':', ';');
-                        if (line.StartsWith("N;"))
-                        {
-                            string naam = words[3];
-                            string achternaam = words[2];
-                            txtAchternaam.Text = achternaam;
-                            txtName.Text = naam;
-                        }
-
-                        foreach (KeyValuePair<string, TextBox> ky in pair)
-                        {
-                            string prefix = ky.Key;
-                            TextBox txtBox = ky.Value;
-
-                            if (line.StartsWith(prefix))
-                            {
-                                string value = line.Substring(prefix.Length);
-                                txtBox.Text = value;
-                            }
-                        }
-                        if (line.StartsWith("GENDER"))
-                        {
-                            Geslacht(line);
-                        }
-                        else if (line.StartsWith("BDAY"))
-                        {
-                            string dateString = words[1];
-
-                            // https://learn.microsoft.com/en-us/dotnet/api/system.datetime.parseexact?view=net-7.0#system-datetime-parseexact(system-string-system-string-system-iformatprovider) 
-                            DateTime date = DateTime.ParseExact(dateString, "yyyyMMdd", CultureInfo.InvariantCulture);
-                            dateBirth.SelectedDate = date;
-                        }
-                    }
+                    lines = File.ReadAllLines(chosenFileName);
                 }
                 catch (FileNotFoundException ex)
                 {
@@ -125,6 +73,64 @@ namespace WpfVcardEditor
                         "Oeps!", // titel
                         MessageBoxButton.OK, // buttons
                         MessageBoxImage.Error);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show($"Ongekende fouten");
+                }
+                Dictionary<string, TextBox> pair = new Dictionary<string, TextBox>();
+                {
+                    // Werk
+                    pair.Add(workEPrefix, txtWerkE);
+                    pair.Add(workTPrefix, txtWerkT);
+                    pair.Add(bedrijfPrefix, txtBedrijf);
+                    pair.Add(titlePrefix, txtJobtitel);
+
+                    // Persoonlijk
+                    pair.Add(emailPrefix, txtEmail);
+                    pair.Add(telefoonPrefix, txtTelefoon);
+
+                    // Sociaal
+                    pair.Add(youtubePrefix, txtYoutube);
+                    pair.Add(facebookPrefix, txtFacebook);
+                    pair.Add(instagramPrefix, txtInsta);
+                    pair.Add(linkedinPrefix, txtLinkedin);
+                }
+
+                foreach (string line in lines)
+                {
+                    string[] words = line.Split(':', ';');
+                    if (line.StartsWith("N;"))
+                    {
+                        string naam = words[3];
+                        string achternaam = words[2];
+                        txtAchternaam.Text = achternaam;
+                        txtName.Text = naam;
+                    }
+
+                    foreach (KeyValuePair<string, TextBox> ky in pair)
+                    {
+                        string prefix = ky.Key;
+                        TextBox txtBox = ky.Value;
+
+                        if (line.StartsWith(prefix))
+                        {
+                            string value = line.Substring(prefix.Length);
+                            txtBox.Text = value;
+                        }
+                    }
+                    if (line.StartsWith("GENDER"))
+                    {
+                        Geslacht(line);
+                    }
+                    else if (line.StartsWith("BDAY"))
+                    {
+                        string dateString = words[1];
+
+                        // https://learn.microsoft.com/en-us/dotnet/api/system.datetime.parseexact?view=net-7.0#system-datetime-parseexact(system-string-system-string-system-iformatprovider) 
+                        DateTime date = DateTime.ParseExact(dateString, "yyyyMMdd", CultureInfo.InvariantCulture);
+                        dateBirth.SelectedDate = date;
+                    }
                 }
                 save.IsEnabled = true;
             }
@@ -149,53 +155,61 @@ namespace WpfVcardEditor
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            List<string> words = new List<string>();
+            words.Add("BEGIN:VCARD");
+            words.Add("VERSION:3.0");
+            words.Add($"FN;CHARSET=UTF-8:{txtName.Text} {txtAchternaam.Text}");
+            words.Add($"N;CHARSET=UTF-8:{txtAchternaam.Text};{txtName.Text};;;;");
+            words.Add($"EMAIL;CHARSET=UTF-8;type=HOME,INTERNET:{txtEmail.Text}");
+            words.Add($"EMAIL;CHARSET=UTF-8;type=WORK,INTERNET:{txtWerkE.Text}");
+            words.Add($"TEL;TYPE=HOME,VOICE:{txtTelefoon.Text}");
+            words.Add($"TEL;TYPE=WORK,VOICE:{txtWerkT.Text}");
+            words.Add($"ROLE;CHARSET=UTF-8:{txtJobtitel.Text}");
+            words.Add($"ORG;CHARSET=UTF-8:{txtBedrijf.Text}");
+            words.Add($"X-SOCIALPROFILE;TYPE=facebook:{txtFacebook.Text}");
+            words.Add($"X-SOCIALPROFILE;TYPE=linkedin:{txtLinkedin.Text}");
+            words.Add($"X-SOCIALPROFILE;TYPE=instagram:{txtInsta.Text}");
+            words.Add($"X-SOCIALPROFILE;TYPE=youtube:{txtYoutube.Text}");
+            DateTime birthDate;
+            string date = null;
+            if (dateBirth.SelectedDate != null)
+            {
+                date = dateBirth.SelectedDate.Value.ToString("yyyyMMdd");
+            }
+            if (!string.IsNullOrEmpty(date) && DateTime.TryParseExact(date, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out birthDate))
+            {
+                words.Add($"BDAY:{birthDate:yyyyMMdd}");
+            }
+            if (rbMan.IsChecked == true)
+            {
+                words.Add("GENDER:M");
+            }
+            else if (rbVrouw.IsChecked == true)
+            {
+                words.Add("GENDER:F");
+            }
+            else if (rbOnbekend.IsChecked == true)
+            {
+                words.Add("GENDER:O");
+            }
+            words.Add("END:VCARD");
+
             try
             {
-                using (StreamWriter sw = new StreamWriter(chosenFileName))
-                {
-                    sw.WriteLine("BEGIN:VCARD");
-                    sw.WriteLine("VERSION:3.0");
-                    sw.WriteLine($"FN;CHARSET=UTF-8:{txtName.Text} {txtAchternaam.Text}");
-                    sw.WriteLine($"N;CHARSET=UTF-8:{txtAchternaam.Text};{txtName.Text};;;;");
-                    sw.WriteLine($"EMAIL;CHARSET=UTF-8;type=HOME,INTERNET:{txtEmail.Text}");
-                    sw.WriteLine($"EMAIL;CHARSET=UTF-8;type=WORK,INTERNET:{txtWerkE.Text}");
-                    sw.WriteLine($"TEL;TYPE=HOME,VOICE:{txtTelefoon.Text}");
-                    sw.WriteLine($"TEL;TYPE=WORK,VOICE:{txtWerkT.Text}");
-                    sw.WriteLine($"ROLE;CHARSET=UTF-8:{txtJobtitel.Text}");
-                    sw.WriteLine($"ORG;CHARSET=UTF-8:{txtBedrijf.Text}");
-                    sw.WriteLine($"X-SOCIALPROFILE;TYPE=facebook:{txtFacebook.Text}");
-                    sw.WriteLine($"X-SOCIALPROFILE;TYPE=linkedin:{txtLinkedin.Text}");
-                    sw.WriteLine($"X-SOCIALPROFILE;TYPE=instagram:{txtInsta.Text}");
-                    sw.WriteLine($"X-SOCIALPROFILE;TYPE=youtube:{txtYoutube.Text}");
-
-                    DateTime birthDate;
-                    string date = null;
-                    if (dateBirth.SelectedDate != null)
-                    {
-                        date = dateBirth.SelectedDate.Value.ToString("yyyyMMdd");
-                    }
-                    if (!string.IsNullOrEmpty(date) && DateTime.TryParseExact(date, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out birthDate))
-                    {
-                        sw.WriteLine($"BDAY:{birthDate:yyyyMMdd}");
-                    }
-                    if (rbMan.IsChecked == true)
-                    {
-                        sw.WriteLine("GENDER:M");
-                    }
-                    else if (rbVrouw.IsChecked == true)
-                    {
-                        sw.WriteLine("GENDER:F");
-                    }
-                    else if (rbOnbekend.IsChecked == true)
-                    {
-                        sw.WriteLine("GENDER:O");
-                    }
-                    sw.WriteLine("END:VCARD");
-                }
+                File.WriteAllLines(chosenFileName,words);
+            }
+            catch (PathTooLongException)
+            {
+                MessageBox.Show($"Bestandsnaam {chosenFileName} te lang");
             }
             catch (IOException ex)
             {
                 MessageBox.Show($"Fout: Kan doelbestand niet schrijven!{ex.Message}", "Message", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show($"Ongekende fouten");
             }
         }
 
@@ -219,6 +233,10 @@ namespace WpfVcardEditor
             catch (IOException ex)
             {
                 MessageBox.Show($"Fout: Kan doelbestand niet schrijven!{ex.Message}", "Message", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show($"Ongekende fouten");
             }
         }
 
