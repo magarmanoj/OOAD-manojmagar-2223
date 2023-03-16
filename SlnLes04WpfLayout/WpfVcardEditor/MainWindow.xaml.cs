@@ -43,17 +43,6 @@ namespace WpfVcardEditor
             dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             dialog.Filter = "VCFBestand|*.VCF";
 
-            string workEPrefix = "EMAIL;CHARSET=UTF-8;type=WORK,INTERNET:";
-            string emailPrefix = "EMAIL;CHARSET=UTF-8;type=HOME,INTERNET:";
-            string workTPrefix = "TEL;TYPE=WORK,VOICE:";
-            string telefoonPrefix = "TEL;TYPE=HOME,VOICE:";
-            string bedrijfPrefix = "ORG;CHARSET=UTF-8:";
-            string titlePrefix = "TITLE;CHARSET=UTF-8:";
-            string facebookPrefix = "X-SOCIALPROFILE;TYPE=facebook:";
-            string linkedinPrefix = "X-SOCIALPROFILE;TYPE=linkedin:";
-            string instagramPrefix = "X-SOCIALPROFILE;TYPE=instagram:";
-            string youtubePrefix = "X-SOCIALPROFILE;TYPE=youtube:";
-
             bool? dialogResult = dialog.ShowDialog();
             if (dialogResult == true)
             {
@@ -82,25 +71,21 @@ namespace WpfVcardEditor
                 catch (Exception)
                 {
                     MessageBox.Show($"Ongekende fouten");
+                    return;
                 }
-                Dictionary<string, TextBox> pair = new Dictionary<string, TextBox>();
+                Dictionary<string, TextBox> pair = new Dictionary<string, TextBox>()
                 {
-                    // Werk
-                    pair.Add(workEPrefix, txtWerkE);
-                    pair.Add(workTPrefix, txtWerkT);
-                    pair.Add(bedrijfPrefix, txtBedrijf);
-                    pair.Add(titlePrefix, txtJobtitel);
-
-                    // Persoonlijk
-                    pair.Add(emailPrefix, txtEmail);
-                    pair.Add(telefoonPrefix, txtTelefoon);
-
-                    // Sociaal
-                    pair.Add(youtubePrefix, txtYoutube);
-                    pair.Add(facebookPrefix, txtFacebook);
-                    pair.Add(instagramPrefix, txtInsta);
-                    pair.Add(linkedinPrefix, txtLinkedin);
-                }
+                    { "EMAIL;CHARSET=UTF-8;type=WORK,INTERNET:", txtWerkE },
+                    { "EMAIL;CHARSET=UTF-8;type=HOME,INTERNET:", txtEmail },
+                    { "TEL;TYPE=WORK,VOICE:", txtWerkT },
+                    { "TEL;TYPE=HOME,VOICE:", txtTelefoon },
+                    { "TITLE;CHARSET=UTF-8:", txtJobtitel },
+                    { "ORG;CHARSET=UTF-8:", txtBedrijf },
+                    { "X-SOCIALPROFILE;TYPE=facebook:", txtFacebook },
+                    { "X-SOCIALPROFILE;TYPE=linkedin:", txtLinkedin },
+                    { "X-SOCIALPROFILE;TYPE=instagram:", txtInsta },
+                    { "X-SOCIALPROFILE;TYPE=youtube:", txtYoutube }
+                };
 
                 foreach (string line in lines)
                 {
