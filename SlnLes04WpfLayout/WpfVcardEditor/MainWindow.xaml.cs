@@ -74,6 +74,11 @@ namespace WpfVcardEditor
                         MessageBoxButton.OK, // buttons
                         MessageBoxImage.Error);
                 }
+                catch (IOException ex)
+                {
+                    MessageBox.Show($"Fout: Kan doelbestand niet schrijven!{ex.Message}", "Message", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 catch (Exception)
                 {
                     MessageBox.Show($"Ongekende fouten");
@@ -196,11 +201,12 @@ namespace WpfVcardEditor
 
             try
             {
-                File.WriteAllLines(chosenFileName,words);
+                File.WriteAllLines(chosenFileName, words);
             }
             catch (PathTooLongException)
             {
                 MessageBox.Show($"Bestandsnaam {chosenFileName} te lang");
+                return;
             }
             catch (IOException ex)
             {
@@ -210,6 +216,7 @@ namespace WpfVcardEditor
             catch (Exception)
             {
                 MessageBox.Show($"Ongekende fouten");
+                return;
             }
         }
 
@@ -233,14 +240,17 @@ namespace WpfVcardEditor
             catch (PathTooLongException)
             {
                 MessageBox.Show($"Bestandsnaam {chosenFileName} te lang");
+                return;
             }
             catch (IOException ex)
             {
                 MessageBox.Show($"Fout: Kan doelbestand niet schrijven!{ex.Message}", "Message", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
             catch (Exception)
             {
                 MessageBox.Show($"Ongekende fouten");
+                return;
             }
         }
 
