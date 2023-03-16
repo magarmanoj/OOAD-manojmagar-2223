@@ -230,6 +230,10 @@ namespace WpfVcardEditor
                 txtSource = File.ReadAllLines(chosenFileName);
                 File.WriteAllLines(dialog.FileName, txtSource);
             }
+            catch (PathTooLongException)
+            {
+                MessageBox.Show($"Bestandsnaam {chosenFileName} te lang");
+            }
             catch (IOException ex)
             {
                 MessageBox.Show($"Fout: Kan doelbestand niet schrijven!{ex.Message}", "Message", MessageBoxButton.OK, MessageBoxImage.Error);
