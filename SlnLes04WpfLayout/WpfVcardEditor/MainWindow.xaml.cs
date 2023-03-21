@@ -5,6 +5,7 @@ using System.IO;
 using System.Reflection.Emit;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Win32;
@@ -136,6 +137,21 @@ namespace WpfVcardEditor
                         dateBirth.SelectedDate = date;
                         totaalIngevuld += 1;
                     }
+                    else if (line.StartsWith("PHOTO;"))
+                    {
+                        string photo = line.Replace("PHOTO;ENCODING=b;TYPE=JPEG:", "");
+                        byte[] bytes = Convert.FromBase64String(photo);
+                        BitmapImage image = new BitmapImage();
+                        using (MemoryStream ms = new MemoryStream(bytes))
+                        {
+                            ms.Position = 0;
+                            image.BeginInit();
+                            image.CacheOption = BitmapCacheOption.OnLoad;
+                            image.StreamSource = ms;
+                            image.EndInit();
+                        }
+                        imgFoto.Source = image;
+                    }
                 }
                 save.IsEnabled = true;
                 HuidigeMap(chosenFileName);
@@ -164,6 +180,14 @@ namespace WpfVcardEditor
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             List<string> words = new List<string>();
+            string base64String = "";
+            BitmapImage bitmap = (BitmapImage)imgFoto.Source;
+            MemoryStream memoryStream = new MemoryStream();
+            BitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bitmap));
+            encoder.Save(memoryStream);
+            byte[] bytes = memoryStream.ToArray();
+            base64String = Convert.ToBase64String(bytes);
             words.Add("BEGIN:VCARD");
             words.Add("VERSION:3.0");
             words.Add($"FN;CHARSET=UTF-8:{txtName.Text} {txtAchternaam.Text}");
@@ -178,6 +202,7 @@ namespace WpfVcardEditor
             words.Add($"X-SOCIALPROFILE;TYPE=linkedin:{txtLinkedin.Text}");
             words.Add($"X-SOCIALPROFILE;TYPE=instagram:{txtInsta.Text}");
             words.Add($"X-SOCIALPROFILE;TYPE=youtube:{txtYoutube.Text}");
+            words.Add($"PHOTO;ENCODING=b;TYPE=JPEG:{base64String}");
             DateTime birthDate;
             string date = null;
             if (dateBirth.SelectedDate != null)
@@ -283,17 +308,20 @@ namespace WpfVcardEditor
             txtLinkedin.Text = "";
             txtYoutube.Text = "";
             txtBoxChanged = false;
+            imgFoto.Source = null;
+            lblMessage.Content = "(geen geselecteerd)";
+            huidigeMap.Content = "huidige kaart: (geen geopend)";
         }
 
         private void Selecteer(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Image files (*.jpg;*.jpeg;*.png;*.gif)|*.jpg;*.jpeg;*.png;*.gif"; ;
-            if (dlg.ShowDialog() == true)
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Image files (*.jpg;*.jpeg;*.png;*.gif)|*.jpg;*.jpeg;*.png;*.gif"; ;
+            if (dialog.ShowDialog() == true)
             {
-                BitmapImage bitmap = new BitmapImage(new System.Uri(dlg.FileName));
+                BitmapImage bitmap = new BitmapImage(new System.Uri(dialog.FileName));
                 imgFoto.Source = bitmap;
-                lblMessage.Content = dlg.FileName;
+                lblMessage.Content = dialog.FileName;
             }
         }
         private void HuidigeMap(string mapName)
