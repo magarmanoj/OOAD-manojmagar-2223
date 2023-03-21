@@ -22,10 +22,10 @@
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
-                <Label Content="huidige kaart:(geen geopend)" Padding="10" FontSize="10" />
+                <Label x:Name="huidigeMap" Content="huidige kaart:(geen geopend)" Padding="10" FontSize="10" />
             </StatusBarItem>
             <StatusBarItem HorizontalAlignment="Right">
-                <Label Content="percentage ingevuld: n.a" Padding="10" FontSize="10" />
+                <Label x:Name="percentage" Content="percentage ingevuld: n.a" Padding="10" FontSize="10" />
             </StatusBarItem>
         </StatusBar>
         <TabControl DockPanel.Dock="Top" Margin="5">
