@@ -293,8 +293,6 @@ namespace WpfVcardEditor
             {
                 BitmapImage bitmap = new BitmapImage(new System.Uri(dlg.FileName));
                 imgFoto.Source = bitmap;
-                string fileName = System.IO.Path.GetFileName(dlg.FileName);
-                lblFoto.Content = fileName;
                 lblMessage.Content = dlg.FileName;
             }
         }
