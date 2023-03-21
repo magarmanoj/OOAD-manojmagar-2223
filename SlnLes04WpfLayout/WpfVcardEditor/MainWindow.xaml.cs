@@ -4,8 +4,10 @@ using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using Path = System.IO.Path;
 
 namespace WpfVcardEditor
 {
@@ -265,6 +267,28 @@ namespace WpfVcardEditor
             txtLinkedin.Text = "";
             txtYoutube.Text = "";
             txtBoxChanged = false;
+        }
+
+        private void ShowImageName(BitmapImage img)
+        {
+            if (img != null && img.UriSource != null)
+            {
+                string imageName = Path.GetFileName(img.UriSource.LocalPath);
+                lblFoto.Content = imageName;
+            }
+        }
+
+        private void Selecteer(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "Afbeeldingen|*.jpg;*.jpeg;*.png;*.gif";
+            if (dlg.ShowDialog() == true)
+            {
+                BitmapImage bitmap = new BitmapImage(new System.Uri(dlg.FileName));
+                imgFoto.Source = bitmap;
+                string bestandsnaam = System.IO.Path.GetFileName(dlg.FileName);
+                lblMessage.Content = bestandsnaam;
+            }
         }
     }
 }
