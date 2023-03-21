@@ -141,7 +141,6 @@ namespace WpfVcardEditor
                 HuidigeMap(chosenFileName);
                 double totaalPercentage = (double)totaalLvl / totaalField * 100;
                 PercentageLevel(totaalPercentage);
-
             }
         }
 
@@ -316,6 +315,5 @@ namespace WpfVcardEditor
         {
             percentage.Content = "Ingevuld: " + percentFilled.ToString("0.00") + "%";
         }
-
     }
 }
