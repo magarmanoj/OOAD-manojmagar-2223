@@ -43,7 +43,7 @@ namespace WpfVcardEditor
         private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
         {
             int totaalField = 13;
-            int totaalLvl = 0;
+            int totaalIngevuld = 0;
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             dialog.Filter = "VCFBestand|*.VCF";
@@ -103,7 +103,7 @@ namespace WpfVcardEditor
                         txtName.Text = naam;
                         if (!string.IsNullOrEmpty(naam) && !string.IsNullOrEmpty(achternaam))
                         {
-                            totaalLvl += 1;
+                            totaalIngevuld += 1;
                         }
                     }
 
@@ -118,14 +118,14 @@ namespace WpfVcardEditor
                             txtBox.Text = value;
                             if (!string.IsNullOrEmpty(value))
                             {
-                                totaalLvl += 1;
+                                totaalIngevuld += 1;
                             }
                         }
                     }
                     if (line.StartsWith("GENDER"))
                     {
                         Geslacht(line);
-                        totaalLvl += 1;
+                        totaalIngevuld += 1;
                     }
                     else if (line.StartsWith("BDAY"))
                     {
@@ -134,12 +134,12 @@ namespace WpfVcardEditor
                         // https://learn.microsoft.com/en-us/dotnet/api/system.datetime.parseexact?view=net-7.0#system-datetime-parseexact(system-string-system-string-system-iformatprovider) 
                         DateTime date = DateTime.ParseExact(dateString, "yyyyMMdd", CultureInfo.InvariantCulture);
                         dateBirth.SelectedDate = date;
-                        totaalLvl += 1;
+                        totaalIngevuld += 1;
                     }
                 }
                 save.IsEnabled = true;
                 HuidigeMap(chosenFileName);
-                double totaalPercentage = (double)totaalLvl / totaalField * 100;
+                double totaalPercentage = (double)totaalIngevuld / totaalField * 100;
                 PercentageLevel(totaalPercentage);
             }
         }
