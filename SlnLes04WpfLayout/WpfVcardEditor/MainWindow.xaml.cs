@@ -285,7 +285,7 @@ namespace WpfVcardEditor
             txtBoxChanged = false;
         }
 
-        private void ShowImageName(BitmapImage img)
+        private void ImageName(BitmapImage img)
         {
             if (img != null && img.UriSource != null)
             {
