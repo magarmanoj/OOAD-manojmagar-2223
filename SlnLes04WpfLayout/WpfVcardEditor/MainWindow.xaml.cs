@@ -285,15 +285,6 @@ namespace WpfVcardEditor
             txtBoxChanged = false;
         }
 
-        private void ImageName(BitmapImage img)
-        {
-            if (img != null && img.UriSource != null)
-            {
-                string imageName = Path.GetFileName(img.UriSource.LocalPath);
-                lblFoto.Content = imageName;
-            }
-        }
-
         private void Selecteer(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
@@ -304,6 +295,7 @@ namespace WpfVcardEditor
                 imgFoto.Source = bitmap;
                 string fileName = System.IO.Path.GetFileName(dlg.FileName);
                 lblFoto.Content = fileName;
+                lblMessage.Content = dlg.FileName;
             }
         }
         private void HuidigeMap(string mapName)
