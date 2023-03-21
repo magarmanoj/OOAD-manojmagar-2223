@@ -281,13 +281,13 @@ namespace WpfVcardEditor
         private void Selecteer(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Afbeeldingen|*.jpg;*.jpeg;*.png;*.gif";
+            dlg.Filter = "Image files (*.jpg;*.jpeg;*.png;*.gif)|*.jpg;*.jpeg;*.png;*.gif"; ;
             if (dlg.ShowDialog() == true)
             {
                 BitmapImage bitmap = new BitmapImage(new System.Uri(dlg.FileName));
                 imgFoto.Source = bitmap;
-                string bestandsnaam = System.IO.Path.GetFileName(dlg.FileName);
-                lblMessage.Content = bestandsnaam;
+                string fileName = System.IO.Path.GetFileName(dlg.FileName);
+                lblFoto.Content = fileName;
             }
         }
     }
