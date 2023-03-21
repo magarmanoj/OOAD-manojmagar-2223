@@ -28,8 +28,14 @@ namespace ConsoleKaartspel1
                 Kaart kaart2 = spelerRogier.LegKaart();
                 Console.WriteLine($"Hans legt {kaart1.Kleur}{kaart1.Nummer}");
                 Console.WriteLine($"Rogier legt {kaart2.Kleur}{kaart2.Nummer}");
-                if (kaart1.Nummer > kaart2.Nummer) puntenHans++;
-                else if (kaart1.Nummer < kaart2.Nummer) puntenRogier++;
+                if (kaart1.Nummer > kaart2.Nummer)
+                {
+                    puntenHans++;
+                }
+                else if (kaart1.Nummer < kaart2.Nummer)
+                {
+                    puntenRogier++;
+                }
                 else
                 {
                     puntenRogier += 0.5;

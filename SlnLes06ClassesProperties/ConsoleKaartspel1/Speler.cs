@@ -32,7 +32,7 @@ namespace ConsoleKaartspel1
 
         public bool HeeftNogKaarten
         {
-            get { return kaarten.Count > 0;}
+            get { return kaarten.Count > 0; }
         }
 
         public Kaart LegKaart()
