@@ -5,9 +5,9 @@ namespace ConsoleKaartspel1
     internal class Kaart
     {
         private int nummer;
-        private string kleur;
+        private char kleur;
 
-        public Kaart(int nummer, string kleur)
+        public Kaart(int nummer, char kleur)
         {
             Nummer = nummer;
             Kleur = kleur;
@@ -27,7 +27,7 @@ namespace ConsoleKaartspel1
                 nummer = value;
             }
         }
-        public string Kleur
+        public char Kleur
         {
             get
             {
@@ -36,7 +36,7 @@ namespace ConsoleKaartspel1
 
             set
             {
-                if (value != "C" && value != "S" && value != "H" && value != "D")
+                if (value != 'C' && value != 'S' && value != 'H' && value != 'D')
                     throw new ArgumentOutOfRangeException("Kleur moet C, S, H of D zijn.");
                 kleur = value;
             }

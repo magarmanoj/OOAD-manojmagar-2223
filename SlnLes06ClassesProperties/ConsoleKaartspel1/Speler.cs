@@ -20,14 +20,12 @@ namespace ConsoleKaartspel1
             this.kaarten = kaarten;
         }
 
-        public string Naam
-        {
-            get { return naam; }
-        }
+        public string Naam { get; set; }
 
-        public List<Kaart> Kaarten
+        public List<Kaart> Kaarten 
         {
             get { return kaarten; }
+            set { Kaarten = value; }
         }
 
         public bool HeeftNogKaarten

@@ -17,10 +17,10 @@ namespace ConsoleKaartspel1
             kaarten = new List<Kaart>();
             for (int i = 1; i <= 13; i++)
             {
-                kaarten.Add(new Kaart(i, "C"));
-                kaarten.Add(new Kaart(i, "S"));
-                kaarten.Add(new Kaart(i, "H"));
-                kaarten.Add(new Kaart(i, "D"));
+                kaarten.Add(new Kaart(i, 'C'));
+                kaarten.Add(new Kaart(i, 'S'));
+                kaarten.Add(new Kaart(i, 'H'));
+                kaarten.Add(new Kaart(i, 'D'));
             }
         }
 
