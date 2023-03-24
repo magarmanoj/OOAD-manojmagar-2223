@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleKaartspel1", "ConsoleKaartspel1\ConsoleKaartspel1.csproj", "{C4B86D38-FC9C-4DC7-A698-539208F816B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleVeiling", "ConsoleVeiling\ConsoleVeiling.csproj", "{C3E77561-75B7-48B9-9177-12BAD674AE1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{C4B86D38-FC9C-4DC7-A698-539208F816B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4B86D38-FC9C-4DC7-A698-539208F816B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4B86D38-FC9C-4DC7-A698-539208F816B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3E77561-75B7-48B9-9177-12BAD674AE1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3E77561-75B7-48B9-9177-12BAD674AE1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3E77561-75B7-48B9-9177-12BAD674AE1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3E77561-75B7-48B9-9177-12BAD674AE1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
