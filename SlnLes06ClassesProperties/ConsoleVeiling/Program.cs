@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ConsoleVeiling
 {
@@ -39,20 +40,14 @@ namespace ConsoleVeiling
             Console.WriteLine($"De winnaar van de veiling is: {eersteItem.Winaar.Name}");
             Console.WriteLine($"De winnaar van de veiling is: {tweedeItem.Winaar.Name}");
             Console.WriteLine(Environment.NewLine);
-            Console.WriteLine($"Koper {eersteKoper.Name} heeft de volgende items in bezit:");
-            foreach (Item item in eersteKoper.Aangeschafte)
+            List<Koper> Kopers = new List<Koper> { eersteKoper, tweedKoper, derdeKoper };
+            foreach (Koper koper in Kopers)
             {
-                Console.WriteLine(item.Naam);
-            }
-            Console.WriteLine($"Koper {tweedKoper.Name} heeft de volgende items in bezit:");
-            foreach (Item item in tweedKoper.Aangeschafte)
-            {
-                Console.WriteLine(item.Naam);
-            }
-            Console.WriteLine($"Koper {derdeKoper.Name} heeft de volgende items in bezit:");
-            foreach (Item item in derdeKoper.Aangeschafte)
-            {
-                Console.WriteLine(item.Naam);
+                Console.WriteLine($"Koper {koper.Name} heeft de volgende items in bezit:");
+                foreach (Item item in koper.Aangeschafte)
+                {
+                    Console.WriteLine(item.Naam);
+                }
             }
 
             Console.ReadLine();

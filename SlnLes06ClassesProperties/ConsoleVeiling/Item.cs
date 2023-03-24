@@ -40,6 +40,10 @@ namespace ConsoleVeiling
             }
             if (bedrag.Bedrag > Huidigebod)
             {
+                if (winaar != null)
+                {
+                    winaar.Aangeschafte.Remove(this);
+                }
                 Huidigebod = bedrag.Bedrag;
                 winaar = koper;
                 koper.Aangeschafte.Add(this);
