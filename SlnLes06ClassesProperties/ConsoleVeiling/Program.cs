@@ -43,13 +43,17 @@ namespace ConsoleVeiling
             List<Koper> Kopers = new List<Koper> { eersteKoper, tweedKoper, derdeKoper };
             foreach (Koper koper in Kopers)
             {
-                Console.WriteLine($"Koper {koper.Name} heeft de volgende items in bezit:");
-                foreach (Item item in koper.Aangeschafte)
+                // toon allen die iets hebben in zijn ItemLijst.
+                if (koper.Aangeschafte.Count > 0)
                 {
-                    Console.WriteLine(item.Naam);
+                    Console.WriteLine($"Koper {koper.Name} heeft de volgende items in bezit:");
+
+                    foreach (Item item in koper.Aangeschafte)
+                    {
+                        Console.WriteLine(item.Naam);
+                    }
                 }
             }
-
             Console.ReadLine();
         }
     }
