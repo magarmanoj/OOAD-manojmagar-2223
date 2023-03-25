@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Reflection.Emit;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -58,6 +59,7 @@ namespace WpfVcardEditor
                 HuidigeMap(chosenFileName);
                 double totaalPercentage = (double)totaalIngevuld / totaalField * 100;
                 PercentageLevel(totaalPercentage);
+                chosenFileName = dialog.FileName;
             }
         }
 
@@ -247,32 +249,29 @@ namespace WpfVcardEditor
             }
         }
 
+        private Vcard ToVcard()
+        {
+            Vcard card = new Vcard();
+            card.FirstName = txtName.Text;
+            card.LastName = txtAchternaam.Text;
+            card.PEmail = txtEmail.Text;
+            card.WEmail = txtWerkE.Text;
+            card.PTelefoon = txtTelefoon.Text;
+            card.WTelefoon = txtWerkT.Text;
+            card.JobTitel = txtJobtitel.Text;
+            card.Bedrijf = txtBedrijf.Text;
+            card.Facebook = txtFacebook.Text;
+            card.Linkedin = txtFacebook.Text;
+            card.Instagram = txtFacebook.Text;
+            card.Youtube = txtFacebook.Text;
+            card.BirthDate = dateBirth.SelectedDate.Value;
+            // photo date and gender
+
+            return card;
+        }
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             List<string> words = new List<string>();
-            string base64String = "";
-            BitmapImage bitmap = (BitmapImage)imgFoto.Source;
-            MemoryStream memoryStream = new MemoryStream();
-            BitmapEncoder encoder = new JpegBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(bitmap));
-            encoder.Save(memoryStream);
-            byte[] bytes = memoryStream.ToArray();
-            base64String = Convert.ToBase64String(bytes);
-            words.Add("BEGIN:VCARD");
-            words.Add("VERSION:3.0");
-            words.Add($"FN;CHARSET=UTF-8:{txtName.Text} {txtAchternaam.Text}");
-            words.Add($"N;CHARSET=UTF-8:{txtAchternaam.Text};{txtName.Text};;;;");
-            words.Add($"EMAIL;CHARSET=UTF-8;type=HOME,INTERNET:{txtEmail.Text}");
-            words.Add($"EMAIL;CHARSET=UTF-8;type=WORK,INTERNET:{txtWerkE.Text}");
-            words.Add($"TEL;TYPE=HOME,VOICE:{txtTelefoon.Text}");
-            words.Add($"TEL;TYPE=WORK,VOICE:{txtWerkT.Text}");
-            words.Add($"ROLE;CHARSET=UTF-8:{txtJobtitel.Text}");
-            words.Add($"ORG;CHARSET=UTF-8:{txtBedrijf.Text}");
-            words.Add($"X-SOCIALPROFILE;TYPE=facebook:{txtFacebook.Text}");
-            words.Add($"X-SOCIALPROFILE;TYPE=linkedin:{txtLinkedin.Text}");
-            words.Add($"X-SOCIALPROFILE;TYPE=instagram:{txtInsta.Text}");
-            words.Add($"X-SOCIALPROFILE;TYPE=youtube:{txtYoutube.Text}");
-            words.Add($"PHOTO;ENCODING=b;TYPE=JPEG:{base64String}");
             DateTime birthDate;
             string date = null;
             if (dateBirth.SelectedDate != null)
@@ -295,11 +294,11 @@ namespace WpfVcardEditor
             {
                 words.Add("GENDER:O");
             }
-            words.Add("END:VCARD");
 
             try
             {
-                File.WriteAllLines(chosenFileName, words);
+                Vcard card = ToVcard();
+                File.WriteAllText(chosenFileName, card.GenerateVcardCode());
             }
             catch (PathTooLongException)
             {
@@ -317,6 +316,7 @@ namespace WpfVcardEditor
                 return;
             }
         }
+
 
         private void Card_Changed(object sender, RoutedEventArgs e)
         {
