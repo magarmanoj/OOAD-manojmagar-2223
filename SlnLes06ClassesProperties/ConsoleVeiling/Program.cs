@@ -13,7 +13,6 @@ namespace ConsoleVeiling
             Koper tweedKoper = new Koper("Piet");
             Koper derdeKoper = new Koper("Klaas");
 
-            // Maak een item aan met een minimumprijs van 100 euro en een looptijd van 1 minuut
             Item eersteItem = new Item("Laptop", 700);
             Item tweedeItem = new Item("Vaas", 90);
 
@@ -34,7 +33,6 @@ namespace ConsoleVeiling
             tweedeItem.Bieden(tweedKoper, vijfBod);
             tweedeItem.Bieden(derdeKoper, zesBod);
 
-            // Sluit de veiling en bepaal de winnaar
 
             // Toon de winnaar van de veiling en de lijst met items in bezit van elke koper
             Console.WriteLine($"De winnaar van de veiling is: {eersteItem.Winaar.Name}");
