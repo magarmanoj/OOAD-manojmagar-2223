@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ConsoleVeiling
 {
@@ -7,7 +8,14 @@ namespace ConsoleVeiling
         private string _naamItem;
         private decimal _minimumbod;
         private decimal _huidigebod;
-        private Koper winaar;
+        private string _winaar;
+        private bool _isVerkocht;
+        private List<Bod> _biedingen = new List<Bod>();
+
+        public bool IsVerkocht
+        {
+            get { return _isVerkocht; }
+        }
 
         public string Naam {
             get
@@ -16,14 +24,16 @@ namespace ConsoleVeiling
             }
         }
 
-        public Koper Winaar
+        public string Winaar
         {
-            get { return winaar; }
+            get { return _winaar; }
         }
 
-        public decimal Huidigebod { 
+        public decimal Huidigebod {
             get { return _huidigebod; }
+            set { _huidigebod = value; }
         }
+
         public decimal Minimumbod { 
             get{ return _minimumbod; }
         }
@@ -34,23 +44,51 @@ namespace ConsoleVeiling
             _minimumbod = minimumbod;
         }
 
+        public Bod WinnendeBod()
+        {
+            if (_isVerkocht)
+            {
+                Bod winnendBod = null;
+                foreach (Bod bod in _biedingen)
+                {
+                    if (winnendBod == null || bod.Bedrag > winnendBod.Bedrag)
+                    {
+                        winnendBod = bod;
+                    }
+                }
+                return winnendBod;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public void Bieden(Koper koper, Bod bedrag)
         {
-
+            if (IsVerkocht)
+            {
+                throw new InvalidOperationException("Dit item is al verkocht.");
+            }
             if (bedrag.Bedrag < Minimumbod)
             {
-                throw new ArgumentException("Gegeven bod is lager dan minimumprijs");
+                throw new InvalidOperationException("Bedrag is lager dan minimum waarde");
             }
             if (bedrag.Bedrag > Huidigebod)
             {
-                if (winaar != null)
+                if (_winaar != null)
                 {
-                    winaar.Aangeschafte.Remove(this);
+                    koper.Aangeschafte.Remove(this);
                 }
-                _huidigebod = bedrag.Bedrag;
-                winaar = koper;
+                Huidigebod = bedrag.Bedrag;
+                _winaar = koper.Name;
                 koper.Aangeschafte.Add(this);
+                _biedingen.Add(bedrag);
             }
+        }
+        public void SluitKoop()
+        {
+            _isVerkocht = true;
         }
     }
 }
