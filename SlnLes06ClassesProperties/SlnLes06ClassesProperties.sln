@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleKaartspel1", "Consol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleVeiling", "ConsoleVeiling\ConsoleVeiling.csproj", "{C3E77561-75B7-48B9-9177-12BAD674AE1F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfVcardEditor", "WpfVcardEditor\WpfVcardEditor.csproj", "{07A64C9A-B919-4181-A7A5-43240690D61E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{C3E77561-75B7-48B9-9177-12BAD674AE1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3E77561-75B7-48B9-9177-12BAD674AE1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3E77561-75B7-48B9-9177-12BAD674AE1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07A64C9A-B919-4181-A7A5-43240690D61E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07A64C9A-B919-4181-A7A5-43240690D61E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07A64C9A-B919-4181-A7A5-43240690D61E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07A64C9A-B919-4181-A7A5-43240690D61E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
