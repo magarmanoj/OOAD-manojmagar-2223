@@ -8,7 +8,9 @@
         public decimal Bedrag {
             get { return _bedrag; }
         }
-        public Koper Koper { get; set; }
+        public Koper Koper { 
+            get { return _koper; }
+        }
 
         public Bod(Koper koper, decimal bedrag)
         {

@@ -21,7 +21,9 @@ namespace ConsoleVeiling
             get { return winaar; }
         }
 
-        public decimal Huidigebod { get; set; }
+        public decimal Huidigebod { 
+            get { return _huidigebod; }
+        }
         public decimal Minimumbod { 
             get{ return _minimumbod; }
         }
@@ -34,6 +36,7 @@ namespace ConsoleVeiling
 
         public void Bieden(Koper koper, Bod bedrag)
         {
+
             if (bedrag.Bedrag < Minimumbod)
             {
                 throw new ArgumentException("Gegeven bod is lager dan minimumprijs");
@@ -44,7 +47,7 @@ namespace ConsoleVeiling
                 {
                     winaar.Aangeschafte.Remove(this);
                 }
-                Huidigebod = bedrag.Bedrag;
+                _huidigebod = bedrag.Bedrag;
                 winaar = koper;
                 koper.Aangeschafte.Add(this);
             }

@@ -21,7 +21,7 @@ namespace ConsoleVeiling
             Bod tweedeBod = new Bod(tweedKoper, 750);
             Bod derdeBod = new Bod(derdeKoper, 800);
 
-            Bod vBod = new Bod(eersteKoper, 99);
+            Bod vBod = new Bod(eersteKoper, 190);
             Bod vijfBod = new Bod(tweedKoper, 750);
             Bod zesBod = new Bod(derdeKoper, 800);
 
