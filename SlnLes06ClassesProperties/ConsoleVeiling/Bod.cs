@@ -5,10 +5,12 @@
         private decimal _bedrag;
         private Koper _koper;
 
-        public decimal Bedrag {
+        public decimal Bedrag
+        {
             get { return _bedrag; }
         }
-        public Koper Koper { 
+        public Koper Koper
+        { 
             get { return _koper; }
         }
 

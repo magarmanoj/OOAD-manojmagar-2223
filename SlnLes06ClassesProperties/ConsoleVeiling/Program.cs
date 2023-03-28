@@ -27,12 +27,12 @@ VINTAGE MEUBELS VEILING
             eersteItem.Bieden(derdeKoper, new Bod(derdeKoper, 800));
             eersteItem.SluitKoop();
 
-            tweedeItem.Bieden(eersteKoper, new Bod(eersteKoper, 130));
+            tweedeItem.Bieden(eersteKoper, new Bod(eersteKoper, 120));
             tweedeItem.Bieden(tweedKoper, new Bod(tweedKoper, 90));
             tweedeItem.Bieden(derdeKoper, new Bod(derdeKoper, 120));
             tweedeItem.SluitKoop();
 
-            for (int i = 0 ; i < items.Count; i++)
+            for (int i = 0; i < items.Count; i++)
             {
                 Item item = items[i];
                 Bod winnendBod = eersteItem.WinnendeBod();
@@ -40,17 +40,15 @@ VINTAGE MEUBELS VEILING
                 {
                     Console.WriteLine("Item 1 is niet verkocht.");
                 }
-                // wel verkocht
                 else
                 {
                     Console.WriteLine($"De winnaar van de eerste veiling is: {item.Winaar}");
                 }
             }
            
-            List<Koper> Kopers = new List<Koper> { eersteKoper, tweedKoper, derdeKoper };
-            foreach (Koper koper in Kopers)
-            {
-                
+            List<Koper> kopers = new List<Koper> { eersteKoper, tweedKoper, derdeKoper };
+            foreach (Koper koper in kopers)
+            {               
                 Console.WriteLine($"Koper {koper.Name} heeft de volgende items in bezit:");
                 foreach (Item item in koper.Aangeschafte)
                 {

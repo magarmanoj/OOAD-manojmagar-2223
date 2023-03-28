@@ -17,7 +17,8 @@ namespace ConsoleVeiling
             get { return _isVerkocht; }
         }
 
-        public string Naam {
+        public string Naam 
+        {
             get
             {
                 return _naamItem;
@@ -29,13 +30,18 @@ namespace ConsoleVeiling
             get { return _winaar; }
         }
 
-        public decimal Huidigebod {
+        public decimal Huidigebod 
+        {
             get { return _huidigebod; }
             set { _huidigebod = value; }
         }
 
-        public decimal Minimumbod { 
-            get{ return _minimumbod; }
+        public decimal Minimumbod 
+        { 
+            get
+            { 
+                return _minimumbod; 
+            }
         }
 
         public Item(string naamItem, decimal minimumbod)

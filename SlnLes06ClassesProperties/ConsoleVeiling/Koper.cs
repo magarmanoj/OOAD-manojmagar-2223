@@ -5,9 +5,9 @@ namespace ConsoleVeiling
     internal class Koper
     {
         private string _name;
-        private List<Item> _aangeschafte;
 
-        public string Name { 
+        public string Name 
+        { 
             get { return _name; }
         }
         public List<Item> Aangeschafte { get; set; }
