@@ -1,27 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using System.IO;
 using System.Windows.Media.Imaging;
-using System.Xml.Linq;
 
 namespace WpfVcardEditor
 {
     internal class Vcard
     {
-
         private string _gender;
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public string Gender
         {
-            get 
-            { 
-                return _gender; 
+            get
+            {
+                return _gender;
             }
             set
             {
@@ -37,7 +30,7 @@ namespace WpfVcardEditor
         }
         public string PEmail { get; set; }
         public string PTelefoon { get; set; }
-        public BitmapImage Photo { get; set; }
+        public BitmapSource Photo { get; set; }
 
         // Werk
         public string Bedrijf { get; set; }
@@ -50,7 +43,6 @@ namespace WpfVcardEditor
         public string Facebook { get; set; }
         public string Instagram { get; set; }
         public string Youtube { get; set; }
-
 
         public string GenerateVcardCode()
         {
@@ -71,7 +63,25 @@ namespace WpfVcardEditor
             content += $"X-SOCIALPROFILE;TYPE=linkedin:{Linkedin}" + Environment.NewLine;
             content += $"X-SOCIALPROFILE;TYPE=instagram:{Instagram}" + Environment.NewLine;
             content += $"X-SOCIALPROFILE;TYPE=youtube:{Youtube}" + Environment.NewLine;
-            content += $"PHOTO;ENCODING=b;TYPE=JPEG:{Photo}" + Environment.NewLine;
+
+            byte[] imageBytes;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(Photo as BitmapSource));
+                encoder.Save(ms);
+                imageBytes = ms.ToArray();
+            }
+            string base64String = Convert.ToBase64String(imageBytes);
+            content += $"PHOTO;ENCODING=b;TYPE=JPEG:{base64String}" + Environment.NewLine;
+
+            DateTime birthDate = (DateTime)BirthDate;
+            string date = birthDate.ToString("yyyyMMdd");
+            content += $"BDAY:{date}" + Environment.NewLine;
+            if (!string.IsNullOrEmpty(_gender))
+            {
+                content += $"GENDER:{_gender}" + Environment.NewLine;
+            }
             content += "END:VCARD";
 
             return content;

@@ -2,15 +2,10 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Reflection.Emit;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Microsoft.Win32;
-using Path = System.IO.Path;
 
 namespace WpfVcardEditor
 {
@@ -55,11 +50,11 @@ namespace WpfVcardEditor
             {
                 Vcard card = ReadVcardFromFile(dialog.FileName);
                 ShowVcard(card);
-                save.IsEnabled = true;
-                HuidigeMap(chosenFileName);
+                save.IsEnabled = true;               
                 double totaalPercentage = (double)totaalIngevuld / totaalField * 100;
                 PercentageLevel(totaalPercentage);
                 chosenFileName = dialog.FileName;
+                HuidigeMap(chosenFileName);
             }
         }
 
@@ -265,35 +260,32 @@ namespace WpfVcardEditor
             card.Instagram = txtFacebook.Text;
             card.Youtube = txtFacebook.Text;
             card.BirthDate = dateBirth.SelectedDate.Value;
-            // photo date and gender
 
+            BitmapImage bitmap = (BitmapImage)imgFoto.Source;
+            MemoryStream memoryStream = new MemoryStream();
+            BitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bitmap));
+            encoder.Save(memoryStream);
+            byte[] bytes = memoryStream.ToArray();
+            string base64String = Convert.ToBase64String(bytes);
+            card.Photo = (BitmapSource)new ImageSourceConverter().ConvertFrom(Convert.FromBase64String(base64String));
+            if (rbMan.IsChecked == true)
+            {
+                card.Gender = "M";
+            }
+            else if (rbVrouw.IsChecked == true)
+            {
+                card.Gender = "F";
+            }
+            else if (rbOnbekend.IsChecked == true)
+            {
+                card.Gender = "O";
+            }
             return card;
         }
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             List<string> words = new List<string>();
-            DateTime birthDate;
-            string date = null;
-            if (dateBirth.SelectedDate != null)
-            {
-                date = dateBirth.SelectedDate.Value.ToString("yyyyMMdd");
-            }
-            if (!string.IsNullOrEmpty(date) && DateTime.TryParseExact(date, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out birthDate))
-            {
-                words.Add($"BDAY:{birthDate:yyyyMMdd}");
-            }
-            if (rbMan.IsChecked == true)
-            {
-                words.Add("GENDER:M");
-            }
-            else if (rbVrouw.IsChecked == true)
-            {
-                words.Add("GENDER:F");
-            }
-            else if (rbOnbekend.IsChecked == true)
-            {
-                words.Add("GENDER:O");
-            }
 
             try
             {
@@ -316,7 +308,6 @@ namespace WpfVcardEditor
                 return;
             }
         }
-
 
         private void Card_Changed(object sender, RoutedEventArgs e)
         {
