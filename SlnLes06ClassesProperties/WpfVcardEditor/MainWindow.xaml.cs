@@ -238,7 +238,7 @@ namespace WpfVcardEditor
                 case "M":
                     rbMan.IsChecked = true;
                     break;
-                case "0":
+                case "O":
                     rbOnbekend.IsChecked = true;
                     break;
             }
