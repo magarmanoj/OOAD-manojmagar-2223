@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D7FCC289-A57B-4B15-A4B8-20C64FB64FBF}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleKaartspel1", "ConsoleKaartspel1\ConsoleKaartspel1.csproj", "{C4B86D38-FC9C-4DC7-A698-539208F816B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleVeiling", "ConsoleVeiling\ConsoleVeiling.csproj", "{C3E77561-75B7-48B9-9177-12BAD674AE1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfVcardEditor", "WpfVcardEditor\WpfVcardEditor.csproj", "{07A64C9A-B919-4181-A7A5-43240690D61E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C4B86D38-FC9C-4DC7-A698-539208F816B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4B86D38-FC9C-4DC7-A698-539208F816B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4B86D38-FC9C-4DC7-A698-539208F816B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4B86D38-FC9C-4DC7-A698-539208F816B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3E77561-75B7-48B9-9177-12BAD674AE1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3E77561-75B7-48B9-9177-12BAD674AE1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3E77561-75B7-48B9-9177-12BAD674AE1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3E77561-75B7-48B9-9177-12BAD674AE1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07A64C9A-B919-4181-A7A5-43240690D61E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07A64C9A-B919-4181-A7A5-43240690D61E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07A64C9A-B919-4181-A7A5-43240690D61E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07A64C9A-B919-4181-A7A5-43240690D61E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {86863153-CD91-46D3-A6CB-860173C06DA0}
+	EndGlobalSection
+EndGlobal

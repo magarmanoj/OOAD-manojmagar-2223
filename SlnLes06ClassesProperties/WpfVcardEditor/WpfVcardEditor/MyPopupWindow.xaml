@@ -1,0 +1,26 @@
+﻿<Window x:Class="WpfVcardEditor.MyPopupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfVcardEditor"
+        mc:Ignorable="d"
+        Title="MyPopupWindow" Height="400" MaxHeight="500" Width="400" MinWidth="400">
+
+    <StackPanel Orientation="Vertical">
+        <Image Source="images/odisee.jpg" Width="350" Height="150"/>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock x:Name="txtGemaakt" Text="Gemaakt door:"  FontSize="15" FontWeight="Bold" Margin="40,20,0,10" />
+            <TextBlock x:Name="txtNaam" Text="Rogier van der Linde" FontSize="15" FontWeight="Normal" Margin="5,20,0,10"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock x:Name="txtVak" Text="Vak:" FontSize="15" FontWeight="Bold" Margin="40,0,0,5"/>
+            <TextBlock x:Name="txtOOAD" Text="OO Application Development" FontSize="15" FontWeight="Normal" Margin="5,0,0,10" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock x:Name="txtAcadmiejaar" Text="Academiejaar:" FontSize="15" FontWeight="Bold" Margin="40,0,0,5" />
+            <TextBlock x:Name="txtJaartaal" Text="2022-2023" FontSize="15" FontWeight="Normal" Margin="5,0,0,5"/>
+        </StackPanel>
+        <Button Name="btnSluiten" Content="SLUITEN" Margin="0,20,0,0" Click="Sluiten_Click" Height="30" Width="80" HorizontalAlignment="Center"/>
+    </StackPanel>
+</Window>
