@@ -22,20 +22,20 @@ VINTAGE MEUBELS VEILING
             List<Item> items = new List<Item>() { eersteItem, tweedeItem };
 
             // Laat de kopers bieden op het item
-            eersteItem.Bieden(eersteKoper, new Bod(eersteKoper, 900));
-            eersteItem.Bieden(tweedKoper, new Bod(tweedKoper, 750));
-            eersteItem.Bieden(derdeKoper, new Bod(derdeKoper, 800));
+            eersteItem.Bieden(new Bod(eersteKoper, 900));
+            eersteItem.Bieden(new Bod(tweedKoper, 750));
+            eersteItem.Bieden(new Bod(derdeKoper, 800));
             eersteItem.SluitKoop();
 
-            tweedeItem.Bieden(eersteKoper, new Bod(eersteKoper, 120));
-            tweedeItem.Bieden(tweedKoper, new Bod(tweedKoper, 90));
-            tweedeItem.Bieden(derdeKoper, new Bod(derdeKoper, 120));
+            tweedeItem.Bieden(new Bod(eersteKoper, 120));
+            tweedeItem.Bieden(new Bod(tweedKoper, 90));
+            tweedeItem.Bieden(new Bod(derdeKoper, 120));
             tweedeItem.SluitKoop();
 
             for (int i = 0; i < items.Count; i++)
             {
                 Item item = items[i];
-                Bod winnendBod = eersteItem.WinnendeBod();
+                Bod winnendBod = eersteItem.WinnendeBod;
                 if (winnendBod == null)
                 {
                     Console.WriteLine("Item 1 is niet verkocht.");

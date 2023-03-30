@@ -4,97 +4,68 @@ using System.Collections.Generic;
 namespace ConsoleVeiling
 {
     internal class Item
-    {
-        private string _naamItem;
-        private decimal _minimumbod;
-        private decimal _huidigebod;
-        private string _winaar;
-        private bool _isVerkocht;
-        private List<Bod> _biedingen = new List<Bod>();
-
-        public bool IsVerkocht
-        {
-            get { return _isVerkocht; }
-        }
-
-        public string Naam 
-        {
-            get
-            {
-                return _naamItem;
-            }
-        }
-
-        public string Winaar
-        {
-            get { return _winaar; }
-        }
-
-        public decimal Huidigebod 
-        {
-            get { return _huidigebod; }
-            set { _huidigebod = value; }
-        }
-
-        public decimal Minimumbod 
-        { 
-            get
-            { 
-                return _minimumbod; 
-            }
-        }
+    {  
+        private List<Bod> Biedingen{ get; set; } = new List<Bod>();
+        public bool IsVerkocht { get; set; }
+        public string Naam { get; set; }
+        public string Winaar { get; set; }
+        public decimal Huidigebod { get; set; }
+        public decimal Minimumbod { get; set; }
 
         public Item(string naamItem, decimal minimumbod)
         {
-            _naamItem = naamItem;
-            _minimumbod = minimumbod;
+            Naam = naamItem;
+            Minimumbod = minimumbod;
         }
 
-        public Bod WinnendeBod()
+        public Bod WinnendeBod
         {
-            if (_isVerkocht)
+            get
             {
-                Bod winnendBod = null;
-                foreach (Bod bod in _biedingen)
+                if (IsVerkocht)
                 {
-                    if (winnendBod == null || bod.Bedrag > winnendBod.Bedrag)
+                    Bod winnendBod = null;
+                    foreach (Bod bod in Biedingen)
                     {
-                        winnendBod = bod;
+                        if (winnendBod == null || bod.Bedrag > winnendBod.Bedrag)
+                        {
+                            winnendBod = bod;
+                        }
                     }
+                    return winnendBod;
                 }
-                return winnendBod;
-            }
-            else
-            {
-                return null;
+                else
+                {
+                    return null;
+                }
             }
         }
 
-        public void Bieden(Koper koper, Bod bedrag)
+        public void Bieden(Bod bod)
         {
             if (IsVerkocht)
             {
                 throw new InvalidOperationException("Dit item is al verkocht.");
             }
-            if (bedrag.Bedrag < Minimumbod)
+            if (bod.Bedrag < Minimumbod)
             {
                 throw new InvalidOperationException("Bedrag is lager dan minimum waarde");
             }
-            if (bedrag.Bedrag > Huidigebod)
+            if (bod.Bedrag > Huidigebod)
             {
-                if (_winaar != null)
+                if (Winaar != null)
                 {
-                    koper.Aangeschafte.Remove(this);
+                    bod.Koper.Aangeschafte.Remove(this);
                 }
-                Huidigebod = bedrag.Bedrag;
-                _winaar = koper.Name;
-                koper.Aangeschafte.Add(this);
-                _biedingen.Add(bedrag);
+                Huidigebod = bod.Bedrag;
+                Winaar = bod.Koper.Name;
+                bod.Koper.Aangeschafte.Add(this);
+                Biedingen.Add(bod);
             }
         }
         public void SluitKoop()
         {
-            _isVerkocht = true;
+            IsVerkocht = true;
         }
     }
 }

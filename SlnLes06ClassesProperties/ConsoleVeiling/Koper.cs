@@ -4,17 +4,12 @@ namespace ConsoleVeiling
 {
     internal class Koper
     {
-        private string _name;
-
-        public string Name 
-        { 
-            get { return _name; }
-        }
+        public string Name { get; set; }
         public List<Item> Aangeschafte { get; set; }
 
         public Koper(string name)
         {
-            _name = name;
+            Name = name;
             Aangeschafte = new List<Item>();
         }
 
