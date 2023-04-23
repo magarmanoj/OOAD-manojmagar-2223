@@ -5,7 +5,7 @@ namespace ConsoleVeiling
 {
     internal class Item
     {  
-        private List<Bod> Biedingen{ get; set; } = new List<Bod>();
+        private List<Bod> Biedingen { get; set; } = new List<Bod>();
         public bool IsVerkocht { get; set; }
         public string Naam { get; set; }
         public string Winaar { get; set; }
