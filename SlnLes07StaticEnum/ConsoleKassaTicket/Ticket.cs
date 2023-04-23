@@ -7,8 +7,7 @@ namespace ConsoleKassaTicket
     internal class Ticket
     {
         public List<Product> Producten { get; set; } = new List<Product>();
-        public Betaalwijze BetaaldMet { get; set; } = Betaalwijze.cash;
-
+        public Betaalwijze BetaaldMet { get; set; } = Betaalwijze.Cash;
 
         public string Kassier { get; set; }
 
@@ -40,7 +39,7 @@ namespace ConsoleKassaTicket
             }
 
             Console.WriteLine("==========================");
-            if (BetaaldMet == Betaalwijze.visa)
+            if (BetaaldMet == Betaalwijze.Visa)
             {
                 Console.WriteLine("Visa kosten: €0,12");
             }

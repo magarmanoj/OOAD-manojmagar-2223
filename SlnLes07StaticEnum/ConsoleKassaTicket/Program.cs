@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleKassaTicket
 {
-    public enum Betaalwijze { visa, cash, bancontact };
+    public enum Betaalwijze 
+    { 
+        Visa, 
+        Cash, 
+        Bancontact 
+    }
     internal class Program
     {
         static void Main(string[] args)
@@ -21,7 +23,7 @@ namespace ConsoleKassaTicket
             };
 
             // Maak een ticket aan en voeg de producten toe
-            Ticket ticket = new Ticket("Annie", Betaalwijze.visa);
+            Ticket ticket = new Ticket("Annie", Betaalwijze.Visa);
             foreach (Product product in producten)
             {
                 ticket.VoegProductToe(product);
