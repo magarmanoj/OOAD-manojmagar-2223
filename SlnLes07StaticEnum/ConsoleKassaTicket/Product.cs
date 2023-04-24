@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace ConsoleKassaTicket
 {
@@ -10,23 +11,31 @@ namespace ConsoleKassaTicket
         public string Code { get; set; }
         public static bool ValideerCode(string valide)
         {
-            return valide != null;
+            return valide.Length == 6 && valide.StartsWith("P");
         }
 
-        public string ToString()
+        public override string ToString()
         {
-            string product;
-            product = $"({Code}) {Name}: {Eenheidsprijs}"; 
-            return product;
+            return $"({Code}) {Name}: {Eenheidsprijs}";
         }
 
         public Product(string code, string name, decimal eenheidsprijs)
         {
-            if (code.Length != 6 || !code.StartsWith("P"))
+
+            if (string.IsNullOrWhiteSpace(name))
             {
-                throw new ArgumentException("Productcode moet uit 6 tekens bestaan en beginnen met 'P'");
+                throw new ArgumentException("Naam moet niet leeg zijn");
             }
 
+            if (eenheidsprijs < 0)
+            {
+                throw new ArgumentException("Eenheidsprijs moet positief zijn.");
+            }
+
+            if (!ValideerCode(code))
+            {
+                throw new ArgumentException("Ongeldige code");
+            }
             Code = code;
             Name = name;
             Eenheidsprijs = eenheidsprijs;

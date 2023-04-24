@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace ConsoleKassaTicket
 {
-    public enum Betaalwijze 
-    { 
-        Visa, 
-        Cash, 
-        Bancontact 
+    public enum Betaalwijze
+    {
+        Visa,
+        Cash,
+        Bancontact
     }
     internal class Program
     {
