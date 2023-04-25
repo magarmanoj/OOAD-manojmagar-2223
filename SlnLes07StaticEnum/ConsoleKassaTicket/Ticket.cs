@@ -38,13 +38,15 @@ namespace ConsoleKassaTicket
                 Console.WriteLine(p.ToString());
             }
 
+            decimal totaalPrijs = TotaalPrijs;
             Console.WriteLine("==========================");
             if (BetaaldMet == Betaalwijze.Visa)
             {
+                totaalPrijs += 0.12m;
                 Console.WriteLine("Visa kosten: €0,12");
             }
            
-            Console.WriteLine("Totaalprijs: " + TotaalPrijs.ToString("C"));
+            Console.WriteLine("Totaalprijs: s" + totaalPrijs.ToString("C"));
         }
 
         public decimal TotaalPrijs

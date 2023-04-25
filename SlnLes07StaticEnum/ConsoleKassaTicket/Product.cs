@@ -21,7 +21,6 @@ namespace ConsoleKassaTicket
 
         public Product(string code, string name, decimal eenheidsprijs)
         {
-
             if (string.IsNullOrWhiteSpace(name))
             {
                 throw new ArgumentException("Naam moet niet leeg zijn");
