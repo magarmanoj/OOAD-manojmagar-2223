@@ -1,19 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Media.Media3D;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfEscapeGame
 {
@@ -30,45 +16,32 @@ namespace WpfEscapeGame
             // define room
             Room room1 = new Room(
                 "bedroom",
-                "I seem to be in a medium sized bedroom. There " +
-                "is a locker to the left, a nice rug on the " +
-                "floor, and a bed to the right.");
+                "I seem to be in a medium sized bedroom. There is a locker to the left, a nice rug on the floor, and a bed to the right.");
 
             // define items
             Item key1 = new Item(
                 "small silver key",
-                "A small silver key, makes me think of one I had " +
-                "at high school.");
+                "A small silver key, makes me think of one I had at high school.");
 
             Item key2 = new Item(
                 "large key",
                 "A large key. Could this be my way out? ");
-            Item locker = new Item(
-                "locker",
-                "A locker. I wonder what's inside. ");
+            Item locker = new Item("locker", "A locker. I wonder what's inside. ", false);
 
             locker.HiddenItem = key2;
             locker.IsLocked = true;
             locker.Key = key1;
 
-            Item bed = new Item(
-                "bed",
-                "Just a stoel. I am not tired right now. ");
+            Item bed = new Item("bed", "Just a stoel. I am not tired right now. ", false);
 
             bed.HiddenItem = key1;
 
             room1.Items.Add(new Item(
                 "floor mat",
-                "A bit ragged floor mat, but still one of the " +
-                "most popular designs."));
+                "A bit ragged floor mat, but still one of the most popular designs."));
 
-            Item stoel = new Item(
-                "stoel",
-                "Just a bed. I am not tired right now. ");
-
-            Item poster = new Item(
-                "poster",
-                "Just a poster. ");
+            Item stoel = new Item("stoel", "Just a stoel. I am not tired right now. ", false);
+            Item poster = new Item("poster", "Just a poster. ", true);
 
             room1.Items.Add(bed);
             room1.Items.Add(locker);
@@ -107,7 +80,7 @@ namespace WpfEscapeGame
             // 2. is it locked?
             if (roomItem.IsLocked)
             {
-                lblMessage.Content = $"{roomItem.Description}It is firmly locked. ";
+                lblMessage.Content = RandomMessageGenerator.GetRandomMessage(MessageType.Error);
                 return;
             }
 
@@ -115,7 +88,7 @@ namespace WpfEscapeGame
             Item foundItem = roomItem.HiddenItem;
             if (foundItem != null)
             {
-                lblMessage.Content = $"Oh, look, I found a {foundItem.Name}. ";
+                lblMessage.Content = RandomMessageGenerator.GetRandomMessage(MessageType.Info);
                 lstMyItems.Items.Add(foundItem);
                 roomItem.HiddenItem = null;
                 return;
@@ -134,7 +107,7 @@ namespace WpfEscapeGame
             // 2. item doesn't fit
             if (roomItem.Key != myItem)
             {
-                lblMessage.Content = "That doesn't seem to work. ";
+                lblMessage.Content = RandomMessageGenerator.GetRandomMessage(MessageType.Error);
                 return;
             }
 
@@ -142,13 +115,19 @@ namespace WpfEscapeGame
             roomItem.IsLocked = false;
             roomItem.Key = null;
             lstMyItems.Items.Remove(myItem);
-            lblMessage.Content = $"I just unlocked the {roomItem.Name}!";
+            lblMessage.Content = RandomMessageGenerator.GetRandomMessage(MessageType.Info);
         }
 
         private void BtnPickUp_Click(object sender, RoutedEventArgs e)
         {
             // 1. find selected item
             Item selItem = (Item)lstRoomItems.SelectedItem;
+
+            if (!selItem.IsPortable)
+            {
+                lblMessage.Content = RandomMessageGenerator.GetRandomMessage(MessageType.Error);
+                return;
+            }
 
             // 2. add item to your items list
             lblMessage.Content = $"I just picked up the {selItem.Name}. ";
@@ -163,7 +142,7 @@ namespace WpfEscapeGame
             Item selItem = (Item)lstMyItems.SelectedItem;
 
             // 2. add item to your items list
-            lblMessage.Content = $"I just picked up the {selItem.Name}. ";
+            lblMessage.Content = RandomMessageGenerator.GetRandomMessage(MessageType.Info);
             lstMyItems.Items.Remove(selItem);
             lstRoomItems.Items.Add(selItem);
             currentRoom.Items.Add(selItem);
