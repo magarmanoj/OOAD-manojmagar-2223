@@ -16,6 +16,6 @@
         <ListBox x:Name="lstRoomItems" HorizontalAlignment="Left" Height="155" Margin="25,175,0,0" VerticalAlignment="Top" Width="235" SelectionChanged="LstItems_SelectionChanged"/>
         <Label Content="Picked up items" HorizontalAlignment="Left" Height="25" Margin="530,150,0,0" VerticalAlignment="Top" Width="112"/>
         <ListBox x:Name="lstMyItems" HorizontalAlignment="Left" Height="155" Margin="530,175,0,0" VerticalAlignment="Top" Width="240" SelectionChanged="LstItems_SelectionChanged"/>
-        <Button x:Name="btnDrop" Content="DROP &gt;&gt;" HorizontalAlignment="Left" Height="35" Margin="315,295,0,0" VerticalAlignment="Top" Width="160" IsEnabled="False" Click="BtnDrop_Click"/>
+        <Button x:Name="btnDrop" Content="&lt;&lt; DROP " HorizontalAlignment="Left" Height="35" Margin="315,295,0,0" VerticalAlignment="Top" Width="160" IsEnabled="False" Click="BtnDrop_Click"/>
     </Grid>
 </Window>
