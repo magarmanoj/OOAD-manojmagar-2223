@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ConsoleKassaTicket
 {
-    public enum BetaalWijze
+    public enum Betaalwijze
     {
         Visa,
         Cash,
@@ -23,7 +23,7 @@ namespace ConsoleKassaTicket
             };
 
             // Maak een ticket aan en voeg de producten toe
-            Ticket ticket = new Ticket("Annie", BetaalWijze.Visa);
+            Ticket ticket = new Ticket("Annie", Betaalwijze.Visa);
             foreach (Product product in producten)
             {
                 ticket.VoegProductToe(product);

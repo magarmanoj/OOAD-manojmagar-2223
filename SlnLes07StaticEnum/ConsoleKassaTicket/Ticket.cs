@@ -7,7 +7,7 @@ namespace ConsoleKassaTicket
     internal class Ticket
     {
         public List<Product> Producten { get; set; } = new List<Product>();
-        public BetaalWijze BetaaldMet { get; set; } = BetaalWijze.Cash;
+        public Betaalwijze BetaaldMet { get; set; } = Betaalwijze.Cash;
 
         public string Kassier { get; set; }
 
@@ -20,7 +20,7 @@ namespace ConsoleKassaTicket
             Producten.Add(product);
         }
 
-        public Ticket(string kassier, BetaalWijze betaalWijze)
+        public Ticket(string kassier, Betaalwijze betaalWijze)
         {
             Kassier = kassier;
             BetaaldMet = betaalWijze;
@@ -40,26 +40,18 @@ namespace ConsoleKassaTicket
 
             decimal totaalPrijs = TotaalPrijs;
             Console.WriteLine("==========================");
-            if (BetaaldMet == BetaalWijze.Visa)
+            if (BetaaldMet == Betaalwijze.Visa)
             {
                 totaalPrijs += 0.12m;
-                Console.WriteLine("Visa kosten: 0.12");
+                Console.WriteLine("Visa kosten: €0,12");
             }
            
-            Console.WriteLine("Totaalprijs: " + totaalPrijs.ToString("C"));
+            Console.WriteLine("Totaalprijs: s" + totaalPrijs.ToString("C"));
         }
 
         public decimal TotaalPrijs
         {
-            get
-            {
-                decimal totaalPrijs = 0;
-                foreach (Product product in Producten)
-                {
-                    totaalPrijs += product.Eenheidsprijs;
-                }
-                return totaalPrijs;
-            }
+            get { return Producten.Sum(p => p.Eenheidsprijs); }
         }
     }
 }

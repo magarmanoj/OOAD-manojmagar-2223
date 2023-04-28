@@ -1,17 +1,14 @@
 ﻿using System;
+using System.Globalization;
 
 namespace ConsoleKassaTicket
 {
     internal class Product
     {
-        private string _code;
-        public string Naam { get; set; }
+        public string Name { get; set; }
         public decimal Eenheidsprijs { get; set; }
 
-        public string Code
-        {
-            get { return _code; }
-        }
+        public string Code { get; set; }
         public static bool ValideerCode(string valide)
         {
             return valide.Length == 6 && valide.StartsWith("P");
@@ -19,7 +16,7 @@ namespace ConsoleKassaTicket
 
         public override string ToString()
         {
-            return $"({Code}) {Naam}: {Eenheidsprijs}";
+            return $"({Code}) {Name}: {Eenheidsprijs}";
         }
 
         public Product(string code, string name, decimal eenheidsprijs)
@@ -38,8 +35,8 @@ namespace ConsoleKassaTicket
             {
                 throw new ArgumentException("Ongeldige code");
             }
-            _code = code;
-            Naam = name;
+            Code = code;
+            Name = name;
             Eenheidsprijs = eenheidsprijs;
         }
     }
