@@ -1,19 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Media.Media3D;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfEscapeGame
 {
@@ -30,9 +16,6 @@ namespace WpfEscapeGame
             // define room
             Room room1 = new Room(
                 "bedroom",
-                "I seem to be in a medium sized bedroom. There " +
-                "is a locker to the left, a nice rug on the " +
-                "floor, and a bed to the right.");
                 "I seem to be in a medium sized bedroom. There is a locker to the left, a nice rug on the floor, and a bed to the right.");
 
             // define items
@@ -86,7 +69,6 @@ namespace WpfEscapeGame
             btnPickUp.IsEnabled = lstRoomItems.SelectedValue != null; // room item selected
             btnUseOn.IsEnabled = lstRoomItems.SelectedValue != null && lstMyItems.SelectedValue != null; // room item and picked up item selected
             btnDrop.IsEnabled = lstMyItems.SelectedValue != null; // room item selected
-
         }
 
         private void BtnCheck_Click(object sender, RoutedEventArgs e)
