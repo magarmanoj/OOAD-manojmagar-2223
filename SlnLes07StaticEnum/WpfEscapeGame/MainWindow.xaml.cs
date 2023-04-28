@@ -69,7 +69,6 @@ namespace WpfEscapeGame
             btnPickUp.IsEnabled = lstRoomItems.SelectedValue != null; // room item selected
             btnUseOn.IsEnabled = lstRoomItems.SelectedValue != null && lstMyItems.SelectedValue != null; // room item and picked up item selected
             btnDrop.IsEnabled = lstMyItems.SelectedValue != null; // room item selected
-
         }
 
         private void BtnCheck_Click(object sender, RoutedEventArgs e)
