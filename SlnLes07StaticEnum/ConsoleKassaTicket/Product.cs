@@ -4,10 +4,14 @@ namespace ConsoleKassaTicket
 {
     internal class Product
     {
+        private string _code;
         public string Naam { get; set; }
         public decimal Eenheidsprijs { get; set; }
 
-        public string Code { get; set; }
+        public string Code
+        {
+            get { return _code; }
+        }
         public static bool ValideerCode(string valide)
         {
             return valide.Length == 6 && valide.StartsWith("P");
@@ -34,7 +38,7 @@ namespace ConsoleKassaTicket
             {
                 throw new ArgumentException("Ongeldige code");
             }
-            Code = code;
+            _code = code;
             Naam = name;
             Eenheidsprijs = eenheidsprijs;
         }

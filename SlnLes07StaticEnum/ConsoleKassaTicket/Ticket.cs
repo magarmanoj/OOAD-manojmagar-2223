@@ -9,6 +9,8 @@ namespace ConsoleKassaTicket
         public List<Product> Producten { get; set; } = new List<Product>();
         public BetaalWijze BetaaldMet { get; set; } = BetaalWijze.Cash;
 
+        decimal totaalPrijs = 0;
+
         public string Kassier { get; set; }
 
         public void VoegProductToe(Product product)
@@ -38,12 +40,12 @@ namespace ConsoleKassaTicket
                 Console.WriteLine(p.ToString());
             }
 
-            decimal totaalPrijs = TotaalPrijs;
+            totaalPrijs = TotaalPrijs;
             Console.WriteLine("==========================");
             if (BetaaldMet == BetaalWijze.Visa)
             {
                 totaalPrijs += 0.12m;
-                Console.WriteLine("Visa kosten: 0,12");
+                Console.WriteLine("Visa kosten: 0.12");
             }
            
             Console.WriteLine("Totaalprijs: " + totaalPrijs.ToString("C"));
@@ -51,7 +53,14 @@ namespace ConsoleKassaTicket
 
         public decimal TotaalPrijs
         {
-            get { return Producten.Sum(p => p.Eenheidsprijs); }
+            get
+            {
+                foreach (Product product in Producten)
+                {
+                    totaalPrijs += product.Eenheidsprijs;
+                }
+                return totaalPrijs;
+            }
         }
     }
 }
