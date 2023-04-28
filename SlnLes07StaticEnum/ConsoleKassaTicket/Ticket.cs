@@ -9,8 +9,6 @@ namespace ConsoleKassaTicket
         public List<Product> Producten { get; set; } = new List<Product>();
         public BetaalWijze BetaaldMet { get; set; } = BetaalWijze.Cash;
 
-        decimal totaalPrijs = 0;
-
         public string Kassier { get; set; }
 
         public void VoegProductToe(Product product)
@@ -40,7 +38,7 @@ namespace ConsoleKassaTicket
                 Console.WriteLine(p.ToString());
             }
 
-            totaalPrijs = TotaalPrijs;
+            decimal totaalPrijs = TotaalPrijs;
             Console.WriteLine("==========================");
             if (BetaaldMet == BetaalWijze.Visa)
             {
@@ -55,6 +53,7 @@ namespace ConsoleKassaTicket
         {
             get
             {
+                decimal totaalPrijs = 0;
                 foreach (Product product in Producten)
                 {
                     totaalPrijs += product.Eenheidsprijs;
