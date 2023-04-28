@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Globalization;
 
 namespace ConsoleKassaTicket
 {
     internal class Product
     {
-        public string Name { get; set; }
+        public string Naam { get; set; }
         public decimal Eenheidsprijs { get; set; }
 
         public string Code { get; set; }
@@ -16,7 +15,7 @@ namespace ConsoleKassaTicket
 
         public override string ToString()
         {
-            return $"({Code}) {Name}: {Eenheidsprijs}";
+            return $"({Code}) {Naam}: {Eenheidsprijs}";
         }
 
         public Product(string code, string name, decimal eenheidsprijs)
@@ -36,7 +35,7 @@ namespace ConsoleKassaTicket
                 throw new ArgumentException("Ongeldige code");
             }
             Code = code;
-            Name = name;
+            Naam = name;
             Eenheidsprijs = eenheidsprijs;
         }
     }
