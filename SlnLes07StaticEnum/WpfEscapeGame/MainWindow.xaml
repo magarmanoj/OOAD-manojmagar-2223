@@ -10,16 +10,16 @@
         <TextBlock x:Name="txtRoomDesc" Padding="10,10,10,10" HorizontalAlignment="Left" Height="65" Margin="25,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="745" FontSize="15" Background="#FFF9F5F5"/>
         <Label x:Name="lblMessage" Padding="10,10,10,10" Content="" HorizontalAlignment="Left" Height="45" Margin="25,85,0,0" VerticalAlignment="Top" Width="745" Background="#FFF9F5F5" FontSize="15" Foreground="#FF000099"/>
         <Label Content="Room items" HorizontalAlignment="Left" Height="25" Margin="25,150,0,0" VerticalAlignment="Top" Width="112"/>
-        <Button x:Name="btnCheck" Content="&lt;- CHECK" HorizontalAlignment="Left" Height="35" Margin="313,176,0,0" VerticalAlignment="Top" Width="160" IsEnabled="False" Click="BtnCheck_Click"/>
-        <Button x:Name="btnPickUp" Content="PICK UP &gt;&gt;" HorizontalAlignment="Left" Height="35" Margin="315,255,0,0" VerticalAlignment="Top" Width="160" IsEnabled="False" Click="BtnPickUp_Click"/>
-        <Button x:Name="btnUseOn" Content="&lt;- USE ON -&gt;" HorizontalAlignment="Left" Height="35" Margin="315,215,0,0" VerticalAlignment="Top" Width="160" IsEnabled="False" Click="BtnUseOn_Click"/>
+        <Button x:Name="btnCheck" Content="&lt;- CHECK" HorizontalAlignment="Left" Height="35" Margin="310,175,0,0" VerticalAlignment="Top" Width="160" IsEnabled="False" Click="BtnCheck_Click"/>
+        <Button x:Name="btnPickUp" Content="PICK UP &gt;&gt;" HorizontalAlignment="Left" Height="35" Margin="310,255,0,0" VerticalAlignment="Top" Width="160" IsEnabled="False" Click="BtnPickUp_Click"/>
+        <Button x:Name="btnUseOn" Content="&lt;- USE ON -&gt;" HorizontalAlignment="Left" Height="35" Margin="310,215,0,0" VerticalAlignment="Top" Width="160" IsEnabled="False" Click="BtnUseOn_Click"/>
         <ListBox x:Name="lstRoomItems" HorizontalAlignment="Left" Height="155" Margin="25,175,0,0" VerticalAlignment="Top" Width="235" SelectionChanged="LstItems_SelectionChanged"/>
-        <Label Content="Picked up items" HorizontalAlignment="Left" Height="25" Margin="530,150,0,0" VerticalAlignment="Top" Width="112"/>
+        <Label Content="Picked up items" HorizontalAlignment="Left" Height="25" Margin="530,150,0,0" VerticalAlignment="Top" Width="110"/>
         <ListBox x:Name="lstMyItems" HorizontalAlignment="Left" Height="155" Margin="530,175,0,0" VerticalAlignment="Top" Width="240" SelectionChanged="LstItems_SelectionChanged"/>
-        <Button x:Name="btnDrop" Content="&lt;&lt; DROP " HorizontalAlignment="Left" Height="35" Margin="315,295,0,0" VerticalAlignment="Top" Width="160" IsEnabled="False" Click="BtnDrop_Click"/>
-        <ListBox x:Name="lstRoomDoor" HorizontalAlignment="Left" Height="79" Margin="25,432,0,0" VerticalAlignment="Top" Width="235"/>
-        <Label Content="Room doors" HorizontalAlignment="Left" Height="25" Margin="25,402,0,0" VerticalAlignment="Top" Width="112"/>
-        <Button x:Name="btnOpenWith" Content="&lt; PICK UP &gt;" HorizontalAlignment="Left" Height="35" Margin="313,432,0,0" VerticalAlignment="Top" Width="160" IsEnabled="False"/>
-        <Button x:Name="btnEnter" Content="&lt; PICK UP" HorizontalAlignment="Left" Height="35" Margin="313,476,0,0" VerticalAlignment="Top" Width="160" IsEnabled="False"/>
+        <Button x:Name="btnDrop" Content="&lt;&lt; DROP " HorizontalAlignment="Left" Height="35" Margin="310,295,0,0" VerticalAlignment="Top" Width="160" IsEnabled="False" Click="BtnDrop_Click"/>
+        <ListBox x:Name="lstRoomDoor" HorizontalAlignment="Left" Height="80" Margin="25,430,0,0" VerticalAlignment="Top" Width="235"/>
+        <Label Content="Room doors" HorizontalAlignment="Left" Height="25" Margin="25,400,0,0" VerticalAlignment="Top" Width="112"/>
+        <Button x:Name="btnOpenWith" Content="&lt;- PICK UP -&gt;" HorizontalAlignment="Left" Height="35" Margin="310,435,0,0" VerticalAlignment="Top" Width="160" IsEnabled="False"/>
+        <Button x:Name="btnEnter" Content="&lt;- PICK UP" HorizontalAlignment="Left" Height="35" Margin="310,475,0,0" VerticalAlignment="Top" Width="160" IsEnabled="False"/>
     </Grid>
 </Window>
