@@ -17,20 +17,5 @@ namespace WpfEscapeGame
             Description = desc;
             ImagePath = imagePath;
         }
-
-        public List<Room> FindConnectedRooms()
-        {
-            List<Room> connectedRooms = new List<Room>();
-
-            foreach (Door door in Doors)
-            {
-                if (door.ToRoom != null && !connectedRooms.Contains(door.ToRoom))
-                {
-                    connectedRooms.Add(door.ToRoom);
-                }
-            }
-
-            return connectedRooms;
-        }
     }
 }

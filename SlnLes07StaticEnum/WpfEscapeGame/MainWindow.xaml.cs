@@ -18,7 +18,7 @@ namespace WpfEscapeGame
             // define room
             Room room1 = new Room(
                 "bedroom",
-                "I seem to be in a medium sized bedroom. There is a locker to the left, a nice rug on the floor, and a bed to the right.", "/images/ss-bedroom.png");
+                "I seem to be in a medium sized bedroom. There is a locker to the left, a nice rug on the floor, and a bed to the right.", "ss-bedroom.png");
 
             // define items
             Item key1 = new Item(
@@ -50,11 +50,11 @@ namespace WpfEscapeGame
             room1.Items.Add(stoel);
             room1.Items.Add(poster);
 
-            Room livingRoom = new Room("Living room", "Such a lovely living room.", "/images/ss-living.png");
+            Room livingRoom = new Room("Living room", "Such a lovely living room.", "ss-living.png");
             livingRoom.Items.Add(new Item("Sofa", "nice cozy sofa"));
             livingRoom.Items.Add(new Item("TV", "WOAAHHH WHAT A BIG TV!!"));
 
-            Room computerRoom = new Room("Computer room", "Are you a hardcore gamer?", "/images/ss-computer.png");
+            Room computerRoom = new Room("Computer room", "Are you a hardcore gamer?", "ss-computer.png");
             computerRoom.Items.Add(new Item("PC", "IS THAT 4090?"));
             computerRoom.Items.Add(new Item("Gaming chair", "Nice comfy chair"));
 
@@ -66,16 +66,16 @@ namespace WpfEscapeGame
 
             Door door2 = new Door(
                 "computer room door", " Ohh! you have 2 computers, nice");
-            door1.ToRoom = computerRoom;
+            door2.ToRoom = computerRoom;
 
             Door door3 = new Door(
                 "mysterious door", "Can't see nothing, it's so dark");
-            door1.IsLocked = true;
-            door1.ToRoom = null; // null ruimte
+            door3.IsLocked = true;
+            door3.ToRoom = null; // null ruimte
 
             Door door4 = new Door(
                 "bedroom door", "I seem to be in a medium sized bedroom. There is a locker to the left, a nice rug on the floor, and a bed to the right.");
-            door1.ToRoom = room1;
+            door4.ToRoom = room1;
 
             // deuren toevoegen aan kamers
             room1.Doors.Add(door1);
@@ -99,28 +99,14 @@ namespace WpfEscapeGame
                 lstRoomItems.Items.Add(itm);
             }
 
+            lstRoomDoors.Items.Clear();
             foreach (Door door in currentRoom.Doors)
             {
                 lstRoomDoors.Items.Add(door);
             }
 
-            foreach (Room room in currentRoom.FindConnectedRooms())
-            {
-                foreach (Door door in room.Doors)
-                {
-                    if (door.ToRoom == currentRoom)
-                    {
-                        continue;
-                    }
-
-                    if (currentRoom.Doors.Contains(door))
-                    {
-                        continue;
-                    }
-
-                    lstRoomDoors.Items.Add(door);
-                }
-            }
+            BitmapImage roomImage = new BitmapImage(new Uri($"img/{currentRoom.ImagePath}", UriKind.RelativeOrAbsolute));
+            imgFoto.Source = roomImage;
         }
 
         private void LstItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -229,45 +215,14 @@ namespace WpfEscapeGame
 
         private void BtnEnter_Click(object sender, RoutedEventArgs e)
         {
-
-            if (lstRoomDoors.SelectedItem is Door door)
-            {
-                if (door.IsLocked)
-                {
-                    // 1. Vind de key om de deur te openen
-                    Item requiredKey = door.Key;
-
-                    // 2. Check of de speler de nodige sleutel heeft in lstMyItems.
-                    if (lstMyItems.Items.Contains(requiredKey))
-                    {
-
-                        // 3. Unlock de deur.
-                        door.IsLocked = false;
-                        lblMessage.Content = $"You unlocked the {door.Name} with the {requiredKey.Name}.";
-
-                        // 4. Ga naar de volgende kamer.
-                        currentRoom = door.ToRoom;
-                        txtRoomDesc.Text = currentRoom.Description;
-                        UpdateUI();
-                        lblMessage.Content = RandomMessageGenerator.GetRandomMessage(MessageType.Info);
-                    }
-                    else
-                    {
-                        lblMessage.Content = $"The {door.Name} is locked. You need a {requiredKey.Name} to open it.";
-                    }
-                }
-                else
-                {
-                    currentRoom = door.ToRoom;
-                    txtRoomDesc.Text = currentRoom.Description;
-                    UpdateUI();
-                    lblMessage.Content = RandomMessageGenerator.GetRandomMessage(MessageType.Info);
-                }
-            }
-            else
+            Door selectedDoor = (Door)lstRoomDoors.SelectedItem;
+            if (selectedDoor.IsLocked)
             {
                 lblMessage.Content = RandomMessageGenerator.GetRandomMessage(MessageType.Error);
+                return;
             }
+            currentRoom = selectedDoor.ToRoom;
+            UpdateUI();
         }
     }
 }
