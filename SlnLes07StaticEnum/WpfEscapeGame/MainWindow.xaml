@@ -17,9 +17,10 @@
         <Label Content="Picked up items" HorizontalAlignment="Left" Height="25" Margin="530,150,0,0" VerticalAlignment="Top" Width="110"/>
         <ListBox x:Name="lstMyItems" HorizontalAlignment="Left" Height="155" Margin="530,175,0,0" VerticalAlignment="Top" Width="240" SelectionChanged="LstItems_SelectionChanged"/>
         <Button x:Name="btnDrop" Content="&lt;&lt; DROP " HorizontalAlignment="Left" Height="35" Margin="310,295,0,0" VerticalAlignment="Top" Width="160" IsEnabled="False" Click="BtnDrop_Click"/>
-        <ListBox x:Name="lstRoomDoor" HorizontalAlignment="Left" Height="80" Margin="25,430,0,0" VerticalAlignment="Top" Width="235"/>
+        <ListBox x:Name="lstRoomDoors" HorizontalAlignment="Left" Height="80" Margin="25,430,0,0" VerticalAlignment="Top" Width="235" SelectionChanged="LstItems_SelectionChanged"/>
         <Label Content="Room doors" HorizontalAlignment="Left" Height="25" Margin="25,400,0,0" VerticalAlignment="Top" Width="112"/>
-        <Button x:Name="btnOpenWith" Content="&lt;- PICK UP -&gt;" HorizontalAlignment="Left" Height="35" Margin="310,435,0,0" VerticalAlignment="Top" Width="160" IsEnabled="False"/>
-        <Button x:Name="btnEnter" Content="&lt;- PICK UP" HorizontalAlignment="Left" Height="35" Margin="310,475,0,0" VerticalAlignment="Top" Width="160" IsEnabled="False"/>
+        <Button x:Name="btnOpenWith" Content="&lt;- OPEN WITH -&gt;" HorizontalAlignment="Left" Height="35" Margin="310,435,0,0" VerticalAlignment="Top" Width="160" IsEnabled="False" Click="BtnOpenWith_Click"/>
+        <Button x:Name="btnEnter" Content="&lt;- ENTER" HorizontalAlignment="Left" Height="35" Margin="310,475,0,0" VerticalAlignment="Top" Width="160" IsEnabled="False" Click="BtnEnter_Click"/>
+        <Image x:Name="imgFoto" HorizontalAlignment="Left" Height="110" Margin="530,400,0,0" VerticalAlignment="Top" Width="240"/>
     </Grid>
 </Window>

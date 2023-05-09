@@ -9,7 +9,7 @@ namespace WpfEscapeGame
         Error
     }
 
-    internal static class RandomMessageGenerator
+    public static class RandomMessageGenerator
     {
         private static string[] msgInfo = new[]
         {
