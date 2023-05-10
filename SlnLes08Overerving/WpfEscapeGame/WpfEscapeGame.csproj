@@ -55,8 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Actor.cs" />
     <Compile Include="Door.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="Key.cs" />
+    <Compile Include="LockableItem.cs" />
     <Compile Include="RandomMessageGenerator.cs" />
     <Compile Include="Room.cs" />
     <Page Include="MainWindow.xaml">

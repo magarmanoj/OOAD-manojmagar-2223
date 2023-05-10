@@ -13,16 +13,16 @@ namespace WpfEscapeGame
     {
         private static string[] isLockedMsgs = new[]
         {
-            "I think I'm on the right track.",
-            "Ohh, this looks interesting.",
-            "Let's continue exploring."
+            "I think this is locked",
+            "Ohh, this looks interestingn but it's locked.",
+            "It's locked."
         };
 
         private static string[] isWrongKeyMsgs = new[]
         {
-            "How beautiful!.",
-            "Let's go! New piece for my collection.",
-            "Interesting looking item."
+            "Wrong key.",
+            "You are using the wrong key.",
+            "This key won't unlock it."
         };
 
         private static string[] doesNotWorkMsgs = new[]
