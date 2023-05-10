@@ -7,7 +7,6 @@
         public bool IsLocked { get; set; } = false;
         public bool IsPortable { get; set; } = true;
         public Item Key { get; set; }
-        public Item HiddenItem { get; set; }
         public Item(string name, string desc)
         {
             Name = name;

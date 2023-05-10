@@ -1,28 +1,19 @@
-﻿namespace WpfEscapeGame
+﻿using System.Net.NetworkInformation;
+
+namespace WpfEscapeGame
 {
-    public class Item
+    public class Item : Actor
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
+
         public bool IsLocked { get; set; } = false;
         public bool IsPortable { get; set; } = true;
         public Item Key { get; set; }
         public Item HiddenItem { get; set; }
-        public Item(string name, string desc)
-        {
-            Name = name;
-            Description = desc;
-        }
+        public Item(string name, string desc) : base(name, desc) { }
 
-        public Item(string name, string desc, bool isPorttable)
+        public Item(string name, string desc, bool isPortable) : base(name,desc) 
         {
-            Name = name;
-            Description = desc;
-            IsPortable = isPorttable;
-        }
-        public override string ToString()
-        {
-            return Name;
+            IsPortable = isPortable;
         }
     }
 }
