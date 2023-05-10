@@ -21,6 +21,6 @@
         <Label Content="Room doors" HorizontalAlignment="Left" Height="25" Margin="25,400,0,0" VerticalAlignment="Top" Width="112"/>
         <Button x:Name="btnOpenWith" Content="&lt;- OPEN WITH -&gt;" HorizontalAlignment="Left" Height="35" Margin="310,435,0,0" VerticalAlignment="Top" Width="160" IsEnabled="False" Click="BtnOpenWith_Click"/>
         <Button x:Name="btnEnter" Content="&lt;- ENTER" HorizontalAlignment="Left" Height="35" Margin="310,475,0,0" VerticalAlignment="Top" Width="160" IsEnabled="False" Click="BtnEnter_Click"/>
-        <Image x:Name="imgFoto" HorizontalAlignment="Left" Height="110" Margin="530,400,0,0" VerticalAlignment="Top" Width="240"/>
+        <Image x:Name="imgFoto" HorizontalAlignment="Center" Height="125" Margin="530,400,0,0" VerticalAlignment="Top" Width="250"/>
     </Grid>
 </Window>
