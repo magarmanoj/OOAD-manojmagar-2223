@@ -11,11 +11,10 @@ namespace WpfEscapeGame
         public List<Door> Doors { get; set; } = new List<Door>();
         public string ImagePath { get; set; }
 
-        public Room(string name, string desc, string imagePath)
+        public Room(string name, string desc)
         {
             Name = name;
             Description = desc;
-            ImagePath = imagePath;
         }
     }
 }

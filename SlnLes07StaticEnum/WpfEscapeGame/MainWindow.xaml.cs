@@ -18,7 +18,8 @@ namespace WpfEscapeGame
             // define room
             Room room1 = new Room(
                 "bedroom",
-                "I seem to be in a medium sized bedroom. There is a locker to the left, a nice rug on the floor, and a bed to the right.", "ss-bedroom.png");
+                "I seem to be in a medium sized bedroom. There is a locker to the left, a nice rug on the floor, and a bed to the right.");
+            room1.ImagePath = "ss-bedroom.png";
 
             // define items
             Item key1 = new Item(
@@ -50,11 +51,13 @@ namespace WpfEscapeGame
             room1.Items.Add(stoel);
             room1.Items.Add(poster);
 
-            Room livingRoom = new Room("Living room", "Such a lovely living room.", "ss-living.png");
+            Room livingRoom = new Room("Living room", "Such a lovely living room.");
+            livingRoom.ImagePath = "ss-living.png";
             livingRoom.Items.Add(new Item("Sofa", "nice cozy sofa"));
             livingRoom.Items.Add(new Item("TV", "WOAAHHH WHAT A BIG TV!!"));
 
-            Room computerRoom = new Room("Computer room", "Are you a hardcore gamer?", "ss-computer.png");
+            Room computerRoom = new Room("Computer room", "Are you a hardcore gamer?");
+            computerRoom.ImagePath = "ss-computer.png";
             computerRoom.Items.Add(new Item("PC", "IS THAT 4090?"));
             computerRoom.Items.Add(new Item("Gaming chair", "Nice comfy chair"));
 
