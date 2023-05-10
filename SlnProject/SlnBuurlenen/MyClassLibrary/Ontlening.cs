@@ -6,12 +6,6 @@ using System.Threading.Tasks;
 
 namespace MyClassLibrary
 {
-    public enum OntleningStatus
-    {
-        InAanvraag,
-        Goedgekeurd,
-        Verworpen
-    }
     internal class Ontlening
     {
         public int Id { get; set; }

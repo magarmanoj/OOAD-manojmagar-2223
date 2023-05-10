@@ -6,18 +6,6 @@ using System.Threading.Tasks;
 
 namespace MyClassLibrary
 {
-    public enum TransmissieType
-    {
-        Manueel,
-        Automatisch
-    }
-
-    public enum BrandstofType
-    {
-        Benzine,
-        Diesel
-    }
-
     internal class MotorVoertuig : Voertuig
     {
         public string Transmissie { get; set; }
