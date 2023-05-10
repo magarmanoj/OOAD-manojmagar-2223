@@ -1,0 +1,16 @@
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD-manojmagar-2223\SlnLes07StaticEnum\WpfEscapeGame\bin\Debug\WpfEscapeGame.exe.config
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD-manojmagar-2223\SlnLes07StaticEnum\WpfEscapeGame\bin\Debug\WpfEscapeGame.exe
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD-manojmagar-2223\SlnLes07StaticEnum\WpfEscapeGame\bin\Debug\WpfEscapeGame.pdb
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD-manojmagar-2223\SlnLes07StaticEnum\WpfEscapeGame\obj\Debug\WpfEscapeGame.csproj.AssemblyReference.cache
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD-manojmagar-2223\SlnLes07StaticEnum\WpfEscapeGame\obj\Debug\WpfEscapeGame.csproj.SuggestedBindingRedirects.cache
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD-manojmagar-2223\SlnLes07StaticEnum\WpfEscapeGame\obj\Debug\MainWindow.g.cs
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD-manojmagar-2223\SlnLes07StaticEnum\WpfEscapeGame\obj\Debug\App.g.cs
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD-manojmagar-2223\SlnLes07StaticEnum\WpfEscapeGame\obj\Debug\WpfEscapeGame_MarkupCompile.cache
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD-manojmagar-2223\SlnLes07StaticEnum\WpfEscapeGame\obj\Debug\WpfEscapeGame_MarkupCompile.lref
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD-manojmagar-2223\SlnLes07StaticEnum\WpfEscapeGame\obj\Debug\MainWindow.baml
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD-manojmagar-2223\SlnLes07StaticEnum\WpfEscapeGame\obj\Debug\WpfEscapeGame.g.resources
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD-manojmagar-2223\SlnLes07StaticEnum\WpfEscapeGame\obj\Debug\WpfEscapeGame.Properties.Resources.resources
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD-manojmagar-2223\SlnLes07StaticEnum\WpfEscapeGame\obj\Debug\WpfEscapeGame.csproj.GenerateResource.cache
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD-manojmagar-2223\SlnLes07StaticEnum\WpfEscapeGame\obj\Debug\WpfEscapeGame.csproj.CoreCompileInputs.cache
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD-manojmagar-2223\SlnLes07StaticEnum\WpfEscapeGame\obj\Debug\WpfEscapeGame.exe
+C:\Users\magar\OneDrive - ODISEE\Documenten\GitHub\OOAD-manojmagar-2223\SlnLes07StaticEnum\WpfEscapeGame\obj\Debug\WpfEscapeGame.pdb
