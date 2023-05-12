@@ -6,14 +6,27 @@ using System.Threading.Tasks;
 
 namespace MyClassLibrary
 {
-    internal class Ontlening
+    public class Ontlening
     {
         public int Id { get; set; }
         public DateTime Vanaf { get; set; }
         public DateTime Tot { get; set; }
         public string Bericht { get; set; }
         public string Status { get; set; }
-        public int VoertuigId { get; set; }
-        public int AanvragerId { get; set; }
+        public Voertuig Voertuig { get; set; }
+        public Gebruiker Aanvrager { get; set; }
+
+        public static Ontlening FindById(int id)
+        {
+            // sql voor find ontlenning, voertuig en aanvraag
+
+            Voertuig voertuig = new Voertuig();
+            voertuig.Id = id;
+
+            Ontlening ontlening = new Ontlening();
+            ontlening.Voertuig = voertuig;
+
+            return ontlening;
+        }
     }
 }

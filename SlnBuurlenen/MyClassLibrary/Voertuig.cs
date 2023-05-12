@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyClassLibrary
 {
-    internal class Voertuig
+    public class Voertuig
     {
         public int Id { get; set; }
         public string Naam { get; set; }

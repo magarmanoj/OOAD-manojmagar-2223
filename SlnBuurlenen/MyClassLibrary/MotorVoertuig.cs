@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace MyClassLibrary
 {
-    internal class MotorVoertuig : Voertuig
+    public class MotorVoertuig : Voertuig
     {
         public string Transmissie { get; set; }
+
         public string Brandstof { get; set; }
-        public int VoertuigId { get; set; }
     }
 }

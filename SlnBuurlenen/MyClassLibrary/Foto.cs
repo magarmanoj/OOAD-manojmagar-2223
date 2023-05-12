@@ -9,7 +9,10 @@ namespace MyClassLibrary
     public class Foto
     {
         public int Id { get; set; }
+
         public byte[] Data { get; set; }
-        public int VoertuigId { get; set; }
+
+        public Voertuig Voertuig { get; set; }
+
     }
 }

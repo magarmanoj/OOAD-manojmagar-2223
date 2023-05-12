@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyClassLibrary
 {
-    internal class Enums
+    public class Enums
     {
         public enum OntleningStatus
         {
