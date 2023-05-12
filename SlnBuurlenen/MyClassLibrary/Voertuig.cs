@@ -11,7 +11,7 @@ namespace MyClassLibrary
         public int Id { get; set; }
         public string Naam { get; set; }
         public string Beschrijving { get; set; }
-        public int Bouwjaar { get; set; }
+        public int? Bouwjaar { get; set; }
         public string Merk { get; set; }
         public string Model { get; set; }
         public int EigenaarId { get; set; }

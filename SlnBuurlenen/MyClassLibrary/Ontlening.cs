@@ -18,9 +18,7 @@ namespace MyClassLibrary
 
         public static Ontlening FindById(int id)
         {
-
-            //sql voor find ontlenning, voertuig en aanvraag
-
+            // sql voor find ontlenning, voertuig en aanvraag
             Voertuig voertuig = new Voertuig();
             voertuig.Id = id;
 
