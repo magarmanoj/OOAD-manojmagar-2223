@@ -8,8 +8,8 @@ namespace MyClassLibrary
 {
     internal class GetrokkenVoertuig : Voertuig
     {
-        public double Gewicht { get; set; }
-        public double MaxBelasting { get; set; }
+        public int Gewicht { get; set; }
+        public int MaxBelasting { get; set; }
         public string Afmetingen { get; set; }
         public bool Geremd { get; set; }
         public int VoertuigId { get; set; }
