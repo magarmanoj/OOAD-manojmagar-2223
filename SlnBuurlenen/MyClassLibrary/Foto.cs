@@ -13,6 +13,5 @@ namespace MyClassLibrary
         public byte[] Data { get; set; }
 
         public Voertuig Voertuig { get; set; }
-
     }
 }

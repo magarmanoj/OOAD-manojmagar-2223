@@ -8,8 +8,8 @@ namespace MyClassLibrary
 {
     public class MotorVoertuig : Voertuig
     {
-        public string Transmissie { get; set; }
+        public Enums.TransmissieType Transmissie { get; set; }
 
-        public string Brandstof { get; set; }
+        public Enums.BrandstofType Brandstof { get; set; }
     }
 }

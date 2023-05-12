@@ -22,7 +22,7 @@ namespace MyClassLibrary
 
         public string Profielfoto { get; set; }
 
-        public string Geslacht { get; set; }
+        public Enums.GeslachtType Geslacht { get; set; }
 
         public static Gebruiker FindByLoginAndPassword(string login, string password)
         {
