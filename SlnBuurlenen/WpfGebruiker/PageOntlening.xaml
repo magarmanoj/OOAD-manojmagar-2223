@@ -9,6 +9,51 @@
       Title="PageOntlening">
 
     <Grid>
+        <TabControl>
+            <TabItem Header="Mijn ontleningen">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="350"/>
+                    </Grid.RowDefinitions>
 
+                    <TextBlock Text="Door mij ontleend:" FontSize="18" FontWeight="Bold" Margin="10"/>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <ListBox Width="550" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <!-- Add your ListBox items here -->
+                        </ListBox>
+                        <Button Content="Annuleren" Margin="20,300,0,0" Height="45" Width="100" />
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Aanvragen">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="200"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Inkomende aanvragen:" FontSize="18" FontWeight="Bold" Margin="10"/>
+                    <ListBox Grid.Row="1" Grid.Column="0" Width="550" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <!-- Add your ListBox items here -->
+                    </ListBox>
+                    <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+                        <Button Content="Annuleren" Margin="10,0,0,10"/>
+                        <Button Content="Afwijzen" Margin="10,0,0,10"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Grid.Row="2">
+                        <TextBlock Text="Details van de aanvraag:" FontSize="18" FontWeight="Bold" Margin="10"/>
+                        <Label Content="Voertuig:"/>
+                        <Label Content="Periode:"/>
+                        <Label Content="Aanvrager:"/>
+                        <Label Content="Bericht:"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Page>
