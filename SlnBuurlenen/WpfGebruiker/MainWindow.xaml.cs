@@ -33,5 +33,10 @@ namespace WpfGebruiker
         {
             Main.Content = new PageOntlening();
         }
+
+        private void BtnHome_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new PageHome();
+        }
     }
 }

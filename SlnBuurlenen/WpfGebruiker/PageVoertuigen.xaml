@@ -9,6 +9,6 @@
       Title="PageVoertuigen">
 
     <Grid>
-        <Button x:Name="HELLo"/>
+        <Button x:Name="HELLo" Content="Hello" HorizontalAlignment="Center" Height="100" Width="200"/>
     </Grid>
 </Page>

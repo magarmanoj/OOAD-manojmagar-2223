@@ -9,6 +9,6 @@
       Title="PageOntlening">
 
     <Grid>
-        <Button Content="press"/>
+
     </Grid>
 </Page>
