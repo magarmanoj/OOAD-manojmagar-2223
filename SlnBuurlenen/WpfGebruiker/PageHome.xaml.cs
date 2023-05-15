@@ -24,5 +24,13 @@ namespace WpfGebruiker
         {
             InitializeComponent();
         }
+
+        private void Type()
+        {
+            if(rbGemotoriseerd.IsChecked == true)
+            {
+
+            }
+        }
     }
 }
