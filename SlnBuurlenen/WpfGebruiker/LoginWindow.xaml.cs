@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MyClassLibrary;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WpfGebruiker
 {
@@ -22,6 +12,37 @@ namespace WpfGebruiker
         public LoginWindow()
         {
             InitializeComponent();
+        }
+
+        private void Btnlogin_Click(object sender, RoutedEventArgs e)
+        {
+            Gebruiker gebruiker = Gebruiker.FindByLoginAndPassword(EmailTextBox.Text, PasswordTextBox.Text);
+            if (gebruiker == null)
+            {
+                lblErrormsg.Content = "Combination not found!";
+                lblErrormsg.Foreground = Brushes.Red;
+                return;                
+            }
+            MainWindow mainWindow = new MainWindow(gebruiker);
+            mainWindow.Show();
+            Close();
+        }
+
+        private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            UpdateLoginForm();
+        }
+
+        private void UpdateLoginForm()
+        {
+            btnLogin.IsEnabled = !string.IsNullOrEmpty(EmailTextBox.Text) && !string.IsNullOrEmpty(PasswordTextBox.Text);
+
+            if (EmailTextBox.Text == "/")
+            {
+                EmailTextBox.Text = "sam@odisee.be";
+                PasswordTextBox.Text = "test123";
+                btnLogin.Focus();
+            }
         }
     }
 }

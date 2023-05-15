@@ -5,8 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfGebruiker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Vertical" Grid.Column="0" Margin="10,100,10,0" VerticalAlignment="Top">
+            <Button x:Name="HomeButton" Content="Home" Margin="0,0,0,10"/>
+            <Button x:Name="OntleningenButton" Content="Ontleningen" Click="BtnOntleningen_Click" Margin="0,0,0,10"/>
+            <Button x:Name="VoertuigenButton" Content="Voertuigen" Click="BtnVoertuigen_Click" Margin="0,0,0,10"/>
+        </StackPanel>
+        <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="350"/>
+                </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="20" VerticalAlignment="Top">
+                <Label  Content="Type: " HorizontalAlignment="Center"/>
+                <RadioButton x:Name="GemotoriseerdRadioButton" Content="Gemotoriseerd" Margin="0,0,10,0" VerticalContentAlignment="Center"/>
+                <RadioButton x:Name="GetrokkenRadioButton" Content="Getrokken" Margin="0,0,10,0" VerticalContentAlignment="Center"/>
+            </StackPanel>
+            <ListBox Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ListBoxItem Content="List" Margin="20"/>
+                <ListBoxItem Content="List" Margin="20"/>
+                <ListBoxItem Content="List" Margin="20"/>
+            </ListBox>
+        </Grid>
+        <Frame x:Name="Main" Grid.ColumnSpan="2"/>
+
     </Grid>
 </Window>

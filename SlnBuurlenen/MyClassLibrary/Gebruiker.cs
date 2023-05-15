@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace MyClassLibrary
 {
@@ -26,7 +28,30 @@ namespace MyClassLibrary
 
         public static Gebruiker FindByLoginAndPassword(string login, string password)
         {
-            throw new NotImplementedException();
+            string connString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                connection.Open();
+
+                SqlCommand command = new SqlCommand("SELECT * FROM [GEBRUIKER] WHERE email = @Email AND paswoord = @Password", connection);
+                command.Parameters.AddWithValue("@Email", login);
+                command.Parameters.AddWithValue("@Password", password);
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    Gebruiker gebruiker = new Gebruiker();
+                    gebruiker.Voornaam = (string)reader["voornaam"];
+                    gebruiker.Achternaam = (string)reader["achternaam"];
+                    return gebruiker;
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
     }
 }

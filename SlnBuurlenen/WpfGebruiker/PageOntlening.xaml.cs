@@ -1,5 +1,4 @@
-﻿using MyClassLibrary;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,21 +16,13 @@ using System.Windows.Shapes;
 namespace WpfGebruiker
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for PageOntlening.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PageOntlening : Page
     {
-        public MainWindow(Gebruiker gebruiker)
+        public PageOntlening()
         {
             InitializeComponent();
-        }
-        private void BtnVoertuigen_Click(object sender, RoutedEventArgs e)
-        {
-            Main.Content = new PageVoertuigen();
-        }
-        private void BtnOntleningen_Click(object sender, RoutedEventArgs e)
-        {
-            Main.Content = new PageOntlening();
         }
     }
 }
