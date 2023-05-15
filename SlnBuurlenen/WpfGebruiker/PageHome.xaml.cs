@@ -27,10 +27,12 @@ namespace WpfGebruiker
 
         private void Type()
         {
-            if(rbGemotoriseerd.IsChecked == true)
+            if (rbGemotoriseerd.IsChecked == true)
             {
-
+                // show only foto van gemotoriseerd 
             }
+
+            // anders foto van getroklkken.
         }
     }
 }

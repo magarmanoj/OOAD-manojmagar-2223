@@ -195,3 +195,10 @@ dotnet_diagnostic.SA1407.severity = none
 # SA1124: Do not use regions
 dotnet_diagnostic.SA1124.severity = none
 dotnet_diagnostic.SA1202.severity = silent
+
+# SA1309: Field should not begin with an underscore
+dotnet_diagnostic.SA1309.severity = silent
+
+# SA1504: All accessors should be single-line or multi-line
+dotnet_diagnostic.SA1504.severity = silent
+

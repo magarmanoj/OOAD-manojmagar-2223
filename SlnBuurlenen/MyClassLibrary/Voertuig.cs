@@ -16,4 +16,5 @@ namespace MyClassLibrary
         public string Model { get; set; }
         public int EigenaarId { get; set; }
     }
+
 }

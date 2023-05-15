@@ -45,6 +45,7 @@ namespace MyClassLibrary
                     Gebruiker gebruiker = new Gebruiker();
                     gebruiker.Voornaam = (string)reader["voornaam"];
                     gebruiker.Achternaam = (string)reader["achternaam"];
+                    
                     return gebruiker;
                 }
                 else
