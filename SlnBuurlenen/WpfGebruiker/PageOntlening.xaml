@@ -35,15 +35,15 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Inkomende aanvragen:" FontSize="18" FontWeight="Bold" Margin="10"/>
                     <ListBox Grid.Row="1" Grid.Column="0" Width="550" ScrollViewer.VerticalScrollBarVisibility="Auto">
                         <!-- Add your ListBox items here -->
                     </ListBox>
                     <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
-                        <Button Content="Annuleren" Margin="10,0,0,10"/>
-                        <Button Content="Afwijzen" Margin="10,0,0,10"/>
+                        <Button Content="Annuleren" Margin="10,0,100,10"/>
+                        <Button Content="Afwijzen" Margin="10,0,100,10"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Grid.Row="2">
                         <TextBlock Text="Details van de aanvraag:" FontSize="18" FontWeight="Bold" Margin="10"/>
