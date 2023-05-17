@@ -24,7 +24,8 @@ namespace MyClassLibrary
         public enum BrandstofType
         {
             Benzine,
-            Diesel
+            Diesel,
+            LPG
         }
 
         public enum GeslachtType

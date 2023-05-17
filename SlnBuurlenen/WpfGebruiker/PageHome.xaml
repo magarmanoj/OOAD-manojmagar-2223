@@ -15,31 +15,10 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="20" VerticalAlignment="Top">
             <Label Content="Type: " HorizontalAlignment="Center"/>
-            <RadioButton x:Name="rbGemotoriseerd" Content="Gemotoriseerd" Margin="0,0,10,0" VerticalContentAlignment="Center"/>
-            <RadioButton x:Name="rbGetrokken" Content="Getrokken" Margin="0,0,10,0" VerticalContentAlignment="Center"/>
+            <RadioButton x:Name="rbGemotoriseerd" Content="Gemotoriseerd" Margin="0,0,10,0" VerticalContentAlignment="Center" Checked="RbType_Checked" Unchecked="RbType_Unchecked"/>
+            <RadioButton x:Name="rbGetrokken" Content="Getrokken" Margin="0,0,10,0" VerticalContentAlignment="Center" Checked="RbType_Checked" Unchecked="RbType_Unchecked"/>
         </StackPanel>
-        <ListBox Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="20">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Source="{Binding ImagePath}" Width="100" Height="100" Margin="0 0 10 0"/>
-                        <StackPanel Grid.Column="1">
-                            <TextBlock Text="{Binding Brand}" FontWeight="Bold"/>
-                            <TextBlock Text="{Binding Model}"/>
-                            <Button Content="Info" />
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="3"/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
+        <ListBox x:Name="lbox" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto">
         </ListBox>
     </Grid>
 </Page>

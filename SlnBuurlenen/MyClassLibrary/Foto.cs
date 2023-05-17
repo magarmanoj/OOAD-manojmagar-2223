@@ -11,32 +11,32 @@ namespace MyClassLibrary
     public class Foto
     {
         public int Id { get; set; }
-
         public byte[] Data { get; set; }
 
         public Voertuig Voertuig { get; set; }
+
+        public Foto() 
+        { 
+        }
+        public Foto(SqlDataReader reader) 
+        {
+            Id = Convert.ToInt32(reader["id"]);
+            Data = (byte[])reader["data"];
+        }
+        public static Foto GetFotoByVoertuigId(int voertuigId)
+        {
+            string connString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("SELECT * FROM[Foto] WHERE voertuig_id = @VoertuigId", conn);
+                cmd.Parameters.AddWithValue("@VoertuigId", voertuigId);
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (!reader.Read()) return null;
+                return new Foto(reader);
+            }
+        }
     }
-
-    //public static Foto GetDataOfPhoto()
-    //{
-    //    string connString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
-    //    using (SqlConnection connection = new SqlConnection(connString))
-    //    {
-    //        connection.Open();
-
-    //        SqlCommand command = new SqlCommand("SELECT [f].[Id] [f].[Data] CASE WHEN [v].[type] = 1 THEN 'getrokken' ELSE 'motor' END AS [voertuig_type] FROM [BuurlenenDB].[dbo].[Foto] [f] INNER JOIN [BuurlenenDB].[dbo].[Voertuig] [v] ON [f].[VoertuigId] = [v].[Id]WHERE[v].[type] = 1", connection);
-
-    //        SqlDataReader reader = command.ExecuteReader();
-
-    //        if (reader.Read())
-    //        {
-                
-    //        }
-    //        else
-    //        {
-    //            return null;
-    //        }
-    //        return null;
-    //    }
-    //}
 }
