@@ -15,10 +15,13 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="20" VerticalAlignment="Top">
             <Label Content="Type: " HorizontalAlignment="Center"/>
-            <RadioButton x:Name="rbGemotoriseerd" Content="Gemotoriseerd" Margin="0,0,10,0" VerticalContentAlignment="Center" Checked="RbType_Checked" Unchecked="RbType_Unchecked"/>
-            <RadioButton x:Name="rbGetrokken" Content="Getrokken" Margin="0,0,10,0" VerticalContentAlignment="Center" Checked="RbType_Checked" Unchecked="RbType_Unchecked"/>
+            <CheckBox x:Name="chGemotoriseerd" Content="Gemotoriseerd" Margin="0,0,10,0" VerticalContentAlignment="Center" Checked="ChType_Checked" Unchecked="ChType_Unchecked"/>
+            <CheckBox x:Name="chGetrokken" Content="Getrokken" Margin="0,0,10,0" VerticalContentAlignment="Center" Checked="ChType_Checked" Unchecked="ChType_Unchecked"/>
         </StackPanel>
-        <ListBox x:Name="lbox" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto">
-        </ListBox>
+        <ScrollViewer Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <WrapPanel x:Name="lbox" >
+            </WrapPanel>
+        </ScrollViewer>
+
     </Grid>
 </Page>

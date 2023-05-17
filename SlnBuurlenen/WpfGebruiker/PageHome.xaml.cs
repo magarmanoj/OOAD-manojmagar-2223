@@ -25,24 +25,33 @@ namespace WpfGebruiker
             ShowPhotoAndInfo();
         }
 
-        private void RbType_Checked(object sender, RoutedEventArgs e)
+        private CheckBox previousCheckBox;
+
+        private void ChType_Checked(object sender, RoutedEventArgs e)
         {
+            CheckBox currentCheckBox = (CheckBox)sender;
+            if (previousCheckBox != null && previousCheckBox != currentCheckBox)
+            {
+                previousCheckBox.IsChecked = false;
+            }
+            previousCheckBox = currentCheckBox; 
+            currentCheckBox.IsChecked = true;
             ShowPhotoAndInfo();
         }
 
-        private void RbType_Unchecked(object sender, RoutedEventArgs e)
+        private void ChType_Unchecked(object sender, RoutedEventArgs e)
         {
-            RadioButton radioButton = sender as RadioButton;
-            radioButton.IsChecked = false; // Recheck the radio button
+            if (chGemotoriseerd.IsChecked == true) chGemotoriseerd.IsChecked = false;
+            if (chGetrokken.IsChecked == true) chGetrokken.IsChecked = false;
             ShowPhotoAndInfo();
         }
 
         private void ShowPhotoAndInfo()
         {
-            lbox.Items.Clear();
+            lbox.Children.Clear();
 
-            bool isGetrokken = rbGetrokken.IsChecked == true;
-            if (!isGetrokken && !rbGemotoriseerd.IsChecked.Value)
+            bool isGetrokken = chGetrokken.IsChecked == true;
+            if (!isGetrokken && !chGemotoriseerd.IsChecked.Value)
             {
                 VoertuigList = Voertuig.GetAllVoertuig();
             }
@@ -76,6 +85,8 @@ namespace WpfGebruiker
             Grid grid = new Grid();
             grid.Width = 300;
             grid.Height = 150;
+            grid.Margin = new Thickness(0,0,20,0);
+
 
             // Define the columns in the grid
             ColumnDefinition col1 = new ColumnDefinition();
@@ -88,8 +99,8 @@ namespace WpfGebruiker
             // Image in the first column
             Image img = new Image();
             img.Source = bitmap;
-            img.Width = 100;
-            img.Height = 120;
+            img.Width = 110;
+            img.Height = 150;
             img.Margin = new Thickness(0, 0, 10, 0);
             Grid.SetColumn(img, 0);
             grid.Children.Add(img);
@@ -118,7 +129,7 @@ namespace WpfGebruiker
             modelTextBlock.Text = voertuig.Model;
             stackPanel.Children.Add(modelTextBlock);
 
-            // Button in the third column, aligned to the bottom
+            // Button in the third column, USED CHATGPT om icon in een button te doen
             Button btn = new Button();
             StackPanel btnContent = new StackPanel();
             TextBlock icon = new TextBlock();
@@ -134,9 +145,7 @@ namespace WpfGebruiker
             Grid.SetRowSpan(btn, 4);
             grid.Children.Add(btn);
 
-            lbox.Items.Add(grid);
+            lbox.Children.Add(grid);
         }
-
-
     }
 }
