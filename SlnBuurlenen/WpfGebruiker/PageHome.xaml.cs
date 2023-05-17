@@ -145,7 +145,14 @@ namespace WpfGebruiker
             Grid.SetRowSpan(btn, 4);
             grid.Children.Add(btn);
 
+            btn.Click += BtnDetails_Click;
+
             lbox.Children.Add(grid);
+        }
+
+        private void BtnDetails_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new PageDetails());
         }
     }
 }
