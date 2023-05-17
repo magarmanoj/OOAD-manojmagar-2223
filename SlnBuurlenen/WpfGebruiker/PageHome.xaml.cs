@@ -32,6 +32,8 @@ namespace WpfGebruiker
 
         private void RbType_Unchecked(object sender, RoutedEventArgs e)
         {
+            RadioButton radioButton = sender as RadioButton;
+            radioButton.IsChecked = false; // Recheck the radio button
             ShowPhotoAndInfo();
         }
 
@@ -71,37 +73,70 @@ namespace WpfGebruiker
 
         private void CreatePanel(BitmapImage bitmap, Voertuig voertuig)
         {
+            Grid grid = new Grid();
+            grid.Width = 300;
+            grid.Height = 150;
+
+            // Define the columns in the grid
+            ColumnDefinition col1 = new ColumnDefinition();
+            ColumnDefinition col2 = new ColumnDefinition();
+            ColumnDefinition col3 = new ColumnDefinition();
+            grid.ColumnDefinitions.Add(col1);
+            grid.ColumnDefinitions.Add(col2);
+            grid.ColumnDefinitions.Add(col3);
+
+            // Image in the first column
             Image img = new Image();
             img.Source = bitmap;
             img.Width = 100;
-            img.Height = 100;
+            img.Height = 120;
             img.Margin = new Thickness(0, 0, 10, 0);
+            Grid.SetColumn(img, 0);
+            grid.Children.Add(img);
 
+            // StackPanel for Naam, Merk, and Model in the second column
             StackPanel stackPanel = new StackPanel();
-            stackPanel.Orientation = Orientation.Horizontal;
-            stackPanel.Children.Add(img);
-            stackPanel.Children.Add(new TextBlock() { Text = voertuig.Naam, FontWeight = FontWeights.Bold });
-            stackPanel.Children.Add(new TextBlock() { Text = voertuig.Merk });
-            stackPanel.Children.Add(new TextBlock() { Text = voertuig.Model });
+            stackPanel.Orientation = Orientation.Vertical;
+            Grid.SetColumn(stackPanel, 1);
+            grid.Children.Add(stackPanel);
 
-            // Chatgpt om icon te zetten in een button
+            // Naam
+            TextBlock naamTextBlock = new TextBlock();
+            naamTextBlock.Text = voertuig.Naam;
+            naamTextBlock.FontWeight = FontWeights.Bold;
+            naamTextBlock.TextWrapping = TextWrapping.Wrap;
+            naamTextBlock.Margin = new Thickness(0, 0, 0, 30);
+            stackPanel.Children.Add(naamTextBlock);
+
+            // Merk
+            TextBlock merkTextBlock = new TextBlock();
+            merkTextBlock.Text = voertuig.Merk;
+            stackPanel.Children.Add(merkTextBlock);
+
+            // Model
+            TextBlock modelTextBlock = new TextBlock();
+            modelTextBlock.Text = voertuig.Model;
+            stackPanel.Children.Add(modelTextBlock);
+
+            // Button in the third column, aligned to the bottom
             Button btn = new Button();
             StackPanel btnContent = new StackPanel();
             TextBlock icon = new TextBlock();
-            icon.FontFamily = new FontFamily("Segoe MDL2 Assets"); // Set the font family for Material Icons
-            icon.Text = "\uE946"; // Replace with the Google icon code for the desired icon
+            icon.FontFamily = new FontFamily("Segoe MDL2 Assets");
+            icon.Text = "\uE946";
             btnContent.Children.Add(icon);
-
             btn.Content = btnContent;
             btn.Width = 30;
             btn.Height = 30;
+            btn.HorizontalAlignment = HorizontalAlignment.Right;
+            Grid.SetColumn(btn, 2);
+            Grid.SetRow(btn, 0);
+            Grid.SetRowSpan(btn, 4);
+            grid.Children.Add(btn);
 
-            Border btnBorder = new Border();
-            btnBorder.CornerRadius = new CornerRadius(btn.Width / 2);
-            btnBorder.Child = btn;
-
-            stackPanel.Children.Add(btnBorder);
-            lbox.Items.Add(stackPanel);
+            lbox.Items.Add(grid);
         }
+
+
     }
 }
