@@ -85,8 +85,7 @@ namespace WpfGebruiker
             Grid grid = new Grid();
             grid.Width = 300;
             grid.Height = 150;
-            grid.Margin = new Thickness(0,0,20,0);
-
+            grid.Margin = new Thickness(0, 0, 20, 0);
 
             // Define the columns in the grid
             ColumnDefinition col1 = new ColumnDefinition();
@@ -152,7 +151,16 @@ namespace WpfGebruiker
 
         private void BtnDetails_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new PageDetails());
+            PageDetails page = new PageDetails();
+
+            Window detailsWindow = new Window();
+            detailsWindow.Content = page;
+            detailsWindow.Width = 800;
+            detailsWindow.Height = 600;
+            detailsWindow.Title = "Details";
+
+            // Show the new window
+            detailsWindow.ShowDialog();
         }
     }
 }
