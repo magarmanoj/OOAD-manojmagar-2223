@@ -23,20 +23,35 @@ namespace MyClassLibrary
             Id = Convert.ToInt32(reader["id"]);
             Data = (byte[])reader["data"];
         }
-        public static Foto GetFotoByVoertuigId(int voertuigId)
-        {
-            string connString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
 
-            using (SqlConnection conn = new SqlConnection(connString))
+        // returns the list of the photos
+        public static List<Foto> GetFotoListByVoertuigId(int voertuigId)
+        {
+            List<Foto> fotos = new List<Foto>();
+
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["connStr"].ConnectionString))
             {
                 conn.Open();
 
-                SqlCommand cmd = new SqlCommand("SELECT * FROM[Foto] WHERE voertuig_id = @VoertuigId", conn);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM [Foto] WHERE voertuig_id = @VoertuigId", conn);
                 cmd.Parameters.AddWithValue("@VoertuigId", voertuigId);
                 SqlDataReader reader = cmd.ExecuteReader();
-                if (!reader.Read()) return null;
-                return new Foto(reader);
+
+                while (reader.Read())
+                {
+                    Foto foto = new Foto(reader);
+                    fotos.Add(foto);
+                }
             }
+
+            return fotos;
+        }
+
+        // Returns the first object of the list
+        public static Foto GetFotoByVoertuigId(int voertuigId)
+        {
+            List<Foto> fotos = GetFotoListByVoertuigId(voertuigId);
+            return fotos.FirstOrDefault();
         }
     }
 }

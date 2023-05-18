@@ -2,6 +2,8 @@
 using System;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using MyClassLibrary;
+using System.Collections.Generic;
 
 namespace WpfGebruiker
 {
@@ -32,7 +34,7 @@ namespace WpfGebruiker
 
             // Title
             TextBlock titleTextBlock = new TextBlock();
-            titleTextBlock.Text = "Liche vrachtwagen";
+            titleTextBlock.Text = "Liche vrachtwagen"; 
             titleTextBlock.FontSize = 24;
             titleTextBlock.FontWeight = FontWeights.Bold;
             titleTextBlock.Margin = new Thickness(10, 10, 0, 5);
@@ -46,17 +48,19 @@ namespace WpfGebruiker
             Grid.SetRow(photosStackPanel, 1);
             grid.Children.Add(photosStackPanel);
 
+            List<Foto> fotoList = Foto.GetFotoListByVoertuigId(4);
+
             // Create and add three images to the photos stack panel
-            for (int i = 1; i <= 3; i++)
+            foreach (Foto foto in fotoList)
             {
                 Image photoImage = new Image();
-                photoImage.Source = new BitmapImage(new Uri($"photo{i}.jpg", UriKind.Relative));
+                photoImage.Source = new BitmapImage(new Uri($"photo{foto.Data}.jpg", UriKind.Relative));
                 photoImage.Width = 150;
                 photoImage.Height = 100;
-                photoImage.Margin = new Thickness(0, 0, 0,5);
+                photoImage.Margin = new Thickness(0, 0, 0, 5);
                 photosStackPanel.Children.Add(photoImage);
             }
-
+            
             StackPanel beschrijvingStackPanel = new StackPanel();
             beschrijvingStackPanel.Margin = new Thickness(10, 10, 0, 5);
             Grid.SetRow(beschrijvingStackPanel, 2);
@@ -94,7 +98,6 @@ namespace WpfGebruiker
             AddTextBlockToStackPanel(thirdNestedStackPanel, "Fuel Type", new Thickness(0, 0, 10, 10));
             AddTextBlockToStackPanel(thirdNestedStackPanel, "Eignaar:");
             AddTextBlockToStackPanel(thirdNestedStackPanel, "Owner", new Thickness(0, 0, 10, 10));
-
 
             // Dit voertuig lenen
             TextBlock lenenTextBlock = new TextBlock();
@@ -173,7 +176,7 @@ namespace WpfGebruiker
 
         private void AddTextBlockToStackPanel(StackPanel stackPanel, string text)
         {
-            AddTextBlockToStackPanel(stackPanel, text, new Thickness());
+            AddTextBlockToStackPanel(stackPanel, text, new Thickness(0, 0, 0, 0));
         }
     }
 }
