@@ -149,16 +149,26 @@ namespace WpfGebruiker
 
         private void BtnDetails_Click(object sender, RoutedEventArgs e)
         {
-            PageDetails page = new PageDetails();
+            Button btn = (Button)sender;
+            Grid parentGrid = (Grid)btn.Parent;
+            int selectedIndex = lbox.Children.IndexOf(parentGrid);
 
-            Window detailsWindow = new Window();
-            detailsWindow.Content = page;
-            detailsWindow.Width = 800;
-            detailsWindow.Height = 600;
-            detailsWindow.Title = "Details";
+            if (selectedIndex >= 0 && selectedIndex < VoertuigList.Count)
+            {
+                Voertuig selectedVoertuig = VoertuigList[selectedIndex];
 
-            // Show the new window
-            detailsWindow.ShowDialog();
+                PageDetails page = new PageDetails(selectedVoertuig.Id);
+
+                Window detailsWindow = new Window();
+                detailsWindow.Content = page;
+                detailsWindow.Width = 800;
+                detailsWindow.Height = 600;
+                detailsWindow.Title = "Details";
+
+                // Show the new window
+                detailsWindow.ShowDialog();
+            }
+
         }
     }
 }
