@@ -168,7 +168,6 @@ namespace WpfGebruiker
                 // Show the new window
                 detailsWindow.ShowDialog();
             }
-
         }
     }
 }
