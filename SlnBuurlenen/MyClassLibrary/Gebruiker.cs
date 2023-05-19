@@ -18,10 +18,6 @@ namespace MyClassLibrary
 
         public DateTime Aanmaakdatum { get; set; }
 
-        public bool IsAdmin { get; set; }
-
-        public string Status { get; set; }
-
         public string Profielfoto { get; set; }
 
         public Enums.GeslachtType Geslacht { get; set; }

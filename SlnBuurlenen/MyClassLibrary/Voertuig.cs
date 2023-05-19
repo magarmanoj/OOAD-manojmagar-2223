@@ -43,8 +43,8 @@ namespace MyClassLibrary
             Merk = Convert.ToString(reader["merk"]);
             Model = Convert.ToString(reader["model"]);
             Type = Convert.ToInt32(reader["type"]);
-            Transmissie = reader["transmissie"] == DBNull.Value ? null : (Enums.TransmissieType?)(Enums.TransmissieType)Convert.ToInt32(reader["transmissie"]);
-            Brandstof = reader["brandstof"] == DBNull.Value ? null : (Enums.BrandstofType?)(Enums.BrandstofType)Convert.ToInt32(reader["brandstof"]);
+            Transmissie = reader["transmissie"] == DBNull.Value ? null : (Enums.TransmissieType?)(int)reader["transmissie"];
+            Brandstof = reader["brandstof"] == DBNull.Value ? null : (Enums.BrandstofType?)(int)reader["brandstof"];
             Gewicht = reader["gewicht"] == DBNull.Value ? null : (int?)Convert.ToInt32(reader["Gewicht"]);
             MaxBelasting = reader["maxbelasting"] == DBNull.Value ? null : (int?)Convert.ToInt32(reader["maxbelasting"]);
             Geremd = reader["geremd"] == DBNull.Value ? null : (bool?)Convert.ToBoolean(reader["geremd"]);

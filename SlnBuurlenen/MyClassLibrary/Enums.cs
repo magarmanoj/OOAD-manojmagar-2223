@@ -17,15 +17,15 @@ namespace MyClassLibrary
 
         public enum TransmissieType
         {
-            Manueel,
-            Automatisch
+            Manueel = 1,
+            Automatisch = 2
         }
 
         public enum BrandstofType
         {
-            Benzine,
-            Diesel,
-            LPG
+            Benzine = 1,
+            Diesel = 2,
+            LPG = 3
         }
 
         public enum GeslachtType

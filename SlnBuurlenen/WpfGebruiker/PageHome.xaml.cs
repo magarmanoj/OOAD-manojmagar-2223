@@ -142,28 +142,42 @@ namespace WpfGebruiker
             Grid.SetRowSpan(btn, 4);
             grid.Children.Add(btn);
 
+            Border border = new Border();
+            border.BorderThickness = new Thickness(2);
+            border.Margin = new Thickness(5);
+            border.BorderBrush = Brushes.Black;
+            border.Child = grid;
+
             btn.Click += BtnDetails_Click;
 
-            lbox.Children.Add(grid);
+            lbox.Children.Add(border);
         }
 
         private void BtnDetails_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
             Grid parentGrid = (Grid)btn.Parent;
-            int selectedIndex = lbox.Children.IndexOf(parentGrid);
+            Border parentBorder = (Border)parentGrid.Parent;
+            int selectedIndex = lbox.Children.IndexOf(parentBorder);
 
             if (selectedIndex >= 0 && selectedIndex < VoertuigList.Count)
             {
                 Voertuig selectedVoertuig = VoertuigList[selectedIndex];
 
-                PageDetails page = new PageDetails(selectedVoertuig.Id);
-
                 Window detailsWindow = new Window();
-                detailsWindow.Content = page;
                 detailsWindow.Width = 800;
-                detailsWindow.Height = 600;
-                detailsWindow.Title = "Details";
+                detailsWindow.Height = 750;
+
+                if (selectedVoertuig.Type == 1)
+                {
+                    detailsWindow.Content = new PageMotor(selectedVoertuig);
+                    detailsWindow.Title = "Motor Details";
+                }
+                else if (selectedVoertuig.Type == 2)
+                {
+                    detailsWindow.Content = new PageGetrokken(selectedVoertuig);
+                    detailsWindow.Title = "Getrokken Details";
+                }
 
                 // Show the new window
                 detailsWindow.ShowDialog();
