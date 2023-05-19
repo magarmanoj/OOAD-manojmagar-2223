@@ -35,7 +35,7 @@
                 <TextBlock Text="Model:" FontWeight="Bold" />
                 <TextBlock x:Name="Model" Text="" Margin="0,0,50,0"/>
                 <TextBlock Text="Transmissie:" FontWeight="Bold" />
-                <TextBlock x:Name="Transmissie" Text="e" />
+                <TextBlock x:Name="Transmissie" Text="" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Brandstof:" FontWeight="Bold" />

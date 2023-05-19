@@ -39,7 +39,7 @@ namespace MyClassLibrary
             Id = Convert.ToInt32(reader["id"]);
             Naam = Convert.ToString(reader["naam"]);
             Beschrijving = Convert.ToString(reader["beschrijving"]);
-            Bouwjaar = reader["gewicht"] == DBNull.Value ? null : (int?)Convert.ToInt32(reader["bouwjaar"]);
+            Bouwjaar = reader["bouwjaar"] == DBNull.Value ? null : (int?)Convert.ToInt32(reader["bouwjaar"]);
             Merk = Convert.ToString(reader["merk"]);
             Model = Convert.ToString(reader["model"]);
             Type = Convert.ToInt32(reader["type"]);

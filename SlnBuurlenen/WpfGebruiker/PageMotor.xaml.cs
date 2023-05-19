@@ -39,22 +39,14 @@ namespace WpfGebruiker
                     }
                 }
             }
-            Gebruiker naam = new Gebruiker();
-            naam.Id = selectedVoertuig.EigenaarId;
-
+            Gebruiker naam = Gebruiker.GetGebruikerById(selectedVoertuig.Id);
             Name.Text = selectedVoertuig.Naam;
             Beschrijving.Text = $"Beschrijving: {selectedVoertuig.Beschrijving}";
             Merk.Text = selectedVoertuig.Merk;
-            if (selectedVoertuig.Bouwjaar.HasValue)
-            {
-                Bouwjaar.Text = selectedVoertuig.Bouwjaar.Value.ToString("yyyy");
-            }
-            else
-            {
-                Bouwjaar.Text = "N/A";
-            }
+            Bouwjaar.Text = selectedVoertuig.Bouwjaar.HasValue ? selectedVoertuig.Bouwjaar.Value.ToString() : "N/A";
             Model.Text = selectedVoertuig.Model;
-            Eignaar.Text = naam.Voornaam.ToString();
+            Eignaar.Text = naam != null ? $"{naam.Voornaam} {naam.Achternaam}" : "N/A";
+            Transmissie.Text = selectedVoertuig.Transmissie.ToString();
         }
     }
 }
