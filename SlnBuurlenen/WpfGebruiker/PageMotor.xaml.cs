@@ -46,7 +46,8 @@ namespace WpfGebruiker
             Bouwjaar.Text = selectedVoertuig.Bouwjaar.HasValue ? selectedVoertuig.Bouwjaar.Value.ToString() : "N/A";
             Model.Text = selectedVoertuig.Model;
             Eignaar.Text = naam != null ? $"{naam.Voornaam} {naam.Achternaam}" : "N/A";
-            Transmissie.Text = selectedVoertuig.Transmissie.ToString();
+            Transmissie.Text = selectedVoertuig.Transmissie.HasValue ? selectedVoertuig.Transmissie.ToString() : "N/A";
+            Brandstof.Text = selectedVoertuig.Brandstof.HasValue ? selectedVoertuig.Brandstof.ToString() : "N/A";
         }
     }
 }

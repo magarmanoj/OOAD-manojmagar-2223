@@ -47,6 +47,7 @@ namespace MyClassLibrary
             Brandstof = reader["brandstof"] == DBNull.Value ? null : (Enums.BrandstofType?)(int)reader["brandstof"];
             Gewicht = reader["gewicht"] == DBNull.Value ? null : (int?)Convert.ToInt32(reader["Gewicht"]);
             MaxBelasting = reader["maxbelasting"] == DBNull.Value ? null : (int?)Convert.ToInt32(reader["maxbelasting"]);
+            Afmetingen = Convert.ToString(reader["afmetingen"]);
             Geremd = reader["geremd"] == DBNull.Value ? null : (bool?)Convert.ToBoolean(reader["geremd"]);
             EigenaarId = Convert.ToInt32(reader["eigenaar_id"]);
         }

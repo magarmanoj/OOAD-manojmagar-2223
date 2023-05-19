@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfGebruiker"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="850"
       Title="PageOntlening">
 
     <Grid>
@@ -20,7 +20,6 @@
                     <TextBlock Text="Door mij ontleend:" FontSize="18" FontWeight="Bold" Margin="10"/>
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
                         <ListBox Width="550" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                            <!-- Add your ListBox items here -->
                         </ListBox>
                         <Button Content="Annuleren" Margin="20,300,0,0" Height="45" Width="100" />
                     </StackPanel>
@@ -39,7 +38,6 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Inkomende aanvragen:" FontSize="18" FontWeight="Bold" Margin="10"/>
                     <ListBox Grid.Row="1" Grid.Column="0" Width="550" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                        <!-- Add your ListBox items here -->
                     </ListBox>
                     <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
                         <Button Content="Annuleren" Margin="10,0,100,10"/>
