@@ -1,7 +1,6 @@
 ﻿using MyClassLibrary;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.IO;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -56,6 +55,11 @@ namespace WpfGebruiker
 
         private void BtnVerzenden_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            DateTime vanaf = vanDateP.SelectedDate ?? DateTime.MinValue;
+            DateTime tot = totDateP.SelectedDate ?? DateTime.MinValue;
+            string bericht = tbBericht.Text;
+
+            PageOntlening pageOntlening = new PageOntlening(vanaf, tot, bericht);
         }
     }
 }

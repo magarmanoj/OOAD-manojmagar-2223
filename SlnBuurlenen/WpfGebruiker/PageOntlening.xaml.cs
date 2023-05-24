@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyClassLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,28 @@ namespace WpfGebruiker
     /// </summary>
     public partial class PageOntlening : Page
     {
-        public PageOntlening()
+        private DateTime vanDate;
+        private DateTime totDate;
+        private string bericht;
+
+        public PageOntlening(DateTime vanDate, DateTime totDate, string bericht)
         {
             InitializeComponent();
+
+            this.vanDate = vanDate;
+            this.totDate = totDate;
+            this.bericht = bericht;
+
+            // Create a new Ontlening object with the selected date and textbox content
+            Ontlening newOntlening = new Ontlening
+            {
+                Vanaf = vanDate,
+                Tot = totDate,
+                Bericht = bericht
+            };
+
+            // Add the new Ontlening object to the ListBox
+            lbOntleend.Items.Add(newOntlening);
         }
     }
 }

@@ -27,19 +27,19 @@
             <TextBlock x:Name="beschrijving" Text="Beschrijving:" FontWeight="Bold" Margin="0,10,0,5" />
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Merk:" FontWeight="Bold"/>
-                <TextBlock x:Name="merk" Text="" Margin="0,0,35,0" />
+                <TextBlock x:Name="merk" Text="" Margin="0,0,80,0" />
                 <TextBlock Text="Bouwjouw:" FontWeight="Bold" />
                 <TextBlock x:Name="bouwjaar" Text="" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Model:" FontWeight="Bold" />
-                <TextBlock x:Name="model" Text="" Margin="0,0,50,0"/>
+                <TextBlock x:Name="model" Text="" Margin="0,0,75,0"/>
                 <TextBlock Text="Transmissie:" FontWeight="Bold" />
                 <TextBlock x:Name="transmissie" Text="" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Brandstof:" FontWeight="Bold" />
-                <TextBlock x:Name="brandstof" Text="" Margin="0,0,50,0" />
+                <TextBlock x:Name="brandstof" Text="" Margin="0,0,55,0" />
                 <TextBlock Text="Eignaar:"  FontWeight="Bold" />
                 <TextBlock x:Name="eignaar" Text="" />
             </StackPanel>

@@ -39,6 +39,7 @@ namespace MyClassLibrary
                 if (reader.Read())
                 {
                     Gebruiker gebruiker = new Gebruiker();
+                    gebruiker.Id = (int)reader["Id"];
                     gebruiker.Voornaam = (string)reader["voornaam"];
                     gebruiker.Achternaam = (string)reader["achternaam"];
                     

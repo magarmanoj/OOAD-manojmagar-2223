@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyClassLibrary
 {
@@ -74,9 +71,29 @@ namespace MyClassLibrary
             {
                 conn.Open();
 
-                string query = "SELECT * FROM [Voertuig] WHERE Type = @Type";
+                string query = "SELECT * FROM [Voertuig] WHERE type = @Type";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@Type", isGetrokken ? 2 : 1);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    voertuigs.Add(new Voertuig(reader));
+                }
+            }
+            return voertuigs;
+        }
+
+        public static List<Voertuig> GetAllVoertuigNotOwnedByUser(int userId)
+        {
+            List<Voertuig> voertuigs = new List<Voertuig>();
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+
+                string query = "SELECT * FROM [Voertuig] WHERE eigenaar_id <> @UserId";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@UserId", userId);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())

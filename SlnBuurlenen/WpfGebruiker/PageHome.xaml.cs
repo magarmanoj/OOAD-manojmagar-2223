@@ -14,10 +14,19 @@ namespace WpfGebruiker
     public partial class PageHome : Page
     {
         public List<Voertuig> VoertuigList { get; set; }
+        private Gebruiker currentUser;
+
+        // initialize the visual of the page
         public PageHome()
         {
             InitializeComponent();
             DataContext = this;
+        }
+
+        // after initialize the visual which default constructor you create another constructor with a paramaters.
+        public PageHome(Gebruiker userId) : this()
+        {
+            this.currentUser = Gebruiker.GetGebruikerById(userId.Id);
 
             // Populate the VoertuigList with your data
             ShowPhotoAndInfo();
@@ -48,10 +57,12 @@ namespace WpfGebruiker
         {
             lbox.Children.Clear();
 
-            bool isGetrokken = chGetrokken.IsChecked == true;
-            if (!isGetrokken && !chGemotoriseerd.IsChecked.Value)
+            bool isGetrokken = chGetrokken?.IsChecked == true;
+            bool isGemotoriseerd = chGemotoriseerd?.IsChecked == true;
+
+            if (!isGetrokken && !isGemotoriseerd)
             {
-                VoertuigList = Voertuig.GetAllVoertuig();
+                VoertuigList = Voertuig.GetAllVoertuigNotOwnedByUser(currentUser.Id);
             }
             else
             {

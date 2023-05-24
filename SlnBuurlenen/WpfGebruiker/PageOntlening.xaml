@@ -19,7 +19,16 @@
 
                     <TextBlock Text="Door mij ontleend:" FontSize="18" FontWeight="Bold" Margin="10"/>
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <ListBox Width="550" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <ListBox x:Name="lbOntleend" Width="550" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Vanaf}" FontWeight="Bold" />
+                                        <TextBlock Text="{Binding Tot}" FontWeight="Bold" />
+                                        <TextBlock Text="{Binding Bericht}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
                         </ListBox>
                         <Button Content="Annuleren" Margin="20,300,0,0" Height="45" Width="100" />
                     </StackPanel>
