@@ -39,8 +39,8 @@ namespace WpfGebruiker
 
             if (EmailTextBox.Text == "/")
             {
-                EmailTextBox.Text = "sam@odisee.be";
-                PasswordTextBox.Text = "test123";
+                EmailTextBox.Text = "teo@cmb.be";
+                PasswordTextBox.Text = "test345";
                 btnLogin.Focus();
             }
         }

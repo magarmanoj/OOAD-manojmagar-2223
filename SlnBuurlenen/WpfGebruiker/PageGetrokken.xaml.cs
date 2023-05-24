@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media.Imaging;
 
 namespace WpfGebruiker
@@ -51,15 +53,15 @@ namespace WpfGebruiker
             gewicht.Text = selectedVoertuig.Gewicht.HasValue ? selectedVoertuig.Gewicht.Value.ToString() + " kg" : "N/A";
             afmetingen.Text = !string.IsNullOrEmpty(selectedVoertuig.Afmetingen) ? selectedVoertuig.Afmetingen : "n.v.t";
             maxBelasting.Text = selectedVoertuig.MaxBelasting.HasValue ? selectedVoertuig.MaxBelasting.Value.ToString() + " kg" : "N/A";
+            Ontlening ontlening = Ontlening.FindById(selectedVoertuig.Id, selectedVoertuig.EigenaarId);
+            tbBericht.Text = ontlening.Bericht;
+            vanDateP.SelectedDate = ontlening.Vanaf;
+            totDateP.SelectedDate = ontlening.Tot;
         }
 
-        private void BtnVerzenden_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void BtnVerzenden_Click(object sender, RoutedEventArgs e)
         {
-            DateTime vanaf = vanDateP.SelectedDate ?? DateTime.MinValue;
-            DateTime tot = totDateP.SelectedDate ?? DateTime.MinValue;
-            string bericht = tbBericht.Text;
-
-            PageOntlening pageOntlening = new PageOntlening(vanaf, tot, bericht);
+            
         }
     }
 }

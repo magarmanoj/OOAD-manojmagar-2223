@@ -10,9 +10,9 @@ namespace MyClassLibrary
     {
         public enum OntleningStatus
         {
-            InAanvraag,
-            Goedgekeurd,
-            Verworpen
+            InAanvraag = 1,
+            Goedgekeurd = 2,
+            Verworpen = 3
         }
 
         public enum TransmissieType

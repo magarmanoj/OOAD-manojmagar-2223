@@ -48,6 +48,10 @@ namespace WpfGebruiker
             eignaar.Text = naam != null ? $"{naam.Voornaam} {naam.Achternaam}" : "N/A";
             transmissie.Text = selectedVoertuig.Transmissie.HasValue ? selectedVoertuig.Transmissie.ToString() : "N/A";
             brandstof.Text = selectedVoertuig.Brandstof.HasValue ? selectedVoertuig.Brandstof.ToString() : "N/A";
+            Ontlening ontlening = Ontlening.FindById(selectedVoertuig.Id, selectedVoertuig.EigenaarId);
+            tbBericht.Text = ontlening.Bericht;
+            vanDateP.SelectedDate = ontlening.Vanaf;
+            totDateP.SelectedDate = ontlening.Tot;
         }
     }
 }
