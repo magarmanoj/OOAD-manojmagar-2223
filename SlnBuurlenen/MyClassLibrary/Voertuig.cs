@@ -64,16 +64,17 @@ namespace MyClassLibrary
             return voertuigs;
         }
 
-        public static List<Voertuig> GetGetrokkenOrMotor(bool isGetrokken)
+        public static List<Voertuig> GetGetrokkenOrMotor(bool isGetrokken, int userId)
         {
             List<Voertuig> voertuigs = new List<Voertuig>();
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 conn.Open();
 
-                string query = "SELECT * FROM [Voertuig] WHERE type = @Type";
+                string query = "SELECT * FROM [Voertuig] WHERE type = @Type AND eigenaar_id <> @UserId";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@Type", isGetrokken ? 2 : 1);
+                cmd.Parameters.AddWithValue("@UserId", userId);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())

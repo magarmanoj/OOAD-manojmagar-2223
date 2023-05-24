@@ -66,7 +66,7 @@ namespace WpfGebruiker
             }
             else
             {
-                VoertuigList = Voertuig.GetGetrokkenOrMotor(isGetrokken);
+                VoertuigList = Voertuig.GetGetrokkenOrMotor(isGetrokken, currentUser.Id);
             }
 
             for (int i = 0; i < VoertuigList.Count; i++)
