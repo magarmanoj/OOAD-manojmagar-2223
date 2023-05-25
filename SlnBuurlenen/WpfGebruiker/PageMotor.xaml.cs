@@ -42,15 +42,16 @@ namespace WpfGebruiker
                     }
                 }
             }
+            string eigenaarNaam = Gebruiker.GetGebruikerNaamById(selectedVoertuig.EigenaarId);
             Gebruiker naam = Gebruiker.GetGebruikerById(selectedVoertuig.Id);
             name.Text = selectedVoertuig.Naam;
             beschrijving.Text = $"Beschrijving: {selectedVoertuig.Beschrijving}";
-            merk.Text = selectedVoertuig.Merk;
-            bouwjaar.Text = selectedVoertuig.Bouwjaar.HasValue ? selectedVoertuig.Bouwjaar.Value.ToString() : "N/A";
-            model.Text = selectedVoertuig.Model;
-            eignaar.Text = naam != null ? $"{naam.Voornaam} {naam.Achternaam}" : "N/A";
-            transmissie.Text = selectedVoertuig.Transmissie.HasValue ? selectedVoertuig.Transmissie.ToString() : "N/A";
-            brandstof.Text = selectedVoertuig.Brandstof.HasValue ? selectedVoertuig.Brandstof.ToString() : "N/A";
+            merk.Text = $"Merk: {(!string.IsNullOrEmpty(selectedVoertuig.Merk) ? selectedVoertuig.Merk : "n.v.t")}";
+            bouwjaar.Text = $"Bouwjaar: {(selectedVoertuig.Bouwjaar.HasValue ? selectedVoertuig.Bouwjaar.Value.ToString() : "N/A")}";
+            model.Text = $"Model: {(!string.IsNullOrEmpty(selectedVoertuig.Model) ? selectedVoertuig.Model : "n.v.t")}";
+            eigenaar.Text = $"Eignaar: {eigenaarNaam ?? "Onbekend"}";
+            transmissie.Text = $"Transmissie: {(selectedVoertuig.Transmissie.HasValue ? selectedVoertuig.Transmissie.ToString() : "N/A")}";
+            brandstof.Text = $"Brandstof: {(selectedVoertuig.Brandstof.HasValue ? selectedVoertuig.Brandstof.ToString() : "N/A")}";
         }
 
         private void BtnVerzenden_Click(object sender, RoutedEventArgs e)

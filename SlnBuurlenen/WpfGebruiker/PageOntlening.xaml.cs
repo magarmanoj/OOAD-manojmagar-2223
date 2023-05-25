@@ -45,7 +45,7 @@ namespace WpfGebruiker
             foreach (Ontlening ontlening in mijnOntleningen)
             {
                 ListBoxItem item = new ListBoxItem();
-                string displayText = $"{ontlening.VoertuigNaam} - {ontlening.Vanaf.ToString()} - {ontlening.Tot.ToString()}";
+                string displayText = $"{ontlening.VoertuigNaam} - {ontlening.Vanaf.ToString("yyyy-MM-dd 00:00")} - {ontlening.Tot.ToString("yyyy-MM-dd 00:00")}";
                 TextBlock txtb = new TextBlock();
                 txtb.Text = displayText.ToString();
                 switch (ontlening.Status)
@@ -74,7 +74,9 @@ namespace WpfGebruiker
             foreach (Ontlening ontlening in aanvraagOntleningen)
             {
                 ListBoxItem item = new ListBoxItem();
-                string displayText = $"{ontlening.VoertuigNaam} - {ontlening.Vanaf.ToString()} - {ontlening.Tot.ToString()}";
+                Gebruiker aanvrager = Gebruiker.GetGebruikerById(userId);
+                string gebruikerNaam = $"{aanvrager.Voornaam.Substring(0, 1)}.{aanvrager.Achternaam}";
+                string displayText = $"{ontlening.VoertuigNaam} - {ontlening.Vanaf.ToString("yyyy-MM-dd 00:00")} - {ontlening.Tot.ToString("yyyy-MM-dd 00:00")} door {gebruikerNaam.ToString()}";
                 TextBlock txtb = new TextBlock();
                 txtb.Text = displayText.ToString();
                 txtb.Foreground = Brushes.Orange;
@@ -101,6 +103,26 @@ namespace WpfGebruiker
                     LoadOntleningen();
                     LoadAanvraag();
                 }
+            }
+        }
+
+        private void LbAanvraag_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lbAanvraag.SelectedItem is ListBoxItem item && item.Tag is Ontlening ontlening)
+            {
+                Gebruiker aanvraag = Gebruiker.GetGebruikerById(userId);
+                string gebruikerNaam = $"{aanvraag.Voornaam} {aanvraag.Achternaam}";
+                voertuig.Content = $"Voertuig: {ontlening.VoertuigNaam}";
+                periode.Content = $"Periode: {ontlening.Vanaf.ToString("yyyy-MM-dd 00:00")} - {ontlening.Tot.ToString("yyyy-MM-dd 00:00")}";
+                aanvrager.Content = $"Aanvrager: {gebruikerNaam}";
+                bericht.Text = $"Bericht: {ontlening.Bericht}";
+            }
+            else
+            {
+                voertuig.Content = "Voertuig:";
+                periode.Content = "Periode:";
+                aanvrager.Content = "Aanvrager:";
+                bericht.Text = "Bericht:";
             }
         }
     }

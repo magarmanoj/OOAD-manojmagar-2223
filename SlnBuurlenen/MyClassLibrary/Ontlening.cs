@@ -25,7 +25,7 @@ namespace MyClassLibrary
             {
                 conn.Open();
 
-                SqlCommand command = new SqlCommand("SELECT Voertuig.naam, Ontlening.id, Ontlening.vanaf, Ontlening.tot, Ontlening.status FROM Ontlening INNER JOIN Voertuig ON Ontlening.Voertuig_id = Voertuig.Id WHERE Ontlening.Aanvrager_id = @Id", conn);
+                SqlCommand command = new SqlCommand("SELECT Voertuig.naam, Ontlening.id, Ontlening.vanaf, Ontlening.tot, Ontlening.status, Ontlening.bericht FROM Ontlening INNER JOIN Voertuig ON Ontlening.Voertuig_id = Voertuig.Id WHERE Ontlening.Aanvrager_id = @Id", conn);
                 command.Parameters.AddWithValue("@Id", aanvragerId);
 
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -38,7 +38,8 @@ namespace MyClassLibrary
                             VoertuigNaam = reader.GetString(reader.GetOrdinal("naam")),
                             Vanaf = reader.GetDateTime(reader.GetOrdinal("vanaf")),
                             Tot = reader.GetDateTime(reader.GetOrdinal("tot")),
-                            Status = (Enums.OntleningStatus)reader.GetByte(reader.GetOrdinal("status"))
+                            Status = (Enums.OntleningStatus)reader.GetByte(reader.GetOrdinal("status")),
+                            Bericht = !reader.IsDBNull(reader.GetOrdinal("bericht")) ? reader.GetString(reader.GetOrdinal("bericht")) : string.Empty
                         };
                         ontleningen.Add(ontl);
                     }

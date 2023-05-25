@@ -42,17 +42,18 @@ namespace WpfGebruiker
                     }
                 }
             }
+            string eigenaarNaam = Gebruiker.GetGebruikerNaamById(selectedVoertuig.EigenaarId);
             Gebruiker naam = Gebruiker.GetGebruikerById(selectedVoertuig.Id);
             name.Text = !string.IsNullOrEmpty(selectedVoertuig.Naam) ? selectedVoertuig.Naam : "n.v.t";
             beschrijving.Text = $"Beschrijving: {selectedVoertuig.Beschrijving}";
-            merk.Text = !string.IsNullOrEmpty(selectedVoertuig.Merk) ? selectedVoertuig.Merk : "n.v.t";
-            bouwjaar.Text = selectedVoertuig.Bouwjaar.HasValue ? selectedVoertuig.Bouwjaar.Value.ToString() : "N/A";
-            model.Text = !string.IsNullOrEmpty(selectedVoertuig.Model) ? selectedVoertuig.Model : "n.v.t";
-            eignaar.Text = naam != null ? $"{naam.Voornaam} {naam.Achternaam}" : "N/A";
-            geremd.Text = selectedVoertuig.Geremd.HasValue ? (selectedVoertuig.Geremd.Value ? "Ja" : "Nee") : "N/A";
-            gewicht.Text = selectedVoertuig.Gewicht.HasValue ? selectedVoertuig.Gewicht.Value.ToString() + " kg" : "N/A";
-            afmetingen.Text = !string.IsNullOrEmpty(selectedVoertuig.Afmetingen) ? selectedVoertuig.Afmetingen : "n.v.t";
-            maxBelasting.Text = selectedVoertuig.MaxBelasting.HasValue ? selectedVoertuig.MaxBelasting.Value.ToString() + " kg" : "N/A";
+            merk.Text = $"Merk: {(!string.IsNullOrEmpty(selectedVoertuig.Merk) ? selectedVoertuig.Merk : "n.v.t")}";
+            bouwjaar.Text = $"Bouwjaar: {(selectedVoertuig.Bouwjaar.HasValue ? selectedVoertuig.Bouwjaar.Value.ToString() : "N/A")}";
+            model.Text = $"Model: {(!string.IsNullOrEmpty(selectedVoertuig.Model) ? selectedVoertuig.Model : "n.v.t")}";
+            eigenaar.Text = $"Eignaar: {eigenaarNaam ?? "Onbekend"}";
+            geremd.Text = $"Geremd: {(selectedVoertuig.Geremd.HasValue ? (selectedVoertuig.Geremd.Value ? "Ja" : "Nee") : "N/A")}";
+            gewicht.Text = $"Gewicht: {(selectedVoertuig.Gewicht.HasValue ? selectedVoertuig.Gewicht.Value.ToString() + " kg" : "N/A")}";
+            afmetingen.Text = $"Afmeting: {(!string.IsNullOrEmpty(selectedVoertuig.Afmetingen) ? selectedVoertuig.Afmetingen : "n.v.t")}";
+            maxBelasting.Text = $"Maxbelasting: {(selectedVoertuig.MaxBelasting.HasValue ? selectedVoertuig.MaxBelasting.Value.ToString() + " kg" : "N/A")}";
         }
 
         private void BtnVerzenden_Click(object sender, RoutedEventArgs e)

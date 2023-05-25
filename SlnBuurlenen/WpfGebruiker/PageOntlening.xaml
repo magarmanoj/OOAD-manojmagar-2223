@@ -8,8 +8,8 @@
       d:DesignHeight="450" d:DesignWidth="850"
       Title="PageOntlening">
 
-    <Grid>
-        <TabControl>
+    <Grid Background="LightCyan">
+        <TabControl Background="LightCyan">
             <TabItem Header="Mijn ontleningen">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -39,16 +39,16 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Row="0" Grid.Column="0" Content="Inkomende aanvragen:" FontSize="16" FontWeight="Bold" Margin="20 0 0 0"/>
-                    <ListBox x:Name="lbAanvraag" Grid.Row="1" Grid.Column="0" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="20">
+                    <ListBox x:Name="lbAanvraag" Grid.Row="1" Grid.Column="0" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="20" SelectionChanged="LbAanvraag_SelectionChanged">
                     </ListBox>
                     <Button x:Name="btnAccepteren" Grid.Row="1" Grid.Column="1" Content="Accepteren" Margin="0 20 20 0" Height="40" Width="100" VerticalAlignment="Top"/>
                     <Button x:Name="btnAfwijzen" Grid.Row="1" Grid.Column="1" Content="Afwijzen" Margin="0 70 20 0" Height="40" Width="100" VerticalAlignment="Top"/>
                     <StackPanel Orientation="Vertical" Grid.Row="2" Grid.ColumnSpan="2">
                         <Label Content="Details van de aanvraag:" FontSize="18" FontWeight="Bold" Margin="10"/>
-                        <Label Content="Voertuig:" Margin="10,0,0,0"/>
-                        <Label Content="Periode:" Margin="10,0,0,0"/>
-                        <Label Content="Aanvrager:" Margin="10,0,0,0"/>
-                        <Label Content="Bericht:" Margin="10,0,0,0"/>
+                        <Label x:Name="voertuig" Content="Voertuig:" Margin="10,0,0,0"/>
+                        <Label x:Name="periode" Content="Periode:" Margin="10,0,0,0"/>
+                        <Label x:Name="aanvrager" Content="Aanvrager:" Margin="10,0,0,0"/>
+                        <TextBlock x:Name="bericht" Text="Bericht:" Margin="15,0,0,0" TextWrapping="Wrap" Width="500" HorizontalAlignment="Left"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
