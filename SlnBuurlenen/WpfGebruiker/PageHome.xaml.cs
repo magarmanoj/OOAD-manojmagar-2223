@@ -32,24 +32,13 @@ namespace WpfGebruiker
             ShowPhotoAndInfo();
         }
 
-        private CheckBox previousCheckBox;
-
         private void ChType_Checked(object sender, RoutedEventArgs e)
         {
-            CheckBox currentCheckBox = (CheckBox)sender;
-            if (previousCheckBox != null && previousCheckBox != currentCheckBox)
-            {
-                previousCheckBox.IsChecked = false;
-            }
-            previousCheckBox = currentCheckBox; 
-            currentCheckBox.IsChecked = true;
             ShowPhotoAndInfo();
         }
 
         private void ChType_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (chGemotoriseerd.IsChecked == true) chGemotoriseerd.IsChecked = false;
-            if (chGetrokken.IsChecked == true) chGetrokken.IsChecked = false;
             ShowPhotoAndInfo();
         }
 
@@ -60,7 +49,7 @@ namespace WpfGebruiker
             bool isGetrokken = chGetrokken?.IsChecked == true;
             bool isGemotoriseerd = chGemotoriseerd?.IsChecked == true;
 
-            if (!isGetrokken && !isGemotoriseerd)
+            if ((!isGetrokken && !isGemotoriseerd) || (isGetrokken && isGemotoriseerd))
             {
                 VoertuigList = Voertuig.GetAllVoertuigNotOwnedByUser(currentUser.Id);
             }
@@ -181,12 +170,12 @@ namespace WpfGebruiker
 
                 if (selectedVoertuig.Type == 1)
                 {
-                    detailsWindow.Content = new PageMotor(selectedVoertuig);
+                    detailsWindow.Content = new PageMotor(selectedVoertuig, currentUser.Id);
                     detailsWindow.Title = "Motor Details";
                 }
                 else if (selectedVoertuig.Type == 2)
                 {
-                    detailsWindow.Content = new PageGetrokken(selectedVoertuig);
+                    detailsWindow.Content = new PageGetrokken(selectedVoertuig, currentUser.Id);
                     detailsWindow.Title = "Getrokken Details";
                 }
 

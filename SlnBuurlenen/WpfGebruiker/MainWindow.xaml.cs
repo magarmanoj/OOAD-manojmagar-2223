@@ -10,9 +10,7 @@ namespace WpfGebruiker
     public partial class MainWindow : Window
     {
         private Gebruiker currentUser;
-        private DateTime vanDate;
-        private DateTime totDate;
-        private string bericht;
+
         public MainWindow(Gebruiker gebruiker)
         {
             InitializeComponent();
@@ -26,7 +24,7 @@ namespace WpfGebruiker
         }
         private void BtnOntleningen_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new PageOntlening(vanDate, totDate, bericht);
+            Main.Content = new PageOntlening(currentUser.Id);
         }
 
         private void BtnHome_Click(object sender, RoutedEventArgs e)

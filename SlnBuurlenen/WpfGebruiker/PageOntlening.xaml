@@ -20,17 +20,8 @@
                     <TextBlock Text="Door mij ontleend:" FontSize="18" FontWeight="Bold" Margin="10"/>
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
                         <ListBox x:Name="lbOntleend" Width="550" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Vanaf}" FontWeight="Bold" />
-                                        <TextBlock Text="{Binding Tot}" FontWeight="Bold" />
-                                        <TextBlock Text="{Binding Bericht}" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
                         </ListBox>
-                        <Button Content="Annuleren" Margin="20,300,0,0" Height="45" Width="100" />
+                        <Button x:Name="btnCancel" Content="Annuleren" Margin="20,300,0,0" Height="45" Width="100" Click="BtnCancel_Click" />
                     </StackPanel>
                 </Grid>
             </TabItem>
@@ -39,34 +30,25 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="200"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
                         <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Inkomende aanvragen:" FontSize="18" FontWeight="Bold" Margin="10"/>
-                    <ListBox x:Name="lbAanvraag" Grid.Row="1" Grid.Column="0" Width="550" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Aanvragen}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Vanaf}" FontWeight="Bold"/>
-                                    <TextBlock Text="{Binding Tot}" FontWeight="Bold"/>
-                                    <TextBlock Text="{Binding Bericht}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
+
+                    <Label Grid.Row="0" Grid.Column="0" Content="Inkomende aanvragen:" FontSize="16" FontWeight="Bold" Margin="20 0 0 0"/>
+                    <ListBox x:Name="lbAanvraag" Grid.Row="1" Grid.Column="0" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="20">
                     </ListBox>
-                    <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
-                        <Button Content="Annuleren" Margin="10,0,100,10"/>
-                        <Button Content="Afwijzen" Margin="10,0,100,10"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical" Grid.Row="2">
-                        <TextBlock Text="Details van de aanvraag:" FontSize="18" FontWeight="Bold" Margin="10"/>
-                        <Label Content="Voertuig:"/>
-                        <Label Content="Periode:"/>
-                        <Label Content="Aanvrager:"/>
-                        <Label Content="Bericht:"/>
+                    <Button x:Name="btnAccepteren" Grid.Row="1" Grid.Column="1" Content="Accepteren" Margin="0 20 20 0" Height="40" Width="100" VerticalAlignment="Top"/>
+                    <Button x:Name="btnAfwijzen" Grid.Row="1" Grid.Column="1" Content="Afwijzen" Margin="0 70 20 0" Height="40" Width="100" VerticalAlignment="Top"/>
+                    <StackPanel Orientation="Vertical" Grid.Row="2" Grid.ColumnSpan="2">
+                        <Label Content="Details van de aanvraag:" FontSize="18" FontWeight="Bold" Margin="10"/>
+                        <Label Content="Voertuig:" Margin="10,0,0,0"/>
+                        <Label Content="Periode:" Margin="10,0,0,0"/>
+                        <Label Content="Aanvrager:" Margin="10,0,0,0"/>
+                        <Label Content="Bericht:" Margin="10,0,0,0"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
