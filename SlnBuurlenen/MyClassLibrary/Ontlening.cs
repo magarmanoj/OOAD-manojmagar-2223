@@ -85,6 +85,21 @@ namespace MyClassLibrary
             }
         }
 
+        public static void UpdateOntlening(Ontlening ontlening)
+        {
+            string connString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+
+                SqlCommand command = new SqlCommand("UPDATE Ontlening SET status = @Status WHERE id = @Id", conn);
+                command.Parameters.AddWithValue("@Status", (byte)ontlening.Status);
+                command.Parameters.AddWithValue("@Id", ontlening.Id);
+
+                command.ExecuteNonQuery();
+            }
+        }
+
         public static List<Ontlening> GetAanvraagOntleningen(int aanvragerId)
         {
             List<Ontlening> aanvraagOntleningen = new List<Ontlening>();

@@ -125,5 +125,29 @@ namespace WpfGebruiker
                 bericht.Text = "Bericht:";
             }
         }
+
+        private void BtnAccepteren_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbAanvraag.SelectedItem is ListBoxItem item && item.Tag is Ontlening ontlening)
+            {
+                ontlening.Status = Enums.OntleningStatus.Goedgekeurd;
+                Ontlening.UpdateOntlening(ontlening);
+
+                lbAanvraag.Items.Remove(item);
+                LoadOntleningen();
+            }
+        }
+
+        private void BtnAfwijzen_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbAanvraag.SelectedItem is ListBoxItem item && item.Tag is Ontlening ontlening)
+            {
+                ontlening.Status = Enums.OntleningStatus.Verworpen;
+                Ontlening.UpdateOntlening(ontlening);
+
+                lbAanvraag.Items.Remove(item);
+                LoadOntleningen();
+            }
+        }
     }
 }
