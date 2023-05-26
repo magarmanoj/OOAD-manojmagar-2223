@@ -12,6 +12,8 @@ namespace WpfGebruiker
         public LoginWindow()
         {
             InitializeComponent();
+            EmailTextBox.Text = "teo@cmb.be";
+            PasswordTextBox.Text = "test345";
         }
 
         private void Btnlogin_Click(object sender, RoutedEventArgs e)
@@ -21,7 +23,7 @@ namespace WpfGebruiker
             {
                 lblErrormsg.Content = "Combination not found!";
                 lblErrormsg.Foreground = Brushes.Red;
-                return;                
+                return;
             }
             MainWindow mainWindow = new MainWindow(gebruiker);
             mainWindow.Show();
@@ -36,13 +38,6 @@ namespace WpfGebruiker
         private void UpdateLoginForm()
         {
             btnLogin.IsEnabled = !string.IsNullOrEmpty(EmailTextBox.Text) && !string.IsNullOrEmpty(PasswordTextBox.Text);
-
-            if (EmailTextBox.Text == "/")
-            {
-                EmailTextBox.Text = "teo@cmb.be";
-                PasswordTextBox.Text = "test345";
-                btnLogin.Focus();
-            }
         }
     }
 }

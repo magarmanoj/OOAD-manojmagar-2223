@@ -42,14 +42,13 @@ namespace WpfGebruiker
                     }
                 }
             }
-            string eigenaarNaam = Gebruiker.GetGebruikerNaamById(selectedVoertuig.EigenaarId);
-            Gebruiker naam = Gebruiker.GetGebruikerById(selectedVoertuig.Id);
+            Gebruiker eigenaars = Gebruiker.GetGebruikerById(selectedVoertuig.EigenaarId);
             name.Text = selectedVoertuig.Naam;
             beschrijving.Text = $"Beschrijving: {selectedVoertuig.Beschrijving}";
             merk.Text = $"Merk: {(!string.IsNullOrEmpty(selectedVoertuig.Merk) ? selectedVoertuig.Merk : "n.v.t")}";
             bouwjaar.Text = $"Bouwjaar: {(selectedVoertuig.Bouwjaar.HasValue ? selectedVoertuig.Bouwjaar.Value.ToString() : "N/A")}";
             model.Text = $"Model: {(!string.IsNullOrEmpty(selectedVoertuig.Model) ? selectedVoertuig.Model : "n.v.t")}";
-            eigenaar.Text = $"Eignaar: {eigenaarNaam ?? "Onbekend"}";
+            eigenaar.Text = $"Eignaar: {(eigenaars != null ? $"{eigenaars.Voornaam} {eigenaars.Achternaam}" : "Onbekend")}";
             transmissie.Text = $"Transmissie: {(selectedVoertuig.Transmissie.HasValue ? selectedVoertuig.Transmissie.ToString() : "N/A")}";
             brandstof.Text = $"Brandstof: {(selectedVoertuig.Brandstof.HasValue ? selectedVoertuig.Brandstof.ToString() : "N/A")}";
         }

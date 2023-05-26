@@ -19,9 +19,9 @@
 
                     <TextBlock Text="Door mij ontleend:" FontSize="18" FontWeight="Bold" Margin="10"/>
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <ListBox x:Name="lbOntleend" Width="550" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <ListBox x:Name="lbOntleend" Width="550" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionChanged="LbOntleend_SelectionChanged">
                         </ListBox>
-                        <Button x:Name="btnCancel" Content="Annuleren" Margin="20,300,0,0" Height="45" Width="100" Click="BtnCancel_Click" />
+                        <Button x:Name="btnCancel" Content="Annuleren" Margin="20,300,0,0" Height="45" Width="100" Click="BtnCancel_Click" IsEnabled="False" />
                     </StackPanel>
                 </Grid>
             </TabItem>

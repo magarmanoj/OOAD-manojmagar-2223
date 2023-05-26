@@ -42,14 +42,13 @@ namespace WpfGebruiker
                     }
                 }
             }
-            string eigenaarNaam = Gebruiker.GetGebruikerNaamById(selectedVoertuig.EigenaarId);
-            Gebruiker naam = Gebruiker.GetGebruikerById(selectedVoertuig.Id);
+            Gebruiker eigenaars = Gebruiker.GetGebruikerById(selectedVoertuig.EigenaarId);
             name.Text = !string.IsNullOrEmpty(selectedVoertuig.Naam) ? selectedVoertuig.Naam : "n.v.t";
             beschrijving.Text = $"Beschrijving: {selectedVoertuig.Beschrijving}";
             merk.Text = $"Merk: {(!string.IsNullOrEmpty(selectedVoertuig.Merk) ? selectedVoertuig.Merk : "n.v.t")}";
             bouwjaar.Text = $"Bouwjaar: {(selectedVoertuig.Bouwjaar.HasValue ? selectedVoertuig.Bouwjaar.Value.ToString() : "N/A")}";
             model.Text = $"Model: {(!string.IsNullOrEmpty(selectedVoertuig.Model) ? selectedVoertuig.Model : "n.v.t")}";
-            eigenaar.Text = $"Eignaar: {eigenaarNaam ?? "Onbekend"}";
+            eigenaar.Text = $"Eignaar: {(eigenaars != null ? $"{eigenaars.Voornaam} {eigenaars.Achternaam}" : "Onbekend")}";
             geremd.Text = $"Geremd: {(selectedVoertuig.Geremd.HasValue ? (selectedVoertuig.Geremd.Value ? "Ja" : "Nee") : "N/A")}";
             gewicht.Text = $"Gewicht: {(selectedVoertuig.Gewicht.HasValue ? selectedVoertuig.Gewicht.Value.ToString() + " kg" : "N/A")}";
             afmetingen.Text = $"Afmeting: {(!string.IsNullOrEmpty(selectedVoertuig.Afmetingen) ? selectedVoertuig.Afmetingen : "n.v.t")}";

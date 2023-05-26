@@ -59,7 +59,7 @@ namespace MyClassLibrary
             {
                 connection.Open();
 
-                string query = "SELECT * FROM Gebruiker WHERE Id = @GebruikerId";
+                string query = "SELECT * FROM [Gebruiker] WHERE Id = @GebruikerId";
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@GebruikerId", gebruikerId);
 
@@ -69,34 +69,13 @@ namespace MyClassLibrary
                     {
                         Gebruiker gebruiker = new Gebruiker();
                         gebruiker.Id = (int)reader["Id"];
-                        gebruiker.Voornaam = (string)reader["Voornaam"];
-                        gebruiker.Achternaam = (string)reader["Achternaam"];
+                        gebruiker.Voornaam = reader.GetString(reader.GetOrdinal("Voornaam"));
+                        gebruiker.Achternaam = reader.GetString(reader.GetOrdinal("Achternaam"));
                         return gebruiker;
                     }
                 }
             }
             return null; 
-        }
-
-        public static string GetGebruikerNaamById(int id)
-        {
-            string connectionString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT Voornaam, Achternaam FROM [dbo].[Gebruiker] WHERE Id = @id", conn))
-                {
-                    cmd.Parameters.AddWithValue("@id", id);
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            return $"{reader.GetString(reader.GetOrdinal("Voornaam"))} {reader.GetString(reader.GetOrdinal("Achternaam"))}";
-                        }
-                    }
-                }
-            }
-            return null;
         }
     }
 }

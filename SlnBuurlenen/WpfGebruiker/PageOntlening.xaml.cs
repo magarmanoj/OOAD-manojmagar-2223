@@ -113,9 +113,10 @@ namespace WpfGebruiker
                 Gebruiker aanvraag = Gebruiker.GetGebruikerById(userId);
                 string gebruikerNaam = $"{aanvraag.Voornaam} {aanvraag.Achternaam}";
                 voertuig.Content = $"Voertuig: {ontlening.VoertuigNaam}";
-                periode.Content = $"Periode: {ontlening.Vanaf.ToString("yyyy-MM-dd 00:00")} - {ontlening.Tot.ToString("yyyy-MM-dd 00:00")}";
+                periode.Content = $"Periode: {ontlening.Vanaf.ToString("yyyy-MM-dd 00:00")} - {ontlening.Tot.ToString("yyyy-MM-dd 00:00")} ";
                 aanvrager.Content = $"Aanvrager: {gebruikerNaam}";
                 bericht.Text = $"Bericht: {ontlening.Bericht}";
+                string peridoeLeft = (ontlening.Vanaf - ontlening.Tot).ToString();
             }
             else
             {
@@ -147,6 +148,21 @@ namespace WpfGebruiker
 
                 lbAanvraag.Items.Remove(item);
                 LoadOntleningen();
+            }
+        }
+
+        private void LbOntleend_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lbOntleend.SelectedItem is ListBoxItem item && item.Tag is Ontlening ontl)
+            {
+                if (ontl.Tot > DateTime.Now)
+                {
+                    btnCancel.IsEnabled = true;
+                }
+                else
+                {
+                    btnCancel.IsEnabled = false;
+                }
             }
         }
     }
