@@ -18,22 +18,9 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Button Content="Toevoegen" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="210" Height="55" Margin="10"/>
-        <Grid Grid.Row="1" Background="LightBlue">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Row="1" Grid.Column="2">
-                
-            </StackPanel>
-
-
-
-
-        </Grid>
+        <WrapPanel x:Name="wrapP" Grid.Row="1" Background="LightBlue" Margin="0,0,0,70">
+            
+        </WrapPanel>
 
 
     </Grid>

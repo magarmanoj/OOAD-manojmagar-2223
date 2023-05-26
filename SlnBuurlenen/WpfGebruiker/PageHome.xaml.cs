@@ -98,9 +98,14 @@ namespace WpfGebruiker
             img.Source = bitmap;
             img.Width = 110;
             img.Height = 150;
-            img.Margin = new Thickness(0, 0, 10, 0);
             Grid.SetColumn(img, 0);
-            grid.Children.Add(img);
+
+            Border imgBorder = new Border();
+            imgBorder.BorderThickness = new Thickness(2);
+            imgBorder.Margin = new Thickness(5);
+            imgBorder.BorderBrush = Brushes.Black;
+            imgBorder.Child = img;
+            grid.Children.Add(imgBorder);
 
             // StackPanel for Naam, Merk, and Model in the second column
             StackPanel stackPanel = new StackPanel();
