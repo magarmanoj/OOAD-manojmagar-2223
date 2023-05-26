@@ -104,5 +104,25 @@ namespace MyClassLibrary
             }
             return voertuigs;
         }
+
+        public static List<Voertuig> GetAllVoertuigOwnedByUser(int userId)
+        {
+            List<Voertuig> voertuigs = new List<Voertuig>();
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+
+                string query = "SELECT * FROM [Voertuig] WHERE eigenaar_id = @UserId";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@UserId", userId);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    voertuigs.Add(new Voertuig(reader));
+                }
+            }
+            return voertuigs;
+        }
     }
 }

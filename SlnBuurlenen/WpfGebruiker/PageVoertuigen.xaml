@@ -8,21 +8,26 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PageVoertuigen">
 
-    <Grid Background="LightBlue">
+    <Grid Background="LightCyan">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <Button Content="Toevoegen" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="210" Height="55" Margin="10"/>
-        <WrapPanel x:Name="wrapP" Grid.Row="1" Background="LightBlue" Margin="0,0,0,70">
-            
-        </WrapPanel>
-
-
+        <Button HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="210" Height="55" Margin="5, 0, 0, 10">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE710;" FontFamily="Segoe MDL2 Assets" Margin="5"/>
+                    <TextBlock Text="Toevoegen" Margin="5"/>
+                </StackPanel>
+            </Button.Content>
+        </Button>
+        <ScrollViewer Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <WrapPanel x:Name="wrapP" Grid.Row="1" Background="LightCyan" Margin="0,0,0,70">
+            </WrapPanel>
+        </ScrollViewer>
     </Grid>
-
 </Page>

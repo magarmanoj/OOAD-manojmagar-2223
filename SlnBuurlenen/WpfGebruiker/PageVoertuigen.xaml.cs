@@ -1,6 +1,9 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using MyClassLibrary;
 
 namespace WpfGebruiker
@@ -10,17 +13,20 @@ namespace WpfGebruiker
     /// </summary>
     public partial class PageVoertuigen : Page
     {
-        public PageVoertuigen()
+        public List<Voertuig> VoertuigList { get; set; }
+        private Gebruiker currentUser;
+        public PageVoertuigen(Gebruiker userID)
         {
             InitializeComponent();
-            DynamischUI();
+            this.currentUser = userID;
+            ShowPhotoAndInfo();
         }
 
-        private void DynamischUI()
+        private void DynamischUI(BitmapImage bitmap, Voertuig voertuig)
         {
             // Create the main grid
             Grid mainGrid = new Grid();
-            mainGrid.Background = new SolidColorBrush(Colors.LightBlue);
+            mainGrid.Background = new SolidColorBrush(Colors.LightCyan);
             mainGrid.Margin = new Thickness(0, 0, 0, 0);
 
             // Create the row definition
@@ -31,7 +37,7 @@ namespace WpfGebruiker
             ColumnDefinition col1 = new ColumnDefinition();
             ColumnDefinition col2 = new ColumnDefinition();
             ColumnDefinition col3 = new ColumnDefinition();
-            col1.Width = new GridLength(1, GridUnitType.Star);
+            col1.Width = new GridLength(1, GridUnitType.Auto);
             col2.Width = new GridLength(1, GridUnitType.Auto);
             col3.Width = new GridLength(1, GridUnitType.Auto);
             mainGrid.ColumnDefinitions.Add(col1);
@@ -40,9 +46,10 @@ namespace WpfGebruiker
 
             // Create the image
             Image img = new Image();
+            img.Source = bitmap;
             img.Name = "img";
-            img.Width = 180;
-            img.Height = 150;
+            img.Width = 80;
+            img.Height = 80;
             Grid.SetRow(img, 1);
             Grid.SetColumn(img, 0);
 
@@ -63,18 +70,19 @@ namespace WpfGebruiker
 
             // Create the labels
             TextBlock title = new TextBlock();
-            title.Name = "title";
-            title.Text = "Buick Oldtimer";
+            title.Width = 100;
+            title.Text = voertuig.Naam;
+            title.TextWrapping = TextWrapping.Wrap;
             textBStackPanel.Children.Add(title);
 
             TextBlock merk = new TextBlock();
             merk.Name = "merk";
-            merk.Text = "Merk:";
+            merk.Text = voertuig.Merk;
             textBStackPanel.Children.Add(merk);
 
             TextBlock model = new TextBlock();
             model.Name = "model";
-            model.Text = "Model:";
+            model.Text = voertuig.Model;
             textBStackPanel.Children.Add(model);
 
             // Create the stack panel for the buttons
@@ -91,24 +99,27 @@ namespace WpfGebruiker
             deleteButton.Name = "delete";
             deleteButton.Content = "\uE74D";
             deleteButton.FontFamily = new FontFamily("Segoe MDL2 Assets");
-            deleteButton.Width = 50;
+            deleteButton.Width = 25;
             deleteButton.Height = 25;
+            deleteButton.Margin = new Thickness(0, 0, 10, 10);
             buttonStackPanel.Children.Add(deleteButton);
 
             Button editButton = new Button();
             editButton.Name = "edit";
             editButton.Content = "\uE70F";
             editButton.FontFamily = new FontFamily("Segoe MDL2 Assets");
-            editButton.Width = 50;
+            editButton.Width = 25;
             editButton.Height = 25;
+            editButton.Margin = new Thickness(0, 0, 10, 10);
             buttonStackPanel.Children.Add(editButton);
 
             Button infoButton = new Button();
             infoButton.Name = "info";
             infoButton.Content = "\uE946";
             infoButton.FontFamily = new FontFamily("Segoe MDL2 Assets");
-            infoButton.Width = 50;
+            infoButton.Width = 25;
             infoButton.Height = 25;
+            infoButton.Margin = new Thickness(0, 0, 10, 10);
             buttonStackPanel.Children.Add(infoButton);
 
             Border border = new Border();
@@ -121,5 +132,31 @@ namespace WpfGebruiker
             // Add the main grid to the page's content
             wrapP.Children.Add(border);
         }
+
+        private void ShowPhotoAndInfo()
+        {
+
+            VoertuigList = Voertuig.GetAllVoertuigOwnedByUser(currentUser.Id);
+
+            for (int i = 0; i < VoertuigList.Count; i++)
+            {
+                Voertuig voertuig = VoertuigList[i];
+
+                Foto foto = Foto.GetFotoByVoertuigId(voertuig.Id);
+                if (foto == null) continue;
+
+                BitmapImage bitmap = new BitmapImage();
+                using (MemoryStream stream = new MemoryStream(foto.Data))
+                {
+                    bitmap.BeginInit();
+                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmap.StreamSource = stream;
+                    bitmap.EndInit();
+                }
+
+                DynamischUI(bitmap, voertuig);
+            }
+        }
+
     }
 }

@@ -20,7 +20,7 @@ namespace WpfGebruiker
         }
         private void BtnVoertuigen_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new PageVoertuigen();
+            Main.Content = new PageVoertuigen(currentUser);
         }
         private void BtnOntleningen_Click(object sender, RoutedEventArgs e)
         {

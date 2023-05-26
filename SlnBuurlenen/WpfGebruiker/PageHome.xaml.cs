@@ -16,19 +16,11 @@ namespace WpfGebruiker
         public List<Voertuig> VoertuigList { get; set; }
         private Gebruiker currentUser;
 
-        // initialize the visual of the page
-        public PageHome()
+        public PageHome(Gebruiker userId)
         {
             InitializeComponent();
-            DataContext = this;
-        }
-
-        // after initialize the visual which default constructor you create another constructor with a paramaters.
-        public PageHome(Gebruiker userId) : this()
-        {
             this.currentUser = Gebruiker.GetGebruikerById(userId.Id);
-
-            // Populate the VoertuigList with your data
+            DataContext = this;
             ShowPhotoAndInfo();
         }
 
