@@ -127,15 +127,14 @@ namespace WpfGebruiker
             border.Margin = new Thickness(5);
             border.BorderBrush = Brushes.Black;
             border.Child = mainGrid;
-
-
-            // Add the main grid to the page's content
             wrapP.Children.Add(border);
+
+            infoButton.Click += BtnInfo_Click;
+            deleteButton.Click += BtnDelete_Click;
         }
 
         private void ShowPhotoAndInfo()
         {
-
             VoertuigList = Voertuig.GetAllVoertuigOwnedByUser(currentUser.Id);
 
             for (int i = 0; i < VoertuigList.Count; i++)
@@ -158,5 +157,41 @@ namespace WpfGebruiker
             }
         }
 
+        private void BtnInfo_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            StackPanel buttonStackPanel = (StackPanel)btn.Parent;
+            Grid mainGrid = (Grid)buttonStackPanel.Parent;
+            Border parentBorder = (Border)mainGrid.Parent;
+            int selectedIndex = wrapP.Children.IndexOf(parentBorder);
+
+            if (selectedIndex >= 0 && selectedIndex < VoertuigList.Count)
+            {
+                Voertuig selectedVoertuig = VoertuigList[selectedIndex];
+
+                Window detailsWindow = new Window();
+                detailsWindow.Width = 800;
+                detailsWindow.Height = 750;
+
+                if (selectedVoertuig.Type == 1)
+                {
+                    detailsWindow.Content = new PageMotor(selectedVoertuig, currentUser.Id);
+                    detailsWindow.Title = "Motor Details";
+                }
+                else if (selectedVoertuig.Type == 2)
+                {
+                    detailsWindow.Content = new PageGetrokken(selectedVoertuig, currentUser.Id);
+                    detailsWindow.Title = "Getrokken Details";
+                }
+
+                // Show the new window
+                detailsWindow.ShowDialog();
+            }
+        }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
