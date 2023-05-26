@@ -55,7 +55,11 @@ namespace WpfGebruiker
                 Voertuig voertuig = VoertuigList[i];
 
                 Foto foto = Foto.GetFotoByVoertuigId(voertuig.Id);
-                if (foto == null) continue;
+                if (foto == null)
+                {
+                    CreatePanel(null, voertuig);
+                    continue;
+                }
 
                 BitmapImage bitmap = new BitmapImage();
                 using (MemoryStream stream = new MemoryStream(foto.Data))

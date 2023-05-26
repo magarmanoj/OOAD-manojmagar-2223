@@ -142,7 +142,11 @@ namespace WpfGebruiker
                 Voertuig voertuig = VoertuigList[i];
 
                 Foto foto = Foto.GetFotoByVoertuigId(voertuig.Id);
-                if (foto == null) continue;
+                if (foto == null)
+                {
+                    DynamischUI(null, voertuig);
+                    continue;
+                }
 
                 BitmapImage bitmap = new BitmapImage();
                 using (MemoryStream stream = new MemoryStream(foto.Data))
@@ -191,7 +195,16 @@ namespace WpfGebruiker
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
+            Button btn = (Button)sender;
+            Grid parentGrid = (Grid)btn.Parent;
+            Border parentBorder = (Border)parentGrid.Parent;
+            int selectedIndex = wrapP.Children.IndexOf(parentBorder);
 
+            if (selectedIndex >= 0 && selectedIndex < VoertuigList.Count)
+            {
+                Voertuig selectedVoertuig = VoertuigList[selectedIndex];
+                wrapP.Children.Remove(parentBorder);
+            }
         }
     }
 }
