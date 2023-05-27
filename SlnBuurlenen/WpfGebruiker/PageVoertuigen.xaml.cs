@@ -206,5 +206,10 @@ namespace WpfGebruiker
             //    wrapP.Children.Remove(parentBorder);
             //}
         }
+
+        private void Toevoegen_Click(object sender, RoutedEventArgs e)
+        {
+            new AddWindow().Show();
+        }
     }
 }

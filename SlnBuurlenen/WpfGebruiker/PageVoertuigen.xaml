@@ -17,7 +17,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="210" Height="55" Margin="5, 0, 0, 10">
+        <Button x:Name="toevoegen" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="210" Height="55" Margin="5, 0, 0, 10" Click="Toevoegen_Click">
             <Button.Content>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="&#xE710;" FontFamily="Segoe MDL2 Assets" Margin="5"/>
