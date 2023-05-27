@@ -14,7 +14,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="1" Grid.Column="0" Content="Gemotoriseerd?" Height="70" FontWeight="Bold" Background="Green"></Button>
-        <Button Grid.Row="1" Grid.Column="1" Content="Getrokken?" Height="70" FontWeight="Bold" Background="Blue"></Button>
+        <Button x:Name="gemotoriseerd" Grid.Row="1" Grid.Column="0" Content="Gemotoriseerd?" Height="70" FontWeight="Bold" Background="Green" Click="Gemotoriseerd_Click"></Button>
+        <Button x:Name="getrokken" Grid.Row="1" Grid.Column="1" Content="Getrokken?" Height="70" FontWeight="Bold" Background="Blue" Click="Getrokken_Click"></Button>
     </Grid>
 </Window>

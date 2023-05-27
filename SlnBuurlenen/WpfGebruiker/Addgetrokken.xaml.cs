@@ -15,23 +15,13 @@ using System.Windows.Shapes;
 namespace WpfGebruiker
 {
     /// <summary>
-    /// Interaction logic for AddWindow.xaml
+    /// Interaction logic for Addgetrokken.xaml
     /// </summary>
-    public partial class AddWindow : Window
+    public partial class Addgetrokken : Window
     {
-        public AddWindow()
+        public Addgetrokken()
         {
             InitializeComponent();
-        }
-
-        private void Gemotoriseerd_Click(object sender, RoutedEventArgs e)
-        {
-            new Addgemotoriseerd().Show();
-        }
-
-        private void Getrokken_Click(object sender, RoutedEventArgs e)
-        {
-            new Addgetrokken().Show();
         }
     }
 }

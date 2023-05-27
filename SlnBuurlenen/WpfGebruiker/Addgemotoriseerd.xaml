@@ -1,0 +1,90 @@
+﻿<Window x:Class="WpfGebruiker.Addgemotoriseerd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfGebruiker"
+        mc:Ignorable="d"
+        Title="Addgemotoriseerd" Height="600" Width="800">
+    <Grid Background="LightCyan">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" >
+            <Label Content="Voertuig toevegen"></Label>
+            <Button x:Name="btnAdd" Content="Uploaden" Width="90" Margin="5,0,0,0" HorizontalAlignment="Left"></Button>
+            <Label Content="Afbeeldingen:"></Label>
+            <WrapPanel Grid.Row="0" Grid.Column="0"  Width="750">
+                <Image Width="250" Height="200" Source="{Binding Photo}" />
+                <Image Width="250" Height="200" Source="{Binding Photo}" />
+                <Image Width="250" Height="200" Source="{Binding Photo}" />
+            </WrapPanel>
+        </StackPanel >
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
+            <Label  Content="Naam:" Margin="10" />
+            <TextBox Margin="10" Text="{Binding Naam}" Width="250" Height="25"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0">
+            <Label Content="Beschrijving:" Margin="10" />
+            <TextBox  Margin="10" Text="{Binding Beschrijving}" Width="250" Height="70" />
+        </StackPanel>
+
+
+        <Grid Grid.Row="4" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                <Label Content="Merk:" Margin="10" />
+                <TextBox x:Name="tbxMerk" Width="150" Height="25"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  Grid.Row="0" Grid.Column="2">
+                <Label Content="Bouwjaar:" Margin="10" />
+                <TextBox x:Name="tboxbouwjaar" Width="150" Height="25"></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="0">
+                <Label Content="Model:" Margin="10" />
+                <TextBox x:Name="tbxModel" Width="150" Height="25"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="2">
+                <Label Content="Transmissie:" Margin="10" />
+                <ComboBox  Margin="10" SelectedItem="{Binding SelectedTransmissie}" Width="80" Height="25">
+                    <ComboBoxItem>Manueel</ComboBoxItem>
+                    <ComboBoxItem>Automatisch</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                <TextBlock  Text="Brandstof:" Margin="10" />
+                <ComboBox Margin="10" SelectedItem="{Binding SelectedBrandstof}" Width="80" Height="25">
+                    <ComboBoxItem>Manueel</ComboBoxItem>
+                    <ComboBoxItem>Automatisch</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <Button Content="Annuleren" Width="80" Margin="5" />
+            <Button Content="Opslaan" Width="80" Margin="5" />
+        </StackPanel>
+    </Grid>
+</Window>
