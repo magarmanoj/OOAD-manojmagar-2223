@@ -33,11 +33,11 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
             <Label  Content="Naam:" Margin="10" />
-            <TextBox Margin="10" Text="{Binding Naam}" Width="250" Height="25" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="naam" Margin="10" Width="250" Height="25" VerticalContentAlignment="Center"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0">
             <Label Content="Beschrijving:" Margin="10" />
-            <TextBox  Margin="10" Text="{Binding Beschrijving}" Width="450" Height="70" />
+            <TextBox x:Name="beschrijving" Width="450" Height="70" />
         </StackPanel>
 
 
@@ -61,7 +61,6 @@
                 <Label Content="Bouwjaar:" Margin="10" />
                 <TextBox x:Name="tboxbouwjaar" Width="150" Height="25"  VerticalContentAlignment="Center"/>
             </StackPanel>
-
             <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="0">
                 <Label Content="Model:" Margin="10" />
                 <TextBox x:Name="tbxModel" Width="150" Height="25"  VerticalContentAlignment="Center"/>

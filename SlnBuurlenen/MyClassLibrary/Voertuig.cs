@@ -124,5 +124,19 @@ namespace MyClassLibrary
             }
             return voertuigs;
         }
+
+        public void DeleteVoertuig(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+
+                string query = "DELETE FROM [Voertuig] WHERE id = @Id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Id", id);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
     }
 }

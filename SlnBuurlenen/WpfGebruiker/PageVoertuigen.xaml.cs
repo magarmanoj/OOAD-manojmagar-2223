@@ -195,16 +195,18 @@ namespace WpfGebruiker
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            //Button btn = (Button)sender;
-            //Grid parentGrid = (Grid)btn.Parent;
-            //Border parentBorder = (Border)parentGrid.Parent;
-            //int selectedIndex = wrapP.Children.IndexOf(parentBorder);
+            Button btn = (Button)sender;
+            StackPanel buttonStackPanel = (StackPanel)btn.Parent;
+            Grid mainGrid = (Grid)buttonStackPanel.Parent;
+            Border parentBorder = (Border)mainGrid.Parent;
+            int selectedIndex = wrapP.Children.IndexOf(parentBorder);
 
-            //if (selectedIndex >= 0 && selectedIndex < VoertuigList.Count)
-            //{
-            //    Voertuig selectedVoertuig = VoertuigList[selectedIndex];
-            //    wrapP.Children.Remove(parentBorder);
-            //}
+            if (selectedIndex >= 0 && selectedIndex < VoertuigList.Count)
+            {
+                Voertuig selectedVoertuig = VoertuigList[selectedIndex];
+                selectedVoertuig.DeleteVoertuig(selectedVoertuig.Id);
+                wrapP.Children.Remove(parentBorder);
+            }
         }
 
         private void Toevoegen_Click(object sender, RoutedEventArgs e)

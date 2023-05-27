@@ -33,11 +33,11 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
             <Label  Content="Naam:" Margin="10" />
-            <TextBox Margin="10" Text="{Binding Naam}" Width="250" Height="25" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="naam" Margin="10" Width="250" Height="25" VerticalContentAlignment="Center"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0">
             <Label Content="Beschrijving:" Margin="10" />
-            <TextBox  Margin="10" Text="{Binding Beschrijving}" Width="350" Height="70" />
+            <TextBox x:Name="beschrijving" Margin="10" Width="350" Height="70" />
         </StackPanel>
         
         <Grid Grid.Row="4" Grid.ColumnSpan="2">
@@ -67,14 +67,14 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="2">
                 <Label Content="Transmissie:" Margin="10" />
-                <ComboBox  Margin="10" SelectedItem="{Binding SelectedTransmissie}" Width="80" Height="25">
+                <ComboBox Margin="10"  Width="80" Height="25">
                     <ComboBoxItem>Manueel</ComboBoxItem>
                     <ComboBoxItem>Automatisch</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="2">
-                <TextBlock  Text="Brandstof:" Margin="10" />
-                <ComboBox Margin="10" SelectedItem="{Binding SelectedBrandstof}" Width="80" Height="25">
+                <Label Content="Brandstof:" Margin="10" />
+                <ComboBox Margin="10" Width="80" Height="25">
                     <ComboBoxItem>Bezine</ComboBoxItem>
                     <ComboBoxItem>Diesel</ComboBoxItem>
                     <ComboBoxItem>LPG</ComboBoxItem>
