@@ -33,7 +33,7 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
             <Label  Content="Naam:" Margin="10" />
-            <TextBox Margin="10" Text="{Binding Naam}" Width="250" Height="25"/>
+            <TextBox Margin="10" Text="{Binding Naam}" Width="250" Height="25" VerticalContentAlignment="Center"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0">
             <Label Content="Beschrijving:" Margin="10" />
@@ -55,16 +55,16 @@
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
                 <Label Content="Merk:" Margin="10" />
-                <TextBox x:Name="tbxMerk" Width="150" Height="25"/>
+                <TextBox x:Name="tbxMerk" Width="150" Height="25"  VerticalContentAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"  Grid.Row="0" Grid.Column="2">
                 <Label Content="Bouwjaar:" Margin="10" />
-                <TextBox x:Name="tboxbouwjaar" Width="150" Height="25"></TextBox>
+                <TextBox x:Name="tboxbouwjaar" Width="150" Height="25"  VerticalContentAlignment="Center"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="0">
                 <Label Content="Model:" Margin="10" />
-                <TextBox x:Name="tbxModel" Width="150" Height="25"></TextBox>
+                <TextBox x:Name="tbxModel" Width="150" Height="25"  VerticalContentAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="2">
                 <Label Content="Transmissie:" Margin="10" />
@@ -76,8 +76,9 @@
             <StackPanel Orientation="Horizontal" Grid.Row="2">
                 <TextBlock  Text="Brandstof:" Margin="10" />
                 <ComboBox Margin="10" SelectedItem="{Binding SelectedBrandstof}" Width="80" Height="25">
-                    <ComboBoxItem>Manueel</ComboBoxItem>
-                    <ComboBoxItem>Automatisch</ComboBoxItem>
+                    <ComboBoxItem>Bezine</ComboBoxItem>
+                    <ComboBoxItem>Diesel</ComboBoxItem>
+                    <ComboBoxItem>LPG</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
         </Grid>
