@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfGebruiker"
         mc:Ignorable="d"
-        Title="Addgemotoriseerd" Height="600" Width="800">
+        Title="Addgemotoriseerd" Height="750" Width="800">
     <Grid Background="LightCyan">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
