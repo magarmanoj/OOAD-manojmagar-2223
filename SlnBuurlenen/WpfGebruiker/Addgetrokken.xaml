@@ -37,7 +37,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0">
             <Label Content="Beschrijving:" Margin="10" />
-            <TextBox  Margin="10" Text="{Binding Beschrijving}" Width="250" Height="70" />
+            <TextBox  Margin="10" Text="{Binding Beschrijving}" Width="450" Height="70" />
         </StackPanel>
 
 
@@ -67,19 +67,23 @@
                 <TextBox x:Name="tbxModel" Width="150" Height="25"  VerticalContentAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="2">
-                <Label Content="Transmissie:" Margin="10" />
-                <ComboBox  Margin="10" SelectedItem="{Binding SelectedTransmissie}" Width="80" Height="25">
-                    <ComboBoxItem>Manueel</ComboBoxItem>
-                    <ComboBoxItem>Automatisch</ComboBoxItem>
-                </ComboBox>
+                <Label Content="Afmetingen:" Margin="10" />
+                <TextBox x:Name="tbxTransmissie" Width="150" Height="25"  VerticalContentAlignment="Center"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Row="2">
-                <TextBlock  Text="Brandstof:" Margin="10" />
-                <ComboBox Margin="10" SelectedItem="{Binding SelectedBrandstof}" Width="80" Height="25">
-                    <ComboBoxItem>Bezine</ComboBoxItem>
-                    <ComboBoxItem>Diesel</ComboBoxItem>
-                    <ComboBoxItem>LPG</ComboBoxItem>
-                </ComboBox>
+            <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="0">
+                <Label Content="Gewicht:" Margin="10" />
+                <TextBox x:Name="tbxgewicht" Width="150" Height="25"  VerticalContentAlignment="Center"/>
+                <Label  Content="kg" Margin="10" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="2">
+                <Label Content="Geremd:" Margin="10" />
+                <RadioButton Content="Ja" VerticalAlignment="Center"/>
+                <RadioButton Content="Nee" VerticalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="3">
+                <Label  Content="Max.gewicht:" Margin="10" />
+                <TextBox x:Name="tbxMax" Width="150" Height="25"  VerticalContentAlignment="Center"/>
+                <Label  Content="kg" Margin="10" />
             </StackPanel>
         </Grid>
 

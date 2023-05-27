@@ -37,10 +37,9 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0">
             <Label Content="Beschrijving:" Margin="10" />
-            <TextBox  Margin="10" Text="{Binding Beschrijving}" Width="250" Height="70" />
+            <TextBox  Margin="10" Text="{Binding Beschrijving}" Width="350" Height="70" />
         </StackPanel>
-
-
+        
         <Grid Grid.Row="4" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
