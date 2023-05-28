@@ -39,13 +39,14 @@ namespace WpfGebruiker
 
         private void LoadOntleningen()
         {
+            
             List<Ontlening> mijnOntleningen = Ontlening.GetOntleningen(userId);
             LoadOntleningenList(mijnOntleningen, lbOntleend);
 
             foreach (Ontlening ontlening in mijnOntleningen)
             {
                 ListBoxItem item = new ListBoxItem();
-                string displayText = $"{ontlening.VoertuigNaam} - {ontlening.Vanaf.ToString("yyyy-MM-dd 00:00")} - {ontlening.Tot.ToString("yyyy-MM-dd 00:00")}";
+                string displayText = $"{ontlening.Voertuig.Naam} - {ontlening.Vanaf.ToString("yyyy-MM-dd 00:00")} - {ontlening.Tot.ToString("yyyy-MM-dd 00:00")}";
                 TextBlock txtb = new TextBlock();
                 txtb.Text = displayText.ToString();
                 switch (ontlening.Status)
@@ -74,11 +75,9 @@ namespace WpfGebruiker
             foreach (Ontlening ontlening in aanvraagOntleningen)
             {
                 ListBoxItem item = new ListBoxItem();
-                Gebruiker aanvrager = Gebruiker.GetGebruikerById(userId);
-                string gebruikerNaam = $"{aanvrager.Voornaam.Substring(0, 1)}.{aanvrager.Achternaam}";
-                string displayText = $"{ontlening.VoertuigNaam} - {ontlening.Vanaf.ToString("yyyy-MM-dd 00:00")} - {ontlening.Tot.ToString("yyyy-MM-dd 00:00")} door {gebruikerNaam.ToString()}";
+                string displayText = $"{ontlening.Voertuig.Naam} - {ontlening.Vanaf.ToString("yyyy-MM-dd 00:00")} - {ontlening.Tot.ToString("yyyy-MM-dd 00:00")} door {ontlening.Aanvrager.Voornaam} {ontlening.Aanvrager.Achternaam}";
                 TextBlock txtb = new TextBlock();
-                txtb.Text = displayText.ToString();
+                txtb.Text = displayText;
                 txtb.Foreground = Brushes.Orange;
                 item.Content = txtb;
                 item.Tag = ontlening;
@@ -110,13 +109,15 @@ namespace WpfGebruiker
         {
             if (lbAanvraag.SelectedItem is ListBoxItem item && item.Tag is Ontlening ontlening)
             {
-                Gebruiker aanvraag = Gebruiker.GetGebruikerById(userId);
-                string gebruikerNaam = $"{aanvraag.Voornaam} {aanvraag.Achternaam}";
-                voertuig.Content = $"Voertuig: {ontlening.VoertuigNaam}";
-                periode.Content = $"Periode: {ontlening.Vanaf.ToString("yyyy-MM-dd 00:00")} - {ontlening.Tot.ToString("yyyy-MM-dd 00:00")} ";
-                aanvrager.Content = $"Aanvrager: {gebruikerNaam}";
+                voertuig.Content = $"Voertuig: {ontlening.Voertuig.Naam}";
+
+                TimeSpan periodLeft = ontlening.Tot - ontlening.Vanaf;
+                string periodLeftInDays = periodLeft.TotalDays.ToString();
+
+                periode.Content = $"Periode: {ontlening.Vanaf.ToString("yyyy-MM-dd 00:00")} - {ontlening.Tot.ToString("yyyy-MM-dd 00:00")} ({periodLeftInDays} days) ";
+                aanvrager.Content = $"Aanvrager: {ontlening.Aanvrager.Voornaam} {ontlening.Aanvrager.Achternaam}";
                 bericht.Text = $"Bericht: {ontlening.Bericht}";
-                string peridoeLeft = (ontlening.Vanaf - ontlening.Tot).ToString();
+                
             }
             else
             {

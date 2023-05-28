@@ -15,7 +15,6 @@ namespace MyClassLibrary
         public Enums.OntleningStatus Status { get; set; }
         public Voertuig Voertuig { get; set; }
         public Gebruiker Aanvrager { get; set; }
-        public string VoertuigNaam { get; set; }
 
         public static List<Ontlening> GetOntleningen(int aanvragerId)
         {
@@ -24,8 +23,7 @@ namespace MyClassLibrary
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 conn.Open();
-
-                SqlCommand command = new SqlCommand("SELECT Voertuig.naam, Ontlening.id, Ontlening.vanaf, Ontlening.tot, Ontlening.status, Ontlening.bericht FROM Ontlening INNER JOIN Voertuig ON Ontlening.Voertuig_id = Voertuig.Id WHERE Ontlening.Aanvrager_id = @Id", conn);
+                SqlCommand command = new SqlCommand("SELECT *, Voertuig.naam FROM [Ontlening] JOIN Voertuig ON Ontlening.Voertuig_id = Voertuig.Id WHERE Ontlening.Aanvrager_id = @Id", conn);
                 command.Parameters.AddWithValue("@Id", aanvragerId);
 
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -35,12 +33,15 @@ namespace MyClassLibrary
                         Ontlening ontl = new Ontlening
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("id")),
-                            VoertuigNaam = reader.GetString(reader.GetOrdinal("naam")),
                             Vanaf = reader.GetDateTime(reader.GetOrdinal("vanaf")),
                             Tot = reader.GetDateTime(reader.GetOrdinal("tot")),
                             Status = (Enums.OntleningStatus)reader.GetByte(reader.GetOrdinal("status")),
                             Bericht = !reader.IsDBNull(reader.GetOrdinal("bericht")) ? reader.GetString(reader.GetOrdinal("bericht")) : string.Empty
                         };
+                        Voertuig voertuig = new Voertuig();
+                        voertuig.Naam = reader.GetString(reader.GetOrdinal("naam"));
+                        ontl.Voertuig = voertuig;
+
                         ontleningen.Add(ontl);
                     }
                 }
@@ -102,18 +103,48 @@ namespace MyClassLibrary
 
         public static List<Ontlening> GetAanvraagOntleningen(int aanvragerId)
         {
-            List<Ontlening> aanvraagOntleningen = new List<Ontlening>();
-            List<Ontlening> ontleningen = GetOntleningen(aanvragerId);
-
-            foreach (Ontlening ontlening in ontleningen)
+            List<Ontlening> ontleningen = new List<Ontlening>();
+            string connString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connString))
             {
-                if (ontlening.Status == Enums.OntleningStatus.InAanvraag)
+                conn.Open();
+                SqlCommand command = new SqlCommand("SELECT *, Voertuig.naam, Gebruiker.Voornaam, Gebruiker.Achternaam " +
+                                             "FROM [Ontlening] " +
+                                             "JOIN Voertuig ON Ontlening.Voertuig_id = Voertuig.Id " +
+                                             "JOIN Gebruiker ON Ontlening.Aanvrager_id = Gebruiker.Id " +
+                                             "WHERE Ontlening.Aanvrager_id <> @AanvragerId " +
+                                             "AND Voertuig.Eigenaar_id = @AanvragerId", conn);
+                command.Parameters.AddWithValue("@AanvragerId", aanvragerId);
+
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    aanvraagOntleningen.Add(ontlening);
+                    while (reader.Read())
+                    {
+                        Ontlening ontl = new Ontlening
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("id")),
+                            Vanaf = reader.GetDateTime(reader.GetOrdinal("vanaf")),
+                            Tot = reader.GetDateTime(reader.GetOrdinal("tot")),
+                            Status = (Enums.OntleningStatus)reader.GetByte(reader.GetOrdinal("status")),
+                            Bericht = !reader.IsDBNull(reader.GetOrdinal("bericht")) ? reader.GetString(reader.GetOrdinal("bericht")) : string.Empty
+                        };
+                        Voertuig voertuig = new Voertuig();
+                        voertuig.Naam = reader.GetString(reader.GetOrdinal("naam"));
+                        ontl.Voertuig = voertuig;
+
+                        Gebruiker aanvrager = new Gebruiker
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Aanvrager_id")),
+                            Voornaam = reader.GetString(reader.GetOrdinal("Voornaam")),
+                            Achternaam = reader.GetString(reader.GetOrdinal("Achternaam"))
+                        };
+                        ontl.Aanvrager = aanvrager;
+
+                        ontleningen.Add(ontl);
+                    }
                 }
             }
-
-            return aanvraagOntleningen;
+            return ontleningen;
         }
     }
 }
