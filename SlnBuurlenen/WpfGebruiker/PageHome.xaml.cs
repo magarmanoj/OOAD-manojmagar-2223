@@ -92,7 +92,7 @@ namespace WpfGebruiker
             // Image in the first column
             Image img = new Image();
             img.Source = bitmap;
-            img.Width = 110;
+            img.Width = 150;
             img.Height = 150;
             Grid.SetColumn(img, 0);
 
@@ -119,12 +119,12 @@ namespace WpfGebruiker
 
             // Merk
             TextBlock merkTextBlock = new TextBlock();
-            merkTextBlock.Text = voertuig.Merk;
+            merkTextBlock.Text = $"Merk: {voertuig.Merk}";
             stackPanel.Children.Add(merkTextBlock);
 
             // Model
             TextBlock modelTextBlock = new TextBlock();
-            modelTextBlock.Text = voertuig.Model;
+            modelTextBlock.Text = $"Model: {voertuig.Model}";
             stackPanel.Children.Add(modelTextBlock);
 
             // Button in the third column, USED CHATGPT om icon in een button te doen
