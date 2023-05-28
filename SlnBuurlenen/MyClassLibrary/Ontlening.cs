@@ -8,6 +8,7 @@ namespace MyClassLibrary
 {
     public class Ontlening
     {
+        private static string connString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
         public int Id { get; set; }
         public DateTime Vanaf { get; set; }
         public DateTime Tot { get; set; }
@@ -19,7 +20,6 @@ namespace MyClassLibrary
         public static List<Ontlening> GetOntleningen(int aanvragerId)
         {
             List<Ontlening> ontleningen = new List<Ontlening>();
-            string connString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 conn.Open();
@@ -51,7 +51,6 @@ namespace MyClassLibrary
 
         public static void RemoveOntlening(int ontleningId)
         {
-            string connString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 conn.Open();
@@ -65,8 +64,6 @@ namespace MyClassLibrary
 
         public static void AddOntlening(Ontlening nieuweOntlening)
         {
-            string connString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
-
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 connection.Open();
@@ -88,7 +85,6 @@ namespace MyClassLibrary
 
         public static void UpdateOntlening(Ontlening ontlening)
         {
-            string connString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 conn.Open();
@@ -104,16 +100,10 @@ namespace MyClassLibrary
         public static List<Ontlening> GetAanvraagOntleningen(int aanvragerId)
         {
             List<Ontlening> ontleningen = new List<Ontlening>();
-            string connString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 conn.Open();
-                SqlCommand command = new SqlCommand("SELECT *, Voertuig.naam, Gebruiker.Voornaam, Gebruiker.Achternaam " +
-                                             "FROM [Ontlening] " +
-                                             "JOIN Voertuig ON Ontlening.Voertuig_id = Voertuig.Id " +
-                                             "JOIN Gebruiker ON Ontlening.Aanvrager_id = Gebruiker.Id " +
-                                             "WHERE Ontlening.Aanvrager_id <> @AanvragerId " +
-                                             "AND Voertuig.Eigenaar_id = @AanvragerId", conn);
+                SqlCommand command = new SqlCommand("SELECT *, Voertuig.naam, Gebruiker.Voornaam, Gebruiker.Achternaam FROM [Ontlening] JOIN Voertuig ON Ontlening.Voertuig_id = Voertuig.Id JOIN Gebruiker ON Ontlening.Aanvrager_id = Gebruiker.Id WHERE Ontlening.Aanvrager_id <> @AanvragerId AND Voertuig.Eigenaar_id = @AanvragerId", conn);
                 command.Parameters.AddWithValue("@AanvragerId", aanvragerId);
 
                 using (SqlDataReader reader = command.ExecuteReader())
