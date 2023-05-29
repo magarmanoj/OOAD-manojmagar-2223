@@ -29,14 +29,14 @@ namespace WpfGebruiker
 
         private void Gemotoriseerd_Click(object sender, RoutedEventArgs e)
         {
-            Addgemotoriseerd addWindowGemotor = new Addgemotoriseerd();
+            Addgemotoriseerd addWindowGemotor = new Addgemotoriseerd(currentUser);
             addWindowGemotor.Show();
             this.Close();
         }
 
         private void Getrokken_Click(object sender, RoutedEventArgs e)
         {
-            Addgetrokken addWindowGetrokken = new Addgetrokken(currentUser.Id);
+            Addgetrokken addWindowGetrokken = new Addgetrokken(currentUser);
             addWindowGetrokken.Show();
             this.Close();
         }

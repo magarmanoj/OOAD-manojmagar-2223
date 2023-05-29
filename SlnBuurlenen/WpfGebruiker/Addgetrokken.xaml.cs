@@ -2,17 +2,11 @@
 using MyClassLibrary;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WpfGebruiker
 {
@@ -21,10 +15,10 @@ namespace WpfGebruiker
     /// </summary>
     public partial class Addgetrokken : Window
     {
-        List<string> photoList = new List<string>();
-        private int currentId;
+        List<byte[]> photoList = new List<byte[]>();
+        private Gebruiker currentId;
 
-        public Addgetrokken(int userId)
+        public Addgetrokken(Gebruiker userId)
         {
             InitializeComponent();
             currentId = userId;
@@ -43,21 +37,19 @@ namespace WpfGebruiker
                 {
                     if (photoList.Count < 3)
                     {
-                        // Add each selected photo to the list
-                        photoList.Add(filePath);
+                        byte[] imageData = File.ReadAllBytes(filePath);
+                        photoList.Add(imageData);
 
-                        // Display the photos in the Image elements
                         for (int i = 0; i < photoList.Count; i++)
                         {
                             if (i < wrapPanel.Children.Count && wrapPanel.Children[i] is Image image)
                             {
-                                BitmapImage bitmap = new BitmapImage(new Uri(photoList[i]));
+                                BitmapImage bitmap = new BitmapImage(new Uri(filePath));
                                 image.Source = bitmap;
                             }
                             else
                             {
-                                // Create a new Image control and add it to the WrapPanel
-                                BitmapImage bitmap = new BitmapImage(new Uri(photoList[i]));
+                                BitmapImage bitmap = new BitmapImage(new Uri(filePath));
                                 Image newImage = new Image();
                                 newImage.Width = 220;
                                 newImage.Height = 220;
@@ -85,15 +77,11 @@ namespace WpfGebruiker
             Button clickedButton = (Button)sender;
             int index = wrapPanel.Children.IndexOf(clickedButton);
 
-            // Check if the clicked button is associated with an image
             if (index >= 1 && wrapPanel.Children[index - 1] is Image image)
             {
-                // Remove the image and the button from the WrapPanel
-                wrapPanel.Children.RemoveAt(index); // Remove button
-                wrapPanel.Children.RemoveAt(index - 1); // Remove image
-
-                // Remove the corresponding photo from the photoList
-                int photoIndex = (index - 1) / 2; // Calculate the index in photoList based on the button index
+                wrapPanel.Children.RemoveAt(index); 
+                wrapPanel.Children.RemoveAt(index - 1);
+                int photoIndex = (index - 1) / 2;
                 if (photoIndex >= 0 && photoIndex < photoList.Count)
                 {
                     photoList.RemoveAt(photoIndex);
@@ -114,9 +102,8 @@ namespace WpfGebruiker
             voertuig.Afmetingen = tbxAfmeting.Text;
             voertuig.Geremd = rbJa.IsChecked ?? false;
 
-            voertuig.UpdateVoertuig(voertuig, currentId);
-
-            MessageBox.Show("Vehicle information updated successfully!");
+            voertuig.AddGetrokkenVoertuig(voertuig, currentId.Id); 
+            Close();
         }
     }
 }

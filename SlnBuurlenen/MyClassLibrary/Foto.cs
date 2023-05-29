@@ -53,5 +53,18 @@ namespace MyClassLibrary
             List<Foto> fotos = GetFotoListByVoertuigId(voertuigId);
             return fotos.FirstOrDefault();
         }
+
+        public void AddPhotos(byte[] imageData, int voertuigID)
+        {
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["connStr"].ConnectionString))
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("INSERT INTO [Foto] (data, voertuig_id) VALUES (@ImageData, @VoertuigId)", conn);
+                cmd.Parameters.AddWithValue("@ImageData", imageData);
+                cmd.Parameters.AddWithValue("@VoertuigId", voertuigID);
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

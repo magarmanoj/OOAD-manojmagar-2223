@@ -133,7 +133,7 @@ namespace WpfGebruiker
             deleteButton.Click += BtnDelete_Click;
         }
 
-        private void ShowPhotoAndInfo()
+        public void ShowPhotoAndInfo()
         {
             voertuigList = Voertuig.GetAllVoertuigOwnedByUser(currentUser.Id);
 

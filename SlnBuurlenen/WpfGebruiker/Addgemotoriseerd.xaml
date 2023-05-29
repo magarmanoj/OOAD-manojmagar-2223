@@ -22,12 +22,9 @@
 
         <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" >
             <Label Content="Voertuig toevegen"></Label>
-            <Button x:Name="btnAdd" Content="Uploaden" Width="90" Margin="5,0,0,0" HorizontalAlignment="Left" Click="BtnAdd_Click"></Button>
+            <Button x:Name="btnAdd" Content="Uploaden" Width="90" Margin="5,0,0,0" HorizontalAlignment="Left" Click="BtnAdd_Click"/>
             <Label Content="Afbeeldingen:"></Label>
-            <WrapPanel Grid.Row="0" Grid.Column="0"  Width="750">
-                <Image Width="250" Height="200" Source="{Binding Photo}" />
-                <Image Width="250" Height="200" Source="{Binding Photo}" />
-                <Image Width="250" Height="200" Source="{Binding Photo}" />
+            <WrapPanel x:Name="wrapPanel" Grid.Row="0" Grid.Column="0" Width="800" Height="200">
             </WrapPanel>
         </StackPanel >
 
@@ -67,14 +64,14 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="2">
                 <Label Content="Transmissie:" Margin="10" />
-                <ComboBox Margin="10"  Width="80" Height="25">
+                <ComboBox x:Name="transmissieComboBox" Margin="10"  Width="80" Height="25">
                     <ComboBoxItem>Manueel</ComboBoxItem>
                     <ComboBoxItem>Automatisch</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="2">
                 <Label Content="Brandstof:" Margin="10" />
-                <ComboBox Margin="10" Width="80" Height="25">
+                <ComboBox x:Name="brandstofComboBox" Margin="10" Width="80" Height="25">
                     <ComboBoxItem>Bezine</ComboBoxItem>
                     <ComboBoxItem>Diesel</ComboBoxItem>
                     <ComboBoxItem>LPG</ComboBoxItem>
@@ -83,8 +80,8 @@
         </Grid>
 
         <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-            <Button Content="Annuleren" Width="80" Margin="5" />
-            <Button Content="Opslaan" Width="80" Margin="5" />
+            <Button x:Name="btnAnnuleren" Content="Annuleren" Width="80" Margin="5" />
+            <Button x:Name="btnOpslaan" Content="Opslaan" Width="80" Margin="5" Click="BtnOpslaan_Click" />
         </StackPanel>
     </Grid>
 </Window>

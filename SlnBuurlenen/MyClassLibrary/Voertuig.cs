@@ -164,14 +164,14 @@ namespace MyClassLibrary
             }
         }
 
-        public void UpdateVoertuig(Voertuig voertuig, int userId)
+        public void AddGetrokkenVoertuig(Voertuig voertuig, int userId)
         {
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 connection.Open();
 
                 string sql = "INSERT INTO Voertuig (naam, beschrijving, bouwjaar, merk, model, gewicht, maxbelasting, afmetingen, geremd, type, eigenaar_id) " +
-                       "VALUES (@Naam, @Beschrijving, @Bouwjaar, @Merk, @Model, @Gewicht, @MaxBelasting, @Afmetingen, @Geremd, @Type, @Id)";
+                     "VALUES (@Naam, @Beschrijving, @Bouwjaar, @Merk, @Model, @Gewicht, @MaxBelasting, @Afmetingen, @Geremd, @Type, @EigenaarId)";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -185,7 +185,33 @@ namespace MyClassLibrary
                     command.Parameters.AddWithValue("@Afmetingen", voertuig.Afmetingen);
                     command.Parameters.AddWithValue("@Geremd", voertuig.Geremd);
                     command.Parameters.AddWithValue("@Type", 2);
-                    command.Parameters.AddWithValue("@Id", userId);
+                    command.Parameters.AddWithValue("@eigenaarId", userId);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void AddGemotoriseerdVoertuig(Voertuig voertuig, int userId)
+        {
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                connection.Open();
+
+                string sql = "INSERT INTO Voertuig (naam, beschrijving, bouwjaar, merk, model, type, transmissie, brandstof, eigenaar_id) " +
+                     "VALUES (@Naam, @Beschrijving, @Bouwjaar, @Merk, @Model, @Type, @Transmissie, @Brandstof, @EigenaarId)";
+
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@Naam", voertuig.Naam);
+                    command.Parameters.AddWithValue("@Beschrijving", voertuig.Beschrijving);
+                    command.Parameters.AddWithValue("@Bouwjaar", voertuig.Bouwjaar);
+                    command.Parameters.AddWithValue("@Merk", voertuig.Merk);
+                    command.Parameters.AddWithValue("@Model", voertuig.Model);
+                    command.Parameters.AddWithValue("@Type", 1);
+                    command.Parameters.AddWithValue("@Transmissie", (int)voertuig.Transmissie);
+                    command.Parameters.AddWithValue("@Brandstof", (int)voertuig.Brandstof);
+                    command.Parameters.AddWithValue("@eigenaarId", userId);
 
                     command.ExecuteNonQuery();
                 }
