@@ -131,10 +131,36 @@ namespace MyClassLibrary
             {
                 conn.Open();
 
-                string query = "DELETE FROM [Voertuig] WHERE id = @Id";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@Id", id);
-                cmd.ExecuteNonQuery();
+                using (SqlTransaction transaction = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        // Delete "Foto" table first
+                        string deleteFotoQuery = "DELETE FROM [Foto] WHERE voertuig_id = @Id";
+                        SqlCommand deleteFotoCmd = new SqlCommand(deleteFotoQuery, conn, transaction);
+                        deleteFotoCmd.Parameters.AddWithValue("@Id", id);
+                        deleteFotoCmd.ExecuteNonQuery();
+
+                        // Delete "Ontlening" table
+                        string deleteOntleningQuery = "DELETE FROM [Ontlening] WHERE voertuig_id = @Id";
+                        SqlCommand deleteOntleningCmd = new SqlCommand(deleteOntleningQuery, conn, transaction);
+                        deleteOntleningCmd.Parameters.AddWithValue("@Id", id);
+                        deleteOntleningCmd.ExecuteNonQuery();
+
+                        // Delete "Voertuig" table
+                        string deleteVoertuigQuery = "DELETE FROM [Voertuig] WHERE id = @Id";
+                        SqlCommand deleteVoertuigCmd = new SqlCommand(deleteVoertuigQuery, conn, transaction);
+                        deleteVoertuigCmd.Parameters.AddWithValue("@Id", id);
+                        deleteVoertuigCmd.ExecuteNonQuery();
+
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw ex;
+                    }
+                }
             }
         }
     }

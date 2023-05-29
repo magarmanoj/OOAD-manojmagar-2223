@@ -13,8 +13,8 @@ namespace WpfGebruiker
     /// </summary>
     public partial class PageVoertuigen : Page
     {
-        public List<Voertuig> VoertuigList { get; set; }
         private Gebruiker currentUser;
+        List<Voertuig> voertuigList;
         public PageVoertuigen(Gebruiker userID)
         {
             InitializeComponent();
@@ -135,11 +135,11 @@ namespace WpfGebruiker
 
         private void ShowPhotoAndInfo()
         {
-            VoertuigList = Voertuig.GetAllVoertuigOwnedByUser(currentUser.Id);
+            voertuigList = Voertuig.GetAllVoertuigOwnedByUser(currentUser.Id);
 
-            for (int i = 0; i < VoertuigList.Count; i++)
+            for (int i = 0; i < voertuigList.Count; i++)
             {
-                Voertuig voertuig = VoertuigList[i];
+                Voertuig voertuig = voertuigList[i];
 
                 Foto foto = Foto.GetFotoByVoertuigId(voertuig.Id);
                 if (foto == null)
@@ -168,10 +168,11 @@ namespace WpfGebruiker
             Grid mainGrid = (Grid)buttonStackPanel.Parent;
             Border parentBorder = (Border)mainGrid.Parent;
             int selectedIndex = wrapP.Children.IndexOf(parentBorder);
+            voertuigList = Voertuig.GetAllVoertuigOwnedByUser(currentUser.Id);
 
-            if (selectedIndex >= 0 && selectedIndex < VoertuigList.Count)
+            if (selectedIndex >= 0 && selectedIndex < voertuigList.Count)
             {
-                Voertuig selectedVoertuig = VoertuigList[selectedIndex];
+                Voertuig selectedVoertuig = voertuigList[selectedIndex];
 
                 Window detailsWindow = new Window();
                 detailsWindow.Width = 800;
@@ -200,10 +201,11 @@ namespace WpfGebruiker
             Grid mainGrid = (Grid)buttonStackPanel.Parent;
             Border parentBorder = (Border)mainGrid.Parent;
             int selectedIndex = wrapP.Children.IndexOf(parentBorder);
+            voertuigList = Voertuig.GetAllVoertuigOwnedByUser(currentUser.Id);
 
-            if (selectedIndex >= 0 && selectedIndex < VoertuigList.Count)
+            if (selectedIndex >= 0 && selectedIndex < voertuigList.Count)
             {
-                Voertuig selectedVoertuig = VoertuigList[selectedIndex];
+                Voertuig selectedVoertuig = voertuigList[selectedIndex];
                 selectedVoertuig.DeleteVoertuig(selectedVoertuig.Id);
                 wrapP.Children.Remove(parentBorder);
             }

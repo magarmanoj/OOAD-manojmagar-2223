@@ -26,12 +26,16 @@ namespace WpfGebruiker
 
         private void Gemotoriseerd_Click(object sender, RoutedEventArgs e)
         {
-            new Addgemotoriseerd().Show();
+            Addgemotoriseerd addWindowGemotor = new Addgemotoriseerd();
+            addWindowGemotor.Show();
+            this.Close();
         }
 
         private void Getrokken_Click(object sender, RoutedEventArgs e)
         {
-            new Addgetrokken().Show();
+            Addgetrokken addWindowGetrokken = new Addgetrokken();
+            addWindowGetrokken.Show();
+            this.Close();
         }
     }
 }
