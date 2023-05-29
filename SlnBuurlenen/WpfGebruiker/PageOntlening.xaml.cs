@@ -136,7 +136,7 @@ namespace WpfGebruiker
                 Ontlening.UpdateOntlening(ontlening);
 
                 lbAanvraag.Items.Remove(item);
-                LoadOntleningen();
+                LoadAanvraag();
             }
         }
 
@@ -148,7 +148,6 @@ namespace WpfGebruiker
                 Ontlening.UpdateOntlening(ontlening);
 
                 lbAanvraag.Items.Remove(item);
-                LoadOntleningen();
             }
         }
 

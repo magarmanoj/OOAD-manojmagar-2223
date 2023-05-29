@@ -23,5 +23,10 @@ namespace WpfGebruiker
         {
             InitializeComponent();
         }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -22,7 +22,7 @@
 
         <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" >
             <Label Content="Voertuig toevegen"></Label>
-            <Button x:Name="btnAdd" Content="Uploaden" Width="90" Margin="5,0,0,0" HorizontalAlignment="Left"></Button>
+            <Button x:Name="btnAdd" Content="Uploaden" Width="90" Margin="5,0,0,0" HorizontalAlignment="Left" Click="BtnAdd_Click"></Button>
             <Label Content="Afbeeldingen:"></Label>
             <WrapPanel Grid.Row="0" Grid.Column="0"  Width="750">
                 <Image Width="250" Height="200" Source="{Binding Photo}" />

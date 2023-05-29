@@ -90,7 +90,7 @@ namespace MyClassLibrary
                 conn.Open();
 
                 SqlCommand command = new SqlCommand("UPDATE Ontlening SET status = @Status WHERE id = @Id", conn);
-                command.Parameters.AddWithValue("@Status", (byte)ontlening.Status);
+                command.Parameters.AddWithValue("@Status", (int)ontlening.Status);
                 command.Parameters.AddWithValue("@Id", ontlening.Id);
 
                 command.ExecuteNonQuery();
@@ -103,7 +103,7 @@ namespace MyClassLibrary
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 conn.Open();
-                SqlCommand command = new SqlCommand("SELECT *, Voertuig.naam, Gebruiker.Voornaam, Gebruiker.Achternaam FROM [Ontlening] JOIN Voertuig ON Ontlening.Voertuig_id = Voertuig.Id JOIN Gebruiker ON Ontlening.Aanvrager_id = Gebruiker.Id WHERE Ontlening.Aanvrager_id <> @AanvragerId AND Voertuig.Eigenaar_id = @AanvragerId", conn);
+                SqlCommand command = new SqlCommand("SELECT *, Voertuig.naam, Gebruiker.Voornaam, Gebruiker.Achternaam FROM [Ontlening] JOIN Voertuig ON Ontlening.Voertuig_id = Voertuig.Id JOIN Gebruiker ON Ontlening.Aanvrager_id = Gebruiker.Id WHERE Ontlening.Aanvrager_id <> @AanvragerId AND Voertuig.Eigenaar_id = @AanvragerId AND Ontlening.status = 1", conn);
                 command.Parameters.AddWithValue("@AanvragerId", aanvragerId);
 
                 using (SqlDataReader reader = command.ExecuteReader())
