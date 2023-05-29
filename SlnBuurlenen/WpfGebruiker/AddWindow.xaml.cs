@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyClassLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,11 @@ namespace WpfGebruiker
     /// </summary>
     public partial class AddWindow : Window
     {
-        public AddWindow()
+        private Gebruiker currentUser;
+        public AddWindow(Gebruiker gebruiker)
         {
             InitializeComponent();
+            currentUser = gebruiker;
         }
 
         private void Gemotoriseerd_Click(object sender, RoutedEventArgs e)
@@ -33,7 +36,7 @@ namespace WpfGebruiker
 
         private void Getrokken_Click(object sender, RoutedEventArgs e)
         {
-            Addgetrokken addWindowGetrokken = new Addgetrokken();
+            Addgetrokken addWindowGetrokken = new Addgetrokken(currentUser.Id);
             addWindowGetrokken.Show();
             this.Close();
         }

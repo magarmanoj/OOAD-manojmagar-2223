@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using MyClassLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,12 @@ namespace WpfGebruiker
     public partial class Addgetrokken : Window
     {
         List<string> photoList = new List<string>();
+        private int currentId;
 
-        public Addgetrokken()
+        public Addgetrokken(int userId)
         {
             InitializeComponent();
+            currentId = userId;
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -98,5 +101,22 @@ namespace WpfGebruiker
             }
         }
 
+        private void BtnOpslaan_Click(object sender, RoutedEventArgs e)
+        {
+            Voertuig voertuig = new Voertuig();
+            voertuig.Naam = naamTxt.Text;
+            voertuig.Beschrijving = beschrijvingTxt.Text;
+            voertuig.Merk = tbxMerk.Text;
+            voertuig.Model = tbxModel.Text;
+            voertuig.Gewicht = (int?)Convert.ToInt32(tbxgewicht.Text);
+            voertuig.MaxBelasting = (int?)Convert.ToInt32(tbxMax.Text);
+            voertuig.Bouwjaar = (int?)Convert.ToInt32(tboxbouwjaar.Text);
+            voertuig.Afmetingen = tbxAfmeting.Text;
+            voertuig.Geremd = rbJa.IsChecked ?? false;
+
+            voertuig.UpdateVoertuig(voertuig, currentId);
+
+            MessageBox.Show("Vehicle information updated successfully!");
+        }
     }
 }

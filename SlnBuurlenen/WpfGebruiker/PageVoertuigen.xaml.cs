@@ -213,7 +213,7 @@ namespace WpfGebruiker
 
         private void Toevoegen_Click(object sender, RoutedEventArgs e)
         {
-            new AddWindow().Show();
+            new AddWindow(currentUser).Show();
         }
     }
 }

@@ -163,5 +163,33 @@ namespace MyClassLibrary
                 }
             }
         }
+
+        public void UpdateVoertuig(Voertuig voertuig, int userId)
+        {
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                connection.Open();
+
+                string sql = "INSERT INTO Voertuig (naam, beschrijving, bouwjaar, merk, model, gewicht, maxbelasting, afmetingen, geremd, type, eigenaar_id) " +
+                       "VALUES (@Naam, @Beschrijving, @Bouwjaar, @Merk, @Model, @Gewicht, @MaxBelasting, @Afmetingen, @Geremd, @Type, @Id)";
+
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@Naam", voertuig.Naam);
+                    command.Parameters.AddWithValue("@Beschrijving", voertuig.Beschrijving);
+                    command.Parameters.AddWithValue("@Bouwjaar", voertuig.Bouwjaar);
+                    command.Parameters.AddWithValue("@Merk", voertuig.Merk);
+                    command.Parameters.AddWithValue("@Model", voertuig.Model);
+                    command.Parameters.AddWithValue("@Gewicht", voertuig.Gewicht);
+                    command.Parameters.AddWithValue("@MaxBelasting", voertuig.MaxBelasting);
+                    command.Parameters.AddWithValue("@Afmetingen", voertuig.Afmetingen);
+                    command.Parameters.AddWithValue("@Geremd", voertuig.Geremd);
+                    command.Parameters.AddWithValue("@Type", 2);
+                    command.Parameters.AddWithValue("@Id", userId);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

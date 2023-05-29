@@ -30,11 +30,11 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
             <Label  Content="Naam:" Margin="10" />
-            <TextBox x:Name="naam" Margin="10" Width="250" Height="25" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="naamTxt" Margin="10" Width="250" Height="25" VerticalContentAlignment="Center"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0">
             <Label Content="Beschrijving:" Margin="10" />
-            <TextBox x:Name="beschrijving" Width="450" Height="70" />
+            <TextBox x:Name="beschrijvingTxt" Width="450" Height="70" />
         </StackPanel>
 
 
@@ -64,7 +64,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="2">
                 <Label Content="Afmetingen:" Margin="10" />
-                <TextBox x:Name="tbxTransmissie" Width="150" Height="25"  VerticalContentAlignment="Center"/>
+                <TextBox x:Name="tbxAfmeting" Width="150" Height="25"  VerticalContentAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="0">
                 <Label Content="Gewicht:" Margin="10" />
@@ -73,8 +73,8 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="2">
                 <Label Content="Geremd:" Margin="10" />
-                <RadioButton Content="Ja" VerticalAlignment="Center"/>
-                <RadioButton Content="Nee" VerticalAlignment="Center" />
+                <RadioButton x:Name="rbJa" Content="Ja" VerticalAlignment="Center"/>
+                <RadioButton Content="rbNee" VerticalAlignment="Center" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="3">
                 <Label  Content="Max.gewicht:" Margin="10" />
@@ -84,8 +84,8 @@
         </Grid>
 
         <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-            <Button Content="Annuleren" Width="80" Margin="5" />
-            <Button Content="Opslaan" Width="80" Margin="5" />
+            <Button x:Name="btnAnnuleren" Content="Annuleren" Width="80" Margin="5" />
+            <Button x:Name="btnOpslaan" Content="Opslaan" Width="80" Margin="5" Click="BtnOpslaan_Click" />
         </StackPanel>
     </Grid>
 </Window>

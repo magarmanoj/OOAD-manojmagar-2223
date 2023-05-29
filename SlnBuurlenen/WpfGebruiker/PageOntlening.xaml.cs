@@ -39,7 +39,6 @@ namespace WpfGebruiker
 
         private void LoadOntleningen()
         {
-            
             List<Ontlening> mijnOntleningen = Ontlening.GetOntleningen(userId);
             LoadOntleningenList(mijnOntleningen, lbOntleend);
 
