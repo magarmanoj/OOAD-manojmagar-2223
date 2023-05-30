@@ -2,23 +2,32 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace WpfGebruiker
 {
     /// <summary>
-    /// Interaction logic for EditGemotoriseerd.xaml
+    /// Interaction logic for EditGemotor.xaml
     /// </summary>
-    public partial class EditGemotoriseerd : Page
+    public partial class EditGemotor : Page
     {
         private Voertuig selectedVoertuig;
         private int userId;
         private bool textChanged = false;
         private bool selectionChanged = false;
 
-        public EditGemotoriseerd(Voertuig voertuig, int userID)
+        public EditGemotor(Voertuig voertuig, int userID)
         {
             InitializeComponent();
             selectedVoertuig = voertuig;
@@ -51,7 +60,6 @@ namespace WpfGebruiker
                 selectedVoertuig.Merk = merk.Text;
                 selectedVoertuig.Model = model.Text;
 
-
                 selectedVoertuig.Naam = name.Text;
                 selectedVoertuig.Beschrijving = beschrijving.Text;
                 selectedVoertuig.Bouwjaar = (int)Convert.ToInt64(bouwjaar.Text);
@@ -63,7 +71,6 @@ namespace WpfGebruiker
                 {
                     selectedVoertuig.Brandstof = null;
                 }
-
 
                 if (transmissieComboBox.SelectedIndex != 0)
                 {
@@ -130,4 +137,3 @@ namespace WpfGebruiker
         }
     }
 }
-

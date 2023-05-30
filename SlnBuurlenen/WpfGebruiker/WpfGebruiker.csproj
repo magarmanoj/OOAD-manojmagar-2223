@@ -67,7 +67,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EditGemotoriseerd.xaml">
+    <Page Include="EditGemotor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -96,8 +96,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="EditGemotoriseerd.xaml.cs">
-      <DependentUpon>EditGemotoriseerd.xaml</DependentUpon>
+    <Compile Include="EditGemotor.xaml.cs">
+      <DependentUpon>EditGemotor.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditGetrokken.xaml.cs">
       <DependentUpon>EditGetrokken.xaml</DependentUpon>

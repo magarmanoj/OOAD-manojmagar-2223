@@ -229,7 +229,7 @@ namespace WpfGebruiker
 
                 if (selectedVoertuig.Type == 1)
                 {
-                    detailsWindow.Content = new EditGemotoriseerd(selectedVoertuig, currentUser.Id);
+                    detailsWindow.Content = new EditGemotor(selectedVoertuig, currentUser.Id);
                     detailsWindow.Title = "Motor Details";
                 }
                 else if (selectedVoertuig.Type == 2)
