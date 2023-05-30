@@ -89,7 +89,7 @@ namespace MyClassLibrary
             {
                 conn.Open();
 
-                SqlCommand command = new SqlCommand("UPDATE Ontlening SET status = @Status WHERE id = @Id", conn);
+                SqlCommand command = new SqlCommand("UPDATE [Ontlening] SET status = @Status WHERE id = @Id", conn);
                 command.Parameters.AddWithValue("@Status", (int)ontlening.Status);
                 command.Parameters.AddWithValue("@Id", ontlening.Id);
 

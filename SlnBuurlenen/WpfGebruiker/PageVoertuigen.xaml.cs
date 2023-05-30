@@ -131,6 +131,7 @@ namespace WpfGebruiker
 
             infoButton.Click += BtnInfo_Click;
             deleteButton.Click += BtnDelete_Click;
+            editButton.Click += BtnEdit_Click;
         }
 
         private void ShowPhotoAndInfo()
@@ -188,8 +189,6 @@ namespace WpfGebruiker
                     detailsWindow.Content = new PageGetrokken(selectedVoertuig, currentUser.Id);
                     detailsWindow.Title = "Getrokken Details";
                 }
-
-                // Show the new window
                 detailsWindow.ShowDialog();
             }
         }
@@ -208,6 +207,39 @@ namespace WpfGebruiker
                 Voertuig selectedVoertuig = voertuigList[selectedIndex];
                 selectedVoertuig.DeleteVoertuig(selectedVoertuig.Id);
                 wrapP.Children.Remove(parentBorder);
+            }
+        }
+
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            StackPanel buttonStackPanel = (StackPanel)btn.Parent;
+            Grid mainGrid = (Grid)buttonStackPanel.Parent;
+            Border parentBorder = (Border)mainGrid.Parent;
+            int selectedIndex = wrapP.Children.IndexOf(parentBorder);
+            voertuigList = Voertuig.GetAllVoertuigOwnedByUser(currentUser.Id);
+
+            if (selectedIndex >= 0 && selectedIndex < voertuigList.Count)
+            {
+                Voertuig selectedVoertuig = voertuigList[selectedIndex];
+
+                Window detailsWindow = new Window();
+                detailsWindow.Width = 800;
+                detailsWindow.Height = 750;
+
+                if (selectedVoertuig.Type == 1)
+                {
+                    detailsWindow.Content = new EditGemotoriseerd(selectedVoertuig, currentUser.Id);
+                    detailsWindow.Title = "Motor Details";
+                }
+                else if (selectedVoertuig.Type == 2)
+                {
+                    detailsWindow.Content = new EditGetrokken(selectedVoertuig, currentUser.Id);
+                    detailsWindow.Title = "Getrokken Details";
+                }
+
+                // Show the new window
+                detailsWindow.ShowDialog();
             }
         }
 

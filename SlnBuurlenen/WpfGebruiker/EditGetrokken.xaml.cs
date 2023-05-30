@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyClassLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,13 @@ namespace WpfGebruiker
     /// </summary>
     public partial class EditGetrokken : Page
     {
-        public EditGetrokken()
+        private Voertuig selectedVoertuig;
+        private int userId;
+        public EditGetrokken(Voertuig voertuig, int userID)
         {
             InitializeComponent();
+            selectedVoertuig = voertuig;
+            userId = userID;
         }
     }
 }
