@@ -188,17 +188,15 @@ namespace MyClassLibrary
                     command.Parameters.AddWithValue("@Type", 2);
                     command.Parameters.AddWithValue("@EigenaarId", userId);
 
-                    if (voertuig.Gewicht != null) command.Parameters.AddWithValue("@Gewicht", voertuig.Gewicht);
-                    command.Parameters.AddWithValue("@Gewicht", DBNull.Value);
-                    if (voertuig.MaxBelasting != null) command.Parameters.AddWithValue("@MaxBelasting", voertuig.MaxBelasting);
-                    command.Parameters.AddWithValue("@MaxBelasting", DBNull.Value);
+                    // if value is empty set the object value to Null
+                    command.Parameters.AddWithValue("@Gewicht", voertuig.Gewicht ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@MaxBelasting", voertuig.MaxBelasting ?? (object)DBNull.Value);
                     voertuigId = (int)command.ExecuteScalar();
                 }
             }
 
             return voertuigId;
         }
-
 
         public void AddGemotoriseerdVoertuig(Voertuig voertuig, int userId)
         {
@@ -217,24 +215,8 @@ namespace MyClassLibrary
                     command.Parameters.AddWithValue("@Merk", voertuig.Merk);
                     command.Parameters.AddWithValue("@Model", voertuig.Model);
                     command.Parameters.AddWithValue("@Type", 1);
-                    if (voertuig.Transmissie.HasValue)
-                    {
-                        command.Parameters.AddWithValue("@Transmissie", voertuig.Transmissie);
-                    }
-                    else
-                    {
-                        command.Parameters.AddWithValue("@Transmissie", DBNull.Value);
-                    }
-
-                    if (voertuig.Brandstof.HasValue)
-                    {
-                        command.Parameters.AddWithValue("@Brandstof", voertuig.Brandstof);
-                    }
-                    else
-                    {
-                        command.Parameters.AddWithValue("@Brandstof", DBNull.Value);
-                    }
-
+                    command.Parameters.AddWithValue("@Transmissie", voertuig.Transmissie ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Brandstof", voertuig.Brandstof ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@eigenaarId", userId);
 
                     command.ExecuteNonQuery();
