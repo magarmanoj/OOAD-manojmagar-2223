@@ -164,14 +164,17 @@ namespace MyClassLibrary
             }
         }
 
-        public void AddGetrokkenVoertuig(Voertuig voertuig, int userId)
+        public int AddGetrokkenVoertuig(Voertuig voertuig, int userId)
         {
+            int voertuigId = 0;
+
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 connection.Open();
 
                 string sql = "INSERT INTO Voertuig (naam, beschrijving, bouwjaar, merk, model, gewicht, maxbelasting, afmetingen, geremd, type, eigenaar_id) " +
-                     "VALUES (@Naam, @Beschrijving, @Bouwjaar, @Merk, @Model, @Gewicht, @MaxBelasting, @Afmetingen, @Geremd, @Type, @EigenaarId)";
+                             "OUTPUT inserted.id " +
+                             "VALUES (@Naam, @Beschrijving, @Bouwjaar, @Merk, @Model, @Gewicht, @MaxBelasting, @Afmetingen, @Geremd, @Type, @EigenaarId)";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -180,17 +183,22 @@ namespace MyClassLibrary
                     command.Parameters.AddWithValue("@Bouwjaar", voertuig.Bouwjaar);
                     command.Parameters.AddWithValue("@Merk", voertuig.Merk);
                     command.Parameters.AddWithValue("@Model", voertuig.Model);
-                    command.Parameters.AddWithValue("@Gewicht", voertuig.Gewicht);
-                    command.Parameters.AddWithValue("@MaxBelasting", voertuig.MaxBelasting);
                     command.Parameters.AddWithValue("@Afmetingen", voertuig.Afmetingen);
                     command.Parameters.AddWithValue("@Geremd", voertuig.Geremd);
                     command.Parameters.AddWithValue("@Type", 2);
-                    command.Parameters.AddWithValue("@eigenaarId", userId);
+                    command.Parameters.AddWithValue("@EigenaarId", userId);
 
-                    command.ExecuteNonQuery();
+                    if (voertuig.Gewicht != null) command.Parameters.AddWithValue("@Gewicht", voertuig.Gewicht);
+                    command.Parameters.AddWithValue("@Gewicht", DBNull.Value);
+                    if (voertuig.MaxBelasting != null) command.Parameters.AddWithValue("@MaxBelasting", voertuig.MaxBelasting);
+                    command.Parameters.AddWithValue("@MaxBelasting", DBNull.Value);
+                    voertuigId = (int)command.ExecuteScalar();
                 }
             }
+
+            return voertuigId;
         }
+
 
         public void AddGemotoriseerdVoertuig(Voertuig voertuig, int userId)
         {
@@ -209,8 +217,24 @@ namespace MyClassLibrary
                     command.Parameters.AddWithValue("@Merk", voertuig.Merk);
                     command.Parameters.AddWithValue("@Model", voertuig.Model);
                     command.Parameters.AddWithValue("@Type", 1);
-                    command.Parameters.AddWithValue("@Transmissie", (int)voertuig.Transmissie);
-                    command.Parameters.AddWithValue("@Brandstof", (int)voertuig.Brandstof);
+                    if (voertuig.Transmissie.HasValue)
+                    {
+                        command.Parameters.AddWithValue("@Transmissie", voertuig.Transmissie);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@Transmissie", DBNull.Value);
+                    }
+
+                    if (voertuig.Brandstof.HasValue)
+                    {
+                        command.Parameters.AddWithValue("@Brandstof", voertuig.Brandstof);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@Brandstof", DBNull.Value);
+                    }
+
                     command.Parameters.AddWithValue("@eigenaarId", userId);
 
                     command.ExecuteNonQuery();

@@ -45,35 +45,42 @@ namespace WpfGebruiker
                     {
                         byte[] imageData = File.ReadAllBytes(filePath);
                         photoList.Add(imageData);
-
-                        for (int i = 0; i < photoList.Count; i++)
-                        {
-                            if (i < wrapPanel.Children.Count && wrapPanel.Children[i] is Image image)
-                            {
-                                BitmapImage bitmap = new BitmapImage(new Uri(filePath));
-                                image.Source = bitmap;
-                            }
-                            else
-                            {
-                                BitmapImage bitmap = new BitmapImage(new Uri(filePath));
-                                Image newImage = new Image();
-                                newImage.Width = 220;
-                                newImage.Height = 220;
-                                newImage.Source = bitmap;
-                                wrapPanel.Children.Add(newImage);
-
-                                // Create a new Button control and add it to the WrapPanel
-                                Button newButton = new Button();
-                                newButton.Name = "btnVerwijder" + (i + 1);
-                                newButton.Content = "X";
-                                newButton.HorizontalAlignment = HorizontalAlignment.Right;
-                                newButton.VerticalAlignment = VerticalAlignment.Top;
-                                newButton.Background = Brushes.Transparent;
-                                newButton.Click += VerwijderAfbeelding_Click;
-                                wrapPanel.Children.Add(newButton);
-                            }
-                        }
                     }
+                }
+                DisplayPhotos();
+            }
+        }
+
+        private void DisplayPhotos()
+        {
+            wrapPanel.Children.Clear();
+
+            for (int i = 0; i < photoList.Count; i++)
+            {
+                byte[] imageData = photoList[i];
+                using (MemoryStream stream = new MemoryStream(imageData))
+                {
+                    BitmapImage bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmap.StreamSource = stream;
+                    bitmap.EndInit();
+
+                    Image newImage = new Image();
+                    newImage.Width = 220;
+                    newImage.Height = 220;
+                    newImage.Source = bitmap;
+                    wrapPanel.Children.Add(newImage);
+
+                    // Create a new Button control and add it to the WrapPanel
+                    Button newButton = new Button();
+                    newButton.Name = "btnVerwijder" + (i + 1);
+                    newButton.Content = "X";
+                    newButton.HorizontalAlignment = HorizontalAlignment.Right;
+                    newButton.VerticalAlignment = VerticalAlignment.Top;
+                    newButton.Background = Brushes.Transparent;
+                    newButton.Click += VerwijderAfbeelding_Click;
+                    wrapPanel.Children.Add(newButton);
                 }
             }
         }
@@ -83,15 +90,15 @@ namespace WpfGebruiker
             Button clickedButton = (Button)sender;
             int index = wrapPanel.Children.IndexOf(clickedButton);
 
-            if (index >= 1 && wrapPanel.Children[index - 1] is Image image)
+            if (index >= 1 && index % 2 == 1)
             {
-                wrapPanel.Children.RemoveAt(index);
-                wrapPanel.Children.RemoveAt(index - 1);
                 int photoIndex = (index - 1) / 2;
                 if (photoIndex >= 0 && photoIndex < photoList.Count)
                 {
                     photoList.RemoveAt(photoIndex);
                 }
+
+                wrapPanel.Children.RemoveRange(index - 1, 2);
             }
         }
 
@@ -102,9 +109,18 @@ namespace WpfGebruiker
             voertuig.Beschrijving = beschrijving.Text;
             voertuig.Merk = tbxMerk.Text;
             voertuig.Model = tbxModel.Text;
-            voertuig.Bouwjaar = (int?)Convert.ToInt32(tboxbouwjaar.Text);
-            voertuig.Transmissie = (Enums.TransmissieType)transmissieComboBox.SelectedIndex + 1;
-            voertuig.Brandstof = (Enums.BrandstofType)brandstofComboBox.SelectedIndex + 1;
+            if (brandstofComboBox.SelectedIndex != 0) voertuig.Brandstof = (Enums.BrandstofType)(brandstofComboBox.SelectedIndex - 1) + 1;
+            voertuig.Brandstof = null;
+
+            if (transmissieComboBox.SelectedIndex != 0) voertuig.Transmissie = (Enums.TransmissieType)(transmissieComboBox.SelectedIndex - 1) + 1;
+            voertuig.Transmissie = null;
+
+            if (!int.TryParse(tboxbouwjaar.Text, out int bouwjaar))
+            {
+                MessageBox.Show("Vul een geldig bouwjaar in.", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            voertuig.Bouwjaar = bouwjaar;
 
             voertuig.AddGemotoriseerdVoertuig(voertuig, currentId.Id);
             Close();

@@ -64,18 +64,21 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="2">
                 <Label Content="Transmissie:" Margin="10" />
-                <ComboBox x:Name="transmissieComboBox" Margin="10"  Width="80" Height="25">
+                <ComboBox x:Name="transmissieComboBox" Margin="10"  Width="80" Height="25" SelectedIndex="0">
+                    <ComboBoxItem >-- Select Brandstof --</ComboBoxItem>
                     <ComboBoxItem>Manueel</ComboBoxItem>
                     <ComboBoxItem>Automatisch</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="2">
                 <Label Content="Brandstof:" Margin="10" />
-                <ComboBox x:Name="brandstofComboBox" Margin="10" Width="80" Height="25">
+                <ComboBox x:Name="brandstofComboBox" Margin="10" Width="80" Height="25" SelectedIndex="0">
+                    <ComboBoxItem >-- Select Brandstof --</ComboBoxItem>
                     <ComboBoxItem>Bezine</ComboBoxItem>
                     <ComboBoxItem>Diesel</ComboBoxItem>
                     <ComboBoxItem>LPG</ComboBoxItem>
                 </ComboBox>
+
             </StackPanel>
         </Grid>
 

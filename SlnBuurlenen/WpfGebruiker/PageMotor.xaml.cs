@@ -20,6 +20,7 @@ namespace WpfGebruiker
             selectedVoertuig = voertuig;
             userId = userID;
             Fotolist();
+            DisableButton();
         }
 
         private void Fotolist()
@@ -84,6 +85,25 @@ namespace WpfGebruiker
             {
                 MessageBox.Show("Vul de velden 'Van' en 'Tot' in.", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void DisableButton()
+        {
+            if (IsCurrentUserCarOwner())
+            {
+                // User is the car owner, disable controls
+                verzenden.IsEnabled = false;
+                tbBericht.IsEnabled = false;
+                vanDateP.IsEnabled = false;
+                totDateP.IsEnabled = false;
+                return;
+            }
+        }
+
+        private bool IsCurrentUserCarOwner()
+        {
+            Gebruiker gebruiker = Gebruiker.GetGebruikerById(userId);
+            return gebruiker != null && gebruiker.Id == selectedVoertuig.EigenaarId;
         }
     }
 }
