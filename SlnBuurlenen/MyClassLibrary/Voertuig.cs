@@ -191,6 +191,7 @@ namespace MyClassLibrary
                     // if value is empty set the object value to Null
                     command.Parameters.AddWithValue("@Gewicht", voertuig.Gewicht ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@MaxBelasting", voertuig.MaxBelasting ?? (object)DBNull.Value);
+
                     voertuigId = (int)command.ExecuteScalar();
                 }
             }
@@ -198,14 +199,16 @@ namespace MyClassLibrary
             return voertuigId;
         }
 
-        public void AddGemotoriseerdVoertuig(Voertuig voertuig, int userId)
+        public int AddGemotoriseerdVoertuig(Voertuig voertuig, int userId)
         {
+            int voertuigId = 0;
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 connection.Open();
 
                 string sql = "INSERT INTO Voertuig (naam, beschrijving, bouwjaar, merk, model, type, transmissie, brandstof, eigenaar_id) " +
-                     "VALUES (@Naam, @Beschrijving, @Bouwjaar, @Merk, @Model, @Type, @Transmissie, @Brandstof, @EigenaarId)";
+                             "OUTPUT inserted.id " +
+                             "VALUES (@Naam, @Beschrijving, @Bouwjaar, @Merk, @Model, @Type, @Transmissie, @Brandstof, @EigenaarId)";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -219,9 +222,10 @@ namespace MyClassLibrary
                     command.Parameters.AddWithValue("@Brandstof", voertuig.Brandstof ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@eigenaarId", userId);
 
-                    command.ExecuteNonQuery();
+                    voertuigId = (int)command.ExecuteScalar();
                 }
             }
+            return voertuigId;
         }
     }
 }

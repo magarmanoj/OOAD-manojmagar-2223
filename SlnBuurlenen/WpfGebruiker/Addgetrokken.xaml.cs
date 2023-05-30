@@ -99,8 +99,6 @@ namespace WpfGebruiker
         private void BtnOpslaan_Click(object sender, RoutedEventArgs e)
         {
             Voertuig voertuig = new Voertuig();
-            voertuig.Naam = naamTxt.Text;
-            voertuig.Beschrijving = beschrijvingTxt.Text;
             voertuig.Merk = tbxMerk.Text;
             voertuig.Model = tbxModel.Text;                  
             voertuig.Afmetingen = tbxAfmeting.Text;
@@ -111,11 +109,24 @@ namespace WpfGebruiker
             if (voertuig.MaxBelasting != null) voertuig.MaxBelasting = (int?)Convert.ToInt32(tbxMax.Text);
             voertuig.MaxBelasting = null;
 
+            if (string.IsNullOrEmpty(naamTxt.Text))
+            {
+                MessageBox.Show("Vul een geldig naam in.", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(beschrijvingTxt.Text))
+            {
+                MessageBox.Show("Vul een geldig bouwjaar in.", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             if (!int.TryParse(tboxbouwjaar.Text, out int bouwjaar))
             {
                 MessageBox.Show("Vul een geldig bouwjaar in.", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            voertuig.Naam = naamTxt.Text;
+            voertuig.Beschrijving = beschrijvingTxt.Text;
             voertuig.Bouwjaar = bouwjaar;
 
             int voertuigId = voertuig.AddGetrokkenVoertuig(voertuig, currentId.Id);

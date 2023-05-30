@@ -99,8 +99,6 @@ namespace WpfGebruiker
         private void BtnOpslaan_Click(object sender, RoutedEventArgs e)
         {
             Voertuig voertuig = new Voertuig();
-            voertuig.Naam = naam.Text;
-            voertuig.Beschrijving = beschrijving.Text;
             voertuig.Merk = tbxMerk.Text;
             voertuig.Model = tbxModel.Text;
             if (brandstofComboBox.SelectedIndex != 0) voertuig.Brandstof = (Enums.BrandstofType)(brandstofComboBox.SelectedIndex - 1) + 1;
@@ -109,14 +107,33 @@ namespace WpfGebruiker
             if (transmissieComboBox.SelectedIndex != 0) voertuig.Transmissie = (Enums.TransmissieType)(transmissieComboBox.SelectedIndex - 1) + 1;
             voertuig.Transmissie = null;
 
+            if (string.IsNullOrEmpty(naam.Text))
+            {
+                MessageBox.Show("Vul een geldig naam in.", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(beschrijving.Text))
+            {
+                MessageBox.Show("Vul een geldig beschrijving in.", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             if (!int.TryParse(tboxbouwjaar.Text, out int bouwjaar))
             {
                 MessageBox.Show("Vul een geldig bouwjaar in.", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            voertuig.Naam = naam.Text;
+            voertuig.Beschrijving = beschrijving.Text;
             voertuig.Bouwjaar = bouwjaar;
 
-            voertuig.AddGemotoriseerdVoertuig(voertuig, currentId.Id);
+            int voertuigId = voertuig.AddGemotoriseerdVoertuig(voertuig, currentId.Id);
+
+            Foto foto = new Foto();
+            foreach (byte[] imageData in photoList)
+            {
+                foto.AddPhotos(imageData, voertuigId);
+            }
             Close();
         }
     }
