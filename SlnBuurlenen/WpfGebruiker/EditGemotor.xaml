@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfGebruiker"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="650" d:DesignWidth="800"
       Title="EditGemotor">
     <Grid Background="LightCyan">
         <Grid.RowDefinitions>
@@ -17,11 +17,13 @@
 
         <TextBox x:Name="name" Text="" FontSize="24" FontWeight="Bold" Margin="10" Grid.Row="0" VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
 
-        <StackPanel x:Name="stpFoto" Orientation="Horizontal" Grid.Row="1" Margin="10">
-            <Image  Width="250" Height="150" Margin="5" />
-            <Image  Width="250" Height="150" Margin="5" />
-            <Image  Width="250" Height="150" Margin="5" />
-        </StackPanel>
+        <StackPanel x:Name="stpFoto" Orientation="Vertical" Grid.Row="1" Grid.Column="0" >
+            <Label Content="Voertuig toevegen"></Label>
+            <Button x:Name="btnAdd" Content="Uploaden" Width="90" Margin="5,0,0,0" HorizontalAlignment="Left" Click="BtnAdd_Click"/>
+            <Label Content="Afbeeldingen:"></Label>
+            <WrapPanel x:Name="wrapPanel" Grid.Row="0" Grid.Column="0" Width="800" Height="200">
+            </WrapPanel>
+        </StackPanel >
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="10">
             <Label Content="Beschrijving:" FontWeight="Bold" Margin="0,10,0,20" HorizontalAlignment="Left" />
@@ -49,7 +51,7 @@
                 <TextBox x:Name="model" Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
                 <Label Content="Brandstof:" FontWeight="Bold"  Grid.Row="2" Grid.Column="0" />
                 <!--<TextBox x:Name="brandstof" Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged" />-->
-                <ComboBox x:Name="brandstofComboBox" Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center">
+                <ComboBox x:Name="brandstofComboBox" Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center" Width="120" HorizontalAlignment="Left">
                     <ComboBoxItem >None</ComboBoxItem>
                     <ComboBoxItem>Benzine</ComboBoxItem>
                     <ComboBoxItem>Diesel</ComboBoxItem>
@@ -59,13 +61,13 @@
                 <TextBox x:Name="bouwjaar" Grid.Row="0" Grid.Column="4" VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged" />
                 <Label Content="Transmissie:" FontWeight="Bold" Grid.Row="1" Grid.Column="2" />
                 <!--<TextBox x:Name="transmissie" Grid.Row="1" Grid.Column="4" VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged" />-->
-                <ComboBox x:Name="transmissieComboBox" Grid.Row="1" Grid.Column="4" VerticalContentAlignment="Center" >
+                <ComboBox x:Name="transmissieComboBox" Grid.Row="1" Grid.Column="4" VerticalContentAlignment="Center" Width="120" HorizontalAlignment="Left" >
                     <ComboBoxItem >None</ComboBoxItem>
                     <ComboBoxItem>Manueel</ComboBoxItem>
                     <ComboBoxItem>Automatisch</ComboBoxItem>
                 </ComboBox>
                 <Label Content="Eignaar:" FontWeight="Bold" Grid.Row="2" Grid.Column="2" />
-                <TextBox x:Name="eigenaar" Grid.Row="2" Grid.Column="4" VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
+                <TextBox x:Name="eigenaar" Grid.Row="2" Grid.Column="4" VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged" IsEnabled="False"/>
                 <Button x:Name="btnSend" Content="Send" Grid.Row="3" Grid.Column="4" Width="100" Height="30" HorizontalAlignment="Right" Click="BtnSend_Click"/>
             </Grid>
         </StackPanel>

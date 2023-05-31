@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -54,16 +55,78 @@ namespace MyClassLibrary
             return fotos.FirstOrDefault();
         }
 
-        public void AddPhotos(byte[] imageData, int voertuigID)
+        //public void AddPhotos(byte[] imageData, int voertuigID)
+        //{
+        //    using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["connStr"].ConnectionString))
+        //    {
+        //        conn.Open();
+
+        //        SqlCommand cmd = new SqlCommand("INSERT INTO [Foto] (data, voertuig_id) VALUES (@ImageData, @VoertuigId)", conn);
+        //        cmd.Parameters.AddWithValue("@ImageData", imageData);
+        //        cmd.Parameters.AddWithValue("@VoertuigId", voertuigID);
+        //        cmd.ExecuteNonQuery();
+        //    }
+        //}
+
+        public int AddPhotos(byte[] imageData, int voertuigID)
+        {
+            int photoId = 0;
+
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["connStr"].ConnectionString))
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("INSERT INTO [Foto] (data, voertuig_id) OUTPUT INSERTED.id VALUES (@ImageData, @VoertuigId)", conn);
+                cmd.Parameters.AddWithValue("@ImageData", imageData);
+                cmd.Parameters.AddWithValue("@VoertuigId", voertuigID);
+
+                photoId = (int)cmd.ExecuteScalar();
+            }
+
+            return photoId;
+        }
+
+        public void UpdatePhoto(byte[] imageData, int fotoId)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["connStr"].ConnectionString))
             {
                 conn.Open();
 
-                SqlCommand cmd = new SqlCommand("INSERT INTO [Foto] (data, voertuig_id) VALUES (@ImageData, @VoertuigId)", conn);
+                SqlCommand cmd = new SqlCommand("UPDATE [Foto] SET data = @ImageData WHERE id = @FotoId", conn);
                 cmd.Parameters.AddWithValue("@ImageData", imageData);
-                cmd.Parameters.AddWithValue("@VoertuigId", voertuigID);
+                cmd.Parameters.AddWithValue("@FotoId", fotoId);
                 cmd.ExecuteNonQuery();
+            }
+        }
+
+        //public void DeletePhoto(byte[] imageData)
+        //{
+        //    using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connStr"].ConnectionString))
+        //    {
+        //        string query = "DELETE FROM [foto] WHERE data = @ImageData";
+
+        //        using (SqlCommand command = new SqlCommand(query, connection))
+        //        {
+        //            command.Parameters.AddWithValue("@ImageData", imageData);
+
+        //            connection.Open();
+        //            command.ExecuteNonQuery();
+        //        }
+        //    }
+        //}
+
+        public void DeletePhoto(int photoId)
+        {
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connStr"].ConnectionString))
+            {
+                connection.Open();
+
+                string query = "DELETE FROM [foto] WHERE id = @PhotoId";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@PhotoId", photoId);
+                    command.ExecuteNonQuery();
+                }
             }
         }
     }
