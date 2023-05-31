@@ -17,24 +17,21 @@ namespace WpfGebruiker
     {
         List<byte[]> photoList = new List<byte[]>();
         private Voertuig selectedVoertuig;
-        private int userId;
         private bool textChanged = false;
         private bool selectionChanged = false;
-
+        private List<int> photosToDelete = new List<int>();
 
         OpenFileDialog openFileDialog = new OpenFileDialog();
 
-        public EditGetrokken(Voertuig voertuig, int userID)
+        public EditGetrokken(Voertuig voertuig)
         {
             InitializeComponent();
             selectedVoertuig = voertuig;
-            userId = userID;
             Fotolist();
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             openFileDialog.Filter = "Image Files (*.jpg, *.png, *.jpeg)|*.jpg;*.png;*.jpeg";
             openFileDialog.Multiselect = true;
@@ -96,7 +93,8 @@ namespace WpfGebruiker
                 int photoIndex = (index - 1) / 2;
                 if (photoIndex >= 0 && photoIndex < photoList.Count)
                 {
-                    photoList.RemoveAt(photoIndex);
+                    int photoId = GetPhotoIdByIndex(photoIndex);
+                    photosToDelete.Add(photoId);
                 }
 
                 wrapPanel.Children.RemoveRange(index - 1, 2);
@@ -145,7 +143,24 @@ namespace WpfGebruiker
                 int newPhotoId = foto.AddPhotos(imageData, selectedVoertuig.Id);
                 foto.UpdatePhoto(imageData, newPhotoId);
             }
+
+            foreach (int photoId in photosToDelete)
+            {
+                foto.DeletePhoto(selectedVoertuig.Id, photoId);
+            }
+
             MessageBox.Show("You chages has been saved");
+        }
+
+        private int GetPhotoIdByIndex(int photoIndex)
+        {
+            List<Foto> fotos = Foto.GetFotoListByVoertuigId(selectedVoertuig.Id);
+
+            if (photoIndex >= 0 && photoIndex < fotos.Count)
+            {
+                return fotos[photoIndex].Id;
+            }
+            return -1;
         }
 
         private void Fotolist()

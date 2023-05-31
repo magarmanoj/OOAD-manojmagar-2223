@@ -4,17 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfGebruiker
 {
@@ -25,24 +18,21 @@ namespace WpfGebruiker
     {
         List<byte[]> photoList = new List<byte[]>();
         private Voertuig selectedVoertuig;
-        private int userId;
         private bool textChanged = false;
         private bool selectionChanged = false;
-        private List<int> deletedPhotoIndices = new List<int>();
+        private List<int> photosToDelete = new List<int>();
 
         OpenFileDialog openFileDialog = new OpenFileDialog();
 
-        public EditGemotor(Voertuig voertuig, int userID)
+        public EditGemotor(Voertuig voertuig)
         {
             InitializeComponent();
             selectedVoertuig = voertuig;
-            userId = userID;
             Fotolist();
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             openFileDialog.Filter = "Image Files (*.jpg, *.png, *.jpeg)|*.jpg;*.png;*.jpeg";
             openFileDialog.Multiselect = true;
@@ -104,9 +94,9 @@ namespace WpfGebruiker
                 int photoIndex = (index - 1) / 2;
                 if (photoIndex >= 0 && photoIndex < photoList.Count)
                 {
-                    photoList.RemoveAt(photoIndex);
+                    int photoId = GetPhotoIdByIndex(photoIndex);
+                    photosToDelete.Add(photoId);
                 }
-
                 wrapPanel.Children.RemoveRange(index - 1, 2);
             }
         }
@@ -169,15 +159,34 @@ namespace WpfGebruiker
                 int newPhotoId = foto.AddPhotos(imageData, selectedVoertuig.Id);
                 foto.UpdatePhoto(imageData, newPhotoId);
             }
+
+            foreach (int photoId in photosToDelete)
+            {
+                foto.DeletePhoto(selectedVoertuig.Id, photoId);
+            }
+
+            MessageBox.Show("You chages has been saved");
+        }
+
+        private int GetPhotoIdByIndex(int photoIndex)
+        {
+            List<Foto> fotos = Foto.GetFotoListByVoertuigId(selectedVoertuig.Id); 
+
+            if (photoIndex >= 0 && photoIndex < fotos.Count)
+            {
+                return fotos[photoIndex].Id;
+            }
+            return -1;
         }
 
         private void Fotolist()
         {
             List<Foto> fotoList = Foto.GetFotoListByVoertuigId(selectedVoertuig.Id);
+
             wrapPanel.Children.Clear();
             photoList.Clear();
 
-            for (int i = 0; i < fotoList.Count; i++)
+            for (int i = 0; i < fotoList.Count; i++) 
             {
                 byte[] imageData = fotoList[i].Data;
                 photoList.Add(imageData);
@@ -235,6 +244,6 @@ namespace WpfGebruiker
         private void Text_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectionChanged = true;
-        }
+        }        
     }
 }

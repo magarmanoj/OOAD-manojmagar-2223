@@ -55,19 +55,6 @@ namespace MyClassLibrary
             return fotos.FirstOrDefault();
         }
 
-        //public void AddPhotos(byte[] imageData, int voertuigID)
-        //{
-        //    using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["connStr"].ConnectionString))
-        //    {
-        //        conn.Open();
-
-        //        SqlCommand cmd = new SqlCommand("INSERT INTO [Foto] (data, voertuig_id) VALUES (@ImageData, @VoertuigId)", conn);
-        //        cmd.Parameters.AddWithValue("@ImageData", imageData);
-        //        cmd.Parameters.AddWithValue("@VoertuigId", voertuigID);
-        //        cmd.ExecuteNonQuery();
-        //    }
-        //}
-
         public int AddPhotos(byte[] imageData, int voertuigID)
         {
             int photoId = 0;
@@ -99,32 +86,19 @@ namespace MyClassLibrary
             }
         }
 
-        //public void DeletePhoto(byte[] imageData)
-        //{
-        //    using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connStr"].ConnectionString))
-        //    {
-        //        string query = "DELETE FROM [foto] WHERE data = @ImageData";
-
-        //        using (SqlCommand command = new SqlCommand(query, connection))
-        //        {
-        //            command.Parameters.AddWithValue("@ImageData", imageData);
-
-        //            connection.Open();
-        //            command.ExecuteNonQuery();
-        //        }
-        //    }
-        //}
-
-        public void DeletePhoto(int photoId)
+        public void DeletePhoto(int voertuigId, int imageData)
         {
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connStr"].ConnectionString))
             {
                 connection.Open();
 
-                string query = "DELETE FROM [foto] WHERE id = @PhotoId";
+                string query = "DELETE FROM [foto] WHERE voertuig_id = @voertuigId AND id = @imageData";
+
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@PhotoId", photoId);
+                    command.Parameters.AddWithValue("@voertuigId", voertuigId);
+                    command.Parameters.AddWithValue("@imageData", imageData);
+
                     command.ExecuteNonQuery();
                 }
             }

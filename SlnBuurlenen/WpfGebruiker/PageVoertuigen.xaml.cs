@@ -229,12 +229,12 @@ namespace WpfGebruiker
 
                 if (selectedVoertuig.Type == 1)
                 {
-                    detailsWindow.Content = new EditGemotor(selectedVoertuig, currentUser.Id);
+                    detailsWindow.Content = new EditGemotor(selectedVoertuig);
                     detailsWindow.Title = "Motor Details";
                 }
                 else if (selectedVoertuig.Type == 2)
                 {
-                    detailsWindow.Content = new EditGetrokken(selectedVoertuig, currentUser.Id);
+                    detailsWindow.Content = new EditGetrokken(selectedVoertuig);
                     detailsWindow.Title = "Getrokken Details";
                 }
 
