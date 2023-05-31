@@ -32,14 +32,21 @@ namespace WpfGebruiker
             bool? dialogResult = openFileDialog.ShowDialog();
             if (dialogResult == true)
             {
+                int remainingSlots = 3 - photoList.Count;
+
+                if (openFileDialog.FileNames.Length > remainingSlots)
+                {
+                    MessageBox.Show("You can only add up to 3 photos.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 foreach (string filePath in openFileDialog.FileNames)
                 {
-                    if (photoList.Count < 3)
-                    {
-                        byte[] imageData = File.ReadAllBytes(filePath);
-                        photoList.Add(imageData);
-                    }
+                    byte[] imageData = File.ReadAllBytes(filePath);
+                    photoList.Add(imageData);
                 }
+
+                btnAdd.IsEnabled = photoList.Count < 3;
+
                 DisplayPhotos();
             }
         }
@@ -97,6 +104,11 @@ namespace WpfGebruiker
 
         private void BtnOpslaan_Click(object sender, RoutedEventArgs e)
         {
+            if (photoList.Count == 0)
+            {
+                MessageBox.Show("One or more images are missing.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             Voertuig voertuig = new Voertuig();
             voertuig.Merk = tbxMerk.Text;
             voertuig.Model = tbxModel.Text;

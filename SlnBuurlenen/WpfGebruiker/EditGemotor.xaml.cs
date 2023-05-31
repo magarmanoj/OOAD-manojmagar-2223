@@ -46,15 +46,11 @@ namespace WpfGebruiker
                     MessageBox.Show("You can only add up to 3 photos.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-
                 foreach (string filePath in openFileDialog.FileNames)
                 {
                     byte[] imageData = File.ReadAllBytes(filePath);
                     photoList.Add(imageData);
                 }
-
-                btnAdd.IsEnabled = (photoList.Count < 3);
-
                 DisplayPhotos();
             }
         }
@@ -107,16 +103,17 @@ namespace WpfGebruiker
                 }
                 wrapPanel.Children.RemoveRange(index - 1, 2);
                 photoList.RemoveAt(photoIndex);
-
-                if (photoList.Count < 3)
-                {
-                    btnAdd.IsEnabled = true;
-                }
             }
         }
 
         private void BtnSend_Click(object sender, RoutedEventArgs e)
         {
+            if (photoList.Count == 0)
+            {
+                MessageBox.Show("One or more images are missing.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             if (textChanged && selectionChanged)
             {
                 if (string.IsNullOrEmpty(name.Text))

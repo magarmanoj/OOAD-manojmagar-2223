@@ -38,13 +38,17 @@ namespace WpfGebruiker
             bool? dialogResult = openFileDialog.ShowDialog();
             if (dialogResult == true)
             {
+                int remainingSlots = 3 - photoList.Count;
+
+                if (openFileDialog.FileNames.Length > remainingSlots)
+                {
+                    MessageBox.Show("You can only add up to 3 photos.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 foreach (string filePath in openFileDialog.FileNames)
                 {
-                    if (photoList.Count < 3)
-                    {
-                        byte[] imageData = File.ReadAllBytes(filePath);
-                        photoList.Add(imageData);
-                    }
+                    byte[] imageData = File.ReadAllBytes(filePath);
+                    photoList.Add(imageData);
                 }
                 DisplayPhotos();
             }
@@ -96,13 +100,17 @@ namespace WpfGebruiker
                     int photoId = GetPhotoIdByIndex(photoIndex);
                     photosToDelete.Add(photoId);
                 }
-
-                wrapPanel.Children.RemoveRange(index - 1, 2);
+                photoList.RemoveAt(photoIndex);
             }
         }
 
         private void BtnSend_Click(object sender, RoutedEventArgs e)
         {
+            if (photoList.Count == 0)
+            {
+                MessageBox.Show("One or more images are missing.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             if (textChanged && selectionChanged)
             {
                 if (string.IsNullOrEmpty(name.Text))
