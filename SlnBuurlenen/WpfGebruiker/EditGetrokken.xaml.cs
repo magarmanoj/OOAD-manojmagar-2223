@@ -185,7 +185,9 @@ namespace WpfGebruiker
                 foto.DeletePhoto(selectedVoertuig.Id, photoId);
             }
 
-            MessageBox.Show("You chages has been saved");
+            MessageBox.Show("You changes has been saved");
+            PageVoertuigen.Instance.ShowPhotoAndInfo();
+            Window.GetWindow(this).Close();
         }
 
         private int GetPhotoIdByIndex(int photoIndex)

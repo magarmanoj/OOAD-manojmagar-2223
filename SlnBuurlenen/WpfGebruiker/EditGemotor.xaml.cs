@@ -125,32 +125,32 @@ namespace WpfGebruiker
                 MessageBox.Show("One or more images are missing.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (textChanged && selectionChanged)
+            if (textChanged || selectionChanged)
             {
                 if (string.IsNullOrEmpty(name.Text))
                 {
                     MessageBox.Show("Vul een geldig naam in.", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
+                selectedVoertuig.Naam = name.Text;
 
                 if (string.IsNullOrEmpty(beschrijving.Text))
                 {
                     MessageBox.Show("Vul een geldig beschrijving in.", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
+                selectedVoertuig.Beschrijving = beschrijving.Text;
 
                 if (string.IsNullOrEmpty(bouwjaar.Text))
                 {
                     MessageBox.Show("Vul een geldig bouwjaar in.", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
+                selectedVoertuig.Bouwjaar = (int)Convert.ToInt64(bouwjaar.Text);
 
                 selectedVoertuig.Merk = merk.Text;
                 selectedVoertuig.Model = model.Text;
 
-                selectedVoertuig.Naam = name.Text;
-                selectedVoertuig.Beschrijving = beschrijving.Text;
-                selectedVoertuig.Bouwjaar = (int)Convert.ToInt64(bouwjaar.Text);
                 if (brandstofComboBox.SelectedIndex != 0)
                 {
                     selectedVoertuig.Brandstof = (Enums.BrandstofType)brandstofComboBox.SelectedIndex;
@@ -186,8 +186,9 @@ namespace WpfGebruiker
             {
                 foto.DeletePhoto(selectedVoertuig.Id, photoId);
             }
-
-            MessageBox.Show("You chages has been saved");
+            MessageBox.Show("You changes has been saved");
+            PageVoertuigen.Instance.ShowPhotoAndInfo();
+            Window.GetWindow(this).Close();
         }
 
         private int GetPhotoIdByIndex(int photoIndex)
@@ -252,7 +253,6 @@ namespace WpfGebruiker
                 transmissieComboBox.SelectedIndex = (int)selectedVoertuig.Transmissie;
             else
                 transmissieComboBox.SelectedIndex = 0;
-
 
             merk.TextChanged += TextBox_TextChanged;
             model.TextChanged += TextBox_TextChanged;

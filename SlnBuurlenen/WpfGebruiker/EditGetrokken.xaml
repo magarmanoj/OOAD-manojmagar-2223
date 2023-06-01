@@ -60,7 +60,7 @@
                 <RadioButton x:Name="rbJa"   Grid.Row="2" Grid.Column="3" Content="Ja"  VerticalAlignment="Center" />
                 <RadioButton x:Name="rbNee"  Grid.Row="2" Grid.Column="3" Content="Nee" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 <Label Content="Max.gewicht:" FontWeight="Bold" Grid.Row="3" Grid.Column="0" />
-                <TextBox x:Name="Maxgewicht" Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
+                <TextBox x:Name="Maxgewicht" Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Top" TextChanged="TextBox_TextChanged"/>
 
                 <StackPanel Grid.Row="3" Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
                     <Button x:Name="btnAnnuleren" Content="Annuleren" Width="80" Margin="5" Click="BtnAnnuleren_Click" />
