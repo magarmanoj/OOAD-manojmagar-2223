@@ -9,7 +9,7 @@
     <Grid Background="LightCyan">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -30,7 +30,7 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
             <Label  Content="Naam:" Margin="10" />
-            <TextBox x:Name="naam" Margin="10" Width="250" Height="25" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="naam" Width="250" Height="25" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0">
             <Label Content="Beschrijving:" Margin="10" />
