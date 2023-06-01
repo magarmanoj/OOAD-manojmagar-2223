@@ -9,7 +9,7 @@
     <Grid Background="LightCyan">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition />
             <RowDefinition Height="auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />

@@ -62,7 +62,10 @@
                 <Label Content="Max.gewicht:" FontWeight="Bold" Grid.Row="3" Grid.Column="0" />
                 <TextBox x:Name="Maxgewicht" Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
 
-                <Button x:Name="btnSend" Content="Send" Grid.Row="3" Grid.Column="4" Width="100" Height="30" HorizontalAlignment="Right" Click="BtnSend_Click"/>
+                <StackPanel Grid.Row="3" Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+                    <Button x:Name="btnAnnuleren" Content="Annuleren" Width="80" Margin="5" Click="BtnAnnuleren_Click" />
+                    <Button x:Name="btnOpslaan" Content="Opslaan" Width="80" Margin="5" Click="BtnSend_Click" />
+                </StackPanel>
             </Grid>
         </StackPanel>
     </Grid>

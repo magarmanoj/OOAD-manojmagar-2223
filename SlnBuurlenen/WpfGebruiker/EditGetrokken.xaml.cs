@@ -275,5 +275,10 @@ namespace WpfGebruiker
         {
             textChanged = true;
         }
+
+        private void BtnAnnuleren_Click(object sender, RoutedEventArgs e)
+        {
+            Window.GetWindow(this).Close();
+        }
     }
 }

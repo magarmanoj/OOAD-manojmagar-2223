@@ -160,6 +160,7 @@ namespace WpfGebruiker
             {
                 foto.AddPhotos(imageData, voertuigId);
             }
+            PageVoertuigen.Instance.ShowPhotoAndInfo();
             Close();
         }
 

@@ -2,6 +2,7 @@
 using MyClassLibrary;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -269,6 +270,11 @@ namespace WpfGebruiker
         private void Text_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectionChanged = true;
-        }        
+        }
+
+        private void BtnAnnuleren_Click(object sender, RoutedEventArgs e)
+        {
+            Window.GetWindow(this).Close();
+        }
     }
 }

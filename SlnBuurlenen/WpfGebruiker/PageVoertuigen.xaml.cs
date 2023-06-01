@@ -15,10 +15,13 @@ namespace WpfGebruiker
     {
         private Gebruiker currentUser;
         List<Voertuig> voertuigList;
+        public static PageVoertuigen Instance ;
+
         public PageVoertuigen(Gebruiker userID)
         {
             InitializeComponent();
-            this.currentUser = userID;
+            currentUser = userID;
+            Instance = this;
             ShowPhotoAndInfo();
         }
 
@@ -134,9 +137,10 @@ namespace WpfGebruiker
             editButton.Click += BtnEdit_Click;
         }
 
-        private void ShowPhotoAndInfo()
+        public void ShowPhotoAndInfo()
         {
             voertuigList = Voertuig.GetAllVoertuigOwnedByUser(currentUser.Id);
+            wrapP.Children.Clear();
 
             for (int i = 0; i < voertuigList.Count; i++)
             {
