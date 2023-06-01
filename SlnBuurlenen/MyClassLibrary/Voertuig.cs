@@ -308,8 +308,7 @@ namespace MyClassLibrary
                         command.Parameters.AddWithValue("@Gewicht", Gewicht ?? (object)DBNull.Value);
                         command.Parameters.AddWithValue("@MaxBelasting", MaxBelasting ?? (object)DBNull.Value);
                         command.Parameters.AddWithValue("@Afmetingen", Afmetingen);
-                        
-
+                       
                         command.ExecuteNonQuery();
                     }
                 }
