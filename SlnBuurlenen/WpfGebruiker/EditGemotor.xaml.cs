@@ -243,11 +243,15 @@ namespace WpfGebruiker
             bouwjaar.Text = selectedVoertuig.Bouwjaar.HasValue ? selectedVoertuig.Bouwjaar.Value.ToString() : "N/A";
             model.Text = !string.IsNullOrEmpty(selectedVoertuig.Model) ? selectedVoertuig.Model : "n.v.t";
             eigenaar.Text = eigenaars != null ? $"{eigenaars.Voornaam} {eigenaars.Achternaam}" : "Onbekend";
-            transmissieComboBox.Text = selectedVoertuig.Transmissie.HasValue ? selectedVoertuig.Transmissie.ToString() : "N/A";
-            transmissieComboBox.SelectedItem = selectedVoertuig.Transmissie;
+            if (selectedVoertuig.Brandstof.HasValue)
+                brandstofComboBox.SelectedIndex = (int)selectedVoertuig.Brandstof;
+            else
+                brandstofComboBox.SelectedIndex = 0;
+            if (selectedVoertuig.Transmissie.HasValue)
+                transmissieComboBox.SelectedIndex = (int)selectedVoertuig.Transmissie;
+            else
+                transmissieComboBox.SelectedIndex = 0;
 
-            brandstofComboBox.Text = selectedVoertuig.Brandstof.HasValue ? selectedVoertuig.Brandstof.ToString() : "N/A";
-            brandstofComboBox.SelectedItem = selectedVoertuig.Brandstof;
 
             merk.TextChanged += TextBox_TextChanged;
             model.TextChanged += TextBox_TextChanged;

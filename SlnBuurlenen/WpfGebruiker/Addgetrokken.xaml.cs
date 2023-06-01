@@ -116,10 +116,23 @@ namespace WpfGebruiker
             voertuig.Afmetingen = tbxAfmeting.Text;
             voertuig.Geremd = rbJa.IsChecked ?? false;
 
-            if (voertuig.Gewicht != null) voertuig.Gewicht = (int?)Convert.ToInt32(tbxgewicht.Text);
-            voertuig.Gewicht = null;
-            if (voertuig.MaxBelasting != null) voertuig.MaxBelasting = (int?)Convert.ToInt32(tbxMax.Text);
-            voertuig.MaxBelasting = null;
+            if (tbxgewicht.Text != null)
+            {
+                voertuig.Gewicht = (int?)Convert.ToInt32(tbxgewicht.Text);
+            }
+            else
+            {
+                voertuig.Gewicht = null;
+            }
+
+            if (tbxMax.Text != null)
+            {
+                voertuig.MaxBelasting = (int?)Convert.ToInt32(tbxMax.Text);
+            }
+            else
+            {
+                voertuig.MaxBelasting = null;
+            }
 
             if (string.IsNullOrEmpty(naamTxt.Text))
             {

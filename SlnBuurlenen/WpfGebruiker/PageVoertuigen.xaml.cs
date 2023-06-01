@@ -157,7 +157,6 @@ namespace WpfGebruiker
                     bitmap.StreamSource = stream;
                     bitmap.EndInit();
                 }
-
                 DynamischUI(bitmap, voertuig);
             }
         }

@@ -112,11 +112,16 @@ namespace WpfGebruiker
             Voertuig voertuig = new Voertuig();
             voertuig.Merk = tbxMerk.Text;
             voertuig.Model = tbxModel.Text;
-            if (brandstofComboBox.SelectedIndex != 0) voertuig.Brandstof = (Enums.BrandstofType)(brandstofComboBox.SelectedIndex - 1) + 1;
-            voertuig.Brandstof = null;
 
-            if (transmissieComboBox.SelectedIndex != 0) voertuig.Transmissie = (Enums.TransmissieType)(transmissieComboBox.SelectedIndex - 1) + 1;
-            voertuig.Transmissie = null;
+            if (voertuig.Brandstof.HasValue)
+                brandstofComboBox.SelectedIndex = (int)voertuig.Brandstof;
+            else
+                brandstofComboBox.SelectedIndex = 0;
+
+            if (voertuig.Transmissie.HasValue)
+                transmissieComboBox.SelectedIndex = (int)voertuig.Transmissie;
+            else
+                transmissieComboBox.SelectedIndex = 0;
 
             if (string.IsNullOrEmpty(naam.Text))
             {

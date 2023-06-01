@@ -238,47 +238,84 @@ namespace MyClassLibrary
                 if (type == 1)
                 {
                     sql = "UPDATE [Voertuig] SET naam = @Naam, beschrijving = @Beschrijving, merk = @Merk, model = @Model, brandstof = @Brandstof, transmissie = @Transmissie, bouwjaar = @Bouwjaar, eigenaar_id = @EigenaarId WHERE id = @Id";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@Naam", Naam);
+                        command.Parameters.AddWithValue("@Beschrijving", Beschrijving);
+                        command.Parameters.AddWithValue("@Merk", Merk);
+                        command.Parameters.AddWithValue("@Model", Model);
+                        if (Brandstof.HasValue && Brandstof.Value != 0)
+                        {
+                            command.Parameters.AddWithValue("@Brandstof", (int)Brandstof);
+                        }
+                        else
+                        {
+                            command.Parameters.AddWithValue("@Brandstof", DBNull.Value);
+                        }
+                        if (Transmissie.HasValue && Transmissie.Value != 0)
+                        {
+                            command.Parameters.AddWithValue("@Transmissie", (int)Transmissie);
+                        }
+                        else
+                        {
+                            command.Parameters.AddWithValue("@Transmissie", DBNull.Value);
+                        }
+                        command.Parameters.AddWithValue("@Bouwjaar", Bouwjaar);
+                        command.Parameters.AddWithValue("@Id", Id);
+                        command.Parameters.AddWithValue("@EigenaarId", EigenaarId);
+
+                        command.ExecuteNonQuery();
+                    }
                 }
                 else if (type == 2)
                 {
                     sql = "UPDATE [Voertuig] SET naam = @Naam, beschrijving = @Beschrijving, merk = @Merk, model = @Model, bouwjaar = @Bouwjaar, gewicht = @gewicht, maxbelasting = @Maxbelasting, afmetingen = @Afmetingen, geremd = @Geremd, eigenaar_id = @EigenaarId WHERE id = @Id";
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        if (Geremd == true && Geremd != null)
+                        {
+                            command.Parameters.AddWithValue("@Geremd", Geremd);
+                        }
+                        else
+                        {
+                            command.Parameters.AddWithValue("@Geremd", Geremd);
+                        }
+
+                        command.Parameters.AddWithValue("@Naam", Naam);
+                        command.Parameters.AddWithValue("@Beschrijving", Beschrijving);
+                        command.Parameters.AddWithValue("@Merk", Merk);
+                        command.Parameters.AddWithValue("@Model", Model);
+                        if (Brandstof.HasValue && Brandstof.Value != 0)
+                        {
+                            command.Parameters.AddWithValue("@Brandstof", (int)Brandstof);
+                        }
+                        else
+                        {
+                            command.Parameters.AddWithValue("@Brandstof", DBNull.Value);
+                        }
+                        if (Transmissie.HasValue && Transmissie.Value != 0)
+                        {
+                            command.Parameters.AddWithValue("@Transmissie", (int)Transmissie);
+                        }
+                        else
+                        {
+                            command.Parameters.AddWithValue("@Transmissie", DBNull.Value);
+                        }
+                        command.Parameters.AddWithValue("@Bouwjaar", Bouwjaar);
+                        command.Parameters.AddWithValue("@Id", Id);
+                        command.Parameters.AddWithValue("@EigenaarId", EigenaarId);
+                        command.Parameters.AddWithValue("@Gewicht", Gewicht ?? (object)DBNull.Value);
+                        command.Parameters.AddWithValue("@MaxBelasting", MaxBelasting ?? (object)DBNull.Value);
+                        command.Parameters.AddWithValue("@Afmetingen", Afmetingen);
+                        
+
+                        command.ExecuteNonQuery();
+                    }
                 }
                 else
                 {
                     return;
-                }
-
-                using (SqlCommand command = new SqlCommand(sql, connection))
-                {
-                    command.Parameters.AddWithValue("@Naam", Naam);
-                    command.Parameters.AddWithValue("@Beschrijving", Beschrijving);
-                    command.Parameters.AddWithValue("@Merk", Merk);
-                    command.Parameters.AddWithValue("@Model", Model);
-                    if (Brandstof.HasValue && Brandstof.Value != 0)
-                    {
-                        command.Parameters.AddWithValue("@Brandstof", (int)Brandstof);
-                    }
-                    else
-                    {
-                        command.Parameters.AddWithValue("@Brandstof", DBNull.Value);
-                    }
-                    if (Transmissie.HasValue && Transmissie.Value != 0)
-                    {
-                        command.Parameters.AddWithValue("@Transmissie", (int)Transmissie);
-                    }
-                    else
-                    {
-                        command.Parameters.AddWithValue("@Transmissie", DBNull.Value);
-                    }
-                    command.Parameters.AddWithValue("@Bouwjaar", Bouwjaar);
-                    command.Parameters.AddWithValue("@Id", Id);
-                    command.Parameters.AddWithValue("@EigenaarId", EigenaarId);
-                    command.Parameters.AddWithValue("@gewicht", Gewicht);
-                    command.Parameters.AddWithValue("@Maxbelasting", MaxBelasting);
-                    command.Parameters.AddWithValue("@Afmetingen", Afmetingen);
-                    command.Parameters.AddWithValue("@Geremd", Geremd);
-
-                    command.ExecuteNonQuery();
                 }
             }
         }

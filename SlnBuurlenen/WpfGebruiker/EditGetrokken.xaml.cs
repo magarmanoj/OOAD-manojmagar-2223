@@ -143,13 +143,29 @@ namespace WpfGebruiker
 
                 selectedVoertuig.Merk = merk.Text;
                 selectedVoertuig.Model = model.Text;
-                selectedVoertuig.Gewicht = (int)Convert.ToInt64(gewicht.Text);
-                selectedVoertuig.MaxBelasting = (int)Convert.ToInt64(Maxgewicht.Text);
+                if (string.IsNullOrEmpty(gewicht.Text) && selectedVoertuig.Gewicht != null)
+                {
+                    selectedVoertuig.Gewicht = (int?)Convert.ToInt32(gewicht.Text);
+                }
+                else
+                {
+                    selectedVoertuig.Gewicht = null;
+                }
+
+                if (string.IsNullOrEmpty(Maxgewicht.Text) && selectedVoertuig.MaxBelasting != null)
+                {
+                    selectedVoertuig.MaxBelasting = (int?)Convert.ToInt32(Maxgewicht.Text);
+                }
+                else
+                {
+                    selectedVoertuig.MaxBelasting = null;
+                }
+
                 selectedVoertuig.Afmetingen = afmeting.Text;
                 selectedVoertuig.Naam = name.Text;
                 selectedVoertuig.Beschrijving = beschrijving.Text;
                 selectedVoertuig.Bouwjaar = (int)Convert.ToInt64(bouwjaar.Text);
-                selectedVoertuig.Geremd = rbJa.IsChecked == true ? rbJa.IsChecked : rbNee.IsChecked;
+                selectedVoertuig.Geremd = rbJa.IsChecked == true;
                 selectedVoertuig.UpdateVoertuig(selectedVoertuig.Type);
             }
 
@@ -224,9 +240,28 @@ namespace WpfGebruiker
             merk.Text = !string.IsNullOrEmpty(selectedVoertuig.Merk) ? selectedVoertuig.Merk : "n.v.t";
             bouwjaar.Text = selectedVoertuig.Bouwjaar.HasValue ? selectedVoertuig.Bouwjaar.Value.ToString() : "N/A";
             model.Text = !string.IsNullOrEmpty(selectedVoertuig.Model) ? selectedVoertuig.Model : "n.v.t";
-            gewicht.Text = selectedVoertuig.Gewicht.ToString();
-            Maxgewicht.Text = selectedVoertuig.MaxBelasting.ToString();
-            afmeting.Text = selectedVoertuig.Afmetingen;
+            afmeting.Text = !string.IsNullOrEmpty(selectedVoertuig.Afmetingen) ? selectedVoertuig.Afmetingen : "n.v.t";
+            if (string.IsNullOrEmpty(gewicht.Text) && selectedVoertuig.Gewicht != null)
+            {
+                gewicht.Text = selectedVoertuig.Gewicht.ToString();
+            }
+            else
+            {
+                gewicht.Text = "N/A";
+            }
+
+            if (string.IsNullOrEmpty(Maxgewicht.Text) && selectedVoertuig.MaxBelasting != null)
+            {
+                Maxgewicht.Text = selectedVoertuig.Gewicht.ToString();
+            }
+            else
+            {
+                Maxgewicht.Text = "N/A";
+            }
+
+            if (!selectedVoertuig.Geremd == true) rbNee.IsChecked = true;
+            rbJa.IsChecked = selectedVoertuig.Geremd;
+
             merk.TextChanged += TextBox_TextChanged;
             model.TextChanged += TextBox_TextChanged;
             bouwjaar.TextChanged += TextBox_TextChanged;
