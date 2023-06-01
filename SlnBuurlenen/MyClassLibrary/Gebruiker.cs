@@ -1,6 +1,9 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace MyClassLibrary
 {
@@ -30,26 +33,43 @@ namespace MyClassLibrary
             {
                 connection.Open();
 
-                SqlCommand command = new SqlCommand("SELECT * FROM [GEBRUIKER] WHERE email = @Email AND paswoord = @Password", connection);
+                SqlCommand command = new SqlCommand("SELECT * FROM [GEBRUIKER] WHERE email = @Email", connection);
                 command.Parameters.AddWithValue("@Email", login);
-                command.Parameters.AddWithValue("@Password", password);
 
                 SqlDataReader reader = command.ExecuteReader();
-
                 if (reader.Read())
                 {
                     Gebruiker gebruiker = new Gebruiker();
                     gebruiker.Id = (int)reader["Id"];
                     gebruiker.Voornaam = (string)reader["voornaam"];
                     gebruiker.Achternaam = (string)reader["achternaam"];
-                    
-                    return gebruiker;
+                    string storedPassword = (string)reader["paswoord"];
+
+                    bool isPasswordCorrect = VerifyPassword(password, storedPassword);
+                    if (isPasswordCorrect)
+                    {
+                        return gebruiker;
+                    }
+                    else
+                    {
+                        string hashedStoredPassword = ToSha256(storedPassword);
+                        string hashedInputPassword = ToSha256(password);
+                        if (hashedInputPassword == hashedStoredPassword)
+                        {
+
+                            return gebruiker;
+                        }
+                    }
+
                 }
-                else
-                {
-                    return null;
-                }
+                return null;
             }
+        }
+
+        private static bool VerifyPassword(string inputPassword, string hashedPassword)
+        {
+            string hashedInputPassword = ToSha256(inputPassword);
+            return hashedInputPassword == hashedPassword;
         }
 
         public static Gebruiker GetGebruikerById(int gebruikerId)
@@ -76,6 +96,34 @@ namespace MyClassLibrary
                 }
             }
             return null; 
+        }
+
+        public static string ToSha256(string text)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] inputBytes = Encoding.UTF8.GetBytes(text);
+                byte[] hashedPasswordBytes = sha256.ComputeHash(inputBytes);
+                string hashedPassword = BitConverter.ToString(hashedPasswordBytes).Replace("-", "");
+                return Convert.ToBase64String(hashedPasswordBytes);
+            }
+        }
+        public static void StoreHashedPassword(string hashedPassword, int userId)
+        {
+            string connString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                connection.Open();
+
+                string query = "UPDATE [Gebruiker] SET paswoord = @HashedPassword Where id = @ID";
+                
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@HashedPassword", hashedPassword);
+                command.Parameters.AddWithValue("@ID", userId);
+
+                command.ExecuteNonQuery();
+            }
         }
     }
 }

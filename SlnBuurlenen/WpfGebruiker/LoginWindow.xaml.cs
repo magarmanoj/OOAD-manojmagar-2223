@@ -13,18 +13,19 @@ namespace WpfGebruiker
         {
             InitializeComponent();
             EmailTextBox.Text = "teo@cmb.be";
-            PasswordTextBox.Text = "test345";
+            PasswordTextBox.Password = "test345";
         }
 
         private void Btnlogin_Click(object sender, RoutedEventArgs e)
         {
-            Gebruiker gebruiker = Gebruiker.FindByLoginAndPassword(EmailTextBox.Text, PasswordTextBox.Text);
+            Gebruiker gebruiker = Gebruiker.FindByLoginAndPassword(EmailTextBox.Text, PasswordTextBox.Password);
             if (gebruiker == null)
             {
                 lblErrormsg.Content = "Combination not found!";
                 lblErrormsg.Foreground = Brushes.Red;
                 return;
             }
+            Gebruiker.StoreHashedPassword(Gebruiker.ToSha256(PasswordTextBox.Password), gebruiker.Id);
             MainWindow mainWindow = new MainWindow(gebruiker);
             mainWindow.Show();
             Close();
@@ -37,7 +38,12 @@ namespace WpfGebruiker
 
         private void UpdateLoginForm()
         {
-            btnLogin.IsEnabled = !string.IsNullOrEmpty(EmailTextBox.Text) && !string.IsNullOrEmpty(PasswordTextBox.Text);
+            btnLogin.IsEnabled = !string.IsNullOrEmpty(EmailTextBox.Text) && !string.IsNullOrEmpty(PasswordTextBox.Password);
+        }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+             UpdateLoginForm();
         }
     }
 }
