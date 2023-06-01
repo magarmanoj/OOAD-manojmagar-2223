@@ -29,6 +29,11 @@ namespace WpfGebruiker
             InitializeComponent();
             selectedVoertuig = voertuig;
             Fotolist();
+
+            if (photoList.Count >= 3)
+            {
+                btnAdd.IsEnabled = false;
+            }
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -51,6 +56,7 @@ namespace WpfGebruiker
                     byte[] imageData = File.ReadAllBytes(filePath);
                     photoList.Add(imageData);
                 }
+                btnAdd.IsEnabled = photoList.Count < 3;
                 DisplayPhotos();
             }
         }
@@ -103,6 +109,11 @@ namespace WpfGebruiker
                 }
                 wrapPanel.Children.RemoveRange(index - 1, 2);
                 photoList.RemoveAt(photoIndex);
+
+                if (photoList.Count < 3)
+                {
+                    btnAdd.IsEnabled = true;
+                }
             }
         }
 
@@ -113,7 +124,6 @@ namespace WpfGebruiker
                 MessageBox.Show("One or more images are missing.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
             if (textChanged && selectionChanged)
             {
                 if (string.IsNullOrEmpty(name.Text))
@@ -157,7 +167,7 @@ namespace WpfGebruiker
                 {
                     selectedVoertuig.Transmissie = null;
                 }
-                selectedVoertuig.UpdateVoertuig();
+                selectedVoertuig.UpdateVoertuig(selectedVoertuig.Type);
             }
 
             Foto foto = new Foto();

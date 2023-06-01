@@ -18,7 +18,6 @@ namespace WpfGebruiker
         List<byte[]> photoList = new List<byte[]>();
         private Voertuig selectedVoertuig;
         private bool textChanged = false;
-        private bool selectionChanged = false;
         private List<int> photosToDelete = new List<int>();
 
         OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -28,6 +27,11 @@ namespace WpfGebruiker
             InitializeComponent();
             selectedVoertuig = voertuig;
             Fotolist();
+
+            if (photoList.Count >= 3)
+            {
+                btnAdd.IsEnabled = false;
+            }
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -50,6 +54,7 @@ namespace WpfGebruiker
                     byte[] imageData = File.ReadAllBytes(filePath);
                     photoList.Add(imageData);
                 }
+                btnAdd.IsEnabled = photoList.Count < 3;
                 DisplayPhotos();
             }
         }
@@ -100,7 +105,12 @@ namespace WpfGebruiker
                     int photoId = GetPhotoIdByIndex(photoIndex);
                     photosToDelete.Add(photoId);
                 }
+                wrapPanel.Children.RemoveRange(index - 1, 2);
                 photoList.RemoveAt(photoIndex);
+                if (photoList.Count < 3)
+                {
+                    btnAdd.IsEnabled = true;
+                }
             }
         }
 
@@ -111,7 +121,7 @@ namespace WpfGebruiker
                 MessageBox.Show("One or more images are missing.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (textChanged && selectionChanged)
+            if (textChanged)
             {
                 if (string.IsNullOrEmpty(name.Text))
                 {
@@ -133,12 +143,14 @@ namespace WpfGebruiker
 
                 selectedVoertuig.Merk = merk.Text;
                 selectedVoertuig.Model = model.Text;
-
+                selectedVoertuig.Gewicht = (int)Convert.ToInt64(gewicht.Text);
+                selectedVoertuig.MaxBelasting = (int)Convert.ToInt64(Maxgewicht.Text);
+                selectedVoertuig.Afmetingen = afmeting.Text;
                 selectedVoertuig.Naam = name.Text;
                 selectedVoertuig.Beschrijving = beschrijving.Text;
                 selectedVoertuig.Bouwjaar = (int)Convert.ToInt64(bouwjaar.Text);
-
-                selectedVoertuig.UpdateVoertuig();
+                selectedVoertuig.Geremd = rbJa.IsChecked == true ? rbJa.IsChecked : rbNee.IsChecked;
+                selectedVoertuig.UpdateVoertuig(selectedVoertuig.Type);
             }
 
             Foto foto = new Foto();
@@ -212,7 +224,9 @@ namespace WpfGebruiker
             merk.Text = !string.IsNullOrEmpty(selectedVoertuig.Merk) ? selectedVoertuig.Merk : "n.v.t";
             bouwjaar.Text = selectedVoertuig.Bouwjaar.HasValue ? selectedVoertuig.Bouwjaar.Value.ToString() : "N/A";
             model.Text = !string.IsNullOrEmpty(selectedVoertuig.Model) ? selectedVoertuig.Model : "n.v.t";
-
+            gewicht.Text = selectedVoertuig.Gewicht.ToString();
+            Maxgewicht.Text = selectedVoertuig.MaxBelasting.ToString();
+            afmeting.Text = selectedVoertuig.Afmetingen;
             merk.TextChanged += TextBox_TextChanged;
             model.TextChanged += TextBox_TextChanged;
             bouwjaar.TextChanged += TextBox_TextChanged;
@@ -223,10 +237,6 @@ namespace WpfGebruiker
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             textChanged = true;
-        }
-        private void Text_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            selectionChanged = true;
         }
     }
 }

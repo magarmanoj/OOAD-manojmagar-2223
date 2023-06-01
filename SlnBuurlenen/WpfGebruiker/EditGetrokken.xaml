@@ -56,8 +56,10 @@
                 <Label Content="Afmetingen:" FontWeight="Bold" Grid.Row="1" Grid.Column="2" />
                 <TextBox x:Name="afmeting" Grid.Row="1" Grid.Column="3" VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
                 <Label Content="Geremd:" FontWeight="Bold" Grid.Row="2" Grid.Column="2" />
-                <RadioButton x:Name="rbJa" Content="Ja" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" />
-                <RadioButton x:Name="rbNee" Content="Nee" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <StackPanel x:Name="radioBtn" Orientation="Horizontal" Grid.Row="2" Grid.Column="3">
+                    <RadioButton x:Name="rbJa" Content="Ja"  VerticalAlignment="Center" Margin="10, 0, 0, 0"/>
+                    <RadioButton x:Name="rbNee" Content="Nee" VerticalAlignment="Center" Margin="10, 0, 0, 0"/>
+                </StackPanel>
                 <Label Content="Max.gewicht:" FontWeight="Bold" Grid.Row="3" Grid.Column="0" />
                 <TextBox x:Name="Maxgewicht" Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
                 
