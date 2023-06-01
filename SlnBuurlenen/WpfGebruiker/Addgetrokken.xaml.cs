@@ -116,24 +116,6 @@ namespace WpfGebruiker
             voertuig.Afmetingen = tbxAfmeting.Text;
             voertuig.Geremd = rbJa.IsChecked ?? false;
 
-            if (tbxgewicht.Text != null)
-            {
-                voertuig.Gewicht = (int?)Convert.ToInt32(tbxgewicht.Text);
-            }
-            else
-            {
-                voertuig.Gewicht = null;
-            }
-
-            if (tbxMax.Text != null)
-            {
-                voertuig.MaxBelasting = (int?)Convert.ToInt32(tbxMax.Text);
-            }
-            else
-            {
-                voertuig.MaxBelasting = null;
-            }
-
             if (string.IsNullOrEmpty(naamTxt.Text))
             {
                 MessageBox.Show("Vul een geldig naam in.", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -153,6 +135,23 @@ namespace WpfGebruiker
             voertuig.Naam = naamTxt.Text;
             voertuig.Beschrijving = beschrijvingTxt.Text;
             voertuig.Bouwjaar = bouwjaar;
+            if (!string.IsNullOrEmpty(tbxgewicht.Text))
+            {
+                voertuig.Gewicht = (int?)Convert.ToInt32(tbxgewicht.Text);
+            }
+            else
+            {
+                voertuig.Gewicht = null;
+            }
+
+            if (!string.IsNullOrEmpty(tbxMax.Text))
+            {
+                voertuig.MaxBelasting = (int?)Convert.ToInt32(tbxMax.Text);
+            }
+            else
+            {
+                voertuig.MaxBelasting = null;
+            }
 
             int voertuigId = voertuig.AddGetrokkenVoertuig(voertuig, currentId.Id);
 

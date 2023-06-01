@@ -143,7 +143,7 @@ namespace WpfGebruiker
 
                 selectedVoertuig.Merk = merk.Text;
                 selectedVoertuig.Model = model.Text;
-                if (string.IsNullOrEmpty(gewicht.Text) && selectedVoertuig.Gewicht != null)
+                if (!string.IsNullOrEmpty(gewicht.Text) && gewicht.Text != "N/A")
                 {
                     selectedVoertuig.Gewicht = (int?)Convert.ToInt32(gewicht.Text);
                 }
@@ -152,7 +152,7 @@ namespace WpfGebruiker
                     selectedVoertuig.Gewicht = null;
                 }
 
-                if (string.IsNullOrEmpty(Maxgewicht.Text) && selectedVoertuig.MaxBelasting != null)
+                if (!string.IsNullOrEmpty(Maxgewicht.Text) && Maxgewicht.Text != "N/A")
                 {
                     selectedVoertuig.MaxBelasting = (int?)Convert.ToInt32(Maxgewicht.Text);
                 }
@@ -267,6 +267,8 @@ namespace WpfGebruiker
             bouwjaar.TextChanged += TextBox_TextChanged;
             name.TextChanged += TextBox_TextChanged;
             beschrijving.TextChanged += TextBox_TextChanged;
+            gewicht.TextChanged += TextBox_TextChanged;
+            Maxgewicht.TextChanged += TextBox_TextChanged;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
