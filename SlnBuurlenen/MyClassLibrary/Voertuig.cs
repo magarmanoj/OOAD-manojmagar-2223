@@ -56,7 +56,7 @@ namespace MyClassLibrary
             {
                 conn.Open();
 
-                SqlCommand cmd = new SqlCommand("SELECT * FROM[Voertuig]", conn);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM [Voertuig]", conn);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read()) voertuigs.Add(new Voertuig(reader));
@@ -172,7 +172,7 @@ namespace MyClassLibrary
             {
                 connection.Open();
 
-                string sql = "INSERT INTO Voertuig (naam, beschrijving, bouwjaar, merk, model, gewicht, maxbelasting, afmetingen, geremd, type, eigenaar_id) " +
+                string sql = "INSERT INTO [Voertuig] (naam, beschrijving, bouwjaar, merk, model, gewicht, maxbelasting, afmetingen, geremd, type, eigenaar_id) " +
                              "OUTPUT inserted.id " +
                              "VALUES (@Naam, @Beschrijving, @Bouwjaar, @Merk, @Model, @Gewicht, @MaxBelasting, @Afmetingen, @Geremd, @Type, @EigenaarId)";
 
@@ -206,7 +206,7 @@ namespace MyClassLibrary
             {
                 connection.Open();
 
-                string sql = "INSERT INTO Voertuig (naam, beschrijving, bouwjaar, merk, model, type, transmissie, brandstof, eigenaar_id) " +
+                string sql = "INSERT INTO [Voertuig] (naam, beschrijving, bouwjaar, merk, model, type, transmissie, brandstof, eigenaar_id) " +
                              "OUTPUT inserted.id " +
                              "VALUES (@Naam, @Beschrijving, @Bouwjaar, @Merk, @Model, @Type, @Transmissie, @Brandstof, @EigenaarId)";
 

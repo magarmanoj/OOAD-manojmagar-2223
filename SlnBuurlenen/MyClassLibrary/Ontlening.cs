@@ -55,7 +55,7 @@ namespace MyClassLibrary
             {
                 conn.Open();
 
-                SqlCommand command = new SqlCommand("DELETE FROM Ontlening WHERE id = @Id", conn);
+                SqlCommand command = new SqlCommand("DELETE FROM [Ontlening] WHERE id = @Id", conn);
                 command.Parameters.AddWithValue("@Id", ontleningId);
 
                 command.ExecuteNonQuery();
@@ -68,7 +68,7 @@ namespace MyClassLibrary
             {
                 connection.Open();
 
-                string query = "INSERT INTO Ontlening (voertuig_id, vanaf, tot, bericht, status, aanvrager_id) " +
+                string query = "INSERT INTO [Ontlening] (voertuig_id, vanaf, tot, bericht, status, aanvrager_id) " +
                                "VALUES (@VoertuigId, @Van, @Tot, @Bericht, @Status, @AanvragerID)";
 
                 SqlCommand command = new SqlCommand(query, connection);
@@ -103,7 +103,7 @@ namespace MyClassLibrary
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 conn.Open();
-                SqlCommand command = new SqlCommand("SELECT *, Voertuig.naam, Gebruiker.Voornaam, Gebruiker.Achternaam FROM [Ontlening] JOIN Voertuig ON Ontlening.Voertuig_id = Voertuig.Id JOIN Gebruiker ON Ontlening.Aanvrager_id = Gebruiker.Id WHERE Ontlening.Aanvrager_id <> @AanvragerId AND Voertuig.Eigenaar_id = @AanvragerId AND Ontlening.status = 1", conn);
+                SqlCommand command = new SqlCommand("SELECT *, Voertuig.naam, Gebruiker.Voornaam, Gebruiker.Achternaam FROM [Ontlening] JOIN [Voertuig] ON Ontlening.Voertuig_id = Voertuig.Id JOIN Gebruiker ON Ontlening.Aanvrager_id = Gebruiker.Id WHERE Ontlening.Aanvrager_id <> @AanvragerId AND Voertuig.Eigenaar_id = @AanvragerId AND Ontlening.status = 1", conn);
                 command.Parameters.AddWithValue("@AanvragerId", aanvragerId);
 
                 using (SqlDataReader reader = command.ExecuteReader())
