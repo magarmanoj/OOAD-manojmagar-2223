@@ -1,4 +1,5 @@
 ﻿using MyClassLibrary;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
@@ -58,7 +59,7 @@ namespace WpfGebruiker
         {
             if (vanDateP.SelectedDate.HasValue && totDateP.SelectedDate.HasValue)
             {
-                if (totDateP.SelectedDate.Value >= vanDateP.SelectedDate.Value)
+                if (vanDateP.SelectedDate.Value.Date < totDateP.SelectedDate.Value.Date && vanDateP.SelectedDate.Value.Date >= DateTime.Now)
                 {
                     Ontlening nieuweOntlening = new Ontlening
                     {
@@ -78,7 +79,14 @@ namespace WpfGebruiker
                 }
                 else
                 {
-                    MessageBox.Show("De einddatum moet na de begindatum liggen.", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+                    if (vanDateP.SelectedDate.Value.Date < DateTime.Now)
+                    {
+                        MessageBox.Show("Gelieve een toekomstige datum te kiezen.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        MessageBox.Show("De einddatum moet na de begindatum zijn.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
             }
             else

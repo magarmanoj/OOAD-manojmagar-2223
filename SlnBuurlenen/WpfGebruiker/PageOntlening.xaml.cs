@@ -115,8 +115,7 @@ namespace WpfGebruiker
 
                 periode.Content = $"Periode: {ontlening.Vanaf.ToString("yyyy-MM-dd 00:00")} - {ontlening.Tot.ToString("yyyy-MM-dd 00:00")} ({periodLeftInDays} days) ";
                 aanvrager.Content = $"Aanvrager: {ontlening.Aanvrager.Voornaam} {ontlening.Aanvrager.Achternaam}";
-                bericht.Text = $"Bericht: {ontlening.Bericht}";
-                
+                bericht.Text = $"Bericht: {ontlening.Bericht}";               
             }
             else
             {

@@ -37,7 +37,6 @@ namespace WpfGebruiker
         private void ShowPhotoAndInfo()
         {
             lbox.Children.Clear();
-
             bool isGetrokken = chGetrokken?.IsChecked == true;
             bool isGemotoriseerd = chGemotoriseerd?.IsChecked == true;
 

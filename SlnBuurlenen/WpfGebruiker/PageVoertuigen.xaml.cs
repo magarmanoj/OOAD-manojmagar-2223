@@ -15,7 +15,7 @@ namespace WpfGebruiker
     {
         private Gebruiker currentUser;
         List<Voertuig> voertuigList;
-        public static PageVoertuigen Instance ;
+        public static PageVoertuigen Instance;
 
         public PageVoertuigen(Gebruiker userID)
         {

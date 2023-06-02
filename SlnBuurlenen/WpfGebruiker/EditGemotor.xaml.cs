@@ -52,10 +52,18 @@ namespace WpfGebruiker
                     MessageBox.Show("You can only add up to 3 photos.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-                foreach (string filePath in openFileDialog.FileNames)
+                try
                 {
-                    byte[] imageData = File.ReadAllBytes(filePath);
-                    photoList.Add(imageData);
+                    foreach (string filePath in openFileDialog.FileNames)
+                    {
+                        byte[] imageData = File.ReadAllBytes(filePath);
+                        photoList.Add(imageData);
+                    }
+                }
+                catch (IOException)
+                {
+                    MessageBox.Show("FOUT: kan doelbestand niet schrijven");
+                    return;
                 }
                 btnAdd.IsEnabled = photoList.Count < 3;
                 DisplayPhotos();

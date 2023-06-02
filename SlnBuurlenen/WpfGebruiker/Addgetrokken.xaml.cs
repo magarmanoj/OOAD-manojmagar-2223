@@ -40,14 +40,20 @@ namespace WpfGebruiker
                     MessageBox.Show("You can only add up to 3 photos.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-                foreach (string filePath in openFileDialog.FileNames)
+                try
                 {
-                    byte[] imageData = File.ReadAllBytes(filePath);
-                    photoList.Add(imageData);
+                    foreach (string filePath in openFileDialog.FileNames)
+                    {
+                        byte[] imageData = File.ReadAllBytes(filePath);
+                        photoList.Add(imageData);
+                    }
                 }
-
+                catch (IOException)
+                {
+                    MessageBox.Show("FOUT: kan doelbestand niet schrijven");
+                    return;
+                }
                 btnAdd.IsEnabled = photoList.Count < 3;
-
                 DisplayPhotos();
             }
         }
@@ -135,18 +141,20 @@ namespace WpfGebruiker
             voertuig.Naam = naamTxt.Text;
             voertuig.Beschrijving = beschrijvingTxt.Text;
             voertuig.Bouwjaar = bouwjaar;
-            if (!string.IsNullOrEmpty(tbxgewicht.Text))
+            if (!int.TryParse(tbxgewicht.Text, out int gewicht))
             {
-                voertuig.Gewicht = (int?)Convert.ToInt32(tbxgewicht.Text);
+                MessageBox.Show("Vul een geldig gewicht in. (Getal)", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
             else
             {
                 voertuig.Gewicht = null;
             }
 
-            if (!string.IsNullOrEmpty(tbxMax.Text))
+            if (!int.TryParse(tbxMax.Text, out int maxBelasting))
             {
-                voertuig.MaxBelasting = (int?)Convert.ToInt32(tbxMax.Text);
+                MessageBox.Show("Vul een geldig maxbelasting in. (Getal)", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
             else
             {
