@@ -14,8 +14,6 @@ namespace WpfGebruiker
         public LoginWindow()
         {
             InitializeComponent();
-            EmailTextBox.Text = "teo@cmb.be";
-            PasswordTextBox.Password = "test345";
         }
 
         private void Btnlogin_Click(object sender, RoutedEventArgs e)
