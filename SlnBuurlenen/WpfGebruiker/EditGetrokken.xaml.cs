@@ -193,7 +193,7 @@ namespace WpfGebruiker
                 }
                 catch (FormatException)
                 {
-                    MessageBox.Show("Vul een geldig gewicht waarde in.", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Vul een geldig maxbelasting waarde in.", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
