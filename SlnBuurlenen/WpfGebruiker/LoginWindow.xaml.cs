@@ -12,8 +12,6 @@ namespace WpfGebruiker
         public LoginWindow()
         {
             InitializeComponent();
-            EmailTextBox.Text = "teo@cmb.be";
-            PasswordTextBox.Password = "test345";
         }
 
         private void Btnlogin_Click(object sender, RoutedEventArgs e)
@@ -25,7 +23,6 @@ namespace WpfGebruiker
                 lblErrormsg.Foreground = Brushes.Red;
                 return;
             }
-            Gebruiker.StoreHashedPassword(Gebruiker.ToSha256(PasswordTextBox.Password), gebruiker.Id);
             MainWindow mainWindow = new MainWindow(gebruiker);
             mainWindow.Show();
             Close();

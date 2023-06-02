@@ -21,8 +21,6 @@ namespace MyClassLibrary
 
         public DateTime Aanmaakdatum { get; set; }
 
-        public string Profielfoto { get; set; }
-
         public Enums.GeslachtType Geslacht { get; set; }
 
         public static Gebruiker FindByLoginAndPassword(string login, string password)
@@ -45,29 +43,14 @@ namespace MyClassLibrary
                     gebruiker.Achternaam = (string)reader["achternaam"];
                     string storedPassword = (string)reader["paswoord"];
 
-                    bool isPasswordCorrect = VerifyPassword(password, storedPassword);
-                    if (isPasswordCorrect)
+                    string hashedInputPassword = ToSha256(password);
+                    if (hashedInputPassword == storedPassword)
                     {
                         return gebruiker;
-                    }
-                    else
-                    {
-                        string hashedStoredPassword = ToSha256(storedPassword);
-                        string hashedInputPassword = ToSha256(password);
-                        if (hashedInputPassword == hashedStoredPassword)
-                        {
-                            return gebruiker;
-                        }
                     }
                 }
                 return null;
             }
-        }
-
-        private static bool VerifyPassword(string inputPassword, string hashedPassword)
-        {
-            string hashedInputPassword = ToSha256(inputPassword);
-            return hashedInputPassword == hashedPassword;
         }
 
         public static Gebruiker GetGebruikerById(int gebruikerId)
@@ -93,7 +76,7 @@ namespace MyClassLibrary
                     }
                 }
             }
-            return null; 
+            return null;
         }
 
         public static string ToSha256(string text)
@@ -102,25 +85,8 @@ namespace MyClassLibrary
             {
                 byte[] inputBytes = Encoding.UTF8.GetBytes(text);
                 byte[] hashedPasswordBytes = sha256.ComputeHash(inputBytes);
-                string hashedPassword = BitConverter.ToString(hashedPasswordBytes).Replace("-", "");
-                return Convert.ToBase64String(hashedPasswordBytes);
-            }
-        }
-        public static void StoreHashedPassword(string hashedPassword, int userId)
-        {
-            string connString = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
-
-            using (SqlConnection connection = new SqlConnection(connString))
-            {
-                connection.Open();
-
-                string query = "UPDATE [Gebruiker] SET paswoord = @HashedPassword Where id = @ID";
-                
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@HashedPassword", hashedPassword);
-                command.Parameters.AddWithValue("@ID", userId);
-
-                command.ExecuteNonQuery();
+                string hashedPassword = BitConverter.ToString(hashedPasswordBytes).Replace("-", "").ToLower();
+                return hashedPassword;
             }
         }
     }
