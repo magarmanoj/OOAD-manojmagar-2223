@@ -163,22 +163,38 @@ namespace WpfGebruiker
 
                 selectedVoertuig.Merk = merk.Text;
                 selectedVoertuig.Model = model.Text;
-                if (!string.IsNullOrEmpty(gewicht.Text) && gewicht.Text != "N/A")
+                try
                 {
-                    selectedVoertuig.Gewicht = (int?)Convert.ToInt32(gewicht.Text);
+                    if (!string.IsNullOrEmpty(gewicht.Text) && gewicht.Text != "N/A")
+                    {
+                        selectedVoertuig.Gewicht = Convert.ToInt32(gewicht.Text);
+                    }
+                    else
+                    {
+                        selectedVoertuig.Gewicht = null;
+                    }
                 }
-                else
+                catch (FormatException)
                 {
-                    selectedVoertuig.Gewicht = null;
+                    MessageBox.Show("Vul een geldig gewicht waarde in.", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
 
-                if (!string.IsNullOrEmpty(Maxgewicht.Text) && Maxgewicht.Text != "N/A")
+                try
                 {
-                    selectedVoertuig.MaxBelasting = (int?)Convert.ToInt32(Maxgewicht.Text);
+                    if (!string.IsNullOrEmpty(Maxgewicht.Text) && Maxgewicht.Text != "N/A")
+                    {
+                        selectedVoertuig.MaxBelasting = Convert.ToInt32(Maxgewicht.Text);
+                    }
+                    else
+                    {
+                        selectedVoertuig.MaxBelasting = null;
+                    }
                 }
-                else
+                catch (FormatException)
                 {
-                    selectedVoertuig.MaxBelasting = null;
+                    MessageBox.Show("Vul een geldig gewicht waarde in.", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
 
                 selectedVoertuig.Afmetingen = afmeting.Text;
