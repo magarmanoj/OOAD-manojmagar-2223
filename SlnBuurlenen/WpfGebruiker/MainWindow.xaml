@@ -12,7 +12,8 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Frame x:Name="Main" Grid.Column="2" NavigationUIVisibility="Hidden" Source="PageHome.xaml"/>
-        <StackPanel Orientation="Vertical" Grid.Column="0" Margin="10,100,10,0" VerticalAlignment="Top">
+        <StackPanel Orientation="Vertical" Margin="10,100,10,0" VerticalAlignment="Top">
+            <Image x:Name="imgProfiel"  Margin="0,0,0,10" Width="80" Height="80"/>
             <Button x:Name="HomeButton" Content="Home" Click="BtnHome_Click" Margin="0,0,0,10"/>
             <Button x:Name="OntleningenButton" Content="Ontleningen" Click="BtnOntleningen_Click" Margin="0,0,0,10"/>
             <Button x:Name="VoertuigenButton" Content="Voertuigen" Click="BtnVoertuigen_Click" Margin="0,0,0,10"/>

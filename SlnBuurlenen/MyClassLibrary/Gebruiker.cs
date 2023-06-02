@@ -21,6 +21,8 @@ namespace MyClassLibrary
 
         public DateTime Aanmaakdatum { get; set; }
 
+        public byte[] Profielfoto { get; set; }
+
         public Enums.GeslachtType Geslacht { get; set; }
 
         public static Gebruiker FindByLoginAndPassword(string login, string password)
@@ -41,6 +43,7 @@ namespace MyClassLibrary
                     gebruiker.Id = (int)reader["Id"];
                     gebruiker.Voornaam = (string)reader["voornaam"];
                     gebruiker.Achternaam = (string)reader["achternaam"];
+                    gebruiker.Profielfoto = (byte[])reader["profielfoto"];
                     string storedPassword = (string)reader["paswoord"];
 
                     string hashedInputPassword = ToSha256(password);

@@ -44,7 +44,6 @@ namespace MyClassLibrary
                     fotos.Add(foto);
                 }
             }
-
             return fotos;
         }
 
