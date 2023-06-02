@@ -2,9 +2,8 @@
 using MyClassLibrary;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
+using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -113,8 +112,19 @@ namespace WpfGebruiker
                 int photoIndex = (index - 1) / 2;
                 if (photoIndex >= 0 && photoIndex < photoList.Count)
                 {
-                    int photoId = GetPhotoIdByIndex(photoIndex);
-                    photosToDelete.Add(photoId);
+                    try
+                    {
+                        int photoId = GetPhotoIdByIndex(photoIndex);
+                        photosToDelete.Add(photoId);
+                    }
+                    catch (SqlException ex)
+                    {
+                        MessageBox.Show("An SQL error  while deleting the image: " + ex.Message);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("An error: " + ex.Message);
+                    }
                 }
                 wrapPanel.Children.RemoveRange(index - 1, 2);
                 photoList.RemoveAt(photoIndex);
@@ -155,7 +165,6 @@ namespace WpfGebruiker
                     return;
                 }
                 selectedVoertuig.Bouwjaar = (int)Convert.ToInt64(bouwjaar.Text);
-
                 selectedVoertuig.Merk = merk.Text;
                 selectedVoertuig.Model = model.Text;
 
@@ -176,7 +185,14 @@ namespace WpfGebruiker
                 {
                     selectedVoertuig.Transmissie = null;
                 }
-                selectedVoertuig.UpdateVoertuig(selectedVoertuig.Type);
+                try
+                {
+                    selectedVoertuig.UpdateVoertuig(selectedVoertuig.Type);
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("An SQL error while updating the vehicle: " + ex.Message);
+                }
             }
 
             Foto foto = new Foto();
@@ -185,14 +201,32 @@ namespace WpfGebruiker
 
             for (int i = startIndex; i < photoList.Count; i++)
             {
-                byte[] imageData = photoList[i];
-                int newPhotoId = foto.AddPhotos(imageData, selectedVoertuig.Id);
-                foto.UpdatePhoto(imageData, newPhotoId);
+                try
+                {
+                    byte[] imageData = photoList[i];
+                    int newPhotoId = foto.AddPhotos(imageData, selectedVoertuig.Id);
+                    foto.UpdatePhoto(imageData, newPhotoId);
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("An SQL error  while adding/updating a photo: " + ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error  while adding/updating a photo: " + ex.Message);
+                }
             }
 
             foreach (int photoId in photosToDelete)
             {
-                foto.DeletePhoto(selectedVoertuig.Id, photoId);
+                try
+                {
+                    foto.DeletePhoto(selectedVoertuig.Id, photoId);
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("An SQL error while deleting a photo: " + ex.Message);
+                }
             }
             MessageBox.Show("You changes has been saved");
             PageVoertuigen.Instance.ShowPhotoAndInfo();
@@ -201,23 +235,48 @@ namespace WpfGebruiker
 
         private int GetPhotoIdByIndex(int photoIndex)
         {
-            List<Foto> fotos = Foto.GetFotoListByVoertuigId(selectedVoertuig.Id); 
-
-            if (photoIndex >= 0 && photoIndex < fotos.Count)
+            try
             {
-                return fotos[photoIndex].Id;
+                List<Foto> fotos = Foto.GetFotoListByVoertuigId(selectedVoertuig.Id);
+
+                if (photoIndex >= 0 && photoIndex < fotos.Count)
+                {
+                    return fotos[photoIndex].Id;
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("An SQL error while getting the photo ID: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error  while getting the photo ID: " + ex.Message);
             }
             return -1;
         }
 
         private void Fotolist()
         {
-            List<Foto> fotoList = Foto.GetFotoListByVoertuigId(selectedVoertuig.Id);
+            List<Foto> fotoList;
+            try
+            {
+                fotoList = Foto.GetFotoListByVoertuigId(selectedVoertuig.Id);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("An SQL exception occurred: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                fotoList = new List<Foto>();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An exception occurred: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                fotoList = new List<Foto>();
+            }
 
             wrapPanel.Children.Clear();
             photoList.Clear();
 
-            for (int i = 0; i < fotoList.Count; i++) 
+            for (int i = 0; i < fotoList.Count; i++)
             {
                 byte[] imageData = fotoList[i].Data;
                 photoList.Add(imageData);
@@ -246,13 +305,11 @@ namespace WpfGebruiker
                     wrapPanel.Children.Add(newButton);
                 }
             }
-            Gebruiker eigenaars = Gebruiker.GetGebruikerById(selectedVoertuig.EigenaarId);
             name.Text = selectedVoertuig.Naam;
             beschrijving.Text = selectedVoertuig.Beschrijving;
             merk.Text = !string.IsNullOrEmpty(selectedVoertuig.Merk) ? selectedVoertuig.Merk : "n.v.t";
             bouwjaar.Text = selectedVoertuig.Bouwjaar.HasValue ? selectedVoertuig.Bouwjaar.Value.ToString() : "N/A";
             model.Text = !string.IsNullOrEmpty(selectedVoertuig.Model) ? selectedVoertuig.Model : "n.v.t";
-            eigenaar.Text = eigenaars != null ? $"{eigenaars.Voornaam} {eigenaars.Achternaam}" : "Onbekend";
             if (selectedVoertuig.Brandstof.HasValue)
                 brandstofComboBox.SelectedIndex = (int)selectedVoertuig.Brandstof;
             else

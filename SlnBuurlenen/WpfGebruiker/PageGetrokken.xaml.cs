@@ -1,9 +1,11 @@
 ﻿using MyClassLibrary;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace WpfGebruiker
@@ -26,7 +28,21 @@ namespace WpfGebruiker
 
         private void Fotolist()
         {
-            List<Foto> fotoList = Foto.GetFotoListByVoertuigId(selectedVoertuig.Id);
+            List<Foto> fotoList;
+            try
+            {
+                fotoList = Foto.GetFotoListByVoertuigId(selectedVoertuig.Id);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("An SQL exception occurred: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                fotoList = new List<Foto>();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An exception occurred: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                fotoList = new List<Foto>();            
+            }
 
             // Update the Source property of the existing Image elements
             for (int i = 0; i < fotoList.Count; i++)
@@ -44,6 +60,7 @@ namespace WpfGebruiker
                     }
                 }
             }
+
             Gebruiker eigenaars = Gebruiker.GetGebruikerById(selectedVoertuig.EigenaarId);
             name.Text = !string.IsNullOrEmpty(selectedVoertuig.Naam) ? selectedVoertuig.Naam : "n.v.t";
             beschrijving.Text = $"Beschrijving: {selectedVoertuig.Beschrijving}";
@@ -112,8 +129,21 @@ namespace WpfGebruiker
 
         private bool IsCurrentUserCarOwner()
         {
-            Gebruiker gebruiker = Gebruiker.GetGebruikerById(userId);
-            return gebruiker != null && gebruiker.Id == selectedVoertuig.EigenaarId;
+            try
+            {
+                Gebruiker gebruiker = Gebruiker.GetGebruikerById(userId);
+                return gebruiker != null && gebruiker.Id == selectedVoertuig.EigenaarId;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("An error occurred while checking if the current user is the car owner: " + ex.Message);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while checking if the current user is the car owner: " + ex.Message);
+                return false;
+            }
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -139,7 +141,18 @@ namespace WpfGebruiker
 
         public void ShowPhotoAndInfo()
         {
-            voertuigList = Voertuig.GetAllVoertuigOwnedByUser(currentUser.Id);
+            try
+            {
+                voertuigList = Voertuig.GetAllVoertuigOwnedByUser(currentUser.Id);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("An SQL exception occurred: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An exception occurred: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             wrapP.Children.Clear();
 
             for (int i = 0; i < voertuigList.Count; i++)
@@ -172,7 +185,14 @@ namespace WpfGebruiker
             Grid mainGrid = (Grid)buttonStackPanel.Parent;
             Border parentBorder = (Border)mainGrid.Parent;
             int selectedIndex = wrapP.Children.IndexOf(parentBorder);
-            voertuigList = Voertuig.GetAllVoertuigOwnedByUser(currentUser.Id);
+            try
+            {
+                voertuigList = Voertuig.GetAllVoertuigOwnedByUser(currentUser.Id);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("An SQL exception occurred: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
             if (selectedIndex >= 0 && selectedIndex < voertuigList.Count)
             {
@@ -220,7 +240,14 @@ namespace WpfGebruiker
             Grid mainGrid = (Grid)buttonStackPanel.Parent;
             Border parentBorder = (Border)mainGrid.Parent;
             int selectedIndex = wrapP.Children.IndexOf(parentBorder);
-            voertuigList = Voertuig.GetAllVoertuigOwnedByUser(currentUser.Id);
+            try
+            {
+                voertuigList = Voertuig.GetAllVoertuigOwnedByUser(currentUser.Id);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("An SQL exception occurred: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
             if (selectedIndex >= 0 && selectedIndex < voertuigList.Count)
             {

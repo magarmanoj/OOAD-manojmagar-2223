@@ -1,5 +1,7 @@
 ﻿using MyClassLibrary;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -42,18 +44,50 @@ namespace WpfGebruiker
 
             if ((!isGetrokken && !isGemotoriseerd) || (isGetrokken && isGemotoriseerd))
             {
-                VoertuigList = Voertuig.GetAllVoertuigNotOwnedByUser(currentUser.Id);
+                try
+                {
+                    VoertuigList = Voertuig.GetAllVoertuigNotOwnedByUser(currentUser.Id);
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("An SQL error  while retrieving vehicles: " + ex.Message);
+                    return;
+                }
             }
             else
             {
-                VoertuigList = Voertuig.GetGetrokkenOrMotor(isGetrokken, currentUser.Id);
+                try
+                {
+                    VoertuigList = Voertuig.GetGetrokkenOrMotor(isGetrokken, currentUser.Id);
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("An SQL error  while retrieving vehicles: " + ex.Message);
+                    return;
+                }
             }
 
             for (int i = 0; i < VoertuigList.Count; i++)
             {
                 Voertuig voertuig = VoertuigList[i];
 
-                Foto foto = Foto.GetFotoByVoertuigId(voertuig.Id);
+                Foto foto;
+
+                try
+                {
+                    foto = Foto.GetFotoByVoertuigId(voertuig.Id);
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("An SQL exception occurred: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    foto = null;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An exception occurred: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    foto = null;
+                }
+
                 if (foto == null)
                 {
                     CreatePanel(null, voertuig);

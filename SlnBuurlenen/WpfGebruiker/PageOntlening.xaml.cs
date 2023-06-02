@@ -1,6 +1,7 @@
 ﻿using MyClassLibrary;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -39,7 +40,16 @@ namespace WpfGebruiker
 
         private void LoadOntleningen()
         {
-            List<Ontlening> mijnOntleningen = Ontlening.GetOntleningen(userId);
+            List<Ontlening> mijnOntleningen;
+            try
+            {
+                mijnOntleningen = Ontlening.GetOntleningen(userId);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("An SQL error  while loading ontleningen: " + ex.Message);
+                return;
+            }
             LoadOntleningenList(mijnOntleningen, lbOntleend);
 
             foreach (Ontlening ontlening in mijnOntleningen)
@@ -68,7 +78,16 @@ namespace WpfGebruiker
 
         private void LoadAanvraag()
         {
-            List<Ontlening> aanvraagOntleningen = Ontlening.GetAanvraagOntleningen(userId);
+            List<Ontlening> aanvraagOntleningen;
+            try
+            {
+                aanvraagOntleningen = Ontlening.GetAanvraagOntleningen(userId);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("An SQL error occurred while retrieving aanvraag ontleningen: " + ex.Message);
+                return; 
+            }
             LoadOntleningenList(aanvraagOntleningen, lbAanvraag);
 
             foreach (Ontlening ontlening in aanvraagOntleningen)
@@ -97,9 +116,20 @@ namespace WpfGebruiker
             {
                 if (ontl.Tot > DateTime.Now)
                 {
-                    Ontlening.RemoveOntlening(ontl.Id);
-                    LoadOntleningen();
-                    LoadAanvraag();
+                    try
+                    {
+                        Ontlening.RemoveOntlening(ontl.Id);
+                        LoadOntleningen();
+                        LoadAanvraag();
+                    }
+                    catch (SqlException ex)
+                    {
+                        MessageBox.Show("An SQL exception occurred: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("An exception occurred: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
             }
         }
@@ -130,11 +160,22 @@ namespace WpfGebruiker
         {
             if (lbAanvraag.SelectedItem is ListBoxItem item && item.Tag is Ontlening ontlening)
             {
-                ontlening.Status = Enums.OntleningStatus.Goedgekeurd;
-                Ontlening.UpdateOntlening(ontlening);
+                try
+                {
+                    ontlening.Status = Enums.OntleningStatus.Goedgekeurd;
+                    Ontlening.UpdateOntlening(ontlening);
 
-                lbAanvraag.Items.Remove(item);
-                LoadAanvraag();
+                    lbAanvraag.Items.Remove(item);
+                    LoadAanvraag();
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("An SQL exception occurred: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An exception occurred: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
@@ -142,10 +183,21 @@ namespace WpfGebruiker
         {
             if (lbAanvraag.SelectedItem is ListBoxItem item && item.Tag is Ontlening ontlening)
             {
-                ontlening.Status = Enums.OntleningStatus.Verworpen;
-                Ontlening.UpdateOntlening(ontlening);
+                try
+                {
+                    ontlening.Status = Enums.OntleningStatus.Verworpen;
+                    Ontlening.UpdateOntlening(ontlening);
 
-                lbAanvraag.Items.Remove(item);
+                    lbAanvraag.Items.Remove(item);
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("An SQL exception occurred: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An exception occurred: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 

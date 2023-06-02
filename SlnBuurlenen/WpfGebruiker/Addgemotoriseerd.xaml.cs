@@ -2,6 +2,7 @@
 using MyClassLibrary;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -118,15 +119,23 @@ namespace WpfGebruiker
             voertuig.Merk = tbxMerk.Text;
             voertuig.Model = tbxModel.Text;
 
-            if (voertuig.Brandstof.HasValue)
-                brandstofComboBox.SelectedIndex = (int)voertuig.Brandstof;
+            if (brandstofComboBox.SelectedIndex != 0)
+            {
+                voertuig.Brandstof = (Enums.BrandstofType)brandstofComboBox.SelectedIndex;
+            }
             else
-                brandstofComboBox.SelectedIndex = 0;
+            {
+                voertuig.Brandstof = null;
+            }
 
-            if (voertuig.Transmissie.HasValue)
-                transmissieComboBox.SelectedIndex = (int)voertuig.Transmissie;
+            if (transmissieComboBox.SelectedIndex != 0)
+            {
+                voertuig.Transmissie = (Enums.TransmissieType)transmissieComboBox.SelectedIndex;
+            }
             else
-                transmissieComboBox.SelectedIndex = 0;
+            {
+                voertuig.Transmissie = null;
+            }
 
             if (string.IsNullOrEmpty(naam.Text))
             {
@@ -148,15 +157,25 @@ namespace WpfGebruiker
             voertuig.Beschrijving = beschrijving.Text;
             voertuig.Bouwjaar = bouwjaar;
 
-            int voertuigId = voertuig.AddGemotoriseerdVoertuig(voertuig, currentId.Id);
-
-            Foto foto = new Foto();
-            foreach (byte[] imageData in photoList)
+            try
             {
-                foto.AddPhotos(imageData, voertuigId);
+                int voertuigId = voertuig.AddGemotoriseerdVoertuig(voertuig, currentId.Id);
+                Foto foto = new Foto();
+                foreach (byte[] imageData in photoList)
+                {
+                    foto.AddPhotos(imageData, voertuigId);
+                }
+                PageVoertuigen.Instance.ShowPhotoAndInfo();
+                Close();
             }
-            PageVoertuigen.Instance.ShowPhotoAndInfo();
-            Close();
+            catch (SqlException ex)
+            {
+                MessageBox.Show("An error  while performing the SQL operation: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
         }
 
         private void BtnAnnuleren_Click(object sender, RoutedEventArgs e)

@@ -1,4 +1,6 @@
 ﻿using MyClassLibrary;
+using System;
+using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Media;
 
@@ -12,20 +14,35 @@ namespace WpfGebruiker
         public LoginWindow()
         {
             InitializeComponent();
+            EmailTextBox.Text = "teo@cmb.be";
+            PasswordTextBox.Password = "test345";
         }
 
         private void Btnlogin_Click(object sender, RoutedEventArgs e)
         {
-            Gebruiker gebruiker = Gebruiker.FindByLoginAndPassword(EmailTextBox.Text, PasswordTextBox.Password);
-            if (gebruiker == null)
+            try
             {
-                lblErrormsg.Content = "Combination not found!";
-                lblErrormsg.Foreground = Brushes.Red;
-                return;
+                Gebruiker gebruiker = Gebruiker.FindByLoginAndPassword(EmailTextBox.Text, PasswordTextBox.Password);
+                if (gebruiker == null)
+                {
+                    lblErrormsg.Content = "Combination not found!";
+                    lblErrormsg.Foreground = Brushes.Red;
+                    return;
+                }
+                MainWindow mainWindow = new MainWindow(gebruiker);
+                mainWindow.Show();
+                Close();
             }
-            MainWindow mainWindow = new MainWindow(gebruiker);
-            mainWindow.Show();
-            Close();
+            catch (SqlException ex)
+            {
+                lblErrormsg.Content = "An SQL error  during login: " + ex.Message;
+                lblErrormsg.Foreground = Brushes.Red;
+            }
+            catch (Exception ex)
+            {
+                lblErrormsg.Content = "An error  during login: " + ex.Message;
+                lblErrormsg.Foreground = Brushes.Red;
+            }
         }
 
         private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)

@@ -2,6 +2,7 @@
 using MyClassLibrary;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -141,35 +142,53 @@ namespace WpfGebruiker
             voertuig.Naam = naamTxt.Text;
             voertuig.Beschrijving = beschrijvingTxt.Text;
             voertuig.Bouwjaar = bouwjaar;
-            if (!int.TryParse(tbxgewicht.Text, out int gewicht))
+            if (string.IsNullOrEmpty(tbxgewicht.Text))
+            {
+                voertuig.Gewicht = null;
+            }
+            else if (!int.TryParse(tbxgewicht.Text, out int gewicht))
             {
                 MessageBox.Show("Vul een geldig gewicht in. (Getal)", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             else
             {
-                voertuig.Gewicht = null;
+                voertuig.Gewicht = gewicht;
             }
 
-            if (!int.TryParse(tbxMax.Text, out int maxBelasting))
+            if (string.IsNullOrEmpty(tbxMax.Text))
+            {
+                voertuig.MaxBelasting = null;
+            }
+            else if (!int.TryParse(tbxMax.Text, out int maxBelasting))
             {
                 MessageBox.Show("Vul een geldig maxbelasting in. (Getal)", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             else
             {
-                voertuig.MaxBelasting = null;
+                voertuig.MaxBelasting = maxBelasting;
             }
 
-            int voertuigId = voertuig.AddGetrokkenVoertuig(voertuig, currentId.Id);
-
-            Foto foto = new Foto();
-            foreach (byte[] imageData in photoList)
+            try
             {
-                foto.AddPhotos(imageData, voertuigId);
+                int voertuigId = voertuig.AddGetrokkenVoertuig(voertuig, currentId.Id);
+                Foto foto = new Foto();
+                foreach (byte[] imageData in photoList)
+                {
+                    foto.AddPhotos(imageData, voertuigId);
+                }
+                PageVoertuigen.Instance.ShowPhotoAndInfo();
+                Close();
             }
-            PageVoertuigen.Instance.ShowPhotoAndInfo();
-            Close();
+            catch (SqlException ex)
+            {
+                MessageBox.Show("An error  while performing the SQL operation: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
         }
 
         private void BtnAnnuleren_Click(object sender, RoutedEventArgs e)
